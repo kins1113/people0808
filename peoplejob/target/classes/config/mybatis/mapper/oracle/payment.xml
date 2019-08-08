@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.payment">
+	 <insert id="insertPayment" parameterType="paymentVo">
+	<selectKey keyProperty="paymentCode" order="BEFORE" resultType="int">
+		select payment_seq.nextval from dual
+	</selectKey>
+	insert into payment
+	values(#{paymentCode},'카드','결제완료',#{period},sysdate,to_date(#{paystartDate})+#{period},#{serviceCode},#{memberCode},#{jobopening},#{paystartDate},#{price})
+	</insert> 
+	
+	<select id="getpaymentJobCount" resultType="int" parameterType="int">
+	select count(*) from payment where jobopening=#{jobopening}
+	</select>
+	
+	<update id="cancelPay" parameterType="int">
+	update payment
+	set progress='결제취소요청'
+	where payment_code=#{paymentCode}
+	</update>
+	
+	<select id="selectPaymentById" parameterType="string" resultType="map">
+		select p.*, s.* 
+		from payment p join service s
+		on p.SERVICE_CODE = s.SERVICE_CODE
+		where member_code=(select member_code from member where memberid=#{memberid})
+	</select>
+	
+	<select id="selectPaymentByCode" parameterType="int" resultType="paymentVo">
+		select * from payment
+		where payment_code=#{paymentCode}
+	</select>
+	
+	<select id="selectMainAdvertiseByServiceCode" resultType="map" parameterType="int">
+	select v.*, c.*, trunc(end_date-sysdate) as dday
+	from vvipmain v join companyJobOpen c
+	on c.COMPANY_CODE = v.COMPANY_CODE
+	where service_code=#{serviceCode}
+	order by dbms_random.value
+	</select>
+	
+	<select id="getCountByJobopening" resultType="int" parameterType="int">
+	select count(*) from payment where jobopening=#{jobopening} and progress='결제완료'
+	</select>
+	
+	<update id="updatePaysuccess" parameterType="int">
+	update payment
+	set progress='결제완료'
+	where payment_code=#{paymentCode}
+	</update>
+
+
+	 <select id="selectTotalCount" parameterType="searchVo" resultType="int">
+	select count(*) from payment p join service s
+				on p.service_code = s.service_code
+				join member m
+				on p.member_code = m.member_code
+						
+	<!-- 			<if test="searchCondition=='결제완료'">
+				where progress='결제완료'
+				</if>
+				<if test="searchCondition=='결제취소'">
+				where progress='결제취소'
+				</if>
+				<if test="searchCondition=='결제취소요청'">
+				where progress='결제취소요청'
+				</if> -->
+		<where>
+	<if test='type 	!= null and type !=""'>	
+				<if test="type=='결제완료'">
+				progress='결제완료'
+				</if>
+				<if test="type=='결제취소'">
+				progress='결제취소'
+				</if>
+				<if test="type=='결제취소요청'">
+				progress='결제취소요청'
+				</if>
+		</if>		
+	<if test='type == null or type ==""'>
+	 <if test="searchKeyword != null and searchKeyword !=''">
+ 		<if test='searchCondition=="all"'>
+ 			
+			 m.memberid like  '%' || #{searchKeyword} || '%' or
+			 
+			 s.servicename like  '%' || #{searchKeyword} || '%'
+		</if>
+		
+			<if test='searchCondition=="memberid"'>
+			 m.memberid like  '%' || #{searchKeyword} || '%'
+				</if>
+			<if test='searchCondition=="servicename"'>
+				 s.servicename like  '%' || #{searchKeyword} || '%'
+						</if>
+<!-- 	 	 ${searchCondition} like '%' || #{searchKeyword} || '%' -->
+	 </if>
+	 </if>
+	 </where>	
+	 </select>
+
+
+	<select id="selectPayment" parameterType="map" resultType="map" >
+	select* from
+	(
+		select A.*, rownum as RNUM from 
+		(
+			select payment_code,paymentway,progress,period,price,paydate, s.servicename, m.memberid
+				from payment p join service s
+				on p.service_code = s.service_code
+				join member m
+				on p.member_code = m.member_code
+				<where>
+							<if test="searchVo.searchCondition!= null and searchVo.searchCondition!=''
+								and searchVo.searchKeyword!= null and searchVo.searchKeyword!=''">
+								
+								<if test='searchVo.searchCondition=="all"'>
+								 m.memberid like  '%' || #{searchVo.searchKeyword} || '%' or
+								 
+								 s.servicename like  '%' || #{searchVo.searchKeyword} || '%'
+								</if>
+							<if test='searchVo.searchCondition=="memberid"'>
+									 m.memberid like  '%' || #{searchVo.searchKeyword} || '%'
+							</if>
+							
+							<if test='searchVo.searchCondition=="servicename"'>
+									  s.servicename like  '%' || #{searchVo.searchKeyword} || '%'
+							</if>
+							<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
+								 <![CDATA[ or paydate >= #{startDay} and paydate <to_date(#{endDay})+1]]>
+							</if>
+					</if>				
+			<!-- 		<if test=" searchVo.searchKeyword== null or searchVo.searchKeyword==''">
+						<if test='searchVo.searchCondition=="progress"'>
+									 progress ='결제완료'
+						</if>
+						<if test='searchVo.searchCondition=="progress1"'>
+									 progress ='결제취소'
+						</if>
+						<if test='searchVo.searchCondition=="progress2"'>
+									 progress ='결제취소요청'
+						</if>
+						<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
+							 <![CDATA[paydate >= #{startDay} and paydate <to_date(#{endDay})+1]]>
+						</if>	
+					</if> -->
+				</where>
+
+			) A
+		)
+	<![CDATA[where RNUM>#{searchVo.firstRecordIndex}  
+		and RNUM<=#{searchVo.firstRecordIndex} + #{searchVo.recordCountPerPage}]]> 
+	</select>
+	
+	 <select id="selectBySameTime" resultType="map" parameterType="paymentVo">
+	 select p.*, j.jobtitle, (sysdate-p.paydate) as confirmtime
+	 from payment p join jobopening j
+ 	on p.JOBOPENING = j.JOBOPENING
+	where to_char(paydate,'yyyy-MM-dd HH:mm:ss')=#{paydate} 
+	and member_code=#{memberCode}
+	order by paydate desc
+	</select> 
+	
+	<select id="selectPayByTime" resultType="map" parameterType="string">
+	select p.member_Code, s.servicename, sum(p.price) as totalprice , count(p.price) as count,
+	p.progress, to_char(p.paydate,'yyyy-MM-dd HH:mm:ss') as ByTime, trunc(sysdate-p.paydate) as confirmtime
+	from payment p join service s
+	on p.SERVICE_CODE = s.SERVICE_CODE
+	where p.member_code=(select member_Code from member where memberid=#{memberid})
+	group by p.paydate, s.servicename, p.progress, p.member_code
+	order by p.paydate desc
+	</select>
+	
+	<select id="selectCancelConfirm" parameterType="paymentVo" resultType="paymentVo">
+	select p.*, to_char(paydate, 'yyyy-MM-dd HH:mm:ss') as stringdate , (sysdate-paydate) as confirmtime
+	from payment p where member_Code=#{memberCode} and to_char(paydate, 'yyyy-MM-dd HH:mm:ss')=#{paydate}
+	</select>
+
+	<update id="updateProgress" parameterType="map" >
+		update payment set progress=#{progressSel}
+	where payment_code in
+		<foreach collection="paymentChk" 
+		open="(" close=")" separator="," item="code">
+			#{code}
+		</foreach>
+	</update>
+	
+	<select id="selectProgress" parameterType="map" resultType="map">
+		select* from
+	(
+		select A.*, rownum as RNUM from 
+		(
+			select payment_code,paymentway,progress,period,price,paydate, s.servicename, m.memberid
+				from payment p join service s
+				on p.service_code = s.service_code
+				join member m
+				on p.member_code = m.member_code
+				<where>
+				<if test="type=='결제완료'">
+				progress='결제완료'
+				</if>
+				<if test="type=='결제취소'">
+				progress='결제취소'
+				</if>
+				<if test="type=='결제취소요청'">
+				progress='결제취소요청'
+				</if>
+				</where>
+				) A
+		)
+	<![CDATA[where RNUM>#{searchVo.firstRecordIndex}  
+		and RNUM<=#{searchVo.firstRecordIndex} + #{searchVo.recordCountPerPage}]]> 
+	</select>
+	
+</mapper>
+

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.resumeManager">
+
+	<insert id="insertHopeWorkingMN" parameterType="HopeWorkingVO">
+		<selectKey resultType="int" keyProperty="hopeworkCode" order="BEFORE">
+			select hope_working_seq.nextval from dual
+		</selectKey>
+		insert into hope_working (hopework_code, hopeWorkDate, hopePay, hopeWorkForm, 
+                            local_code, btype_code3, third_code)
+		values(#{hopeworkCode},#{hopeworkdate},#{hopepay},#{hopeworkform},#{localCode},#{btypeCode3},#{thirdCode})
+	</insert>
+	
+	<insert id="insertCertificateMN" parameterType="CertificateVO">
+		<selectKey resultType="int" keyProperty="lNo" order="BEFORE">
+			select certificate_seq.nextval from dual
+		</selectKey>
+		insert into certificate (l_no, l_name, l_getdate, l_institution)
+		values (#{lNo}, #{lName}, #{lGetdate}, #{lInstitution})
+	</insert>
+	
+	<insert id="insertEducationMN" parameterType="educationVo">
+		<selectKey resultType="int" keyProperty="academicCode" order="BEFORE">
+			select education_seq.nextval from dual
+		</selectKey>
+		insert into education (academic_code, schoolName, major, degree, graduatecheck,
+		                        schoolLocal, graduatetype, graduate2, graduate)
+		values (#{academicCode},#{schoolName},#{major},#{degree},#{graduateCheck},#{schoollocal},
+					#{graduatetype},#{graduate2},#{graduate})
+	</insert>
+	
+	<insert id="insertLangcertificationMN" parameterType="LangCertificationVO">
+		<selectKey resultType="int" keyProperty="langLicenceCode" order="BEFORE">
+			select LANGCERTIFICATION_seq.nextval from dual
+		</selectKey>
+		insert into LANGCERTIFICATION (langlicence_code, langlicencename, institute,
+		        certificationtype, language, langpoint, lang_grade, lang_getdate)
+		values (#{langLicenceCode},#{langLicenceName}, #{institute}, #{certificationtype}, #{language},
+					 #{langpoint}, #{langGrade}, #{langGetdate})
+	</insert>
+	
+	<insert id="insertCareerMN" parameterType="CareerVO">
+		<selectKey resultType="int" keyProperty="dvCode" order="BEFORE">
+			select career_seq.nextval from dual
+		</selectKey>
+		insert into CAREER(dv_code, companyname, chargework, workcheck, 
+		            jobGrade,workcondition, workterm2,workterm)
+		values(#{dvCode}, #{companyname}, #{chargework}, #{workcheck}, #{jobgrade},
+					 #{workcondition}, #{workterm2}, #{workterm})
+	</insert>
+	
+	<insert id="insertResumeMN" parameterType="ResumeManagerVO">
+		<selectKey resultType="int" keyProperty="resumeCode" order="BEFORE">
+			select resume_seq.nextval from dual
+		</selectKey>
+		insert into resume (resume_code, resumeTitle, introduce, 
+		<if test='award!=""'>award,</if>
+		<if test='langlicenceCode!=0'>langlicence_code,</if>
+		<if test='licenceCode!=0'>licence_code,</if>
+		<if test='dvCode!=0'>dv_code,</if>
+		<if test='academicCode!=0'>academic_code,</if>
+		<if test='hopeworkCode!=0'>HOPEWORK_CODE,</if>
+		        member_code,picture)
+		values(#{resumeCode}, #{resumeTitle}, #{introduce},
+		<if test='award!=""'>#{award},</if>
+		<if test='langlicenceCode!=0'> #{langlicenceCode},</if>
+		<if test='licenceCode!=0'>#{licenceCode},</if>
+		<if test='dvCode!=0'>#{dvCode},</if>
+		<if test='academicCode!=0'>#{academicCode},</if>
+		<if test='hopeworkCode!=0'>#{hopeworkCode},</if>
+			 #{memberCode}, #{picture})
+	</insert>
+	
+	
+	<select id="selectResumeManage" parameterType="map" resultType="map">
+	select * from
+			(
+			    select A.*, rownum as RNUM 
+			    from
+			    (
+					select * from
+					(
+						select * from resume_view	
+						<where>
+							<if test='detailCk="Y"'>
+								<if test="searchStartDay!='' and searchEndDay!=''">
+									resumeregdate > #{searchStartDay} and resumeregdate <![CDATA[ < ]]> to_date(#{searchEndDay})+1
+								</if>
+								<if test="hopworkingVo.localCode!=null and hopworkingVo.localCode!='구/군' ">
+									and local_code like	'%' || #{hopworkingVo.localCode} || '%'
+								</if>
+								<if test="hopworkingVo.btypeCode3!=null and hopworkingVo.btypeCode3!='3차 업종'">
+									and btype_code3 like '%' || #{hopworkingVo.btypeCode3} || '%'
+								</if>
+								<if test="hopworkingVo.thirdCode!=null and hopworkingVo.thirdCode!='3차 직종'">
+									and third_code like '%' || #{hopworkingVo.thirdCode} || '%'
+								</if>
+								<if test="ages!=null">
+									<foreach collection="ages" item="age">
+										<if test='age!="5"'>
+											or birth/10 >= #{age} and birth/10 <![CDATA[ < ]]> #{age}+1
+										</if>
+										<if test='age=="5"'>
+		   									or birth/10 >= ${age} 
+		   								</if>
+									</foreach>
+								</if>
+								<if test="gender!=null">
+									and membergender in 
+										<foreach collection="gender" close=")" item="gen" open="(" separator=",">
+											#{gen}
+										</foreach> 
+								</if>
+								<if test="currer!=null">
+								and
+									<foreach collection="currer" item="cur" separator="or">
+										<if test='cur=="신입"'> workterm is null</if>
+										<if test='cur=="1~3년"'> workterm>= 1 and workterm <![CDATA[ < ]]>=1+2 </if>
+										<if test='cur=="3~5년"'> workterm>= 3 and workterm <![CDATA[ <= ]]>3+2 </if>
+										<if test='cur=="5~10년"'> workterm>= 5 and workterm <![CDATA[ <= ]]>10 </if>
+										<if test='cur=="10년이상"'> workterm>= 10</if>
+									</foreach>
+								</if>
+								<if test="academic!=null">
+									and graduatetype in
+										<foreach collection="academic" open="(" close=")" separator="," item="aca">
+											#{aca}
+										</foreach>
+								</if>
+							</if>
+						</where>
+			   		) 
+			   		<where>
+				   		<if test="searchKeyword!='' and searchKeyword!=null">
+				   			<if test='searchCondition=="all"'>
+					   			memberid like '%' || #{searchKeyword} || '%' or
+								membername like '%' || #{searchKeyword} || '%' or
+								resumetitle  like '%' || #{searchKeyword} || '%' or
+								address  like '%' || #{searchKeyword} || '%' or
+								addressdetail   like '%' || #{searchKeyword} || '%' or
+								introduce  like '%' || #{searchKeyword} || '%' or
+								schoolname like '%' || #{searchKeyword} || '%' or
+								major like '%' || #{searchKeyword} || '%' 
+				   			</if>
+				   			<if test='searchCondition=="id"'>
+				   				and memberid like '%' || #{searchKeyword} || '%'
+				   			</if>
+				   			<if test='searchCondition=="name"'>
+				   				and membername like '%' || #{searchKeyword} || '%'
+				   			</if>
+				   			<if test='searchCondition=="resume"'>
+				   				resumetitle  like '%' || #{searchKeyword} || '%' or
+								address  like '%' || #{searchKeyword} || '%' or
+								addressdetail   like '%' || #{searchKeyword} || '%' or
+								introduce  like '%' || #{searchKeyword} || '%' or
+								schoolname like '%' || #{searchKeyword} || '%' or
+								major like '%' || #{searchKeyword} || '%' 
+				   			</if>
+				   		</if>
+			   		</where>
+				)A
+			)
+		where RNUM>#{firstRecordIndex}  
+		and RNUM <![CDATA[<]]>=#{firstRecordIndex} + #{recordCountPerPage}
+	</select>
+	
+	<select id="getTotalCountManager" parameterType="map" resultType="int">
+	select count(*) from
+			(
+			    select A.*, rownum as RNUM 
+			    from
+			    (
+					select * from
+					(
+						select * from resume_view	
+						<where>
+							<if test='detailCk="Y"'>
+								<if test="searchStartDay!='' and searchEndDay!=''">
+									resumeregdate > #{searchStartDay} and resumeregdate <![CDATA[ < ]]> to_date(#{searchEndDay})+1
+								</if>
+								<if test="hopworkingVo.localCode!=null and hopworkingVo.localCode!='구/군'  ">
+									and local_code like	'%' || #{hopworkingVo.localCode} || '%'
+								</if>
+								<if test=" hopworkingVo.btypeCode3!=null and hopworkingVo.btypeCode3!='3차 업종'">
+									and btype_code3 like '%' || #{hopworkingVo.btypeCode3} || '%'
+								</if>
+								<if test="hopworkingVo.thirdCode!=null and hopworkingVo.thirdCode!='3차 직종'">
+									and third_code like '%' || #{hopworkingVo.thirdCode} || '%'
+								</if>
+								<if test="ages!=null">
+									<foreach collection="ages" item="age">
+										<if test='age!="5"'>
+											or birth/10 >= #{age} and birth/10 <![CDATA[ < ]]> #{age}+1
+										</if>
+										<if test='age=="5"'>
+		   									or birth/10 >= ${age} 
+		   								</if>
+									</foreach>
+								</if>
+								<if test="gender!=null">
+									and membergender in 
+										<foreach collection="gender" close=")" item="gen" open="(" separator=",">
+											#{gen}
+										</foreach> 
+								</if>
+								<if test="currer!=null">
+								and
+									<foreach collection="currer" item="cur" separator="or">
+										<if test='cur=="신입"'> workterm is null</if>
+										<if test='cur=="1~3년"'> workterm>= 1 and workterm <![CDATA[ < ]]>=1+2 </if>
+										<if test='cur=="3~5년"'> workterm>= 3 and workterm <![CDATA[ <= ]]>3+2 </if>
+										<if test='cur=="5~10년"'> workterm>= 5 and workterm <![CDATA[ <= ]]>10 </if>
+										<if test='cur=="10년이상"'> workterm>= 10</if>
+									</foreach>
+								</if>
+								<if test="academic!=null">
+									and graduatetype in
+										<foreach collection="academic" open="(" close=")" separator="," item="aca">
+											#{aca}
+										</foreach>
+								</if>
+							</if>
+						</where>
+			   		) 
+			   		<where>
+				   		<if test="searchKeyword!='' and searchKeyword!=null">
+				   			<if test='searchCondition=="all"'>
+					   			memberid like '%' || #{searchKeyword} || '%' or
+								membername like '%' || #{searchKeyword} || '%' or
+								resumetitle  like '%' || #{searchKeyword} || '%' or
+								address  like '%' || #{searchKeyword} || '%' or
+								addressdetail   like '%' || #{searchKeyword} || '%' or
+								introduce  like '%' || #{searchKeyword} || '%' or
+								schoolname like '%' || #{searchKeyword} || '%' or
+								major like '%' || #{searchKeyword} || '%' 
+				   			</if>
+				   			<if test='searchCondition=="id"'>
+				   				and memberid like '%' || #{searchKeyword} || '%'
+				   			</if>
+				   			<if test='searchCondition=="name"'>
+				   				and membername like '%' || #{searchKeyword} || '%'
+				   			</if>
+				   			<if test='searchCondition=="resume"'>
+				   				resumetitle  like '%' || #{searchKeyword} || '%' or
+								address  like '%' || #{searchKeyword} || '%' or
+								addressdetail   like '%' || #{searchKeyword} || '%' or
+								introduce  like '%' || #{searchKeyword} || '%' or
+								schoolname like '%' || #{searchKeyword} || '%' or
+								major like '%' || #{searchKeyword} || '%' 
+				   			</if>
+				   		</if>
+			   		</where>
+				)A
+			)
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.popup">
+
+	
+	<insert id="insertPopup" parameterType="popupVo" >
+		<selectKey keyProperty="popupCode" resultType="int" order="BEFORE">
+			select popup_seq.nextval from dual
+		</selectKey>
+		insert into popup (admin_code, popup_name, popup_img, width, height, left, top, usage, popup_code, end_day, start_day)
+		values(#{adminCode}, #{popupName}, #{popupImg},  #{width}, #{height}, #{left}, #{top},
+							#{usage}, #{popupCode}, #{endDay}, #{startDay})	
+	</insert>
+
+	<select id="selectPopupAll" resultType="popupVo">
+		select * from popup order by end_day
+	</select>
+
+	<update id="updateUsage" parameterType="map" >
+		update popup
+		<if test="usageCk=='미사용'"> set usage= 'Y'</if>
+		<if test="usageCk=='사용중'"> set usage= 'N'</if>
+		where popup_code=#{popupCode}
+	</update>
+	
+	<update id="updateUsageYandN" parameterType="map" >
+		update popup
+		<if test='NYck=="btUsageY"'>set usage='Y'</if>
+		<if test='NYck=="btUsageN"'>set usage='N'</if>
+		where popup_code in 
+		<foreach collection="popupCodeArr" item="i" open="(" close=")" separator=",">
+			#{i}
+		</foreach>
+	</update>
+	
+	<update id="updateTrem" parameterType="map">
+		update popup
+		set start_day = #{startDay}, end_day=#{endDay}
+		where popup_code=#{popupCode}
+	</update>
+
+	<delete id="deleteByPopupCode" parameterType="int">
+	  delete from popup
+	  where popup_code = #{popupCode}
+	</delete>
+	
+	<select id="selectByPopupCode" parameterType="int" resultType="popupVo">
+		select * from popup where popup_code = #{popupCode}
+	</select>
+	
+	<update id="updatePopup" parameterType="popupVo">
+		  update popup
+		  set admin_code=#{adminCode}, popup_name=#{popupName} ,popup_img =#{popupImg} ,
+		  			width=#{width}, height=#{height}, left=#{left},
+		            top=#{top}, usage=#{usage}, start_day=#{startDay} , end_day=#{endDay}
+		  where popup_code=#{popupCode}
+	</update>
+	
+	<select id="selectUsageY" resultType="popupVo">
+		SELECT * FROM POPUP
+		where usage='Y' 
+		<![CDATA[and end_day>sysdate and start_day <sysdate]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
