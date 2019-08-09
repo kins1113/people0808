@@ -52,6 +52,11 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 	    	$("form[name=memberList]").submit();	    	
 	    });
 		
+		$("#postSearch").click(function(){
+			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member&showKey=member'/>");
+			$("form[name=memberList]").submit();
+		})
+		
 	});
 	//페이지 처리 함수
 	function pageFunc(curPage){
@@ -76,7 +81,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		
     }
 </script>
-<form name="memberList" method="post" 
+<form name="memberList" method="post"  action="<c:url value='/manager/member/memberList.do?authorityCk=member&showKey=member'/>"
 		 enctype="multipart/form-data" >
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
@@ -111,7 +116,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
 				</div>
 				<div class="form-group serDiv">
-					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
+					<input type="button" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
 				</div>
 				<div class="form-group serDiv">
 					<input type="text" class="form-control" placeholder="검색어"
@@ -229,7 +234,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 								<td>${memberVo.email}</td>
 								<td>${memberVo.tel}</td>
 								<td><a href="#">${memberVo.authorityCode}</a></td>
-								<td>무엇을 넣을까?</td>
+								<td></td>
 							</tr>
 						</c:forEach>
 					</c:if>

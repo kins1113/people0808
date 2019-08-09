@@ -46,6 +46,13 @@ width: 100%; height: 100%;    background: rgba(0,0,0,.3);    z-index: 10;}
 #my-dialog a {  float: right;  padding-right: 49px;}
 #my-dialog tr:nth-of-type(2) {  height:235px;  background: #f0f5ff40;}
 #answercontent {    height: 220px;    width: 541px;    margin-left: 4px;}
+.divCus {    width: 46%;    float: left;    border: 1px solid #97c3ea; overflow:scroll;
+    padding: 10px;    height: 100%;    background: white;}
+.divAns  {   width: 46%;   float: right;   border: 1px solid #97c3ea;   padding: 10px; overflow:scroll;
+    height: 100%;    background: white;}    
+.divAns::-webkit-scrollbar ,.divCus::-webkit-scrollbar{display:none;}
+div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px; 
+	margin-right:8px;   padding-left: 9px;    font-weight: bold;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -68,8 +75,15 @@ width: 100%; height: 100%;    background: rgba(0,0,0,.3);    z-index: 10;}
 		}) */
 		//답글다는 모달창 띄우기 
 		 $("#btn-open-dialog,#dialog-background,#btn-close-dialog").click(function () {
-			var code=$(this).next().val();		
+			var code=$(this).next().val();
+			var ck=$(this).next().next().val();
 			$("input[name=custextCode]").val(code);
+			if(!ck){
+				$("input[name=recontentAdd]").val('수정하기');
+				$("#thBt").html("<input type='submit' value='수정하기' >")
+			}else{
+				$("input[name=recontentAdd]").val('보내기');
+			}
 			$("#my-dialog,#dialog-background").toggle();
 		}); 
 		//답글 처리 
@@ -200,12 +214,29 @@ width: 100%; height: 100%;    background: rgba(0,0,0,.3);    z-index: 10;}
 									<c:if test="${empty vo['ANSWERCONTENT']}">미완료</c:if>
 									<c:if test="${!empty vo['ANSWERCONTENT']}">완료</c:if>
 								</td>	
+									<c:set var="reEditCk" value="${empty vo['ANSWERCONTENT']}"/>
 								<td><button type="button" id="btn-open-dialog" class="btRe">답변하기</button>
-									<input type="hidden" name='asd' value="${vo['CUSTEXT_CODE']}">		
+									<input type="hidden" name='asd' value="${vo['CUSTEXT_CODE']}">
+									<input type="hidden" name='reEditCk' value="${reEditCk}">
 								</td>	
 							</tr>
 							<tr class="trContent">
-								<td colspan="5" class="tdContent">${vo['CUSCONTENT']} </td>
+								<td class="tdContent"	colspan="5">
+									<div id="sliedDiv">
+												질문
+										</div>
+									<div class="divCus" 
+									<c:if test="${empty vo['ANSWERCONTENT']}">
+										style="width: 96%"
+									</c:if>
+									>${vo['CUSCONTENT']}</div> 
+									<c:if test="${!empty vo['ANSWERCONTENT']}">
+										<div id="sliedDiv">
+												답변
+										</div>
+										<div class="divAns">${vo['ANSWERCONTENT']}</div>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -251,7 +282,7 @@ width: 100%; height: 100%;    background: rgba(0,0,0,.3);    z-index: 10;}
 	<input type="hidden" name="custextCode">
    <table>
    		<tr>
-   			<th colspan="2">문의사항 답변 <input type="submit" id="recontentAdd" value='보내기'></th>
+   			<th colspan="2" id="thBt">문의사항 답변 <input type="submit" name="recontentAdd" ></th>
    		</tr>
    		<tr>
    			<th align="center">내용</th>
