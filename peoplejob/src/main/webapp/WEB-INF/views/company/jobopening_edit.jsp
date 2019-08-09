@@ -16,7 +16,34 @@
 		});
 	}); */
 	$(document).ready(function(){
+		/* $("#subwayinfo").hide();
+		$("#subwayinfo1").change(function(){
+			var a=$("#subwayinfo1").val();
+			$("select#subwayinfo option[value!='']").remove();
+			//alert(a);
+			$.ajax({
+				url:"http://openapi.seoul.go.kr:8088/6b65787671736b6135324370774b64/xml/SearchSTNBySubwayLineService/1/999/"+a,
+				dataType:"xml",
+				type:'GET',
+				success:function(data){
+					//alert(data);
+					//console.log(data);
+					$(data).find("row").each(function(){
+					
+						var info = "<option value='"+$(this).find("STATION_NM").text()+"'>"+$(this).find("STATION_NM").text() +"</option>";
+
+						$('#subwayinfo').append(info);
+
+					});
+				},error:function(xhr,error,status){
+					alert("error="+error+", status="+status);
+				}
+			});  
+			/* http://openapi.seoul.go.kr:8088/6b65787671736b6135324370774b64/xml/SearchSTNBySubwayLineService/1/999/1 */
+			$("#subwayinfo").show();
+		}); */
 		//$("#submit2").click(function(){
+		$('textarea[name="applicationhandbook"]').html('${vo.applicationhandbook}');
 		$("form[name=boardForm]").submit(function(){  
 			//if(confirm("등록하시겠습니까?")){              
 				$("form[name=boardForm]").find("input[type=text]").each(function(){
@@ -100,6 +127,9 @@ h3, .h3 {
 select {
     height: 30px;
 }
+body .se2_inputarea{
+	background:white;
+}
 </style>
 <article>
 	<fieldset>
@@ -125,23 +155,91 @@ select {
             <div>
                 <label for="title" >지역구분</label>
                     <select name="localcheck">
-                		<option value="서울특별시">서울</option>
-                		<option value="부산광역시">부산</option>
-                		<option value="인천광역시">인천</option>
-                		<option value="대전">대전</option>
-                		<option value="광주">광주</option>
-                		<option value="대구">대구</option>
-                		<option value="울산">울산</option>
-                		<option value="세종">세종</option>
-                		<option value="경기도">경기</option>
-                		<option value="강원도">강원</option>
-                		<option value="충청북도">충북</option>
-                		<option value="충청남도">충남</option>
-                		<option value="전라북도">전북</option>
-                		<option value="전라남도">전남</option>
-                		<option value="경상북도">경북</option>
-                		<option value="경상남도">경남</option>
-                		<option value="제주">제주</option>
+                		<option value="서울특별시"
+                		<c:if test="${vo.localcheck=='서울특별시' }">
+                		selected
+                		</c:if>
+                		>서울</option>
+                		<option value="부산광역시"
+                		<c:if test="${vo.localcheck=='부산광역시' }">
+                		selected
+                		</c:if>
+                		>부산</option>
+                		<option value="인천광역시"
+                		<c:if test="${vo.localcheck=='인천광역시' }">
+                		selected
+                		</c:if>
+                		>인천</option>
+                		<option value="대전"
+                		<c:if test="${vo.localcheck=='대전' }">
+                		selected
+                		</c:if>
+                		>대전</option>
+                		<option value="광주"
+                		<c:if test="${vo.localcheck=='광주' }">
+                		selected
+                		</c:if>
+                		>광주</option>
+                		<option value="대구"
+                		<c:if test="${vo.localcheck=='대구' }">
+                		selected
+                		</c:if>
+                		>대구</option>
+                		<option value="울산"
+                		<c:if test="${vo.localcheck=='울산' }">
+                		selected
+                		</c:if>
+                		>울산</option>
+                		<option value="세종"
+                		<c:if test="${vo.localcheck=='세종' }">
+                		selected
+                		</c:if>
+                		>세종</option>
+                		<option value="경기도"
+                		<c:if test="${vo.localcheck=='경기도' }">
+                		selected
+                		</c:if>
+                		>경기</option>
+                		<option value="강원도"
+                		<c:if test="${vo.localcheck=='강원도' }">
+                		selected
+                		</c:if>
+                		>강원</option>
+                		<option value="충청북도"
+                		<c:if test="${vo.localcheck=='충청북도' }">
+                		selected
+                		</c:if>
+                		>충북</option>
+                		<option value="충청남도"
+                		<c:if test="${vo.localcheck=='충청남도' }">
+                		selected
+                		</c:if>
+                		>충남</option>
+                		<option value="전라북도"
+                		<c:if test="${vo.localcheck=='전라북도' }">
+                		selected
+                		</c:if>
+                		>전북</option>
+                		<option value="전라남도"
+                		<c:if test="${vo.localcheck=='전라남도' }">
+                		selected
+                		</c:if>
+                		>전남</option>
+                		<option value="경상북도"
+                		<c:if test="${vo.localcheck=='경상북도' }">
+                		selected
+                		</c:if>
+                		>경북</option>
+                		<option value="경상남도"
+                		<c:if test="${vo.localcheck=='경상남도' }">
+                		selected
+                		</c:if>
+                		>경남</option>
+                		<option value="제주"
+                		<c:if test="${vo.localcheck=='제주' }">
+                		selected
+                		</c:if>
+                		>제주</option>
                 	</select>
                 </div>
             </div>
@@ -452,7 +550,10 @@ select {
             <div class="form-group">
                 <div >
                     <label >상세모집요강 :</label> 
-                    <input id="applicationhandbook" name="applicationhandbook" class="form-control" type="text" value="${vo.applicationhandbook }"/>
+                    <c:import url="/main/smarteditorTestjsp.do">
+						<c:param name="name" value="applicationhandbook"></c:param>
+					</c:import>
+                    <%-- <input id="applicationhandbook" name="applicationhandbook" class="form-control" type="text" value="${vo.applicationhandbook }"/> --%>
                 </div>
             </div>
             <%-- <div class="form-group">

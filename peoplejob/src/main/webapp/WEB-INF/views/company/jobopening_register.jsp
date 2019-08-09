@@ -23,6 +23,32 @@
 	}); */
 	$(document).ready(function(){
 		//$("#submit2").click(function(){
+		$("#subwayinfo").hide();
+		$("#subwayinfo1").change(function(){
+			var a=$("#subwayinfo1").val();
+			$("select#subwayinfo option[value!='']").remove();
+			//alert(a);
+			$.ajax({
+				url:"http://openapi.seoul.go.kr:8088/6b65787671736b6135324370774b64/xml/SearchSTNBySubwayLineService/1/999/"+a,
+				dataType:"xml",
+				type:'GET',
+				success:function(data){
+					//alert(data);
+					//console.log(data);
+					$(data).find("row").each(function(){
+					
+						var info = "<option value='"+$(this).find("STATION_NM").text()+"'>"+$(this).find("STATION_NM").text() +"</option>";
+
+						$('#subwayinfo').append(info);
+
+					});
+				},error:function(xhr,error,status){
+					alert("error="+error+", status="+status);
+				}
+			});  
+			/* http://openapi.seoul.go.kr:8088/6b65787671736b6135324370774b64/xml/SearchSTNBySubwayLineService/1/999/1 */
+			$("#subwayinfo").show();
+		});
 		$("form[name=boardForm]").submit(function(){ 
 			//if(confirm("등록하시겠습니까?")){
 				$("form[name=boardForm]").find("input[type=text]").each(function(){
@@ -107,6 +133,9 @@ h3, .h3 {
 select {
     height: 30px;
 }
+body .se2_inputarea{
+	background:white;
+}
 </style>
 <article>
 	<fieldset>
@@ -155,7 +184,29 @@ select {
             <div class="form-group">
                 <div >
                 <label >역정보</label>
-                    <input id="subwayinfo" name="subwayinfo" class="form-control" type="text" />
+                    <!-- <input id="subwayinfo" name="subwayinfo" class="form-control" type="text" /> -->
+                    <select id="subwayinfo1" name="subwayinfo1">
+                    	<option value="" selected>값을 선택해주세요</option>
+                    	<option value="1">1호선</option>
+                    	<option value="2">2호선</option>
+                    	<option value="3">3호선</option>
+                    	<option value="4">4호선</option>
+                    	<option value="5">5호선</option>
+                    	<option value="6">6호선</option>
+                    	<option value="7">7호선</option>
+                    	<option value="8">8호선</option>
+                    	<option value="9">9호선</option>
+                    	<option value="I">인천1호선</option>
+                    	<option value="K">경의중앙선</option>
+                    	<option value="B">분당선</option>
+                    	<option value="A">공항철도</option>
+                    	<option value="G">경춘선</option>
+                    	<option value="S">신분당선</option>
+                    	<option value="SU">수인선</option>
+                    </select>
+                    <select id="subwayinfo" name="subwayinfo">
+                    	<option value="">값을 선택해주세요</option>
+                    </select>
                 </div>
             </div>         
               <div class="form-group">
@@ -336,7 +387,10 @@ select {
             <div class="form-group">
                 <div  >
                     <label  >상세모집요강</label> 
-                    <input id="applicationhandbook" name="applicationhandbook" class="form-control" type="text" />
+                    <!-- <input id="applicationhandbook" name="applicationhandbook" class="form-control" type="text" /> -->
+                    <c:import url="/main/smarteditorTestjsp.do">
+						<c:param name="name" value="applicationhandbook"></c:param>
+					</c:import>
                 </div>
             </div>
             <!-- <div class="form-group">

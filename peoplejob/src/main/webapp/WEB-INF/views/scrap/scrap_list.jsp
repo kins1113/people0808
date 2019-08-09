@@ -23,14 +23,14 @@
 		}); 
 		$("#del").click(function(){
 			var cnt=0;
-			if(confirm("삭제하시겠습니까?")){
+			if(confirm("해당 스크랩을 삭제하시겠습니까?")){
 				$("input[name=jobopening1]").each(function(){
 					if($(this).is(':checked')==true){
 						cnt=1;
 					}
 				})
 				if(cnt==0){
-					alert("삭제할 공고를 체크해주세요.");
+					alert("삭제할 스크랩을 체크해주세요.");
 					event.preventDefault();
 					return false;
 				}else{
@@ -191,7 +191,7 @@
        <input type="hidden" name="jobopening" id="jobopening">
          <c:if test="${mvo.authorityCode==1}"> 
         <div class="pull-right">
-        	<input type="button" id="del" name="del" class="btn btn-primary" role="button" value="삭제하기">
+        	<input type="button" id="del" name="del" class="btn btn-primary" role="button" value="스크랩 삭제하기">
             <a href="<c:url value='/company/jobopening_list.do'/>" class="btn btn-primary" role="button">채용정보보러가기</a>
         </div>
         </c:if>
