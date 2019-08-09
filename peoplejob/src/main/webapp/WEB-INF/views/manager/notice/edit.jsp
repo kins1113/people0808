@@ -50,7 +50,8 @@
 						</c:import>
      
             <button class="btn btn-primary btn-default" type = "submit">수정</button>
-            <button class="btn btn-primary btn-default" onclick="location.href='list.do' ">목록</button>      
+            <a  href="<c:url value='/manager/notice/list.do'/>"
+							class="btn btn-primary btn-default">목록</a>     
       
 	</fieldset>
 </form>    
