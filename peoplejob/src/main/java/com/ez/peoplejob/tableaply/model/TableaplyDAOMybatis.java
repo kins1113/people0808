@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.resume.model.ResumeVO;
 
 @Repository
@@ -68,6 +69,17 @@ public class TableaplyDAOMybatis implements TableaplyDAO{
 	@Override
 	public int applyCnt(int jobopening) {
 		return sqlSession.selectOne(namespace+"applyCnt",jobopening);
+	}
+	@Override
+	public List<Map<String, Object>> selectAll(Map<String, Object> map) {
+		List<Map<String, Object>>list
+		=sqlSession.selectList(namespace+"selectADapply",map);
+		
+		return list;
+	}
+	@Override
+	public int selectTotalCount(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",searchVo);
 	}
 	
 }
