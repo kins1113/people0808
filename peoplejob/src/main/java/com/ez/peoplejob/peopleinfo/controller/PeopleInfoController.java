@@ -52,8 +52,7 @@ public class PeopleInfoController {
 			@RequestParam(required = false,defaultValue = "0") int[] localCode2,@RequestParam(required = false,defaultValue = "0") int[] btypeCode1 ,
 			@RequestParam(required = false,defaultValue = "0") int[] btypeCode2,@RequestParam(required = false,defaultValue = "0") int[] btypeCode3,
 			@RequestParam(required = false,defaultValue = "0") int[] firstCode,
-			@RequestParam(required = false,defaultValue = "0") int[] secondCode,@RequestParam(required = false,defaultValue = "0") int[] thirdCode,
-			@RequestParam(required = false, value="resumeCode", defaultValue = "0") int resumeCode) {
+			@RequestParam(required = false,defaultValue = "0") int[] secondCode,@RequestParam(required = false,defaultValue = "0") int[] thirdCode) {
 		
 		logger.info("workcheck={}",workcheck);
 		logger.info("membergender={}",membergender);
@@ -105,7 +104,6 @@ public class PeopleInfoController {
 		map.put("thirdCode",thirdCode);
 		map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
 		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
-		map.put("resumeCode", resumeCode);
 		logger.info("map={}",map);
 		list=peopleinfoService.selectPeoplew(map);
 		

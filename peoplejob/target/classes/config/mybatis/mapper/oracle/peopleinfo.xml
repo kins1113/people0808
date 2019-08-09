@@ -14,29 +14,29 @@
 		    (
 		        select * from resume_viewMain where opencheck='Y'
 		    
-		    <if test="term != null">
+		    <if test="term != null and term !=''">
 				and term IN 
-				<foreach collection="term" item="term" 
+				<foreach collection="term" item="term1" 
 					index="index" open="(" close=")" separator=",">
-				#{term}
+				#{term1}
 				</foreach>
 				</if>
-				<if test="age != null">
+				<if test="age != null and age !='' ">
 				and age in
-			<foreach collection="age" item="age" index="index" open="(" close=")" separator=",">
-			#{age}
+			<foreach collection="age" item="age1" index="index" open="(" close=")" separator=",">
+			#{age1}
 			</foreach>
 			</if>
 			<if test="graduatetype != null">
 	and graduatetype in
-	<foreach collection="graduatetype" item="graduatetype" index="index" open="(" close=")" separator=",">
-	#{graduatetype}
+	<foreach collection="graduatetype" item="graduatetype1" index="index" open="(" close=")" separator=",">
+	#{graduatetype1}
 	</foreach>
 	</if>
 	<if test="localCode != null">
 	and local_code in
-	<foreach collection="localCode" item="localCode" index="index" open="(" close=")" separator=",">
-	#{localCode}
+	<foreach collection="localCode" item="localCode1" index="index" open="(" close=")" separator=",">
+	#{localCode1}
 	</foreach>
 	</if>
 	<if test="localCode2 != null">
