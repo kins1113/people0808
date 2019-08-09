@@ -183,7 +183,7 @@ public class PaymentController {
 		}
 		
 		logger.info("payment 등록 cnt={}",cnt+"\n");
-		return "service/payment";
+		return "redirect:/service/payment.do";
 	}
 	
 	@RequestMapping(value="/mypage/corp/paymoreDetail.do", method = RequestMethod.GET)

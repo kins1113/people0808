@@ -391,15 +391,11 @@
     color: white;">
           <!-- 페이지 처리 -->
           
-          <div class="divPage">
+          <div class="divPage" style="margin-left: 225px;">
 										<!-- 이전블럭으로 이동하기 -->
 										<c:if test="${pagingInfo.firstPage>1 }">
-												<a class="page-link" href="#"
-													aria-label="Previous"
-													onclick="pageFunc1(${pagingInfo.firstPage-1})"> <span
-														aria-hidden="true" class="mdi mdi-chevron-left"></span> <span
-														class="sr-only">Previous</span>
-												</a>
+												<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7" 
+												style="float: left;" onclick="pageFunc1(${pagingInfo.firstPage-1})"><</a>
 											</c:if>
 										<!-- 페이지 번호 추가 -->
 										<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -420,12 +416,8 @@
 
 										<!-- 다음 블럭으로 이동하기 -->
 										<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Next"
-												onclick="pageFunc1(${pagingInfo.lastPage+1})"> <span
-													aria-hidden="true" class="mdi mdi-chevron-right"></span> <span
-													class="sr-only">Next</span>
-											</a></li>
+											<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7" 
+												style="float: left;" onclick="pageFunc1(${pagingInfo.lastPage+1})">></a>
 										</c:if>
 							</div>
 				<div class="divSearch"></div>

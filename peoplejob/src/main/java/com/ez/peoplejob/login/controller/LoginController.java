@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
+import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.payment.model.PaymentService;
@@ -52,6 +53,10 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		String memberid=(String)session.getAttribute("memberid");
 		MemberVO memberVo=memberService.selectByUserid(memberid);
 		logger.info("마이페이지 화면 보!!여!!주!!기!! memberVo={}",memberVo);
+		
+			CompanyVO companyVo=jobService.selectcompany(memberVo.getCompanyCode());
+			logger.info("companyVo={}",companyVo);
+			model.addAttribute("companVo",companyVo);
 		
 		//
 		List<Map<String , Object>> paylist=paymentService.selectPaymentById(memberid);
