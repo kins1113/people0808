@@ -20,14 +20,14 @@
 		}); 
 		$("#del").click(function(){
 			var cnt=0;
-			if(confirm("삭제하시겠습니까?")){
+			if(confirm("지원취소 하시겠습니까?")){
 				$("input[name=applyCode1]").each(function(){
 					if($(this).is(':checked')==true){
 						cnt=1;
 					}
 				})
 				if(cnt==0){
-					alert("삭제할 공고를 체크해주세요.");
+					alert("지원취소 할 공고를 체크해주세요.");
 					event.preventDefault();
 					return false;
 				}else{
@@ -181,7 +181,7 @@
 </div>
 	<input type="hidden" name="applyCode" id="applyCode"> 
 	<div class="pull-right">
-      <input type="button" id="del" name="del" class="btn btn-primary" role="button" value="삭제하기">
+      <input type="button" id="del" name="del" class="btn btn-primary" role="button" value="지원취소하기">
        <a href="<c:url value='/company/jobopening_list.do'/>" class="btn btn-primary" role="button">채용정보로 돌아가기</a>
       </div>
         </div>

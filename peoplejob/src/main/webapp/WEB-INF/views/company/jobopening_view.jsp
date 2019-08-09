@@ -316,7 +316,15 @@ span #companyname{
         		 <c:if test="${mvo.authorityCode==3}">
                 <a href="<c:url value='/company/jobopening_deleteck.do?jobopening=${vo.jobopening}'/>"><input type="button" id="deleteBtn" class="btn btn-default btn-mg" role="button" value="삭제"></a>
                 <a href="<c:url value='/company/jobopening_editck.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
-                <a href="<c:url value='/company/jobopening_agreeeditck.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
+                <a href="<c:url value='/company/jobopening_agreeeditck.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button"
+                <c:if test="${vo.adminagree=='Y' }">
+               	value="비활성화"
+                </c:if>
+                <c:if test="${vo.adminagree=='N' }">
+               	value="활성화"
+                </c:if>
+                > 
+                </a>
                 </c:if>
                 <!-- 일반회원일경우 -->
                 <c:if test="${mvo.authorityCode==1}">
