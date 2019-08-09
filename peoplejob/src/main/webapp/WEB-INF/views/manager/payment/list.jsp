@@ -232,7 +232,7 @@ action='<c:url value="/manager/payment/list.do"/>'>
 								</nav>
 							</div>
 		
-			
+			</div>
 		
 		<div class="divRight">
 	
@@ -243,6 +243,7 @@ action='<c:url value="/manager/payment/list.do"/>'>
 		<option value="결제취소요청">결제취소요청</option>
 	</select>
 	<input type="button" value="변경" id="btProgressEdit" class="mb-1 btn btn-success">
+</div>
 </div>
 		</form>
 
