@@ -60,8 +60,8 @@ hr{margin: 1px;}
 			$("#resumeSearchDtCg").hide();
 		}else if($("input[name=detailCk]").val()=="Y"){
 			$("#searchDtDiv").show();
+			$("#resumeSearchDt").hide();
 			$("#resumeSearchDtCg").show();
-			$("#resumeSearchDtDt").hide();
 		}
 		$("#resumeSearchDt").click(function(){
 			$("#searchDtDiv").show();
@@ -554,6 +554,25 @@ hr{margin: 1px;}
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
+		
+		$("input[name=searchStartDay]").val('${param.searchStartDay}');
+		$("input[name=searchEndDay]").val('${param.searchEndDay}');
+		$("input[name=searchKeyword]").val('${param.searchKeyword}');
+		$("input[name=searchCondition]").val('${param.searchCondition}');
+		$("input[name=currentPage]").val('${param.searchStartDay}');
+		$("input[name=ages]").val('${param.ages}');
+		$("input[name=gender]").val('${param.gender}');
+		$("input[name=currer]").val('${param.currer}');
+		$("input[name=academic]").val('${param.academic}');
+		$("input[name=localCode]").val('${param.localCode}');
+		$("input[name=btypeCode3]").val('${param.btypeCode3}');
+		$("input[name=thirdCode]").val('${param.thirdCode}');
+		
+		
+		
+		
+		
+		
 		$("form[name=resumeList]").attr("action","<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>");
 		$("form[name=resumeList]").submit();
 	}

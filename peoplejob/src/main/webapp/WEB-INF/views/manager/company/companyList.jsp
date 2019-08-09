@@ -42,16 +42,16 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				}else{
 						$("input[name=filterKey]").val("Y");
 				}
-			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
-	    	$("form[name=memberList]").submit();	    	
+			$("form[name=companyList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
+	    	$("form[name=companyList]").submit();	    	
 			})
 		});
 		
 		//체크된것 메일 보내기
 	    $("#btMultMail").click(function(){
-	    	$("form[name=memberList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
+	    	$("form[name=companyList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
 	    		.attr("method",'get');
-	    	$("form[name=memberList]").submit();	    	
+	    	$("form[name=companyList]").submit();	    	
 	    });
 		//권한 승인 처리 
 		
@@ -93,31 +93,36 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			});
 			
 		});
+		
+		$("#companySearch").click(function(){
+			$("form[name=companyList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company&showKey=member'/>");
+			$("form[name=companyList]").submit();
+		})
 	});
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
-		$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
-		$("form[name=memberList]").submit();
+		$("form[name=companyList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
+		$("form[name=companyList]").submit();
 	}
 	//엑셀 다운로드 함수
 	function doExcelDownloadProcess(ckAll){
 		if(ckAll=="all"){
 		//전체 회원 엑셀다운 처리
-			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do?all=all'/>");
-	        $("form[name=memberList]").submit();
+			$("form[name=companyList]").attr("action","<c:url value='/downloadExcelFileCompany.do?all=all'/>");
+	        $("form[name=companyList]").submit();
 		}else{
 		//지금 화면에 있는 회원만 엑셀 다운
 			if($("input[name=searchKeyword]")==''){
 				$("input[name=searchCondition]").val('');
 			}
-	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do'/>");
-	        $("form[name=memberList]").submit();
+	        $("form[name=companyList]").attr("action","<c:url value='/downloadExcelFileCompany.do'/>");
+	        $("form[name=companyList]").submit();
 		}
 		
     }
 </script>
-<form name="memberList" method="post" 
+<form name="companyList" method="post" 
 		 enctype="multipart/form-data" >
 <!-- 회사인지 일반인지 구분하기 위한 hidden -->
 <input type="hidden" name="authorityCk" value="${param.authorityCk }">
@@ -154,7 +159,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
 				</div>
 				<div class="form-group serDiv">
-					<input type="submit" class="btn btn-secondary btn-default" id="postSearch" value="검색">&nbsp;
+					<input type="button" class="btn btn-secondary btn-default" id="companySearch" value="검색">&nbsp;
 				</div>
 				<div class="form-group serDiv">
 					<input type="text" class="form-control" placeholder="검색어"
