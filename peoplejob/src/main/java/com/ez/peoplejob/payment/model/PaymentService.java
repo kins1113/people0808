@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ez.peoplejob.common.SearchVO;
-import com.ez.peoplejob.jobopening.model.JobopeningVO;
 
 public interface PaymentService {
 	

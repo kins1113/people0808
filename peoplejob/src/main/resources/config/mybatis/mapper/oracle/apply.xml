@@ -91,6 +91,88 @@
 	<select id="applyCnt" parameterType="int" resultType="int">
 		select count(*) from apply where jobopening=#{jobopening}
 	</select>
+			<select id="selectTotalCount" parameterType="searchVo" resultType="int" >
+
+			select count(*) from apply a join member m
+				on a.member_code = m.member_code
+				join jobopening j
+				on a.jobopening = j.jobopening
+				<where>
+							<if test="searchCondition!= null and searchCondition!=''
+								and searchKeyword!= null and searchKeyword!=''">
+								
+								<if test='searchCondition=="all"'>
+								 m.memberid like  '%' || #{searchKeyword} || '%' or
+								 
+								 m.membername like  '%' || #{searchKeyword} || '%' or
+								 
+								  j.jobtitle like  '%' || #{searchKeyword} || '%' 
+								</if>
+							<if test='searchCondition=="memberid"'>
+									 m.memberid like  '%' || #{searchKeyword} || '%'
+							</if>
+							
+							<if test='searchCondition=="membername"'>
+									  m.membername like  '%' || #{searchKeyword} || '%'
+							</if>
+							<if test='searchCondition=="jobtitle"'>
+									  j.jobtitle like  '%' || #{searchKeyword} || '%'
+							</if>
+							<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
+								 <![CDATA[ or applydate >= #{startDay} and applydate <to_date(#{endDay})+1]]>
+							</if>
+					</if>				
+			
+				</where>
+
+	</select>
+	
+	<select id="selectADapply" parameterType="map" resultType="map" >
+	select* from
+	(
+		select A.*, rownum as RNUM from 
+		(
+			select apply_code,m.memberid,m.membername,j.jobtitle,opencheck,applydate
+				from apply a join member m
+				on a.member_code = m.member_code
+				join jobopening j
+				on a.jobopening = j.jobopening
+				<where>
+							<if test="searchVo.searchCondition!= null and searchVo.searchCondition!=''
+								and searchVo.searchKeyword!= null and searchVo.searchKeyword!=''">
+								
+								<if test='searchVo.searchCondition=="all"'>
+								 m.memberid like  '%' || #{searchVo.searchKeyword} || '%' or
+								 
+								 m.membername like  '%' || #{searchVo.searchKeyword} || '%' or
+								 
+								  j.jobtitle like  '%' || #{searchVo.searchKeyword} || '%' 
+								</if>
+							<if test='searchVo.searchCondition=="memberid"'>
+									 m.memberid like  '%' || #{searchVo.searchKeyword} || '%'
+							</if>
+							
+							<if test='searchVo.searchCondition=="membername"'>
+									  m.membername like  '%' || #{searchVo.searchKeyword} || '%'
+							</if>
+							<if test='searchVo.searchCondition=="jobtitle"'>
+									  j.jobtitle like  '%' || #{searchVo.searchKeyword} || '%'
+							</if>
+							<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
+								 <![CDATA[ or applydate >= #{startDay} and applydate <to_date(#{endDay})+1]]>
+							</if>
+					</if>				
+			
+				</where>
+
+			) A
+		)
+	<![CDATA[where RNUM>#{searchVo.firstRecordIndex}  
+		and RNUM<=#{searchVo.firstRecordIndex} + #{searchVo.recordCountPerPage}]]> 
+	</select>
+	
+
+	
 </mapper>
 
 

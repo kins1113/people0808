@@ -12,86 +12,86 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select * from resume_viewMain
+		        select * from resume_viewMain where opencheck='Y'
 		    
-		    <if test="term1 != null">
-				where term IN 
-				<foreach collection="term1" item="term" 
+		    <if test="term != null and term !=''">
+				and term IN 
+				<foreach collection="term" item="term1" 
 					index="index" open="(" close=")" separator=",">
-				#{term}
+				#{term1}
 				</foreach>
 				</if>
-				<if test="age1 != null">
+				<if test="age != null and age !='' ">
 				and age in
-			<foreach collection="age1" item="age" index="index" open="(" close=")" separator=",">
-			#{age}
+			<foreach collection="age" item="age1" index="index" open="(" close=")" separator=",">
+			#{age1}
 			</foreach>
 			</if>
-			<if test="graduatetype1 != null">
+			<if test="graduatetype != null">
 	and graduatetype in
-	<foreach collection="graduatetype1" item="graduatetype" index="index" open="(" close=")" separator=",">
-	#{graduatetype}
+	<foreach collection="graduatetype" item="graduatetype1" index="index" open="(" close=")" separator=",">
+	#{graduatetype1}
 	</foreach>
 	</if>
-	<if test="sido1 != null">
-	and sido in
-	<foreach collection="sido1" item="sido" index="index" open="(" close=")" separator=",">
-	#{sido}
+	<if test="localCode != null">
+	and local_code in
+	<foreach collection="localCode" item="localCode1" index="index" open="(" close=")" separator=",">
+	#{localCode1}
 	</foreach>
 	</if>
-	<if test="gugun1 != null">
-	and gugun in
-	<foreach collection="gugun1" item="gugun" index="index" open="(" close=")" separator=",">
-	#{gugun}
+	<if test="localCode2 != null">
+	and local_code2 in
+	<foreach collection="localCode2" item="localCode2" index="index" open="(" close=")" separator=",">
+	#{localCode2}
 	</foreach>
 	</if>
-	<if test="workcheck1 != null">
+	<if test="workcheck != null">
 	and workcheck in
-	<foreach collection="workcheck1" item="workcheck" index="index" open="(" close=")" separator=",">
+	<foreach collection="workcheck" item="workcheck" index="index" open="(" close=")" separator=",">
 	#{workcheck}
 	</foreach>
 	</if>
 	
-	<if test="membergender1 != null">
+	<if test="membergender != null">
 	and membergender in
-	<foreach collection="membergender1" item="membergender" index="index" open="(" close=")" separator=",">
+	<foreach collection="membergender" item="membergender" index="index" open="(" close=")" separator=",">
 	#{membergender}
 	</foreach>
 	</if>
-	<if test="btypename11 != null">
-	and btypename1 in
-	<foreach collection="btypename11" item="btypename1" index="index" open="(" close=")" separator=",">
-	#{btypename1}
+	<if test="btypeCode1 != null">
+	and btype_code1 in
+	<foreach collection="btypeCode1" item="btypeCode1" index="index" open="(" close=")" separator=",">
+	#{btypeCode1}
 	</foreach>
 	</if>
-	<if test="btypename22 != null">
-	and b2.btypename2 in
-	<foreach collection="btypename22" item="btypename2" index="index" open="(" close=")" separator=",">
-	#{btypename2}
+	<if test="btypeCode2 != null">
+	and btype_code2 in
+	<foreach collection="btypeCode2" item="btypeCode2" index="index" open="(" close=")" separator=",">
+	#{btypeCode2}
 	</foreach>
 	</if>
-	<if test="btypename33 != null">
-	and b3.btypename3 in
-	<foreach collection="btypename33" item="btypename3" index="index" open="(" close=")" separator=",">
-	#{btypename3}
+	<if test="btypeCode3 != null">
+	and btype_code3 in
+	<foreach collection="btypeCode3" item="btypeCode3" index="index" open="(" close=")" separator=",">
+	#{btypeCode3}
 	</foreach>
 	</if>
-	<if test="firstname1 != null">
-	and f.firstname in
-	<foreach collection="firstname1" item="firstname" index="index" open="(" close=")" separator=",">
-	#{firstname}
+	<if test="firstCode != null">
+	and first_code in
+	<foreach collection="firstCode" item="firstCode" index="index" open="(" close=")" separator=",">
+	#{firstCode}
 	</foreach>
 	</if>
-	<if test="secondname1 != null">
-	and s.secondname in
-	<foreach collection="secondname1" item="secondname" index="index" open="(" close=")" separator=",">
-	#{secondname}
+	<if test="secondCode != null">
+	and	second_code in
+	<foreach collection="secondCode" item="secondCode" index="index" open="(" close=")" separator=",">
+	#{secondCode}
 	</foreach>
 	</if>
-	<if test="thirdname1 != null">
-	and t.thirdname in
-	<foreach collection="thirdname1" item="thirdname" index="index" open="(" close=")" separator=",">
-	#{thirdname}
+	<if test="thirdCode != null">
+	and third_code in
+	<foreach collection="thirdCode" item="thirdCode" index="index" open="(" close=")" separator=",">
+	#{thirdCode}
 	</foreach>
 	</if>
 	)A
@@ -286,87 +286,87 @@
 	
 	
 	<select id="selectTotalCountPeople" parameterType="map" resultType="int">
-		select count(*) from resume_viewMain 
+		select count(*) from resume_viewMain where opencheck='Y'
 		    
-		      <if test="term1 != null">
-				where term IN 
-				<foreach collection="term1" item="term" 
+		      <if test="term != null">
+				and term IN 
+				<foreach collection="term" item="term" 
 					index="index" open="(" close=")" separator=",">
 				#{term}
 				</foreach>
 				</if>
-				<if test="age1 != null">
+				<if test="age != null">
 				and age in
-			<foreach collection="age1" item="age" index="index" open="(" close=")" separator=",">
+			<foreach collection="age" item="age" index="index" open="(" close=")" separator=",">
 			#{age}
 			</foreach>
 			</if>
-			<if test="graduatetype1 != null">
-	and e.graduatetype in
-	<foreach collection="graduatetype1" item="graduatetype" index="index" open="(" close=")" separator=",">
+			<if test="graduatetype != null">
+	and graduatetype in
+	<foreach collection="graduatetype" item="graduatetype" index="index" open="(" close=")" separator=",">
 	#{graduatetype}
 	</foreach>
 	</if>
-	<if test="sido1 != null">
-	and l.sido in
-	<foreach collection="sido1" item="sido" index="index" open="(" close=")" separator=",">
-	#{sido}
+	<if test="localCode != null">
+	and local_code in
+	<foreach collection="localCode" item="localCode" index="index" open="(" close=")" separator=",">
+	#{localCode}
 	</foreach>
 	</if>
-	<if test="gugun1 != null">
-	and gugun in
-	<foreach collection="gugun1" item="gugun" index="index" open="(" close=")" separator=",">
-	#{gugun}
+	<if test="localCode2 != null">
+	and local_code2 in
+	<foreach collection="localCode2" item="localCode2" index="index" open="(" close=")" separator=",">
+	#{localCode2}
 	</foreach>
 	</if>
 	
-	<if test="workcheck1 != null">
+	<if test="workcheck != null">
 	and workcheck in
-	<foreach collection="workcheck1" item="workcheck" index="index" open="(" close=")" separator=",">
+	<foreach collection="workcheck" item="workcheck" index="index" open="(" close=")" separator=",">
 	#{workcheck}
 	</foreach>
 	</if>
 	
-	<if test="membergender1 != null">
+	<if test="membergender != null">
 	and membergender in
-	<foreach collection="membergender1" item="membergender" index="index" open="(" close=")" separator=",">
+	<foreach collection="membergender" item="membergender" index="index" open="(" close=")" separator=",">
 	#{membergender}
 	</foreach>
 	</if>
-	<if test="btypename11 != null">
-	and b1.btypename1 in
-	<foreach collection="btypename11" item="btypename1" index="index" open="(" close=")" separator=",">
-	#{btypename1}
+	<if test="btypeCode1 != null">
+	and btype_code1 in
+	<foreach collection="btypeCode1" item="btypeCode1" index="index" open="(" close=")" separator=",">
+	#{btypeCode1}
 	</foreach>
 	</if>
-	<if test="btypename22 != null">
-	and b2.btypename2 in
-	<foreach collection="btypename22" item="btypename2" index="index" open="(" close=")" separator=",">
-	#{btypename2}
+	<if test="btypeCode2 != null">
+	and btype_code2 in
+	<foreach collection="btypeCode2" item="btypeCode2" index="index" open="(" close=")" separator=",">
+	#{btypeCode2}
 	</foreach>
 	</if>
-	<if test="btypename33 != null">
-	and b3.btypename3 in
-	<foreach collection="btypename33" item="btypename3" index="index" open="(" close=")" separator=",">
-	#{btypename3}
+	<if test="btypeCode3 != null">
+	and btype_code3 in
+	<foreach collection="btypeCode3" item="btypeCode3" index="index" open="(" close=")" separator=",">
+	#{btypeCode3}
 	</foreach>
 	</if>
-	<if test="firstname1 != null">
-	and f.firstname in
-	<foreach collection="firstname1" item="firstname" index="index" open="(" close=")" separator=",">
-	#{firstname}
+	<if test="firstCode != null">
+	and first_code in
+	<foreach collection="firstCode" item="firstCode" index="index" open="(" close=")" separator=",">
+	#{firstCode}
 	</foreach>
 	</if>
-	<if test="secondname1 != null">
-	and s.secondname in
-	<foreach collection="secondname1" item="secondname" index="index" open="(" close=")" separator=",">
-	#{secondname}
+	<if test="secondCode != null">
+	and second_code in
+	<foreach collection="secondCode" item="secondCode" index="index" open="(" close=")" separator=",">
+	#{secondCode}
 	</foreach>
 	</if>
-	<if test="thirdname1 != null">
-	and t.thirdname in
-	<foreach collection="thirdname1" item="thirdname" index="index" open="(" close=")" separator=",">
-	#{thirdname}
+	<if test="thirdCode != null">
+	and third_code in
+	<foreach collection="thirdCode" item="thirdCode" index="index" open="(" close=")" separator=",">
+	#{thirdCode}
 	</foreach>
 	</if>
 		    

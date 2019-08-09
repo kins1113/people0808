@@ -208,7 +208,7 @@
 										</ul></li>
 										
 										<li><a class="sidenav-item-link"
-										href="${pageContext.request.contextPath}/manager/service/applyList.do?showKey=resume"> <span class="nav-text">입사 지원 관리</span>
+										href="${pageContext.request.contextPath}/manager/apply/applyList.do"> <span class="nav-text">입사 지원 관리</span>
 									</a></li>
 								</div>
 							</ul></li>

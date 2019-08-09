@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.LengthDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,30 +45,34 @@ public class PeopleInfoController {
 
 	@RequestMapping("/peopleinfolist.do")
 	public String peopleinfolist(
-		 HttpSession session,@RequestParam(required = false) String[] membergender1,
-			@ModelAttribute SearchVO searchVo,Model model,@RequestParam(required = false) String[] term1,@RequestParam(required = false) String[] workcheck1,@RequestParam(required = false) String[] age1,
-			@RequestParam(required = false) String[] graduatetype1,@RequestParam(required = false) String[] sido1,@RequestParam(required = false) String[] gugun1,@RequestParam(required = false) String[] btypename11 ,
-			@RequestParam(required = false) String[] btypename22,@RequestParam(required = false) String[] btypename33,@RequestParam(required = false) String[] firstname1,
-			@RequestParam(required = false) String[] secondname1,@RequestParam(required = false) String[] thirdname1,@RequestParam(value="resumeCode", defaultValue = "0") int resumeCode) {
-		logger.info("workcheck1={}",workcheck1);
-		logger.info("membergender1={}",membergender1);
-		logger.info("term1={}",term1);
-		logger.info("age1={}",age1);
-		logger.info("graduatetype={}",graduatetype1);
-		logger.info("sido1={}",sido1);
-		logger.info("gugun1={}",gugun1);
-		logger.info("btypename11={}",btypename11);
-		logger.info("btypename22={}",btypename22);
-		logger.info("btypename33={}",btypename33);
-		logger.info("firstname1={}",firstname1);
-		logger.info("secondname1={}",secondname1);
-		logger.info("thirdname1={}",thirdname1);
+		 HttpSession session,@RequestParam(required = false,defaultValue = "") String[] membergender,
+			@ModelAttribute SearchVO searchVo,Model model,@RequestParam(required = false,defaultValue = "") String[] term,
+			@RequestParam(required = false,defaultValue = "") String[] workcheck,@RequestParam(required = false,defaultValue = "") String[] age,
+			@RequestParam(required = false,defaultValue = "") String[] graduatetype,@RequestParam(required = false,defaultValue = "0") int[] localCode,
+			@RequestParam(required = false,defaultValue = "0") int[] localCode2,@RequestParam(required = false,defaultValue = "0") int[] btypeCode1 ,
+			@RequestParam(required = false,defaultValue = "0") int[] btypeCode2,@RequestParam(required = false,defaultValue = "0") int[] btypeCode3,
+			@RequestParam(required = false,defaultValue = "0") int[] firstCode,
+			@RequestParam(required = false,defaultValue = "0") int[] secondCode,@RequestParam(required = false,defaultValue = "0") int[] thirdCode) {
+		
+		logger.info("workcheck={}",workcheck);
+		logger.info("membergender={}",membergender);
+		logger.info("term={}",term);
+		logger.info("age={}",age);
+		logger.info("graduatetype={}",graduatetype);
+		logger.info("localCode={}",localCode);
+		logger.info("localCode2={}",localCode2);
+		logger.info("btypeCode1={}",btypeCode1);
+		logger.info("btypeCode2={}",btypeCode2);
+		logger.info("btypeCode3={}",btypeCode3);
+		logger.info("firstCode={}",firstCode);
+		logger.info("secondCode={}",secondCode);
+		logger.info("thirdCode={}",thirdCode);
+	
 		String id=(String)session.getAttribute("memberid");
 		if(id==null) {
 			id="비회원";
 		}
 		ResumeVO vo1=resumeService.selectByMemverid(id);
-		List<ResumeVO> vo=peopleinfoService.selectResumeView(resumeCode);
 		logger.info("로그인 vo={}",vo1);
 		logger.info("인재정보 리스트");
 		//1]PaginationInfo 객체 생성
@@ -84,22 +89,21 @@ public class PeopleInfoController {
 		List<ResumeVO> list=new ArrayList<ResumeVO>();
 		Map<String, Object> map= new HashMap<String, Object>();
 		
-		map.put("workcheck1",workcheck1);
-		map.put("membergender1",membergender1);
-		map.put("term1",term1);
-		map.put("age1",age1);
-		map.put("graduatetype1",graduatetype1);
-		map.put("sido1",sido1);
-		map.put("gugun1",gugun1);
-		map.put("btypename11",btypename11);
-		map.put("btypename22",btypename22);
-		map.put("btypename33",btypename33);
-		map.put("firstname1",firstname1);
-		map.put("secondname1",secondname1);
-		map.put("thirdname1",thirdname1);
+		map.put("workcheck",workcheck);
+		map.put("membergender",membergender);
+		map.put("term",term);
+		map.put("age",age);
+		map.put("graduatetype",graduatetype);
+		map.put("localCode",localCode);
+		map.put("localCode2",localCode2);
+		map.put("btypeCode1",btypeCode1);
+		map.put("btypeCode2",btypeCode2);
+		map.put("btypeCode3",btypeCode3);
+		map.put("firstCode",firstCode);
+		map.put("secondCode",secondCode);
+		map.put("thirdCode",thirdCode);
 		map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
 		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
-		map.put("resumeCode", resumeCode);
 		logger.info("map={}",map);
 		list=peopleinfoService.selectPeoplew(map);
 		
@@ -118,7 +122,6 @@ public class PeopleInfoController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("vo1", vo1);
-		model.addAttribute("vo", vo);
 		return "peopleinfo/peopleinfolist";
 		
 		

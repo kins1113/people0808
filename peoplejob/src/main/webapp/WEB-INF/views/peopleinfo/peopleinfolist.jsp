@@ -107,10 +107,10 @@ h2 {
             <th scope="col" class="update" id="date_type">업데이트일</th>
         </tr>
         <tr>
-            <td id="peoplelist" >${vo1.membername}<br>(${vo1.membergender}|${vo.age})</td>
-            <td id="peoplelist" >경력${vo.term}&nbsp;${vo.resumeTitle}<br>
-            ${vo.schoolname}|${vo.hopepay}|${vo.sido}</td>
-            <td id="peoplelist" >${vo.resumeRegdate}</td>
+            <td id="peoplelist" >${vo1.membername}<br>(${vo1.membergender}|${map['age']})</td>
+            <td id="peoplelist" >경력${map['term']}&nbsp;${map['resumeTitle']}<br>
+            ${map['schoolname']}|${map['hopepay']}|${map['sido']}</td>
+            <td id="peoplelist" >${map['resumeregdate']}</td>
            </tr> 
        
         </thead>

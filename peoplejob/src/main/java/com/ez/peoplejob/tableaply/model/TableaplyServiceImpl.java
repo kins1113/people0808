@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.resume.model.ResumeVO;
 
 @Service
@@ -68,6 +69,15 @@ public class TableaplyServiceImpl implements TableaplyService{
 	@Override
 	public int applyCnt(int jobopening) {
 		return tableaplyDao.applyCnt(jobopening);
+	}
+	@Override
+	public List<Map<String, Object>> selectAll(Map<String, Object> map) {
+		return tableaplyDao.selectAll(map);
+	}
+	@Override
+	public int selectTotalCount(SearchVO searchVo) {
+		
+		return tableaplyDao.selectTotalCount(searchVo);
 	}
 
 }
