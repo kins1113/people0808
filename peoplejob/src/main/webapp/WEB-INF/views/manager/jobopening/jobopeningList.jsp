@@ -46,6 +46,8 @@ input[name=searchKeyword]{width: 400px;margin-right: 3px;}
 #cardBoduPostList table tbody tr td:nth-of-type(6) {width: 10px;}
 input#endDate {    margin-bottom: 4px;}
 hr {MARGIN: 0;}
+.divServiceInfo{overflow: scroll;height: 50px;}
+.divServiceInfo::-webkit-scrollbar {display:none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -588,7 +590,13 @@ hr {MARGIN: 0;}
 										등록일 : <fmt:formatDate value="${memberVo['JOBREGDATE']}" pattern="yyyy-MM-dd"/> / 
 										모집 종료일 : <fmt:formatDate value="${memberVo['END_DATE']}" pattern="yyyy-MM-dd"/>
 										</td>
-								<td></td>
+								<td>
+								<div class="divServiceInfo">
+									<c:forEach var="service" items="${serList}">
+										<div class="divTitleCode">${service.serviceName}: </div>
+									</c:forEach>
+								</div>
+								</td>
 								<td></td>
 							</tr>
 						</c:forEach>

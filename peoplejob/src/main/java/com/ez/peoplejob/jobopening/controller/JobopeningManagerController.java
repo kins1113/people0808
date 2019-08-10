@@ -24,17 +24,18 @@ import com.ez.peoplejob.jobopening.model.JobopeningManagerService;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 import com.ez.peoplejob.member.model.MemberVO;
+import com.ez.peoplejob.service.model.ServiceService;
+import com.ez.peoplejob.service.model.ServiceVO;
 
 @Controller
 @RequestMapping("/manager/jobopening")
 public class JobopeningManagerController {
 	private Logger logger=LoggerFactory.getLogger(JobopeningController.class);
-	@Autowired
-	private FileUploadUtility fileUploadUtil;
-	@Autowired
-	private JobopeningService jobopeningService;
-	@Autowired
-	private JobopeningManagerService jobManagerService;
+	@Autowired private FileUploadUtility fileUploadUtil;
+	@Autowired private JobopeningService jobopeningService;
+	@Autowired private JobopeningManagerService jobManagerService;
+	@Autowired private ServiceService serviceService;
+	
 	@RequestMapping("/jobopeningList.do")
 	public String jobopeningList_post(
 			 @RequestParam(defaultValue = "1") int currentPage,
@@ -91,6 +92,10 @@ public class JobopeningManagerController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
+		
+		//서비스 관련 list
+		List<ServiceVO> serList= serviceService.selectAll();
+		model.addAttribute("serList",serList);
 		
 		return "manager/jobopening/jobopeningList";
 	}

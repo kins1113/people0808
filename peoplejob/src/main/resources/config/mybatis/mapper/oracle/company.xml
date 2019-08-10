@@ -302,7 +302,8 @@
 	<select id="selectMemberSearch" parameterType="map" resultType="map" >
 		select * from 
 		(
-		    select * from member where authority_code=3 
+		    select * from member 
+			    	authority_code=3 
 		)m 
 		left join company c
 		on m.COMPANY_CODE = c.COMPANY_CODE
@@ -312,6 +313,19 @@
 			</if>
 			<if test="searchCon=='id'">
 				memberid like '%'|| #{searchKey} ||'%'
+			</if>
+		</where>
+		</select> 
+		
+		<select id="selectMemSearch" parameterType="map" resultType="memberVo" >
+		    select * from member 
+		<where>
+			authority_code=1
+			<if test="searchCon=='id'">
+				and memberid like '%'|| #{searchKey} ||'%'
+			</if>
+			<if test="searchCon=='company'">
+			and (address like '%' || #{searchKey} || '%' or addressdetail like '%' || #{searchKey} || '%')
 			</if>
 		</where> 
 	</select>

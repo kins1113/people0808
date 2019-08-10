@@ -20,8 +20,19 @@
 		delete from board_kind where type_code=#{Code}
 	</delete>	
 	
-	<select id="boardKindChange" >
-		
+	<update id="changUsage" parameterType="boardKindVo">
+		update board_kind
+		<if test='usage=="Y"'>
+			set usage='N'
+		</if>
+		<if test='usage=="N"'>
+			set usage='Y'
+		</if>
+		where type_code=#{typeCode}
+	</update>
+	
+	<select id="selectByTypeCode" parameterType="int" resultType="String">
+		select usage from board_kind where type_code=#{typeCode}
 	</select>
 </mapper>
 

@@ -11,7 +11,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #modalTable th{width: 54px; text-align: left; margin: auto 0;padding: 0.2rem;
-    vertical-align: middle;border-top: 1px solid #dee2e6;border-right: 1px solid #dee2e6;}
+    vertical-align: middle;border-top: 1px solid #dee2e6;}/*border-right: 1px solid #dee2e6;*/
 #modalTable th{vertical-align: middle;}
 input.form-control.size {width: 67px; float: left;height: 20px;}
 .spanSize1{width: 30px; float: left;}
@@ -21,9 +21,74 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 input[name=startDay], input[name=endDay]{width: 77px;}
 td{vertical-align: middle;}
 .infoP{margin:10px; padding: 20px 0 20px 30px;background: #f2f4f7;}
+.divTitle{width: 41px;   float: left;     text-align: right;    margin-right: 5px;}
+.popupSizeChenge input[type="text"] {    width: 60px;    margin-bottom: 1px;}
+button.mb-1.btn.btn-sm.btn-outline-secondary {    width: 65%;    margin-top: 6px;}
+button.mb-1.btn.btn-sm.btn-outline-secondary.btDateChenge {    width: 57%;    margin-top: 6px;}
+tr.boardBt td {    vertical-align: middle;}
+.table-bordered thead th{border-bottom: 2px solid #dee2e6; border-right: 0; border-left: 0;}
+.boardBt th, .boardBt td {border-bottom: 1px solid #dee2e6; border-right: 0; border-left: 0;}/*이것 이 가로줄 없에기  */
 </style>
 <script type="text/javascript">
 	$(function(){
+		$(".btSizeChenge").click(function(){
+			var width=$(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+			var height=$(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+			var left=$(this).prev().prev().prev().prev().prev().val();
+			var top=$(this).prev().prev().val();
+			var popupCode=$(this).next().val();
+			$.ajax({
+				url:"<c:url value='/manager/popup/popupSizeCheng.do'/>",
+				type:"post",
+				data:{"width":width,"height":height,"left":left,"top":top,"popupCode":popupCode},
+				success:function(res){
+					if(res>0){
+						//'<div class="divTitle">가로 : </div>'+width+'<br>
+						//<div class="divTitle">세로 : </div>'+height+'<br>
+						//<div class="divTitle">왼쪽 : </div>'+left+'<br>
+						//<div class="divTitle">위 : </div>'+top
+						var divEl1=$('<div class="divTitle">가로 : </div>'+width+'<br>');
+						var divEl2=$('<div class="divTitle">세로 : </div>'+height+'<br>')
+						var divEl3=$('<div class="divTitle">왼쪽 : </div>'+left+'<br>')
+						var divEl4=$('<div class="divTitle">위 : </div>'+top+'<span></span>')
+						var sizeEl=$("#popupSizeInfo"+popupCode)
+						
+						sizeEl.html(divEl1).append(divEl2).append(divEl3).append(divEl4)
+						sizeEl.show();
+						$("#popupSizeChenge"+popupCode).hide();
+						
+						
+						var pc=$("#popupClick"+popupCode);
+						pc.find("input[name=width]").val(width);
+						pc.find("input[name=height]").val(height);
+						pc.find("input[name=top]").val(top);
+						pc.find("input[name=left]").val(left);
+					}
+				},
+				error:function(xht,status,error){
+					alert(status+" : "+error);
+				}
+			});
+			
+		})
+		
+		$(".popupSizeChenge").hide();
+		$(".popupSize").dblclick(function(){
+			$(this).find(".popupSizeChenge").show();
+			$(this).find(".popupSizeInfo").hide();
+		})
+		
+		$(".popupOpen").click(function(){
+			var popupImg=$(this).next().val();
+			var popupName=$(this).next().next().val();
+			var width=$(this).next().next().next().val();
+			var height=$(this).next().next().next().next().val();
+			var top=$(this).next().next().next().next().next().val();
+			var left=$(this).next().next().next().next().next().next().val();
+			open("<c:url value='/manager/popup/popupOpen.do?popupImg="+popupImg+"'/>",popupName,
+		   "width="+width+",height="+height+",left="+left+",top="+top);
+		});
+		
 		$("#popUpAdd").click(function(){
 			location.href="<c:url value='/manager/popup/popupAdd.do'/>";
 		});
@@ -55,9 +120,7 @@ td{vertical-align: middle;}
 		});
 		
 		//날짜 변경 
-		$("input[name=btTermChenge]").each(function(){
-			$(this).click(function(){
-				
+		$(".btTermChenge").click(function(){
 				var startDay=$(this).prev().prev().val();
 				var endDay =$(this).prev().val();
 				var popupCode =$(this).parent().parent().parent().find("input[name=popupCode]").val();
@@ -83,7 +146,6 @@ td{vertical-align: middle;}
 					}
 				});//ajax
 			});
-		})
 		
 		
 		//출력 미출력 버튼 누르면 체크된것들 변경
@@ -248,7 +310,8 @@ td{vertical-align: middle;}
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 			<p class="infoP">
-								날짜 더블클릭시 날짜 수정 가능 
+								날짜 더블클릭시 날짜 수정 가능 <br>
+								사이즈 더블클릭시 수정 가능
 				</p>
 				<div align="right" class="form-group serDiv" id="btGroup">
 					<input type="button"class="btn btn-secondary btn-default" name="usageMultChenge" id="btUsageY" value="사용"> 
@@ -266,20 +329,19 @@ td{vertical-align: middle;}
 									<input type="checkbox" name="popupCkAll" id="popupCkAll" />
 									<div class="control-indicator"></div>
 							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">사용여부</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">이미지/이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">가로/세로/왼쪽/위</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">출력날짜</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">등록일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">관리자 아이디</a></th>
+							<th scope="col">사용여부</th>
+							<th scope="col">코드</th>
+							<th scope="col">이미지/이름</th>
+							<th scope="col">출력 사이즈</th>
+							<th scope="col">출력날짜/등록일</th>
+							<th scope="col">관리자 아이디</th>
 							<th scope="col">기타</th>
 						</tr>
 					</thead>
 					<tbody>
 					<!--  반복 시작  -->
 						<c:forEach var="vo" items="${list }">
-							<tr id="popupTr${vo.popupCode}">
+							<tr id="popupTr${vo.popupCode}" class="boardBt">
 								<td>
 									<label class="control control-checkbox checkbox-primary">
 										<input type="checkbox" name="popupCk" id="popupCk"  />
@@ -301,25 +363,43 @@ td{vertical-align: middle;}
 									<img width="150" alt="${vo.popupName }이미지" src="<c:url value='/popup_upload/${vo.popupImg }'/>">
 									<b>${vo.popupName }</b>
 								</td>
-								<td>
-									가로 : ${vo.width }<br> 세로 : ${vo.height }<br>
-									왼쪽 : ${vo.left } <br> 위 &nbsp;&nbsp;: ${vo.top }
+								<td class="popupSize">
+									<div class="popupSizeInfo" id="popupSizeInfo${vo.popupCode}">
+										<div class="divTitle">가로 : </div>${vo.width }<br> 
+										<div class="divTitle">세로 : </div>${vo.height }<br>
+										<div class="divTitle">왼쪽 : </div>${vo.left } <br> 
+										<div class="divTitle">위 : </div>${vo.top }
+									</div>
+									<div class='popupSizeChenge' id="popupSizeChenge${vo.popupCode}">
+										<div class="divTitle">가로 : </div><input type="text" value="${vo.width }"><br> 
+										<div class="divTitle">세로 : </div><input type="text" value="${vo.height }"><br>
+										<div class="divTitle">왼쪽 : </div><input type="text" value="${vo.left }"> <br> 
+										<div class="divTitle">위 : </div><input type="text" value="${vo.top }"><br>
+										<button type="button"  class="mb-1 btn btn-sm btn-outline-secondary btSizeChenge">변경</button>
+										<input type="hidden" value="${vo.popupCode}">
+									</div>
+									
 								</td>
 								<td class="popupTerm">
 									<div class="divTerm" id="divTerm${vo.popupCode}">${vo.startDay } - ${vo.endDay }</div>
 									<div class="divTermChenge" id="divTermChenge${vo.popupCode}">
 										<input type="text" name="startDay" value="${vo.startDay }"> - 
 										<input type="text" name="endDay" value="${vo.endDay }">
-										<input type="button" name="btTermChenge" value="변경">
+										<button type="button" name="btTermChenge"  class="mb-1 btn btn-sm btn-outline-secondary btDateChenge btTermChenge">변경</button>
 									</div>
-								</td>
-								<td>
-									<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> 
+									등록일 : <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> 
 								</td>
 								<td>${sessionScope.adminid }</td>
-								<td>
-									<a href="#" class="popupOneEdit">수정</a>
-									<a href="#" class="popupOneDelete">삭제</a>
+								<td id="popupClick${vo.popupCode}">
+									<a href="#" class="popupOneEdit">수정</a><br>
+									<a href="#" class="popupOneDelete">삭제</a><br>
+									<a href="#" class="popupOpen">열기</a>
+									<input type="hidden" name="popupImg" value="${vo.popupImg }">
+									<input type="hidden" name="popupName" value="${vo.popupName }">
+									<input type="hidden" name="width" value="${vo.width }">
+									<input type="hidden" name="height" value="${vo.height }">
+									<input type="hidden" name="top" value="${vo.top }">
+									<input type="hidden" name="left" value="${vo.left }">
 								</td>
 							</tr>
 						</c:forEach>

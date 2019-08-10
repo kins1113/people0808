@@ -83,6 +83,7 @@
 					select * from
 					(
 						select * from resume_view	
+						
 						<where>
 							<if test='detailCk="Y"'>
 								<if test="searchStartDay!='' and searchEndDay!=''">
@@ -131,6 +132,7 @@
 								</if>
 							</if>
 						</where>
+						order by resume_code desc
 			   		) 
 			   		<where>
 				   		<if test="searchKeyword!='' and searchKeyword!=null">

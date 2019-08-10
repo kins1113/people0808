@@ -53,5 +53,11 @@ public class OccupationDAOMybatis implements OccupationDAO{
 		return sqlSession.selectList(namespace+"selectBtype3",btypeCode2);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectLocationAll() {
+		return sqlSession.selectList(namespace+"selectLocationAll");
+	}
+
+
 	
 }

@@ -143,6 +143,17 @@ hr{margin: 1px;}
 		});
 		
 		
+		//<c:url value='/resume/resumedetail.do?resumeCode=${vo.resumeCode}'/>
+		//이력서 제목 클릭하면 메인 이력서 상세보기 창 open
+		$(".goMainResume").click(function(){
+			var title=$(this).html();
+			var resumeCode=$(this).next().val();
+			alert("이력서야 떠라~~!!  "+title+"   "+resumeCode);
+			open("<c:url value='/resume/resumedetail.do?resumeCode="+resumeCode+"'/>",title,
+					"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
+					)
+		});
+		
 	});
 	//트리거
 	function trigger(type){
@@ -569,10 +580,6 @@ hr{margin: 1px;}
 		$("input[name=thirdCode]").val('${param.thirdCode}');
 		
 		
-		
-		
-		
-		
 		$("form[name=resumeList]").attr("action","<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>");
 		$("form[name=resumeList]").submit();
 	}
@@ -584,7 +591,7 @@ hr{margin: 1px;}
 <input type="hidden" name="detailCk" value="${param.detailCk}">
 		 
 <!-- 페이지 처리를 위한 hidden  -->
-<input type="hidden" name="currentPage"
+<input type="text" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
 	 	value="${param.currentPage }"
 	</c:if>
@@ -883,9 +890,24 @@ hr{margin: 1px;}
 									회원코드 : ${map['MEMBER_CODE']}<br>
 									이력서 코드 : ${map['RESUME_CODE']}		
 								</td>
+								<c:set var="localCode" value="${fn:split(map['LOCAL_CODE'],',')}"/>
+								<c:set var="loCount" value="1"/>
 								<td>
-									${map['RESUMETITLE']}<HR>
-									등록일 : <fmt:formatDate value="${map['RESUMEREGDATE']}" pattern="yyyy-MM-dd"/>&nbsp; 지역 : ${map['ADDRESS']}
+									
+									<a href="#" class="goMainResume">${map['RESUMETITLE']}</a>
+									<input type="hidden" value="${map['RESUME_CODE']}">
+									<HR>
+									등록일 : <fmt:formatDate value="${map['RESUMEREGDATE']}" pattern="yyyy-MM-dd"/>&nbsp; 
+									지역 :  
+									<c:forEach var="lCode" items="${localCode}">
+									
+										<c:forEach var="loMap" items="${loList}" >
+											<c:if test="${loMap['LOCAL_CODE2'] eq lCode}"> 
+												${loCount }. ${loMap['SIDO'] } ${loMap['GUGUN'] }
+												<c:set var="loCount" value="${loCount+1 }"/> 
+											</c:if> 
+										</c:forEach>	 
+									</c:forEach>
 								</td>
 								<td>
 									이름 : ${map['MEMBERNAME']}<BR>
@@ -933,7 +955,6 @@ hr{margin: 1px;}
 		</div>
 		</div></div>
 </form>
-
 
 
 

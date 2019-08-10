@@ -269,6 +269,10 @@
 					</if>
 			</where>
 	</select>
+	
+	<select id="selectJobTile" resultType="map">
+		select company_COde,jobtitle from jobopening
+	</select>
 </mapper>
 
 

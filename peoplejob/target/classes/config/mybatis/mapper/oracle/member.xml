@@ -304,7 +304,7 @@
 	<select id="getTotalRecordCompanyManager" parameterType="map" resultType="int"> 
 			select count(*) from
 				(
-				select * from member m
+				select m.*,c.* from member m
 	            left join company c
 	            on m.COMPANY_CODE = c.company_code
 	              <where>        
@@ -313,8 +313,8 @@
 		            		memberid like '%' || #{memberVo.searchKeyword} || '%' or 
 		            		membername like '%' || #{memberVo.searchKeyword} || '%' or
 		            		companyName like '%' || #{memberVo.searchKeyword} || '%' or
-		            		address like '%' || #{memberVo.searchKeyword} || '%' or
-		            		addressdetail like '%' || #{memberVo.searchKeyword} || '%' or
+		            		m.address like '%' || #{memberVo.searchKeyword} || '%' or
+		            		m.addressdetail like '%' || #{memberVo.searchKeyword} || '%' or
 		            		company_address like '%' || #{memberVo.searchKeyword} || '%' or
 		            		company_addressdetail like '%' || #{memberVo.searchKeyword} || '%' or
 		            		tel like '%' || #{memberVo.searchKeyword} || '%' or

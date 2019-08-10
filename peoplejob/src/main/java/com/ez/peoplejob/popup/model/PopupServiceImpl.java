@@ -78,5 +78,10 @@ public class PopupServiceImpl implements PopupService{
 	public List<PopupVO> selectUsageY() {
 		return popupDao.selectUsageY();
 	}
+
+	@Override
+	public int popupSizeUpdate(PopupVO popupVo) {
+		return popupDao.popupSizeUpdate(popupVo);
+	}
 	
 }

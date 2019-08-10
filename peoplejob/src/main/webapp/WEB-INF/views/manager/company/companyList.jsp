@@ -16,6 +16,10 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
 #startDay, #endDay{width: 120px;}
 #btGroup button{margin-top: 4px;}
+.divTitle { width: 67px;   float: left;   text-align: right;   margin-right: 2px;}
+.divTitleCode {    width: 84px;    float: left;  text-align: right;    margin-right: 2px;}
+.divJobList{overflow: scroll;height: 82px;}
+.divJobList::-webkit-scrollbar {display:none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -242,22 +246,20 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
 										<div class="control-indicator"></div>
 								</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">사업자 번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">사업자 번호/회원 코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사명(로고)</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">홈페이지</a></th>
 							
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="address">주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="birth">생년월일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">성별</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="email">이메일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="tel">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">권한 코드</a></th>
+								<!-- <th scope="col"><a href="#" class="fileterCode" id="member_Code"></a></th> -->
+							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디/이름/생년월일/성별</a></th>
+								<!-- <th scope="col"><a href="#" class="fileterCode" id="membername"></a></th> -->
+							<th scope="col"><a href="#" class="fileterCode" id="m.address">주소/이메일/전화번호/홈페이지</a></th>
+								<!-- <th scope="col"><a href="#" class="fileterCode" id="birth"></a></th>
+								<th scope="col"><a href="#" class="fileterCode" id="membergender"></a></th>
+								<th scope="col"><a href="#" class="fileterCode" id="email"></a></th>
+								<th scope="col"><a href="#" class="fileterCode" id="tel"></a></th> -->
 							<th scope="col">체용공고</th>
-							<th scope="col">비고</th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">권한</a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -277,22 +279,36 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 											<div class="control-indicator"></div>
 									</label>
 								</td>
-								<td>${map['COMPANYNO'] }</td>
+								<td>
+									<div class="divTitleCode">사업자 번호 : </div>${map['COMPANYNO'] }<br>
+									<div class="divTitleCode">회원 번호 : </div>${map['MEMBER_CODE']}	
+								</td>
 								<td>${map['COMPANYNAME'] }</td>
 								<td>${map['ADDRESS_1']} ${map['ADDRESSDETAIL_1']}</td>
-								<td>${map['SITE'] }</td>
-
-								<td>${map['MEMBER_CODE']}</td>
-								<td>${map['MEMBERID']}</td>
-								<td>${map['MEMBERNAME']}</td>
-								<td>${map['ADDRESS']} ${map['ADDRESSDETAIL']}</td>
-								<td>${map['BIRTH']}</td>
-								<td>${map['MEMBERGENDER']}</td>
-								<td>${map['EMAIL']}</td>
-								<td>${map['TEL']}</td>
-								<td id="authorityChange"><a href="#"  class="${map['MEMBER_CODE'] }">${map['AUTHORITY_CODE'] }</a></td>
-								<td>아직</td>
-								<td>무엇을 넣을까?</td>
+								<td>
+									<div class="divTitle">아이디 : </div>${map['MEMBERID']}<br>
+									<div class="divTitle">담당자 : </div>${map['MEMBERNAME']}<br>
+									<div class="divTitle">성별 : </div>${map['MEMBERGENDER']}<br>
+									<div class="divTitle">생년월일 : </div>${map['BIRTH']}
+								</td>
+								<td>
+									<div class="divTitle">주소 : </div>${map['ADDRESS']} ${map['ADDRESSDETAIL']}<br>
+									<div class="divTitle">이메일 : </div>${map['EMAIL']}<br>
+									<div class="divTitle">전화번호 : </div>${map['TEL']}<br>
+									<div class="divTitle">홈페이지 : </div>${map['SITE'] }
+								</td>
+								<td>
+								<div class="divJobList">
+									<c:forEach var="jobMap" items="${jobList}">
+										<c:if test="${map['COMPANY_CODE'] eq jobMap['COMPANY_CODE']}">
+											${jobMap['JOBTITLE']}<br>
+										</c:if>
+									</c:forEach>
+								</div>
+								</td>
+								<td id="authorityChange">
+								<a href="#"  class="${map['MEMBER_CODE'] }">${map['AUTHORITY_CODE']}</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
