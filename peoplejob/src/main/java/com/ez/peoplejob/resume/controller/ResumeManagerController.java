@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.hopecompany.model.HopeWorkingVO;
+import com.ez.peoplejob.hopecompany.model.OccupationService;
 import com.ez.peoplejob.resume.model.CareerVO;
 import com.ez.peoplejob.resume.model.CertificateVO;
 import com.ez.peoplejob.resume.model.EducationVO;
@@ -31,7 +32,8 @@ public class ResumeManagerController {
 	private Logger logger=LoggerFactory.getLogger(ResumeManagerController.class);
 	@Autowired
 	private ResumeManagerService resumeServiceMN;
-	
+	@Autowired
+	private OccupationService occupationService;
 	@RequestMapping("/resumeList.do")
 	public String resumeList_get( @RequestParam(defaultValue = "1") int currentPage,
 				     @RequestParam(defaultValue = "1") int recordCountPerPage,
@@ -91,7 +93,12 @@ public class ResumeManagerController {
 		logger.info("토탈 레코드 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
+		//지역정보를 뿌려주기위한 값 
+		List<Map<String, Object>> locationList= occupationService.selectLocationAll();
+		logger.info("지역정보 조회 결과 locationList.size={}",locationList.size());
+		
 		model.addAttribute("list",list);
+		model.addAttribute("loList",locationList);
 		model.addAttribute("pagingInfo",pagingInfo);
 		return "manager/resume/resumeList";
 	}
@@ -115,7 +122,7 @@ public class ResumeManagerController {
 	
 		String lCode="";
 		for(int i=0;i<localCode.length;i++) {
-			if(i<localCode.length) {
+			if(i<localCode.length-1) {
 				 lCode+=localCode[i]+",";
 			}else {
 				lCode+=localCode[i];
@@ -127,7 +134,7 @@ public class ResumeManagerController {
 		
 		String tCode="";
 		for(int i=0;i<thirdCode.length;i++) {
-			if(i<thirdCode.length) {
+			if(i<thirdCode.length-1) {
 				tCode+=thirdCode[i]+",";
 			}else {
 				tCode+=thirdCode[i];
@@ -145,6 +152,6 @@ public class ResumeManagerController {
 		int re=resumeServiceMN.insertResumeMN(hopeVo, certificateVO, educationVo, langVo, careerVo, resumeMaVo);
 		logger.info("이력서 등록 결과 re={}",re);
 		
-		return "manager/resume/resumeList";
+		return "redirect:/manager/resume/resumeList.do?showKey=resume";
 	}
 }

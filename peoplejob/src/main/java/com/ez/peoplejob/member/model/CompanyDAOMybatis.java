@@ -31,6 +31,10 @@ public class CompanyDAOMybatis implements CompanyDAO{
 	public MemberVO selectMemberByMcode(int Mcode) {
 		return sqlSession.selectOne(namespace+"selectMemberByMcode",Mcode);
 	}
+	@Override
+	public List<MemberVO> selectMemSearch(Map<String, String> map) {
+		return sqlSession.selectList(namespace+"selectMemSearch", map);
+	}
 	
 	
 	

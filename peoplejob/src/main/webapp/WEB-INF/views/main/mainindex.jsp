@@ -153,12 +153,32 @@ $(function() {
 		$(function(){
 			var count = ${fn:length(popupList)}
 			for(var i=0;i<count;i++){
-				window.open("<c:url value='/manager/popup/popupOpen.do?popupImg=${popupVo.popupImg }'/>",
-					"${popupVo.popupName }","width=${popupVo.width },height=${popupVo.height},left=${popupVo.left},top=${popupVo.top}")
-					/* window.open("<c:url value='/manager/popup/popupOpen.do'/>",
-					"popupNam","width=500,height=600,left=100,top=20") */
+				var name='popupOpen'+${popupVo.popupCode}
+				
+				var hasCookie=getCookie(name);
+				
+				if(hasCookie!=${popupVo.popupCode}){
+					window.open("<c:url value='/manager/popup/popupOpen.do?popupImg=${popupVo.popupImg }&popupCode=${popupVo.popupCode}'/>",
+						"${popupVo.popupName }","width=${popupVo.width },height=${popupVo.height},left=${popupVo.left},top=${popupVo.top}")
+						/* window.open("<c:url value='/manager/popup/popupOpen.do'/>",
+						"popupNam","width=500,height=600,left=100,top=20") */
+				}
 			}
 	})
+	
+	function getCookie(cookieName) {
+    cookieName = cookieName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cookieName);
+    var cookieValue = '';
+    if(start != -1){
+        start += cookieName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
 	</script>
 </c:forEach>
 

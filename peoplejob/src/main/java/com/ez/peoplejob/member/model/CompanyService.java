@@ -9,4 +9,5 @@ public interface CompanyService {
 	public MemberVO selectMemberById(String id);
 	public List<Map<String, Object>> selectMemberSearch(Map<String, String>map);
 	public MemberVO selectMemberByMcode(int Mcode);
+	public List<MemberVO> selectMemSearch(Map<String, String>map);
 }

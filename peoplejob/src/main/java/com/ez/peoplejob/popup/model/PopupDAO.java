@@ -14,4 +14,5 @@ public interface PopupDAO {
 	public PopupVO selectByPopupCode(int popupCode);
 	public int updatePopup(PopupVO popupVo);
 	public List<PopupVO> selectUsageY();
+	public int popupSizeUpdate(PopupVO popupVo);
 }

@@ -95,6 +95,7 @@ $(function(){
 				alert(status+":"+error);
 			}
 		});
+		
 	});
 	
 	//1차 직종 가져오기 /manager/occupantion/firstList.do
@@ -191,9 +192,90 @@ $(function(){
 		        sclTop();
 		    });
 		}
-});
+	
+	//사이드에서 검색 버튼
+		var count=0;
+		$("#btSideSearch").click(function(){
+			var con=$("#searchCon").val();
+			var key=$("#searchKey").val();
+			if(con!="choice"){
+				if(key!=''){
+					$.ajax({
+						url:"<c:url value='/manager/member/getMemSearchManager.do'/>",
+						type:"post",
+						data:{"searchCon":con,"searchKey":key},
+						success:function(res){
+							var infoT=$("#infoTable");
+							if(res.length==0){
+									var trEl=$("<tr></tr>");
+									var tdEl=$("<td colspan='3'></td>");
+									tdEl.html("조회된 값이 없습니다...")
+									trEl.html(tdEl);
+									infoT.html(trEl);
+							}else{
+//{"MEMBERNAME":"기업1호","MEMBERID":"jfjh234","REGDATE":1563031980000,"ZIPCODE":"7456",
+//"MEMBERGENDER":"여","EMAIL":"com1@naver.com","ADDRESSDETAIL":"수성구 921-3번지","ADDRESS":"대구",
+//"AUTHORITY_CODE":3,"TEL":"2","BIRTH":"1973-01-03","PWD":"1","MEMBER_CODE":58}
+									var trEl1=$("<tr></tr>");
+									var infoEl1=$("<th>코드</th><th>아이디</th><th>시/도</th><th>선택</th>");
+									trEl1.html(infoEl1);
+									infoT.html(trEl1);
+								$.each(res,function(idx,item){
+									var id=item['MEMBERID'];
+									var trEl2=$("<tr></tr>");
+									var tdEl1=$("<td>"+item.memberCode+"</td>");
+									var tdEl2=$("<td>"+item.memberid+"</td>");
+									var tdEl3=$("<td>"+item.address+"</td>");
+									var tdEl4=$('<td><button type="button" onclick="setInfo('+item.memberCode+')">등록</button></td>');
+									trEl2.html(tdEl1).append(tdEl2).append(tdEl3).append(tdEl4);
+									infoT.append(trEl2);
+								});
+							}
+						},
+						error:function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+						}
+					});
+				}else{
+					var infoT=$("#infoTable");
+					var trEl=$("<tr></tr>");
+					var tdEl=$("<td colspan='3'></td>");
+					tdEl.html("검색어를 입력하세요...")
+					trEl.html(tdEl);
+					infoT.html(trEl);
+				}
+			}else{
+				var infoT=$("#infoTable");
+				var trEl=$("<tr></tr>");
+				var tdEl=$("<td colspan='3'></td>");
+				tdEl.html("검색 키워드를 선택하세요")
+				trEl.html(tdEl);
+				infoT.html(trEl);
+			}
+		});
+	});
 
-
+function setInfo(mCode){
+	//alert("mCode="+mCode);
+	 $.ajax({
+			url:"<c:url value='/manager/member/getMemberSelectMCode.do'/>",
+			type:"post",
+			data:"mCode="+mCode,
+			success:function(res){
+				//alert("성공"+res)
+				$("input[name=companyCode]").val(res.companyCode);
+				$("#membername").val(res.membername);
+				$("#tel").val(res.tel);
+				$("#email").val(res.email);
+				$("#birth").val(res.birth);
+				$("#address").val(res.address);
+				$("#addressdetail").val(res.addressdetail);
+			},
+			error:function(xhr,status,error){
+				alert(status+" : "+error);
+			}
+		});//ajax 
+}
 
 
 
@@ -217,10 +299,10 @@ $(function(){
 	<tr>
 		<th><label for="membername">이름<span class="necessary">*</span></label></th>
 		<td class="td1">
-			<input type="text" class="form-control inputSizeS" name="membername" id="membername" placeholder="이름을 입력하세요" >
+			<input type="text" class="form-control inputSizeS" name="membername" id="membername" placeholder="이름을 입력하세요" readonly="readonly">
 		</td>
-		<th>사진 변경~!</th>	
-		<td rowspan="5" id="tdMemberImg">사진 출력 예정</td><!--  picture  -->
+	<!-- 	<th>사진 변경~!</th>	
+		<td rowspan="5" id="tdMemberImg">사진 출력 예정</td> picture  -->
 	</tr>
 		<tr>
 		<th><label for="birth">생년월일<span class="necessary">*</span></label></th>
@@ -233,25 +315,25 @@ $(function(){
 	<tr>
 		<th><label for="email">이메일<span class="necessary">*</span></label></th>
 		<td colspan="2">
-		<input type="text" class="form-control inputSizeS" name="email" id="email" placeholder="이메일을 입력하세요">
+		<input type="text" class="form-control inputSizeS" name="email" id="email" placeholder="이메일을 입력하세요" readonly="readonly">
 	</td>	
 </tr>
 <tr>
 	<th><label for="tel">전화번호<span class="necessary">*</span></label></th>
 	<td colspan="2">
-		<input type="text" class="form-control inputSizeS" name="tel" id="tel" placeholder="010-0000-0000">
+		<input type="text" class="form-control inputSizeS" name="tel" id="tel" placeholder="010-0000-0000" readonly="readonly">
 	</td>
 </tr>
 <tr>
 	<th><label for="address">주소<span class="necessary">*</span></label></th>
 	<td colspan="2">
-		<input type="text" class="form-control inputSizeS" name="address" id="address" placeholder="주소를 입력하세요">
+		<input type="text" class="form-control inputSizeS" name="address" id="address" placeholder="주소를 입력하세요" readonly="readonly">
 	</td>
 </tr>
 <tr>
 	<th><label for="addressdetail">상세 주소<span class="necessary">*</span></label></th>
 	<td colspan="2">
-		<input type="text" class="form-control inputSizeS" name="addressdetail" id="addressdetail" placeholder="상세주소를 입력하세요">
+		<input type="text" class="form-control inputSizeS" name="addressdetail" id="addressdetail" placeholder="상세주소를 입력하세요" readonly="readonly">
 	</td>
 </tr>
 <tr>
@@ -612,7 +694,7 @@ $(function(){
 			<td colspan="2">
 				<select class="custom-select my-1" id="searchCon">
 					<option value="choice">선택</option>
-					<option value="company">회사명</option>
+					<option value="company">주소</option>
 					<option value="id">아이디</option>
 				</select>
 				<input type="text" class="form-control" 

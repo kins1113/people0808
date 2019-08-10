@@ -58,6 +58,11 @@ public class PopupDAOMybatis implements PopupDAO{
 	public List<PopupVO> selectUsageY() {
 		return sqlSession.selectList(namespace+"selectUsageY");
 	}
+
+	@Override
+	public int popupSizeUpdate(PopupVO popupVo) {
+		return sqlSession.update(namespace+"popupSizeUpdate", popupVo);
+	}
 	
 	
 }

@@ -189,10 +189,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardKindChange.do")
-	public String boardKindChange(@RequestParam String useCk ,@RequestParam int typeCode) {
+	@ResponseBody
+	public int boardKindChange(@RequestParam String useCk ,@RequestParam int typeCode) {
 		logger.info("카테고리 사용 미사용처리 파라미터 useCk={}, typeCode={}",useCk,typeCode);
-		
-		return "manager/board/boardAdd";
+		BoardKindVO vo=new BoardKindVO();
+		vo.setTypeCode(typeCode);
+		vo.setUsage(useCk);
+		return boardKindService.changUsage(vo);
 	}
 	
 	@RequestMapping(value="/boardEdit.do", method = RequestMethod.GET)

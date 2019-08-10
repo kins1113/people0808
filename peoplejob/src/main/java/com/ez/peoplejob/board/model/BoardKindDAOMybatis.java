@@ -25,6 +25,16 @@ public class BoardKindDAOMybatis implements BoardKindDAO{
 	public int deleteBKind(int code) {
 		return sqlSession.delete(namespace+"deleteBKind", code);
 	}
+
+	@Override
+	public int changUsage(BoardKindVO vo) {
+		return sqlSession.update(namespace+"changUsage", vo);
+	}
+
+	@Override
+	public String selectByTypeCode(int typeCode) {
+		return sqlSession.selectOne(namespace+"selectByTypeCode", typeCode);
+	}
 	
 	
 }

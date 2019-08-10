@@ -45,6 +45,11 @@ public class CompanyServiceImpl implements CompanyService{
 	public MemberVO selectMemberByMcode(int Mcode) {
 		return companyDao.selectMemberByMcode(Mcode);
 	}
+
+	@Override
+	public List<MemberVO> selectMemSearch(Map<String, String> map) {
+		return companyDao.selectMemSearch(map);
+	}
 	
 	
 	
