@@ -146,11 +146,19 @@ $(function(){
 			<div style="border: 1px solid lightgray; width:260px;float: left;margin-top:29px;">
 			<div name="photo" style="border-bottom: 1px solid lightgray;width:260px;
     height: 285px;">
+    <c:if test="${sessionScope.author_code==1 }">
 				<img alt="회원이미지" src="<c:url value='/resources/main/images/people.PNG'/>" width="100%"
-				style="    max-width: 69%;
-    border-radius: 3px;
-    margin-left: 42px;
-    display: block;">
+				style="    max-width: 69%; border-radius: 3px; margin-left: 42px; display: block;">
+    </c:if>
+    <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+    	<c:if test="${!empty companyVo.image }">
+    		<img alt="기업 로고 이미지" src="<c:url value='/logo_upload/${companyVo.image }'/>">
+    	</c:if>
+    	<c:if test="${empty companyVo.image }">
+    		<img alt="기업 로고 이미지" src="<c:url value='/resources/main/images/noimage.gif'/>" style="width: 98%;">
+    	</c:if>
+    		<span>${companyVo.companyname } 담당자</span>
+    </c:if>
 				<span style="margin:0 auto; font-size: 1.1em; display: table;">${sessionScope.memberName }님</span>
 				<br><br>
 				<c:if test="${sessionScope.author_code==1 }">
@@ -158,14 +166,13 @@ $(function(){
     width: 100px;
     height: 30px;
     background: #808080;
-    color: white;">
+    color: white; cursor:pointer;">
     </c:if>
 				<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-				<input type="button" value="기업 정보 수정" style="    margin: 0 auto;
-    width: 100px;
+				<input type="button" value="기업  로고 수정" style="margin: 0 auto; width: 100px;
     height: 30px;
     background: #808080;
-    color: white;">
+    color: white; cursor: pointer;" name="companyImage">
     </c:if>
 			</div>
 				<div class="p-l-10 p-rl-0-sr991 p-t-70" style="padding-top: 29px;float:left;">						

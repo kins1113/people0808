@@ -39,7 +39,7 @@ span{
 <div class="container" style="min-height: 629px;">
 	
 	
-<div class="row">
+<div class="row" style=" margin: 45px;">
 	<div class="col-lg-12">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
@@ -70,7 +70,7 @@ span{
 				<c:forEach begin="1" end="${boardVo.upnumage }">
 					<div class="form-group" id="divTitle">
 						<label for="boardtitle">업로드할 파일 ${i }</label> 
-						<input type="file" name="file" id="file" class="form-control"> 
+						<input type="file" name="file" id="file" class="form-control" style="border: none;"> 
 						
 					</div>
 					<c:set var="i" value="${i+1 }" />
@@ -79,10 +79,10 @@ span{
 					</div>
 					</div>
 				<div>
-					<input type="submit" class="btn btn-primary btn-default" value="등록">
+					<input type="submit" class="btn" value="등록" style="background: #17b978; color:white;">
 					<input type="reset" class="btn btn-secondary btn-default" value="취소">
 					<a id="" href="<c:url value='/board/boardByCategory.do?boardCode=${param.boardCode }'/>"
-						class="mb-1 btn btn-outline-success">목록으로</a>
+						class="mb-1 btn btn-outline-success" style="float:right; ">목록으로</a>
 				</div>
 
 		</div>

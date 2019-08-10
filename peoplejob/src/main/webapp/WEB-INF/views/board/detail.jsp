@@ -19,7 +19,7 @@ function report(no){
 	}else{
 	 window.open('<c:url value="/board/report.do?no='+no+'"/>',
 			 'reportView',
-			 "'status=no, height=500, width=700, left='300px', top='300px'");
+			 "'status=no, height=380, width=450, left='300px', top='300px'");
 		
 	}
 	

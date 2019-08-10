@@ -299,7 +299,6 @@ padding: 5px;
 						var param=$("#frmList").serialize();
 						var length=  $('.check:checked').length;
 						var totalprice=$('#totalPrice').val();
-						//var merchantId=$('#merchantId').val();
 						
 						$.ajax({
 							url : "<c:url value='/service/ajaxpayList.do'/>",
@@ -345,7 +344,6 @@ padding: 5px;
 											        msg += ' : ' + rsp.error_msg;
 											    }
 											    alert(msg);
-											    
 											}); 
 									}
 								 }else{
@@ -356,6 +354,7 @@ padding: 5px;
 							},
 							error : function(xhr, status, error) {
 								alert(status + ":" + error);
+								event.preventDefault();
 							}
 						});//ajax
 				 }
