@@ -79,7 +79,7 @@ public class PeopleInfoServiceImpl implements PeopleInfoService {
    }
 
    @Override
-   public List<ResumeVO> selectPeoplew(Map<String, Object> map) {
+   public List<Map<String, Object>> selectPeoplew(Map<String, Object> map) {
       return peopleinfoDao.selectPeoplew(map);
    }
 

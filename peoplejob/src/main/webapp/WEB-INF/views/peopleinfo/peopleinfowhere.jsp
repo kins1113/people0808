@@ -367,18 +367,15 @@ div#woman {
     height: 450px;">
 
 		 <label id="title">경력</label><br>
-<label><input type="checkbox" id="workcheck" name="workcheck" value="경력">경력</label>
-<label><input type="checkbox" id="workcheck" name="workcheck" value="신입">신입</label><br>
+<label><input type="checkbox" id="workcheck" name="currer" value="경력">경력</label>
+<label><input type="checkbox" id="workcheck" name="currer" value="신입">신입</label><br>
  <ul class="wrap_list_value column_two">
-                <li><label class="frm_chkbox01" for="career-years01"><input type="checkbox" id="career-years" name="term" title="1년" value="1"><span>1년 </span></label></li>
+                <li><label class="frm_chkbox01" for="career-years01"><input type="checkbox" id="career-years" name="currer" value="1~3년"><span>1~3년 </span></label></li>
     
-                <li><label class="frm_chkbox01" for="career-years05"><input type="checkbox" id="career-years" name="term" title="5년" value="5"><span>5년</span></label></li>
+                <li><label class="frm_chkbox01" for="career-years05"><input type="checkbox" id="career-years" name="currer" value="3~5년"><span>3~5년</span></label></li>
            
-                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="term" title="10년" value="10"><span>10년</span></label></li>
-                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="term" title="15년" value="15"><span>15년</span></label></li>
-                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="term" title="20년" value="20"><span>20년</span></label></li>
-                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="term" title="25년" value="25"><span>25년</span></label></li>
-                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="term" title="30년" value="30"><span>30년</span></label></li>
+                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="currer" value="5~10년"><span>5~10년</span></label></li>
+                <li><label class="frm_chkbox01" for="career-years06"><input type="checkbox" id="career-years" name="currer" value="10년이상"><span>10년이상</span></label></li>
             </ul>
             </div>
         <div class="box_detail_panel" style="border: 1px solid #63b752;
@@ -391,38 +388,35 @@ div#woman {
         <strong id="title">성별</strong>
             <strong class="title_basic_sub" id="title">나이</strong><br>
 
-            <input type="checkbox" id="male01" name="membergender" value="남">
+            <input type="checkbox" id="male01" name="gender" value="남자">
             <label class="form_sp frm_chk02"  for="male01">
             <span>남</span></label>
             <div id="woman">
 
-            <input type="checkbox" id="female01" name="membergender" value="여">
+            <input type="checkbox" id="female01" name="gender" value="여자">
             <label class="form_sp frm_chk02" for="female01">
             <span>여</span></label>
             </div>
             <ul class="wrap_list_value column_two">
-                <li><label class="frm_chkbox01" for="age-interval01"><input type="checkbox" id="age" name="age" value="20"><span>20세 </span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval02"><input type="checkbox" id="age" name="age" value="25"><span>25세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval03"><input type="checkbox" id="age" name="age" value="30"><span>30세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval04"><input type="checkbox" id="age" name="age" value="35"><span>35세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval05"><input type="checkbox" id="age" name="age" value="40"><span>40세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval06"><input type="checkbox" id="age" name="age" value="45"><span>45세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval06"><input type="checkbox" id="age" name="age" value="50"><span>50세</span></label></li>
-                <li><label class="frm_chkbox01" for="age-interval06"><input type="checkbox" id="age" name="age" value="60"><span>60세</span></label></li>
+                <li><label class="frm_chkbox01" for="age-interval01"><input type="checkbox" id="age" name="ages" value="2"><span>20대 </span></label></li>
+                <li><label class="frm_chkbox01" for="age-interval02"><input type="checkbox" id="age" name="ages" value="3"><span>30대</span></label></li>
+                <li><label class="frm_chkbox01" for="age-interval03"><input type="checkbox" id="age" name="ages" value="4"><span>40대</span></label></li>
+                <li><label class="frm_chkbox01" for="age-interval04"><input type="checkbox" id="age" name="ages" value="5"><span>50이상</span></label></li>
+                
             </ul>
             </div>
         <div class="box_detail_panel" style="border: 1px solid #63b752; float: left; width:  11%; margin: 10px; height: 450px; padding-top: 10px;">
         
         <strong id="title">최종학력</strong>
             <ul class="wrap_list_value">
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu0"><input type="checkbox" id="graduatetype" name="graduatetype" value="대학교졸업(4년)" ><span>대학교 4년 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu1"><input type="checkbox" id="graduatetype" name="graduatetype" value="대학졸업(2,3년)" ><span>대학교 2,3년 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu2"><input type="checkbox" id="graduatetype" name="graduatetype" value="석사졸업" ><span>대학원 석사 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu2"><input type="checkbox" id="graduatetype" name="graduatetype" value="박사졸업" ><span>대학원 박사 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="graduatetype" value="고등학교졸업" ><span>고등학교 졸업 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="graduatetype" value="중학교졸업" ><span>중학교 졸업 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="graduatetype" value="초등학교졸업" ><span>초등학교 졸업 </span></label></li>
-                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="graduatetype" value="학력무관" ><span>학력무관</span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu0"><input type="checkbox" id="graduatetype" name="academic" value="대학교졸업 (4년)" ><span>대학교 4년 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu1"><input type="checkbox" id="graduatetype" name="academic" value="대학졸업 (2,3년)" ><span>대학교 2,3년 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu2"><input type="checkbox" id="graduatetype" name="academic" value="석사졸업이상" ><span>대학원 석사 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu2"><input type="checkbox" id="graduatetype" name="academic" value="석사졸업이상" ><span>대학원 박사 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="academic" value="고등학교졸업" ><span>고등학교 졸업 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="academic" value="중학교졸업" ><span>중학교 졸업 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="academic" value="초등학교졸업" ><span>초등학교 졸업 </span></label></li>
+                                    <li><label class="frm_chkbox01" for="basic-search-final-edu3"><input type="checkbox" id="graduatetype" name="academic" value="학력무관" ><span>학력무관</span></label></li>
                             </ul>
             
         </div>
@@ -432,10 +426,10 @@ div#woman {
 
 				<th id="title">희망 근무 지역</th>
 								<td>
-									<select class="custom-select my-1 mr-sm-2 FST" name="localCode" id="locationSiDo">
+									<select class="custom-select my-1 mr-sm-2 FST" id="locationSiDo">
 										<option>시/도</option>
 									</select>
-									<select class="custom-select my-1 mr-sm-2 FST" name="localCode2" id="locationGugun">
+									<select class="custom-select my-1 mr-sm-2 FST" name="localCode" id="locationGugun">
 										<option>구/군</option>
 										<option>먼저 시/도를 선택하세요</option>
 									</select>
