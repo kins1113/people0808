@@ -10,7 +10,7 @@ public interface PaymentService {
 	int insertPayment(PaymentVO paymentVO);
 	
 	List<Map<String, Object>> selectPaymentById(String memberid);
-	int cancelPay(int paymentCode);
+	int cancelPay(String paydate);
 	PaymentVO selectPaymentByCode(int paymentCode);
 	List<Map<String , Object>> selectMainAdvertiseByServiceCode(int serviceCode);
 	int getpaymentJobCount(PaymentVO paymentVo);

@@ -53,7 +53,7 @@ $(function(){
 <div class="container" style="min-height: 629px;">
 	
 	
-<div class="row">
+<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 	<div class="col-lg-12">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
@@ -84,25 +84,26 @@ $(function(){
 					  <c:if test="${fn:length(uploadList)>0 }">
 					  <c:forEach var="uploadVo" items="${uploadList }">
                 <div class="oneclass">
-                    <label >업로드할 파일 :</label> 
+                    <label >업로드할 파일 :</label> <br>
+                      <span style="color:green;font-weight: bold;    margin-left: 2px;">
+		            	※ 첨부파일을 새로 지정할 경우 기존 파일 ${uploadVo.originalFileName } (${uploadVo.fileSize/1000.0 }KB)은 삭제됩니다.
+		            </span>
                     <input id="file" name="file" class="" type="file" value=""/>
-	            <input type="checkbox" name="oldFileCode" value="${uploadVo.fileName}" readonly />
+                    <span style="display: none;"><input type="checkbox" name="oldFileCode" value="${uploadVo.fileName}" readonly /></span>
+	             
                 </div>
 	            <br>
-	            <span class="sp1"></span>
-		            <span style="color:green;font-weight: bold">
-		            	※ 첨부파일을 새로 지정할 경우 기존 파일 ${uploadVo.originalFileName } (${uploadVo.fileSize/1000.0 }KB)은 삭제됩니다.
-		            </span> 
+		          
 	            </c:forEach>
             </c:if>
             </div>
             
             <c:if test="${boardVo.upage=='Y' }">
 				<c:set var="i" value="1"/>
-				<c:forEach begin="${fn:length(uploadList)-1 }" end="${boardVo.upnumage }">
+				<c:forEach begin="${fn:length(uploadList)+1 }" end="${boardVo.upnumage }">
 					<div class="form-group" id="divTitle">
 						<label for="boardtitle">업로드할 파일 :</label> 
-						<input type="file" name="file" id="file" class="form-control"> 
+						<input type="file" name="file" id="file" class="form-control" style="border: none;"> 
 						
 					</div>
 					<c:set var="i" value="${i+1 }" />
@@ -112,10 +113,11 @@ $(function(){
 					</div>
 					</div>
 				<div>
-					<input type="submit" class="btn btn-primary btn-default" value="수정">
+					<input type="submit" class="btn btn-primary btn-default" value="수정" style=" background-color: #17b978; border-color: #17b978
+    color: white;">
 					<input type="reset" class="btn btn-secondary btn-default" value="취소">
 					<a id="" href="<c:url value='/board/boardByCategory.do?boardCode=${postVo.boardCode }'/>"
-						class="mb-1 btn btn-outline-success">목록으로</a>
+						class="mb-1 btn btn-outline-success" style="float:right;     background: lightgray; color: black;">목록으로</a>
 				</div>
 
 		</div>

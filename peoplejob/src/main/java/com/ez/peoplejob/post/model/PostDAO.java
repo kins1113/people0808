@@ -27,9 +27,15 @@ public interface PostDAO {
 	int updatePost(PostVO postVo);
 	BoardVO selectBoardByboardCode2(int boardCode2);
 	int deletePost(int boardCode2);
-	List<PostVO> selectPostBymemId(String memberid);
+	PostVO selectByPostByadmin(int boardCode2);
+	List<Map<String, Object>> selectPostBymemId(PostVO postVo);
+	int selectTotalCountBymemId(PostVO postVo);
+	int selectmypostcount(int memberCode);
+	PostVO selectPostbyCommentCode(int commentCode);
 	
 	//댓글
 	int insertcmt(PostCmtVO postcmtVo);
 	List<Map<String, Object>> selectCmt(int boardCode2);
+	int updatecmt(PostCmtVO postcmtVo);
+	int deletecmt(int commentCode);
 }

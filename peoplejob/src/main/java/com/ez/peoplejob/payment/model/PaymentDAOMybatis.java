@@ -24,8 +24,8 @@ public class PaymentDAOMybatis implements PaymentDAO{
 		return sqlSession.selectList(namespace+"selectPaymentById",memberid);
 	}
 	@Override
-	public int cancelPay(int paymentCode) {
-		return sqlSession.update(namespace+"cancelPay",paymentCode);
+	public int cancelPay(String paydate) {
+		return sqlSession.update(namespace+"cancelPay",paydate);
 	}
 	@Override
 	public PaymentVO selectPaymentByCode(int paymentCode) {

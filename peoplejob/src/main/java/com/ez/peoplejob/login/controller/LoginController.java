@@ -44,15 +44,12 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	@Autowired private ResumeService resumeService;
 	@Autowired private PostService postService;
 	
-	private kakao_restapi kakao_restapi = new kakao_restapi();
 	
-	
-	
-	@RequestMapping("/mypage/user/userpage.do")
+	@RequestMapping(value="/mypage/user/userpage.do")
 	public String mypage(HttpSession session, Model model, @ModelAttribute SearchVO searchVo) {
 		String memberid=(String)session.getAttribute("memberid");
 		MemberVO memberVo=memberService.selectByUserid(memberid);
-		logger.info("마이페이지 화면 보!!여!!주!!기!! memberVo={}",memberVo);
+		logger.info("마이페이지 화면 보여주기! memberVo={}",memberVo);
 		
 			CompanyVO companyVo=jobService.selectcompany(memberVo.getCompanyCode());
 			logger.info("companyVo={}",companyVo);
@@ -72,13 +69,18 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		map.put("memberCode", memberVo.getMemberCode());
 		int applycount=applyService.selectapplyCount(map);
 		logger.info("개인회원입장 지원현황 applycount={}",applycount);
-		List<PostVO> postlist=postService.selectPostBymemId(memberid);
+		int postcount=postService.selectmypostcount(memberVo.getMemberCode());
+		/*
+		List<PostVO> postlist=postService.selectPostBymemId(po);
 		logger.info("내가 쓴 글 postlist.size={}",postlist.size());
+		*/
+		
+		model.addAttribute("postcount",postcount);
 		
 		model.addAttribute("applycount",applycount);
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("resumelist",resumelist);
-		model.addAttribute("postlist",postlist);
+		//model.addAttribute("postlist",postlist);
 		model.addAttribute("paylist",paylist);
 		model.addAttribute("scraplist",scraplist);
 		model.addAttribute("joblist",joblist);
@@ -124,61 +126,5 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		return "mypage/corp/paymentDetail";
 	}
 	
-	
-	
-	//테스트
-	@RequestMapping("/login/kaokaoTest.do")
-	public String kaokaoTest() {
-		logger.info("카카오테스트 화면 보여주기");
-		return "login/kaokaoTest";
-	}
-	
-	@RequestMapping("/login/home.do")
-	public String kaokaoTest2() {
-		logger.info("카카오테스트 화면 보여주기");
-		return "login/home";
-	}
-	
-	
-	
-	    @RequestMapping(value = "/oauth", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
-	    public String kakaoLogin(@RequestParam("code") String code) {
-	  
-	        return "home";
-	    }
-	    
-	  
-	    
-	    @RequestMapping(value = "/oauth", produces = "application/json")
-	    public String kakaoLogin_post(@RequestParam("code") String code, Model model, HttpSession session) {
-	    	
-	    	/*
-	        System.out.println("로그인 할때 임시 코드값");
-	        //카카오 홈페이지에서 받은 결과 코드
-	        System.out.println(code);
-	        System.out.println("로그인 후 결과값"); */
-	    	
-	    	logger.info("파라미터 code={}",code);
-	        
-	        //카카오 rest api 객체 선언
-	        kakao_restapi kr = new kakao_restapi();
-	        //결과값을 node에 담아줌
-	        JsonNode node = kr.getAccessToken(code);
-	        //결과값 출력
-	        logger.info("node={}",node);
-	        
-	        //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-	        String token = node.get("access_token").toString();
-	        //세션에 담아준다.
-	        session.setAttribute("token", token);
-	        
-	        return "login/logininfo";
-	    }
-
-	    
-
-	    
-
-
 	
 }

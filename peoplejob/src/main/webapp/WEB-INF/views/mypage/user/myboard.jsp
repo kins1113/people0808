@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp"%>
+<%@include file="../../main/inc/top.jsp"%>
 
 <style type="text/css">
 .wraper{
@@ -240,45 +240,11 @@
  
  
  <div class="wraper" style="min-height: 710px;">
-				<div class="sidebar" style="width:170px; border:1px solid lightgray; margin-top: 8px;    margin-right: 43px;">
-					<div id='cssmenu'>
-						<ul style="width: 168px;">
-						<c:forEach var="boardVo" items="${boardkindlist }">
-						   <li><a href="<c:url value='/board/boardByCategory.do?boardCode=${boardVo.boardCode1 }'/>"><span>${boardVo.boardname }</span></a></li>
-						   </c:forEach>
-						   <li><a href="<c:url value='/notice/list.do'/>"><span>공지사항</span></a></li>
-						</ul>
-				</div>
-				</div>
+				
           <div class="container" style="height: 96%;">
-  
-				    <%--  <div class="form-group" id='pageSize'>
-					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
-						<option value="10"
-							<c:if test="${param.recordCountPerPage==10 }">
-								selected="selected"
-							</c:if>>10개씩
-						</option>
-						<option value="20"
-							<c:if test="${param.recordCountPerPage==20 }">
-								selected="selected"
-							</c:if>>20개씩
-						</option>
-						<option value="30"
-							<c:if test="${param.recordCountPerPage==30 }">
-								selected="selected"
-							</c:if>>30개씩
-						</option>
-						<option value="50"
-							<c:if test="${param.recordCountPerPage==50 }">
-								selected="selected"
-							</c:if>>50개씩
-						</option>
-					</select>
-				</div>    --%>
 				
 				<form class="form-inline" method="post"
-								action='<c:url value="/board/boardByCategory.do?boardCode=${param.boardCode }"/>' style="    margin-left: -15px;">
+								action='<c:url value="/mypage/user/myboard.do"/>' style=" margin-left: -15px;">
 
 							<select class="custom-select my-1 mr-sm-2" name="searchCondition" style="    width: 90px;height: 35px;">
 
@@ -317,7 +283,7 @@
 							<!-- 페이징 처리에도 사용 -->
 
 							<form name="frmSearch" method="post"
-								action='<c:url value="/board/boardByCategory.do?boardCode=${param.boardCode }"/>'>
+								action='<c:url value="/mypage/user/myboard.do"/>'>
 								<!-- 현재 페이지 hidden에 넣기 -->
 								<input type="hidden" name='currentPage' value="1">
 
@@ -330,6 +296,7 @@
               <thead>
                 <tr>
                   <th style="background-color:#eeeeee; text-align: center;">번호</th>
+                <th style="background-color:#eeeeee; text-align: center;">게시판</th>
                   <th style="background-color:#eeeeee; text-align: center;">제목</th>
                   <th style="background-color:#eeeeee; text-align: center;">작성자</th>
                   <th style="background-color:#eeeeee; text-align: center;">등록일</th>
@@ -339,7 +306,7 @@
               <tbody>
               <c:if test="${empty list }">
                 <tr style="background: white;">
-				   	<td colspan="5">등록된 게시글이 없습니다.</td>
+				   	<td colspan="6">등록된 게시글이 없습니다.</td>
 				</tr>
               </c:if>
               
@@ -348,6 +315,7 @@
               <c:forEach var="map" items="${list }">
                 <tr style="background: white;">
 				   	<td>${i }</td>
+                 	<td><a href="<c:url value='/board/boardByCategory.do?boardCode=${map["BOARD_CODE"]}'/>" style="color:black;">${map['BOARDNAME'] }</a></td>
 				   	<td><a href="<c:url value='/post/countUpdate.do?pk=${map["BOARD_CODE2"]}&boardCode=${map["BOARD_CODE"] }'/>" style="color:black;">
 				   	
 				   	<c:if test="${fn:length(map['BOARDTITLE'])>=30 }">
@@ -364,15 +332,7 @@
 						 </c:if>
 						</td>
 				   	<td>
-					   	<c:if test="${map['ADMIN_CODE']!=0 && map['MEMBERNAME'] ==NULL}">
-					   		관리자
-					   	</c:if>
-					   	<c:if test="${map['MEMBERNAME'] !=NULL && map['ADMIN_CODE']==NULL}">
-					   		${map['MEMBERNAME'] }
-					   	</c:if>
-					   		<c:if test="${map['MEMBER_CODE']==0 && map['ADMIN_CODE']==0}">
-					   		비회원
-					   	</c:if>
+					   ${sessionScope.memberName }
 				   	</td>
 				   	<td><fmt:formatDate value="${map['BOARDREGDATE2'] }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				   	<td>${map['BOARDHITS'] }</td>
@@ -387,12 +347,7 @@
             </table>
           </div>
           
-          <input type="button" value="글쓰기" class="write" name="boardWrite"
-          style="    float: right;
-    width: 50px;
-    height: 30px;
-    background-color: #17b978;
-    color: white;">
+         
           <!-- 페이지 처리 -->
           
           <div class="divPage" style="margin-left: 225px;">
@@ -437,4 +392,4 @@
 
 	
 </div>
-<%@include file="../main/inc/bottom.jsp"%>
+<%@include file="../../main/inc/bottom.jsp"%>

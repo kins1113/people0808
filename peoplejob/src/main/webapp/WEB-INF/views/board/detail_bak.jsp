@@ -100,13 +100,27 @@ $(function(){
             $(this).parents('.media-body').find('#change').html(str);
             console.log(str);    
             
-            
+            $.ajax({
+                
+                url : "<c:url value='/updatecmt.do'/>",
+                type : "POST",
+                contentType : "application/json; charset=utf-8",
+                data : JSON.stringify({
+                    num : num,
+                    text : text
+                    
+                
+                }),
+                success : function(){
+                    alert("수정 완료");
+                },
+                error : function(error){
+                    console.log(error);
+                }
+                
+            });
 		
 		
-	});
-	
-	$('#back').click(function(){
-		location.href="<c:url value='/board/detail.do?no=${param.no}'/>";
 	});
 });
 </script>
@@ -215,18 +229,16 @@ $(function(){
         <c:forEach var="map" items="${list}">
         <div class="media mb-4">
           <div class="media-body">
-            <h5 class="mt-0" style="display:inline-block; float:left;">${map['MEMBERNAME'] } | <fmt:formatDate value="${map['BOARD_DATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/> </h5> 
+            <h5 class="mt-0" style="display:inline-block;">${map['MEMBERNAME'] } | <fmt:formatDate value="${map['BOARD_DATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/> </h5> 
             <input type="hidden" name="commentCode" value="${map['COMMENT_CODE'] }">
             <form name="updatecmt" action="<c:url value='/updatecmt.do'/>" method="post">
 	            <div name="change" id="change">
-   <c:if test="${sessionScope.memberName==map['MEMBERNAME'] }">
 	            <span class="edit" style="cursor:pointer; ">수정</span> | <span class="delete" style="cursor:pointer; margin-left: 0;">삭제</span>
-	            </c:if>
 	            <br>
 	            
 	            <% pageContext.setAttribute("newLineChar", "\n"); %>
 				
-				<textarea rows="3" id="editcontent" class="editcontent" style="clear:both;">${map['CONTENT']}</textarea>
+				<textarea rows="3" id="editcontent" class="editcontent">${map['CONTENT']}</textarea>
 				</form>
 				</div>
           </div>

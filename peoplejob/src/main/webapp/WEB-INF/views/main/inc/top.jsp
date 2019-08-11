@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>People Job-index</title>
+	<title>People Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -216,9 +216,10 @@ button {
 							<li style="width: 98px;">
 								<a href="">자료실</a>
 								<ul class="sub-menu">
-									<li><a href="">이력서 양식</a></li>
+									<li><a href="<c:url value='/references/resumeForm.do'/>">이력서 양식</a></li>
 									<li><a href="<c:url value='/references/news.do'/>">취업 뉴스</a></li>
 									<li><a href="<c:url value='/references/FreeLecture.do'/>">무료 강좌</a></li>
+									<li><a href="<c:url value='/main/chkLchar.do'/>">글자수 세기</a></li>
 									
 								</ul>
 							</li>
