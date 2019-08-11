@@ -27,16 +27,19 @@ input[name=searchKeyword]{width: 400px;margin-right: 3px;}
 .FST{height: 33px;padding: 0 9px 0 5px;font-size: 13px;}
 .float{float: left;}
 .genderShow{width: 85px;margin: 10px 0 10px 5px;float: left;}
-.labelFont{width: 160px;}
-#cardBoduPostList table thead tr th:nth-of-type(1) {width: 10%; text-align:center; padding-left: 16px; padding-right: 0px;}
+.labelFont{width: 166px;}
+#cardBoduPostList table thead tr th:nth-of-type(1) {width: 13%; text-align:center; padding-left: 16px; padding-right: 0px;}
 #cardBoduPostList table thead tr th:nth-of-type(2) {width: 65%;text-align:center;}
-#cardBoduPostList table thead tr th:nth-of-type(3) {width: 12.5%;  text-align:center;}
+#cardBoduPostList table thead tr th:nth-of-type(3) {width: 13.5%;  text-align:center;}
 #cardBoduPostList table thead tr th:nth-of-type(4) {width: 5%;text-align:center;}
-#cardBoduPostList table tbody tr td:nth-of-type(1) {width: 10%; text-align:center;padding: 19px 0 19px 16px;}
-#cardBoduPostList table tbody tr td:nth-of-type(2) {width: 65%;text-align:center; padding: 19px;}
+#cardBoduPostList table tbody tr td:nth-of-type(1) {width: 10%; text-align:center;padding: 19px 0 19px 0;    vertical-align: middle;}
+#cardBoduPostList table tbody tr td:nth-of-type(2) {width: 65%;text-align:center; padding: 19px;vertical-align: middle;}
 #cardBoduPostList table tbody tr td:nth-of-type(3) {width: 12.5%;  text-align:center; }
 #cardBoduPostList table tbody tr td:nth-of-type(4) {width: 5%;text-align:center;}
 hr{margin: 1px;}
+span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative;    top: 11px;}
+.custom-select{background-image: none; background: none;}
+
 </style>
 <c:set value="${!empty param.firstCode}" var="firstCocode"/>
 <script type="text/javascript">
@@ -148,7 +151,7 @@ hr{margin: 1px;}
 		$(".goMainResume").click(function(){
 			var title=$(this).html();
 			var resumeCode=$(this).next().val();
-			alert("이력서야 떠라~~!!  "+title+"   "+resumeCode);
+			//alert("이력서야 떠라~~!!  "+title+"   "+resumeCode);
 			open("<c:url value='/resume/resumedetail.do?resumeCode="+resumeCode+"'/>",title,
 					"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
 					)
@@ -565,12 +568,17 @@ hr{margin: 1px;}
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
+		alert("페이지번호"+$("input[name=currentPage]").val())
+		setInfo();
 		
+		$("form[name=resumeList]").attr("action","<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>");
+		$("form[name=resumeList]").submit();
+	}
+	function setInfo(){
 		$("input[name=searchStartDay]").val('${param.searchStartDay}');
 		$("input[name=searchEndDay]").val('${param.searchEndDay}');
 		$("input[name=searchKeyword]").val('${param.searchKeyword}');
 		$("input[name=searchCondition]").val('${param.searchCondition}');
-		$("input[name=currentPage]").val('${param.searchStartDay}');
 		$("input[name=ages]").val('${param.ages}');
 		$("input[name=gender]").val('${param.gender}');
 		$("input[name=currer]").val('${param.currer}');
@@ -578,12 +586,7 @@ hr{margin: 1px;}
 		$("input[name=localCode]").val('${param.localCode}');
 		$("input[name=btypeCode3]").val('${param.btypeCode3}');
 		$("input[name=thirdCode]").val('${param.thirdCode}');
-		
-		
-		$("form[name=resumeList]").attr("action","<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>");
-		$("form[name=resumeList]").submit();
 	}
-	
 </script>
 <form name="resumeList" method="post" action="<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>"
 		 enctype="multipart/form-data" >
@@ -591,7 +594,7 @@ hr{margin: 1px;}
 <input type="hidden" name="detailCk" value="${param.detailCk}">
 		 
 <!-- 페이지 처리를 위한 hidden  -->
-<input type="text" name="currentPage"
+<input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
 	 	value="${param.currentPage }"
 	</c:if>
@@ -650,6 +653,7 @@ hr{margin: 1px;}
 											<input type="button" class="btn btn-secondary btn-default SDButton" value="1개월">
 											<input type="button" class="btn btn-secondary btn-default SDButton" value="3개월">
 											<input type="button" class="btn btn-secondary btn-default SDButton" value="9개월">
+											<span class="infoSpan">※단, 월요일을 한주의 시작으로 처리함.</span>
 										</div>
 								</td>
 							</tr>

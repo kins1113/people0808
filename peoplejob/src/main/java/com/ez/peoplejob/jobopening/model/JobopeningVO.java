@@ -1,6 +1,9 @@
 package com.ez.peoplejob.jobopening.model;
 
+import java.util.ArrayList;
+
 import com.ez.peoplejob.common.SearchVO;
+import com.ez.peoplejob.payment.model.PaymentVO;
 
 public class JobopeningVO extends SearchVO{
 	public int jobopening;
@@ -33,6 +36,7 @@ public class JobopeningVO extends SearchVO{
 	public String category;
 	public String companyimage;
 	public int companyCode;
+	
 	public int getJobopening() {
 		return jobopening;
 	}

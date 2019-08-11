@@ -48,6 +48,8 @@ public class ResumeManagerController {
 				     @RequestParam(required = false)String[] currer,
 				     @RequestParam(required = false)String[] academic,
 				Model model) {
+		logger.info("currentPage={}",currentPage);
+		logger.info("currentPage={}",currentPage);
 		logger.info("이력서 관리 보여주기 ");
 		logger.info("이력서 관리 파라미터 searchStartDay={}, searchEndDay={}", searchStartDay, searchEndDay);
 		logger.info("이력서 관리 파라미터 detailCk={}",detailCk);

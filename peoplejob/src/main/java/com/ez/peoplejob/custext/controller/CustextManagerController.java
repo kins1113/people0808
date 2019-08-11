@@ -37,7 +37,7 @@ public class CustextManagerController {
 		     @RequestParam(required = false, defaultValue = "") String searchCondition,
 							
 			Model model) {
-		logger.info("문의사항 보여주는 곳 ");
+		logger.info("문의사항 보여주는 곳  searchKeyword={}, searchCondition={}",searchKeyword,searchCondition);
 		
 		
 		

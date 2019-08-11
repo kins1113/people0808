@@ -3,6 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.jobopeningManager">
+<!-- 
+	<resultMap type="com.ez.peoplejob.jobopening.model.JobopeningVO" id="jobopeningMap">
+		<id property="jobopening" column="JOBOPENING" />
+		<result property="jobtitle" column="JOBTITLE" />
+		<result property="localcheck" column="LOCALCHECK" />
+		<result property="subwayinfo" column="SUBWAYINFO" />
+		<result property="workway" column="WORKWAY" />
+		<result property="workdate" column="WORKDATE" />
+		<result property="dayofweek" column="DAYOFWEEK" />
+		<result property="worktime" column="WORKTIME" />
+		<result property="payway" column="PAYWAY" />
+		<result property="pay" column="PAY" />
+		<result property="workform" column="WORKFORM" />
+		<result property="welfare" column="WELFARE" />
+		<result property="gender" column="GENDER" />
+		<result property="agelimit" column="AGELIMIT" />
+		<result property="academicCondition" column="ACADEMIC_CONDITION" />
+		<result property="career" column="CAREER" />
+		<result property="sweetener" column="SWEETENER" />
+		<result property="recruit" column="RECRUIT" />
+		<result property="recruitmentTarget" column="RECRUITMENT_TARGET" />
+		<result property="endDate" column="END_DDATE" />
+		<result property="receiveway" column="RECEIVEWAY" />
+		<result property="submit" column="SUBMIT" />
+		<result property="applicationhandbook" column="APPLICATIONHANDBOOK" />
+		<result property="jobregdate" column="JOBREGDATE" />
+		<result property="hits" column="HITS" />
+		<result property="reportcheke" column="REPORTCHEKE" />
+		<result property="adminagree" column="ADMINAGREE" />
+		<result property="category" column="CATEGORY" />
+		<result property="companyimage" column="COMPANYIMAGE" />
+		<result property="companyCode" column="COMPANY_CODE" />
+	   
+		<collection property="paymentVO" column="jobopening" javaType="java.util.ArrayList" 
+		ofType="com.ez.peoplejob.payment.model.PaymentVO" select="selectPaymentByJobopening"> 
+		</collection>
+	
+	</resultMap>
+	
+	<select id="selectPaymentByJobopening" resultType="paymentVO" parameterType="map">
+		SELECT payment_Code, paymentway, progress, period, paydate, payend_Date, service_Code, member_Code
+		 FROM PAYMENT
+		WHERE PAYEND_DATE >= SYSDATE AND JOBOPENING =#{jobopening}
+	</select> -->
+
 	<select id="selectJobopeningManager" resultType="map" parameterType="map">
 	select * from 
 	(
@@ -140,7 +185,9 @@
 	</select>
 	
 	<select id="getTotalCountJobopeningManager" resultType="int" parameterType="map">
-		select count(*) from
+		select count(*) from 
+	(
+		select * from
 			(
 			    select A.*, rownum as RNUM 
 			    from
@@ -268,10 +315,11 @@
 						</if>
 					</if>
 			</where>
+		)
 	</select>
 	
 	<select id="selectJobTile" resultType="map">
-		select company_COde,jobtitle from jobopening
+		select company_COde,jobtitle,jobopening from jobopening
 	</select>
 </mapper>
 

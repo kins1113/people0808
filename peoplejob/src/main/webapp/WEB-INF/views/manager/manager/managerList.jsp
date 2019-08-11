@@ -18,24 +18,28 @@
 	}
 	
 </script>
+<style>
+#divBody{
+    padding: 1.125rem;
+}
+button.mb-1.btn.btn-sm.btn-outline-info {
+    margin-left: 28px;
+    padding: 9px 3.8%;
+}
+</style>
 <form action="<c:url value='/manager/manager/managerDel.do'/>" method="post" name="DelForm">
 	<input type="hidden" name="adminCode">
 </form>
-
+<div class="row">
 <div class="col-lg-12">
 	<div class="card card-default">
 		<div class="card-header card-header-border-bottom">
 			<h2>Manager List</h2>
+			
 		</div>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb breadcrumb-inverse">
-				<li class="breadcrumb-item"><a href="#" onclick="managerAdd()">Add</a></li>
-				<li class="breadcrumb-item"  aria-current="page"><a href="#">권한</a></li>
-				<li class="breadcrumb-item"><a href="#">활동 중</a></li>
-			</ol>
-		</nav>
-		<div class="card-body">
-			<table class="table table-dark">
+		<div class="card-body" id='divBody'>
+		<button type="button" class="mb-1 btn btn-sm btn-outline-info" onclick="managerAdd()">등록</button>
+			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th scope="col">코드</th>
@@ -66,5 +70,6 @@
 			</table>
 		</div>
 	</div>
+</div>
 </div>
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

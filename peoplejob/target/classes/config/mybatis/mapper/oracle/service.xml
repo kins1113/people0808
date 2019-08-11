@@ -32,5 +32,12 @@
 	serviceprice=#{servicePrice},servicecontent=#{serviceContent},serviceday=#{serviceDay}
 	where service_Code=#{serviceCode}
 	</update>
+	
+	<select id="selectServPayAll" resultType="map">
+	SELECT p.payment_Code,p.JOBOPENING, p.paymentway, p.progress, p.period, p.paydate, p.payend_Date, p.service_Code, p.member_Code,
+        s.SERVICENAME
+	FROM PAYMENT p join service s on p.SERVICE_CODE = s.SERVICE_CODE
+	WHERE P.PAYEND_DATE > SYSDATE AND PROGRESS='결제완료'
+	</select>
 </mapper>
 	 
