@@ -43,6 +43,22 @@ section#registerds {
     background: white;
     padding: 20px;
 }
+section#registerds1 {
+    margin: 12px;
+    background: white;
+}
+section#registerds2 {
+    margin: 12px;
+    background: white;
+}
+section#registerds3 {
+    margin: 12px;
+    background: white;
+}
+section#registerds4 {
+    margin: 12px;
+    background: white;
+}
 h3 {
     color: green;
     font-weight: bold;
@@ -69,13 +85,256 @@ button#awardbt{
 input[type="submit"] {
     margin-left: 1014px;
 }
-
+select#major {
+    height: 33px;
+}
+select#chargework {
+    height: 33px;
+}
+select#jobgrade {
+    height: 33px;
+}
+select#lName {
+    height: 33px;
+}
+select#language {
+    height: 33px;
+}
+select#langlicencename {
+    height: 33px;
+}
+div#certificationtype {
+    padding: 13px;
+}
+div#langcert {
+    padding: 13px;
+}
+div#award {
+padding: 13px;
+}
+div#hopework {
+    padding: 13px;
+}
 
 </style>
-
+    <script type="text/javascript">
+    $(document).ready(function($){
+		$('#workterm').datepicker({
+			dateFormat:"yy-mm-dd",
+			changeYear:true,
+			dayNamesMin:["일","월","화","수","목","금","토"],
+			monthNames:["1월","2월","3월","4월","5월","6월",
+					"7월","8월","9월","10월","11월","12월"]
+		});
+		$('#workterm2').datepicker({
+			dateFormat:"yy-mm-dd",
+			changeYear:true,
+			dayNamesMin:["일","월","화","수","목","금","토"],
+			monthNames:["1월","2월","3월","4월","5월","6월",
+					"7월","8월","9월","10월","11월","12월"]
+		});
+    });
+    </script>
 <script type="text/javascript">
 
+$(document).on("click","button[name=addcareer]",function(){
+    
+    var addStaffText = '<tr name="careeradd">'+        
+    '<td><strong>회사명</strong>'+
+    '<input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">'+
+    '</td>'+
+    '  <td>재직기간'+
+    '<input id="workterm" name="workterm" class="form-control" type="text" readonly/>'+
+	'<label class="control-label">~</label>'+
+  	'<input id="workterm2" name="workterm2" class="form-control" type="text" readonly/>'+
+		'&nbsp';+
+	'<select class="form-control" name="workcondition" id="workcondition" >'+
+    	'<option value="재직중">재직중</option>'+
+    	'<option value="퇴사">퇴사</option>'+
+    '</select>'+
+    '</td>'+
+
+'<td>직종'+
+'<input type="text" class="form-control"  placeholder="직종을 입력" name="chargework" >'+
+	'</td>'+
+	
+
+	'<td>직급'+
+'<input type="text"  class="form-control"  placeholder="직급을 입력"  name="jobgrade">'+
+'       <button class="btn btn-default" name="delStaff">삭제</button>'+
+'</td>'+
+'</tr>';
+
+var trHtml = $(  "tr[name=careeradd]:last" );
+trHtml.after(addStaffText); //마지막 trStaff명 뒤에 붙인다.
+
+});
+//삭제 버튼
+ $(document).on("click","button[name=delStaff]",function(){
+     
+    var trHtml = $(this).parent().parent().parent().parent();
+     
+    trHtml.remove(); //tr 테그 삭제
+     
+}); 
+</script>
+
+<script>
 $(document).ready(function (){
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#majorinput").hide();
+
+
+
+	$("#major").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#major").val() == "direct") {
+
+				$("#majorinput").show();
+
+			}  else {
+
+				$("#majorinput").hide();
+
+			}
+
+			
+
+		}) 
+
+		
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#chargeworkinput").hide();
+
+
+
+	$("#chargework").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#chargework").val() == "direct") {
+
+				$("#chargeworkinput").show();
+
+			}  else {
+
+				$("#chargeworkinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#jobgradeinput").hide();
+
+
+
+	$("#jobgrade").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#jobgrade").val() == "direct") {
+
+				$("#jobgradeinput").show();
+
+			}  else {
+
+				$("#jobgradeinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#lNameinput").hide();
+
+
+
+	$("#lName").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#lName").val() == "direct") {
+
+				$("#lNameinput").show();
+
+			}  else {
+
+				$("#lNameinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#languageinput").hide();
+
+
+
+	$("#language").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#language").val() == "direct") {
+
+				$("#languageinput").show();
+
+			}  else {
+
+				$("#languageinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#langlicencenameinput").hide();
+
+
+
+	$("#langlicencename").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#langlicencename").val() == "direct") {
+
+				$("#langlicencenameinput").show();
+
+			}  else {
+
+				$("#langlicencenameinput").hide();
+
+			}
+
+			
+
+		}) 
+
+		
 
 	
 	//자격증을 가져오는
@@ -707,7 +966,6 @@ $(document).ready(function (){
     <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
     <div class="inputArea">
  <label for="picture">이력서 사진</label>
- <label for="picture">이력서 사진</label>
  <input type="file" id="gdsImg" name="file" />
  <div class="select_img"><img src="" /></div>
  
@@ -727,38 +985,36 @@ $(document).ready(function (){
     </div>
     <div>        
         <label for="membername">이름</label>
-        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active">
+        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active" readonly>
     </div>
    <input type="hidden" id="picture" name="picture" />
     <div>        
         <label for="birth">생년월일</label>
-        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active">
+        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active" readonly>
     	
     </div>
   
    
     <div>
         <label for="email">이메일 주소</label>
-        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리">
+        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리" readonly>
     </div>
     
     <div>
         <label for="address">주소</label>
         <input type="text" class="form-control"  name="zipcode" id="zipcode" ReadOnly  
         	title="우편번호" class="width_80" value="${vo.zipcode}">
-        
-       
-        <br />
+  
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" id="address" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
+        <input type="text"  class="form-control" id="address" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350" readonly><br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" id="addressdetail" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
+        <input type="text"  class="form-control" id="addressdetail" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350" readonly>
     </div>
     <div>
         <label for="tel">핸드폰</label>&nbsp;
        
         <input type="text"  class="form-control"   name="tel" id="tel" value="${vo.tel}" maxlength="11" title="휴대폰 번호"
-        	class="width_80">
+        	class="width_80" readonly>
     </div>
     </section>
     <section id="registerds">
@@ -790,7 +1046,7 @@ $(document).ready(function (){
 		</label>
 		<hr>
 	</div>
-		<button class="btn btn-success" name="addStaff">학력 추가</button>
+		<!-- <button class="btn btn-success" name="addedu">학력 추가</button> -->
    
 		<div>
 		 <label for="schoolname">학교명</label>&nbsp;
@@ -822,8 +1078,37 @@ $(document).ready(function (){
        </div>
        <div>
        <label>전공</label>
-           <input type="text" class="form-control" placeholder="전공을 입력하세요" name="major" id="major">
-       
+
+       		<select class="form-control" name="major" id="major" >
+        	<option value="가공">가공</option>
+
+        	<option value="가구디자인">가구디자인</option>
+        	<option value="가스냉동">가스냉동</option>
+        	<option value="가정">가정</option>
+        	<option value="가정경제">가정경제</option>
+        	<option value="가정과교육">가정과교육</option>
+        	<option value="가정관리학">가정관리학</option>
+        	<option value="가정복지">가정복지</option>
+        	<option value="가정의학">가정의학</option>
+        	<option value="가정학">가정학</option>
+        	<option value="가족관계">가족관계</option>
+        	<option value="가축질병학">가축질병학</option>
+        	<option value="가축학">가축학</option>
+        	<option value="간호">간호</option>
+        	<option value="간호교육">간호교육</option>
+        	<option value="간호교육학">간호교육학</option>
+        	<option value="건설경영학">건설경영학</option>
+        	<option value="개발행정학">개발행정학</option>
+        	<option value="경영">경영</option>
+        	<option value="경제">경제</option>
+        	<option value="고고미술학">고고미술학</option>
+        	<option value="낙농학">낙농학</option>
+        	<option value="내과">내과</option>
+        	<option value="도시계획">도시계획</option>
+        	<option value="도시공학">도시공학</option>
+        	<option value="direct">직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="majorinput" name="major"/>
        
        </div>
        
@@ -846,7 +1131,7 @@ $(document).ready(function (){
     <h3>경력사항</h3>
     <div>
     <label for="workcheck">경력구분</label>&nbsp;
-       
+       <!-- <button class="btn btn-success" name="addcareer">경력 추가</button> -->
        <label class="radio-inline">
   		<input type="radio" name="workcheck" id="workcheck" value="신입">신입
 		</label>
@@ -856,12 +1141,16 @@ $(document).ready(function (){
 		</label>
     </div>
     <hr>
-    <div>        
+    <div id="careeradd">        
         <label for="companyname">회사명</label>
         <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">
     </div>
     <div>
-        <c:import url="resume_date.jsp"/>
+         <label class="control-label">재직기간</label>
+                    <input id="workterm" name="workterm" class="form-control" type="text" readonly/>
+
+                <label class="control-label">~</label>
+                    <input id="workterm2" name="workterm2" class="form-control" type="text" readonly/>
   		&nbsp;
 		<select class="form-control" name="workcondition" id="workcondition" >
         	<option value="재직중">재직중</option>
@@ -870,27 +1159,100 @@ $(document).ready(function (){
 	</div>
 	<div>
 	<label for="chargework">직종</label>
-	<input type="text" class="form-control"  placeholder="직종을 입력" name="chargework" >
-		
+		<select class="form-control" name="chargework" id="chargework" >
+        	<option value="급여관리">급여관리</option>
+        	<option value="기획">기획</option>
+        	<option value="전략기획">전략기획</option>
+        	<option value="사업기획">사업기획</option>
+        	<option value="사업제휴">사업제휴</option>
+        	<option value="타당성분석">타당성분석</option>
+        	<option value="MBA출신">MBA출신</option>
+        	<option value="경영기획">경영기획</option>
+        	<option value="조직관리">조직관리</option>
+        	<option value="변화관리">변화관리</option>
+        	<option value="경영혁신·PI">경영혁신·PI</option>
+        	<option value="출판기획">출판기획</option>
+        	<option value="인수·합병">인수·합병</option>
+        	<option value="COO">COO</option>
+        	<option value="CEO">CEO</option>
+        	<option value="기획조사">기획조사</option>
+        	<option value="자산관리">자산관리</option>
+        	<option value="특허업무">특허업무</option>
+        	<option value="법무">법무</option>
+        	<option value="총무">총무</option>
+        	<option value="사무">사무</option>
+        	<option value="인허가업무">인허가업무</option>
+        	<option value="저작권관리">저작권관리</option>
+        	<option value="수행비서">수행비서</option>
+        	<option value="PR">PR</option>
+        	<option value="direct">직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="chargeworkinput" name="chargework"/>
         
     </div>
     	
     <div>
     <label for="jobgrade">직급</label>
-    <input type="text"  class="form-control"  placeholder="직급을 입력"  name="jobgrade">
+    <select class="form-control" name="jobgrade" id="jobgrade" >
+        	<option value="관리관">관리관</option>
+
+        	<option value="교정관">교정관</option>
+        	<option value="인쇄담당(5급상당)">인쇄담당(5급상당)</option>
+        	<option value="대리">대리</option>
+        	<option value="사원">사원</option>
+        	<option value="과장">과장</option>
+        	<option value="사장">사장</option>
+        	<option value="부장">부장</option>
+        	<option value="이사">이사</option>
+        	<option value="전무">전무</option>
+        	<option value="계약직">계약직</option>
+        	<option value="의료기사(6급상당)">의료기사(6급상당)</option>
+        	<option value="위원(3급상당)">위원(3급상당)</option>
+        	<option value="COO">COO</option>
+        	<option value="CEO">CEO</option>
+        	
+        	<option value="direct">직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="jobgradeinput" name="jobgrade"/>
+        
    </div>
    </section>
 
    <button type="button" id="certification" class="btn btn-success" value="자격증">자격증</button>
-   <section id="registerds">
+   <section id="registerds1">
    <div id="certificationtype" >
    
    <h3>자격증</h3>
 
       
-   <input class="form-control" name="certificationtype" id="certificationtype" value="자격증/면허증">
+   <input type="hidden" class="form-control" name="certificationtype" id="certificationtype" value="자격증/면허증">
          <label for="lName">자격증명</label>
-         <input type="text" class="form-control" placeholder="자격증명을 입력하세요" name="lName" >
+
+         <select class="form-control" name="lName" id="lName" >
+        	<option value="기계기술사">기계기술사</option>
+        	<option value="모터그레이더운전기능사">모터그레이더운전기능사</option>
+        	<option value="롤러운전기능사">롤러운전기능사</option>
+        	<option value="로더운전기능사">로더운전기능사</option>
+        	<option value="불도저운전기능사">불도저운전기능사</option>
+        	<option value="굴삭기운전기능사">굴삭기운전기능사</option>
+        	<option value="기중기운전기능사">기중기운전기능사</option>
+        	<option value="건설기계정비산업기사">건설기계정비산업기사</option>
+        	<option value="기중기운전기능사">기중기운전기능사</option>
+        	<option value="건설기계정비산업기사">건설기계정비산업기사</option>
+        	<option value="자동차차체수리기능사">자동차차체수리기능사</option>
+        	<option value="철도차량기사">철도차량기사</option>
+        	<option value="보일러기능사">보일러기능사</option>
+        	<option value="전자부품장착(SMT)기능사">전자부품장착(SMT)기능사</option>
+        	<option value="기계조립기능사">기계조립기능사</option>
+        	<option value="컴퓨터응용밀링기능사">컴퓨터응용밀링기능사</option>
+        	<option value="차량기술사">차량기술사</option>
+        	<option value="공조냉동기계산업기사">공조냉동기계산업기사</option>
+        	<option value="일반기계기사">일반기계기사</option>
+        	
+        	<option value="direct">직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="lNameinput" name="lName"/>
+        
     <div>    
         <label for="lInstitution">발행처/기관</label>
         <input type="text" class="form-control"  name="lInstitution" placeholder="발행처/기관을 입력하세요" id="lInstitution" style="ime-mode:active">
@@ -903,14 +1265,33 @@ $(document).ready(function (){
     
     &nbsp;
    <button type="button" id="langcertbt" class="btn btn-success" value="어학">어학</button>
-    <section id="registerds">
+    <section id="registerds2">
     <div id="langcert">
     <h3>어학시험</h3> 
-    <input class="form-control" name="certificationtype" id="certificationtype" value="어학시험">
+    <input type="hidden"class="form-control" name="certificationtype" id="certificationtype" value="어학시험">
     <div> 
      
         <label for="language">언어</label>
-        <input type="text" class="form-control" placeholder="언어를 입력하세요" name="language" id="language" style="ime-mode:active">
+         <select class="form-control" name="language" id="language" >
+        	<option value="한국어">한국어</option>
+        	<option value="중국어">중국어</option>
+        	<option value="일본어">일본어</option>
+        	<option value="네팔어">네팔어</option>
+        	<option value="포르투갈어">포르투갈어</option>
+        	<option value="라오스어">라오스어</option>
+        	<option value="말레이어">말레이어</option>
+        	<option value="몽골어">몽골어</option>
+        	<option value="영어">영어</option>
+        	<option value="독일어">독일어</option>
+        	<option value="아랍어">아랍어</option>
+        	<option value="스페인어">스페인어</option>
+        	<option value="프랑스어">프랑스어</option>
+        	
+        	
+        	<option value="direct">직접입력</option>
+        </select>
+        <input type="text" class="form-control" id="languageinput" name="language"/>
+        
     </div>
      <div>
         <label for="institute">발행처/기관</label>
@@ -918,7 +1299,25 @@ $(document).ready(function (){
      </div>
      <div>
      <label for="institute">시험종류</label>
-     	<input type="text" class="form-control" placeholder="시험종류를 입력하세요" name="langlicencename" id="langlicencename">
+     	<select class="form-control" name="langlicencename" id="langlicencename" >
+        	<option value="OPIc">OPIc</option>
+        	<option value="TEPS">TEPS</option>
+        	<option value="TOEFL">TOEFL</option>
+        	<option value="TOEIC">TOEIC</option>
+        	<option value="SAT">SAT</option>
+        	<option value="ACT">ACT</option>
+        	<option value="GRE">GRE</option>
+        	<option value="IELTS">IELTS</option>
+        	<option value="NEAT">NEAT</option>
+        	<option value="G-TELP">G-TELP</option>
+        	<option value="TOSEL">TOSEL</option>
+        	
+        	
+        	
+        	<option value="direct">직접입력</option>
+        </select>
+        <input type="text" class="form-control" id="langlicencenameinput" name="langlicencename"/>
+        
      </div> 
      <div>
         <label for="langpoint">점수</label>
@@ -936,7 +1335,7 @@ $(document).ready(function (){
 	</section>
    <button type="button" id="awardbt" class="btn btn-success" value="수상내역">수상내역</button>
   
-   <section id="registerds">
+   <section id="registerds3">
     <div class="well" id="award">
      <h3>수상내역</h3>
       <label for="award">수상명</label>
@@ -959,7 +1358,7 @@ $(document).ready(function (){
    </section>
       &nbsp;
       <button type="button" id="hopeworkbt" class="btn btn-success" value="희망근무">희망근무</button>
-      <section id="registerds">
+      <section id="registerds4">
 	 <div  id="hopework">
       <h3>희망근무 선택</h3>
       <div>

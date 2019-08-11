@@ -120,7 +120,7 @@ h2.mb-5 {
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
-	$('textarea[value=introduce]').html('${vo.introduce}');
+	$('textarea[name="introduce"]').html('${vo.introduce}');
 	//자격증을 가져오는
 	$("#certification").click(function(){
 		getCertificate();
