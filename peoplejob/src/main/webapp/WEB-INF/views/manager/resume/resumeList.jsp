@@ -42,6 +42,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 
 </style>
 <c:set value="${!empty param.firstCode}" var="firstCocode"/>
+<c:set value="${!empty param.btypeCode1 }" var="btypeCocode"/>
 <script type="text/javascript">
 	$(document).ready(function (){
 		$("#btResumeAdd").click(function(){
@@ -169,6 +170,24 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		if(type=="second"){
 			if(${firstCocode}){
 				$("#selectSecond").find(":selected").trigger("change",function(){
+				});
+			}
+		}
+		if(type=="Btype2"){
+			if(${btypeCocode}){
+				$("#selectBtype1").find(":selected").trigger("change",function(){
+				});
+			}
+		}
+		if(type=="Btype3"){
+			if(${btypeCocode}){
+				$("#selectBtype2").find(":selected").trigger("change",function(){
+				});
+			}
+		}
+		if(type=="sido"){
+			if(${btypeCocode}){
+				$("#locationSiDo").find(":selected").trigger("change",function(){
 				});
 			}
 		}
@@ -424,16 +443,25 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$.each(res, function(idx,item){
 			if(idx==0){
 				var chEl=$("<option value='0'>시/도</option>");
-				var opEl=$("<option value='"+item.localCode2+"'></option>")
+				if(item.localCode2=="${param.localCodeSido }"){
+					var opEl=$("<option value='"+item.localCode2+"' selected></option>")
+				}else{
+					var opEl=$("<option value='"+item.localCode2+"'></option>")
+				}
 				opEl.html(item.sido);
 				$("#locationSiDo").html(chEl);
 				$("#locationSiDo").append(opEl);
 			}else{
-				var opEl=$("<option value='"+item.localCode2+"'></option>")
+				if(item.localCode2=="${param.localCodeSido }"){
+					var opEl=$("<option value='"+item.localCode2+"' selected></option>")
+				}else{
+					var opEl=$("<option value='"+item.localCode2+"'></option>")
+				}
 				opEl.html(item.sido);
 				$("#locationSiDo").append(opEl);
 			}
 		});
+		trigger("sido")
 	}
 	
 	//지역정보를 가져오는 메서드 - 구군
@@ -456,13 +484,25 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$.each(res, function(idx,item){
 			if(idx==0){
 				var chEl=$("<option value='0'>구/군</option>");
-				var opEl=$("<option value='"+item["LOCAL_CODE2"]+"'></option>")
-				opEl.html(item["GUGUN"]);
+				if(item["LOCAL_CODE2"]=="${param.localCode}"){
+					var opEl=$("<option value='"+item["LOCAL_CODE2"]+"' selected></option>")
+					opEl.html(item["GUGUN"]);
+				}else{
+					var opEl=$("<option value='"+item["LOCAL_CODE2"]+"'></option>")
+					opEl.html(item["GUGUN"]);
+				}
+				
 				$("#locationGugun").html(chEl);
 				$("#locationGugun").append(opEl);
 			}else{
 				//alert("세팅 item[LOCAL_CODE2]="+item["LOCAL_CODE2"]+", item[GUGUN]"+item["GUGUN"])
-				var opEl=$("<option value='"+item["LOCAL_CODE2"]+"'></option>")
+				if(item["LOCAL_CODE2"]=="${param.localCode}"){
+					var opEl=$("<option value='"+item["LOCAL_CODE2"]+"' selected></option>")
+					opEl.html(item["GUGUN"]);
+				}else{
+					var opEl=$("<option value='"+item["LOCAL_CODE2"]+"'></option>")
+					opEl.html(item["GUGUN"]);
+				}
 				opEl.html(item["GUGUN"]);
 				$("#locationGugun").append(opEl);
 			}
@@ -489,16 +529,32 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$.each(res,function(idx,item){
 			if(idx==0){
 				var chEl=$("<option value='0'>1차 업종</option>")
-				var opEl=$("<option value='"+item["BTYPE_CODE1"]+"'></option>");
-				opEl.append(item['BTYPENAME1']);
+				if(item["BTYPE_CODE1"]=="${param.btypeCode1}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE1"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME1']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE1"]+"'></option>");
+					opEl.append(item['BTYPENAME1']);
+				}
+				
 				$("#selectBtype1").html(chEl);
 				$("#selectBtype1").append(opEl);
 			}else{
-				var opEl=$("<option value='"+item["BTYPE_CODE1"]+"'></option>");
-				opEl.append(item['BTYPENAME1']);
+				if(item["BTYPE_CODE1"]=="${param.btypeCode1}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE1"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME1']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE1"]+"'></option>");
+					opEl.append(item['BTYPENAME1']);
+				}
+				
+				
+				/* var opEl=$("<option value='"+item["BTYPE_CODE1"]+"'></option>");
+				opEl.append(item['BTYPENAME1']); */
 				$("#selectBtype1").append(opEl); //최종으로 여기에 넣음
 			}
 		})
+		trigger("Btype2");
 	}
 	//2차 업종 가져오기
 	function getBtype2(btypeCode1){
@@ -514,23 +570,40 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 			}
 		})
 	}
-	//2차 업종 뿌리기
+	//2차 업종 뿌리기 
 	function settingBtype2(res){
 		$.each(res,function(idx,item){
 			if(idx==0){
 				var chEl=$("<option value='0'>2차 업종</option>")
-				var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>");
+				if(item["BTYPE_CODE2"]=="${param.btypeCode2}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE2"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}
+				
+				
+				/* var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>"); */
 				opEl.append(item['BTYPENAME2']);
 				$("#selectBtype2").html(chEl);
 				$("#selectBtype2").append(opEl); 
 			}else{
-				var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>");
-				opEl.append(item['BTYPENAME2']);
+				if(item["BTYPE_CODE2"]=="${param.btypeCode2}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE2"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}
+				/* var opEl=$("<option value='"+item["BTYPE_CODE2"]+"'></option>");
+				opEl.append(item['BTYPENAME2']); */
 				$("#selectBtype2").append(opEl); 
 			}
 		})
-		var chEl=$("<option value='0'>3차 업종</option><option>먼저 2차 업종을 선택하세요</option>")
-		$("#selectBtype3").html(chEl);
+		/* var chEl=$("<option value='0'>3차 업종</option><option>먼저 2차 업종을 선택하세요</option>")
+		$("#selectBtype3").html(chEl); */
+		trigger("Btype3");
 	}
 	//2차 업종 가져오기
 	function getBtype3(btypeCode2){
@@ -551,12 +624,29 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$.each(res,function(idx,item){
 			if(idx==0){
 				var chEl=$("<option value='0'>3차 업종</option>")
-				var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>");
+				
+				if(item["BTYPE_CODE3"]=="${param.btypeCode3}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE3"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}
+				
+				/* var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>"); */
 				opEl.append(item['BTYPENAME3']);
 				$("#selectBtype3").html(chEl);
 				$("#selectBtype3").append(opEl); 
 			}else{
-				var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>");
+				if(item["BTYPE_CODE3"]=="${param.btypeCode3}"){
+					var opEl=$("<option value='"+item["BTYPE_CODE3"]+"' selected='selected'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}else{
+					var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>");
+					opEl.append(item['BTYPENAME2']);
+				}
+				
+				/* var opEl=$("<option value='"+item["BTYPE_CODE3"]+"'></option>"); */
 				opEl.append(item['BTYPENAME3']);
 				$("#selectBtype3").append(opEl); 
 			}
@@ -568,7 +658,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
-		alert("페이지번호"+$("input[name=currentPage]").val())
+		//alert("페이지번호"+$("input[name=currentPage]").val())
 		setInfo();
 		
 		$("form[name=resumeList]").attr("action","<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>");
@@ -588,6 +678,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$("input[name=thirdCode]").val('${param.thirdCode}');
 	}
 </script>
+${firstCocode }    :   ${btypeCocode }
 <form name="resumeList" method="post" action="<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>"
 		 enctype="multipart/form-data" >
 <!-- 상세검색인지 일반검색인제 체크하기 위한 hidden -->
@@ -674,10 +765,10 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 								</td>
 								<th>업종</th>
 								<td colspan="2">
-									<select class="custom-select my-1 FST" id="selectBtype1">
+									<select class="custom-select my-1 FST" id="selectBtype1" name="btypeCode1">
 										<option>1차 업종</option>
 									</select>
-									<select class="custom-select my-1 mr-sm-2 FST" id="selectBtype2">
+									<select class="custom-select my-1 mr-sm-2 FST" id="selectBtype2" name="btypeCode2">
 										<option>2차 업종</option>
 										<option>먼저 1차 업종을 선택하세요</option>
 									</select>
@@ -690,7 +781,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 							<tr>
 								<th>지역</th>
 								<td>
-									<select class="custom-select my-1 mr-sm-2 FST" id="locationSiDo">
+									<select class="custom-select my-1 mr-sm-2 FST" id="locationSiDo" name="localCodeSido">
 										<option>시/도</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" id="locationGugun" name="localCode">
@@ -701,6 +792,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 								
 								<th>연령</th>
 								<td colspan="2">
+								${param.ages }
 									<label class="control control-checkbox checkbox-primary genderShow">
 											<input type="checkbox" name="ages" value="2"/>
 											<div class="control-indicator float"></div>20대
@@ -722,6 +814,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 							<tr>
 							<th>성별</th>
 								<td>
+								${param.gender }
 									<label class="control control-checkbox checkbox-primary genderShow">
 										<input type="checkbox" name="gender" value="여자"/>
 										<div class="control-indicator float"></div>여자
@@ -734,6 +827,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 								
 								<th>경력</th>
 								<td colspan="2">
+								${param.currer }
 									<label class="control control-checkbox checkbox-primary genderShow">
 											<input type="checkbox" name="currer" value="신입"/>
 											<div class="control-indicator float"></div>신입
@@ -759,6 +853,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 							<tr>
 								<th>최종학력</th>
 								<td colspan="4">
+								${param.academic }
 									<label class="control control-checkbox checkbox-primary genderShow labelFont">
 											<input type="checkbox" name="academic" value="학력무관"/>
 											<div class="control-indicator float"></div>학력무관
@@ -873,7 +968,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원코드/이력서코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="birth">이력서</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">이름/성별/나이/아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">편집</a></th>
+							<!-- <th scope="col"><a href="#" class="fileterCode" id="membergender">편집</a></th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -918,7 +1013,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 									아이디 : ${map['MEMBERID']}<BR>
 									성별 : ${map['MEMBERGENDER']} / 나이 : ${map['BIRTH']}
 								</td>
-								<td></td>
+								<!-- <td></td> -->
 							</tr>
 						</c:forEach>
 					</c:if>
