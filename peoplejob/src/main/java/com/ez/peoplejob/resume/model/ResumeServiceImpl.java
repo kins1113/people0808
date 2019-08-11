@@ -85,8 +85,8 @@ public class ResumeServiceImpl implements ResumeService{
 		return resumeDao.selectByMemverid(memberid);
 	}
 	@Override
-	public List<ResumeVO> selectAll(SearchVO searscVo) {
-		return resumeDao.selectAll(searscVo);
+	public List<ResumeVO> selectSearch(Map<String, Object> map) {
+		return resumeDao.selectSearch(map);
 	}
 	@Override
 	public int insertMember2(ResumeVO vo) {

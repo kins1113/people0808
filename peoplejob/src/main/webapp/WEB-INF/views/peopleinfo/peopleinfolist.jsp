@@ -36,6 +36,10 @@ input[name=searchKeyword]{width: 400px;margin-right: 3px;}
 #cardBoduPostList table tbody tr td:nth-of-type(3) {width: 12.5%;  text-align:center; }
 #cardBoduPostList table tbody tr td:nth-of-type(4) {width: 5%;text-align:center;}
 hr{margin: 1px;}
+div#peo {
+    width: 1200px;
+    margin: 0 auto;
+}
 </style>
 <c:set value="${!empty param.firstCode}" var="firstCocode"/>
 <script type="text/javascript">
@@ -142,6 +146,17 @@ hr{margin: 1px;}
 		});
 		
 		
+		//<c:url value='/resume/resumedetail.do?resumeCode=${vo.resumeCode}'/>
+		//이력서 제목 클릭하면 메인 이력서 상세보기 창 open
+		$(".goMainResume").click(function(){
+			var title=$(this).html();
+			var resumeCode=$(this).next().val();
+			
+			open("<c:url value='/resume/resumedetail.do?resumeCode="+resumeCode+"'/>",title,
+					"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
+					)
+		});
+		
 	});
 	//트리거
 	function trigger(type){
@@ -162,7 +177,7 @@ hr{margin: 1px;}
 	//1차 직종 가져오기
 	function selectFirst(){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/firstList.do'/>",
+			url:"<c:url value='/peopleinfo/where/firstList.do'/>",
 			type:"post",
 			success:function(res){
  				settingFirst(res);
@@ -204,7 +219,7 @@ hr{margin: 1px;}
 	//2차 직종가져오기 
 	function selectSecond(firstCode){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectSecond.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectSecond.do'/>",
 			type:"post",
 			data:"firstCode="+firstCode,
 			success:function(res){
@@ -253,7 +268,7 @@ hr{margin: 1px;}
 	 //3차직종 가져오기 
 	function selectThird(secondCode){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectThird.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectThird.do'/>",
 			type:"post",
 			data:"secondCode="+secondCode,
 			success:function(res){
@@ -394,7 +409,7 @@ hr{margin: 1px;}
 	//지역정보를 가져오는 메서드 
 	function getLocation(){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectLocation.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectLocation.do'/>",
 			type:"post",
 			success:function(res){
 				settingLocation(res);
@@ -424,7 +439,7 @@ hr{margin: 1px;}
 	//지역정보를 가져오는 메서드 - 구군
 	function getLocation2(sidoCode){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectLocation2.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectLocation2.do'/>",
 			type:"post",
 		    dataType: "json",
 			data:"sidoCode="+sidoCode,
@@ -458,7 +473,7 @@ hr{margin: 1px;}
 	//1차 업종가져오기
 	function getBtype1(){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectBtype1.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectBtype1.do'/>",
 			type:"post",
 			success:function(res){
  				settingBtype1(res);
@@ -488,7 +503,7 @@ hr{margin: 1px;}
 	//2차 업종 가져오기
 	function getBtype2(btypeCode1){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectBtype2.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectBtype2.do'/>",
 			type:"post",
 			data:"btypeCode1="+btypeCode1,
 			success:function(res){
@@ -520,7 +535,7 @@ hr{margin: 1px;}
 	//2차 업종 가져오기
 	function getBtype3(btypeCode2){
 		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectBtype3.do'/>",
+			url:"<c:url value='/peopleinfo/where/selectBtype3.do'/>",
 			type:"post",
 			data:"btypeCode2="+btypeCode2,
 			success:function(res){
@@ -568,27 +583,25 @@ hr{margin: 1px;}
 		$("input[name=thirdCode]").val('${param.thirdCode}');
 		
 		
-		
-		
-		
-		
 		$("form[name=peopleinfo]").attr("action","<c:url value='/peopleinfo/peopleinfolist.do?authorityCk=member'/>");
 		$("form[name=peopleinfo]").submit();
 	}
 	
+	
 </script>
 <form name="peopleinfo" method="post" action="<c:url value='/peopleinfo/peopleinfolist.do?authorityCk=member'/>"
 		 enctype="multipart/form-data" >
+<div id="peo">
 <!-- 상세검색인지 일반검색인제 체크하기 위한 hidden -->
 <input type="hidden" name="detailCk" value="${param.detailCk}">
 		 
 <!-- 페이지 처리를 위한 hidden  -->
-<input type="hidden" name="currentPage"
+<input type="text" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
 	 	value="${param.currentPage }"
 	</c:if>
 	<c:if test="${param.currentPage==null }">
-		value='1';
+		value='';
 	</c:if>
  >
 <!-- 회사인지 일반인지 구분하기 위한 hidden -->
@@ -604,7 +617,7 @@ hr{margin: 1px;}
 	<div class="col-lg-12">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
-				<h2>이력서 관리</h2>
+				<h2>인재정보</h2>
 			</div>
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
@@ -858,7 +871,7 @@ hr{margin: 1px;}
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원코드/이력서코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="birth">이력서</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">이름/성별/나이/아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">편집</a></th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -879,16 +892,31 @@ hr{margin: 1px;}
 									회원코드 : ${map['MEMBER_CODE']}<br>
 									이력서 코드 : ${map['RESUME_CODE']}		
 								</td>
+								<c:set var="localCode" value="${fn:split(map['LOCAL_CODE'],',')}"/>
+								<c:set var="loCount" value="1"/>
 								<td>
-									${map['RESUMETITLE']}<HR>
-									등록일 : <fmt:formatDate value="${map['RESUMEREGDATE']}" pattern="yyyy-MM-dd"/>&nbsp; 지역 : ${map['ADDRESS']}
+									
+									<a href="#" class="goMainResume">${map['RESUMETITLE']}</a>
+									<input type="hidden" value="${map['RESUME_CODE']}">
+									<HR>
+									등록일 : <fmt:formatDate value="${map['RESUMEREGDATE']}" pattern="yyyy-MM-dd"/>&nbsp; 
+									지역 :  
+									<c:forEach var="lCode" items="${localCode}">
+									
+										<c:forEach var="loMap" items="${loList}" >
+											<c:if test="${loMap['LOCAL_CODE2'] eq lCode}"> 
+												${loCount }. ${loMap['SIDO'] } ${loMap['GUGUN'] }
+												<c:set var="loCount" value="${loCount+1 }"/> 
+											</c:if> 
+										</c:forEach>	 
+									</c:forEach>
 								</td>
 								<td>
 									이름 : ${map['MEMBERNAME']}<BR>
 									아이디 : ${map['MEMBERID']}<BR>
 									성별 : ${map['MEMBERGENDER']} / 나이 : ${map['BIRTH']}
 								</td>
-								<td></td>
+								
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -928,5 +956,7 @@ hr{margin: 1px;}
 			</div>
 		</div>
 		</div></div>
+		</div>
 </form>
+
 <%@include file="../main/inc/bottom.jsp" %>

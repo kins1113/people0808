@@ -1,6 +1,8 @@
 package com.ez.peoplejob.resume.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ez.peoplejob.common.FileUploadUtility;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
+import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.peopleinfo.model.PeopleInfoService;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.resume.model.ResumeVO;
@@ -35,6 +37,8 @@ public class ResumeController {
 	private ResumeService resumeService;
 	@Autowired
 	private PeopleInfoService peopleinfoService;
+	@Autowired
+	private MemberService memberService;
 	@Autowired private FileUploadUtility fileUploadUtil;
 	private Logger logger = LoggerFactory.getLogger(ResumeController.class);
 	
@@ -82,28 +86,35 @@ public class ResumeController {
 	}
 	
 	@RequestMapping("/list.do")
-	public String list(@ModelAttribute SearchVO searchVo, Model model) {
-
+	public String list(@ModelAttribute SearchVO searchVo,HttpSession session, Model model,@RequestParam(required=false,defaultValue = "10") int recordCountPerPage) {
+		
 			//1
 			logger.info("이력서목록 파라미터 searchVo={}", searchVo);
-			
+
+			Map<String, Object> map = new HashMap<String, Object>();
 			//2
-			//[1] PaginationInfo 객체 생성
+			//1]PaginationInfo 객체 생성
 			PaginationInfo pagingInfo=new PaginationInfo();
 			pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
-			pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+			pagingInfo.setRecordCountPerPage(recordCountPerPage);
+			//pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+			//pagingInfo.setRecordCountPerPage(searchVo.getRecordCountPerPage());
 			pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 			
-			//[2] SearchVo에 페이징 관련 변수 셋팅
-			searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+			//2]SearchVo에 페이징 관련 변수 세팅
+			searchVo.setRecordCountPerPage(recordCountPerPage);
+			//searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
 			searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-			logger.info("셋팅 후 searchVo={}", searchVo);
-			
+			logger.info("셋팅 후 serchVo={}",searchVo);
+			logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
+			map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
+			map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
 			//[3] 조회처리
-			List<ResumeVO> list=resumeService.selectAll(searchVo);
+			List<ResumeVO> list=resumeService.selectSearch(map);
 			logger.info("이력서목록 결과, list.size={}",list.size());
 				
 			//3
+			
 			model.addAttribute("list", list);
 			model.addAttribute("pagingInfo", pagingInfo);
 			
