@@ -2,12 +2,14 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
+<style>
+.content {padding: 4px;}
+</style>
 <form action="<c:url value='/manager/email_sms/emailWrite.do'/>" method="post"
 				enctype="multipart/form-data">
 <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
-
 			<div class="col-lg-12">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">

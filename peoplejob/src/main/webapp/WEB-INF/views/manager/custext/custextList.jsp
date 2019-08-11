@@ -53,9 +53,12 @@ width: 100%; height: 100%;    background: rgba(0,0,0,.3);    z-index: 10;}
 .divAns::-webkit-scrollbar ,.divCus::-webkit-scrollbar{display:none;}
 div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px; 
 	margin-right:8px;   padding-left: 9px;    font-weight: bold;}
+	input[name=readd] {    font-size: 0.9em;    height: 21px;    padding: 0 20px;    margin-top: 0;    margin-bottom: 8px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
+		
+		
 		//검색 버튼 클릭했을때~!
 		$("#jobopeningSearch").click(function(){
 			$("form[name=custextList]").attr("action","<c:url value='/manager/custext/custextList.do'/>");
@@ -78,11 +81,11 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 			var code=$(this).next().val();
 			var ck=$(this).next().next().val();
 			$("input[name=custextCode]").val(code);
-			if(!ck){
-				$("input[name=recontentAdd]").val('수정하기');
-				$("#thBt").html("<input type='submit' value='수정하기' >")
+			//alert("code="+code+", ck="+ck);
+			if(ck!=""){
+				$("#thBt").html("문의사항 답변 <input name='readd' class='btn btn-secondary btn-default' type='submit' value='수정하기' >")
 			}else{
-				$("input[name=recontentAdd]").val('보내기');
+				$("#thBt").html("문의사항 답변 <input name='readd' class='btn btn-secondary btn-default' type='submit' value='답변하기' >")
 			}
 			$("#my-dialog,#dialog-background").toggle();
 		}); 
@@ -92,7 +95,18 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 			$("input[name=recontentForm]").attr("action","<c:url value='/manager/custext/custextRepl.do'/>");
 			//$("input[name=recontentForm]").submit();
 		}); */
+		if(${!empty param.custextCode}){
+			var code=${param.custextCode}
+			code="cusTitle"+code
+			trigger(code);
+		}
 	});
+	
+	function trigger(id){
+		if(id!=null){
+			$("#"+id).trigger("click",function(){});
+		}
+	} 
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
@@ -100,7 +114,7 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 		$("form[name=custextList]").submit();
 	}
 	
-</script>
+	</script>
 <form name="custextList" method="post" >
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
@@ -111,6 +125,7 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 		value='1';
 	</c:if>
  >
+ 
  
 <!-- 필터링을 위한 hidden -->
 <input type="hidden" name="filterCode" value="${param.filterCode }">
@@ -123,7 +138,7 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 	<div class="col-lg-12">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
-				<h2>채용공고 관리</h2>
+				<h2>문의사항 관리</h2>
 			</div>
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
@@ -208,16 +223,23 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 							<tr>
 								<td>${vo['CUSTEXT_CODE']}</td>	
 								<td>${vo['CUSTEXTCATEGORY']}</td>	
-								<td><a href="#" class="custitle">${vo['CUSTITLE']}</a><hr>
-									등록인 : ${vo['MEMBER_CODE']} / 등록일 : <fmt:formatDate value="${vo['CUS_REGDATE']}" pattern="yyyy-MM-dd"/></td>	
+								<td><a href="#" class="custitle" id="cusTitle${vo['CUSTEXT_CODE']}">${vo['CUSTITLE']}</a><hr>
+									등록인 : ${vo['MEMBERID']} / 등록일 : <fmt:formatDate value="${vo['CUS_REGDATE']}" pattern="yyyy-MM-dd"/></td>	
 								<td>
 									<c:if test="${empty vo['ANSWERCONTENT']}">미완료</c:if>
 									<c:if test="${!empty vo['ANSWERCONTENT']}">완료</c:if>
 								</td>	
-									<c:set var="reEditCk" value="${empty vo['ANSWERCONTENT']}"/>
-								<td><button type="button" id="btn-open-dialog" class="btRe">답변하기</button>
-									<input type="hidden" name='asd' value="${vo['CUSTEXT_CODE']}">
-									<input type="hidden" name='reEditCk' value="${reEditCk}">
+								<td>
+									<c:if test="${empty vo['ANSWERCONTENT']}">
+										<button type="button" id="btn-open-dialog" class="btRe">답변하기</button>
+										<input type="hidden" name='asd' value="${vo['CUSTEXT_CODE']}">
+										<input type="hidden" name='reEditCk' value="${vo['ANSWERCONTENT']}">
+									</c:if>
+									<c:if test="${!empty vo['ANSWERCONTENT']}">
+										<button type="button" id="btn-open-dialog" class="btRe">수정하기</button>
+										<input type="hidden" name='asd' value="${vo['CUSTEXT_CODE']}">
+										<input type="hidden" name='reEditCk' value="${vo['ANSWERCONTENT']}">
+									</c:if>
 								</td>	
 							</tr>
 							<tr class="trContent">
@@ -226,6 +248,7 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 												질문
 										</div>
 									<div class="divCus" 
+									
 									<c:if test="${empty vo['ANSWERCONTENT']}">
 										style="width: 96%"
 									</c:if>
@@ -282,7 +305,7 @@ div#sliedDiv { float: left;    font-size: 14px;    padding-top: 3px;
 	<input type="hidden" name="custextCode">
    <table>
    		<tr>
-   			<th colspan="2" id="thBt">문의사항 답변 <input type="submit" name="recontentAdd" ></th>
+   			<th colspan="2" id="thBt"> </th>
    		</tr>
    		<tr>
    			<th align="center">내용</th>

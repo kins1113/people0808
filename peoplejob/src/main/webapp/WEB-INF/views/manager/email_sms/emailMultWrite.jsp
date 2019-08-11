@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
+<style>
+.content {padding: 4px;}
+</style>
 <form action="<c:url value='/manager/email_sms/emailMultWrite.do'/>" method="post"
 				enctype="multipart/form-data">
 <div class="content-wrapper">

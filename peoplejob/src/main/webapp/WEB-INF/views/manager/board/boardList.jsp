@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 <style type="text/css">
+	.content {padding: 0;}
  	#pageDiv{width:30%;	}
  	.serDiv{float: right;}
  	input.form-control {margin-top: 4px;}

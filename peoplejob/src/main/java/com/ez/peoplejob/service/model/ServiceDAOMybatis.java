@@ -1,6 +1,7 @@
 package com.ez.peoplejob.service.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class ServiceDAOMybatis implements ServiceDAO {
 	@Override
 	public int updateService(ServiceVO vo) {
 		return sqlSession.update(namespace+"updateService", vo);
+	}
+	@Override
+	public List<Map<String, Object>> selectServPayAll() {
+		return sqlSession.selectList(namespace+"selectServPayAll");
 	}
 
 }

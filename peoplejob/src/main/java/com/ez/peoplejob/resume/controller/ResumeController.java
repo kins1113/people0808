@@ -135,6 +135,7 @@ public class ResumeController {
 		}
 		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
 		ResumeVO vo1=resumeService.selectByMemverid(id);
+		logger.info("이력서 조회 vo ={}\nvo.getHopeworkCode()={}" ,vo,vo.getHopeworkCode());
 		ResumeVO vo2=resumeService.selectBydesiredWorkCode(vo.getHopeworkCode());
 		ResumeVO vo3=resumeService.selectByacademicCode(vo.getAcademicCode());
 		ResumeVO vo4=resumeService.selectBydvCode(vo.getDvCode());

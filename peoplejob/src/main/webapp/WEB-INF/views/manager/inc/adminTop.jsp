@@ -53,7 +53,8 @@
 <link
 	href="${pageContext.request.contextPath}/resources/admin/assets/img/favicon.png"
 	rel="shortcut icon" />
-
+<link id="sleek-css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/managerOrder.css" />
 <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
   -->
@@ -409,6 +410,7 @@
 					</button>
 					<!-- search form -->
 					<div class="search-form d-none d-lg-inline-block">
+						<!-- 상단 검색바  -->
 						<div class="input-group">
 							<button type="button" name="search" id="search-btn"
 								class="btn btn-flat">

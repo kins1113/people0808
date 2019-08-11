@@ -14,12 +14,14 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
-#startDay, #endDay{width: 120px;}
+#startDay, #endDay{width: 125px;}
 #btGroup button{margin-top: 4px;}
-.divTitle { width: 67px;   float: left;   text-align: right;   margin-right: 2px;}
-.divTitleCode {    width: 84px;    float: left;  text-align: right;    margin-right: 2px;}
+.divTitle { width: 69px;   float: left;   text-align: right;   margin-right: 2px;}
+.divTitleCode {    width: 88px;    float: left;  text-align: right;    margin-right: 2px;}
 .divJobList{overflow: scroll;height: 82px;}
 .divJobList::-webkit-scrollbar {display:none;}
+.divJobList a {    color: #6f6d73;}
+select.custom-select.my-1.mr-sm-2 {    font-size: 12px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -124,7 +126,15 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 	        $("form[name=companyList]").submit();
 		}
 		
-    }
+	}
+	
+	//채용공고 상세보기 함수
+	function showJobopening(jobopening){
+		open("<c:url value='/company/jobopening_view.do?jobopening="+jobopening+"'/>","_blank","체용공고",
+				"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes,"
+				)
+	}
+    
 </script>
 <form name="companyList" method="post" 
 		 enctype="multipart/form-data" >
@@ -301,7 +311,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 								<div class="divJobList">
 									<c:forEach var="jobMap" items="${jobList}">
 										<c:if test="${map['COMPANY_CODE'] eq jobMap['COMPANY_CODE']}">
-											${jobMap['JOBTITLE']}<br>
+											<a href="#" onclick="showJobopening(${jobMap['JOBOPENING']})">${jobMap['JOBTITLE']}</a><br>
 										</c:if>
 									</c:forEach>
 								</div>

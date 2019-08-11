@@ -87,14 +87,14 @@ public class JobopeningManagerController {
 		
 		//totalCount
 		int totalCount=jobManagerService.getTotalCountJobopeningManager(map);
-		logger.info("totalCount={}"+totalCount);
+		logger.info("totalCount={}",totalCount);
 		pagingInfo.setTotalRecord(totalCount);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		//서비스 관련 list
-		List<ServiceVO> serList= serviceService.selectAll();
+		List<Map<String, Object>> serList = serviceService.selectServPayAll();
 		model.addAttribute("serList",serList);
 		
 		return "manager/jobopening/jobopeningList";

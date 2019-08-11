@@ -86,9 +86,35 @@ public class PostServiceImpl implements PostService{
 	public int deletePost(int boardCode2) {
 		return postDao.deletePost(boardCode2);
 	}
+	
 	@Override
-	public List<PostVO> selectPostBymemId(String memberid) {
-		return postDao.selectPostBymemId(memberid);
+	public PostVO selectByPostByadmin(int boardCode2) {
+		return postDao.selectByPostByadmin(boardCode2);
+	}
+	@Override
+	public List<Map<String, Object>> selectPostBymemId(PostVO postVo) {
+		return postDao.selectPostBymemId(postVo);
+	}
+	
+	@Override
+	public int selectTotalCountBymemId(PostVO postVo) {
+		return postDao.selectTotalCountBymemId(postVo);
+	}
+	@Override
+	public int updatecmt(PostCmtVO postcmtVo) {
+		return postDao.updatecmt(postcmtVo);
+	}
+	@Override
+	public int deletecmt(int commentCode) {
+		return postDao.deletecmt(commentCode);
+	}
+	@Override
+	public int selectmypostcount(int memberCode) {
+		return postDao.selectmypostcount(memberCode);
+	}
+	@Override
+	public PostVO selectPostbyCommentCode(int commentCode) {
+		return postDao.selectPostbyCommentCode(commentCode);
 	}
 
 	

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 <style type="text/css">
+	.content {padding: 0;}
 a{color: black;}
 #pageDiv {width: 30%;}
 .serDiv {float: right;margin-top: 9px;}

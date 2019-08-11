@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 <style>
-div#boardKindDiv a {
-    color: #aaa9bd;
-}
+	.content {padding: 0;}
+	div#boardKindDiv a { color: #aaa9bd;}
 </style>
 <script type="text/javascript">
 	$(function(){

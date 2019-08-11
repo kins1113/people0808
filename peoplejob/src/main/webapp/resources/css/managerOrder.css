@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.custom-select{background-image: none; background: none;}
+.content {padding: 0;}
+body{
+  font-family:"serif","sans-serif",    "굴림", gulim, arial, helvetica, sans-serif;
+}

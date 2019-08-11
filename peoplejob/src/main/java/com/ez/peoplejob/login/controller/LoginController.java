@@ -1,5 +1,6 @@
 package com.ez.peoplejob.login.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
+import com.ez.peoplejob.common.WebUtility;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 import com.ez.peoplejob.member.model.CompanyVO;
@@ -24,12 +26,11 @@ import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.payment.model.PaymentService;
 import com.ez.peoplejob.post.model.PostService;
-import com.ez.peoplejob.post.model.PostVO;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.scrap.model.ScrapService;
 import com.ez.peoplejob.scrap.model.ScrapVO;
 import com.ez.peoplejob.tableaply.model.TableaplyService;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.ez.peoplejob.tableaply.model.TableaplyVO;
 
 @Controller
 public class LoginController {
@@ -44,15 +45,12 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	@Autowired private ResumeService resumeService;
 	@Autowired private PostService postService;
 	
-	private kakao_restapi kakao_restapi = new kakao_restapi();
 	
-	
-	
-	@RequestMapping("/mypage/user/userpage.do")
+	@RequestMapping(value="/mypage/user/userpage.do")
 	public String mypage(HttpSession session, Model model, @ModelAttribute SearchVO searchVo) {
 		String memberid=(String)session.getAttribute("memberid");
 		MemberVO memberVo=memberService.selectByUserid(memberid);
-		logger.info("마이페이지 화면 보!!여!!주!!기!! memberVo={}",memberVo);
+		logger.info("마이페이지 화면 보여주기! memberVo={}",memberVo);
 		
 			CompanyVO companyVo=jobService.selectcompany(memberVo.getCompanyCode());
 			logger.info("companyVo={}",companyVo);
@@ -72,16 +70,71 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		map.put("memberCode", memberVo.getMemberCode());
 		int applycount=applyService.selectapplyCount(map);
 		logger.info("개인회원입장 지원현황 applycount={}",applycount);
-		List<PostVO> postlist=postService.selectPostBymemId(memberid);
-		logger.info("내가 쓴 글 postlist.size={}",postlist.size());
+		int postcount=postService.selectmypostcount(memberVo.getMemberCode());
+		
+		
+		model.addAttribute("postcount",postcount);
 		
 		model.addAttribute("applycount",applycount);
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("resumelist",resumelist);
-		model.addAttribute("postlist",postlist);
 		model.addAttribute("paylist",paylist);
 		model.addAttribute("scraplist",scraplist);
 		model.addAttribute("joblist",joblist);
+		
+		
+		
+		//기업입장 지원현황
+		String id=(String)session.getAttribute("memberid");
+		MemberVO mvo=memberService.selectByUserid(id);
+		logger.info("로그인한 회원정보 mvo={}",mvo);
+		logger.info("회사에 지원한 회원들 리스트");
+		//1]PaginationInfo 객체 생성
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//2]SearchVo에 페이징 관련 변수 세팅
+		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("셋팅 후 serchVo={}",searchVo);
+		
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
+		map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
+		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
+		List<JobopeningVO> list2=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
+		logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
+		int []jobopening=new int[list2.size()];
+		for(int i=0;i<list2.size();i++) {
+			jobopening[i]=list2.get(i).getJobopening();
+		}
+		map.put("jobopening",jobopening);
+		logger.info("map={}",map);
+		List<TableaplyVO> list=applyService.selectapplyComp(map);
+		logger.info("지원현황 조회결과{}",list.size());
+		int totalRecord=0;
+		totalRecord=applyService.selectapplyCompcount(map);
+		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
+		List<MemberVO> list3=new ArrayList<MemberVO>() ;
+		int []memberCode=new int[list.size()];
+		List<JobopeningVO> list4=new ArrayList<JobopeningVO>() ;
+		
+		for(int i=0;i<list.size();i++) {
+			memberCode[i]=list.get(i).getMemberCode();
+			list3.add(memberService.selectBymemberCode(memberCode[i]));
+			jobopening[i]=list.get(i).getJobopening();
+			list4.add(jobService.selectJobOpenByNo(jobopening[i]));
+		}
+		logger.info("지원한 회원들에 대한 정보={}",list3.size());
+		//5]PaginationInfo에 totalRecord값셋팅
+		pagingInfo.setTotalRecord(totalRecord);
+		//3
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
+		model.addAttribute("list3",list3);
+		model.addAttribute("list4",list4);
 		
 		return "mypage/user/userpage";
 		
@@ -124,61 +177,5 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		return "mypage/corp/paymentDetail";
 	}
 	
-	
-	
-	//테스트
-	@RequestMapping("/login/kaokaoTest.do")
-	public String kaokaoTest() {
-		logger.info("카카오테스트 화면 보여주기");
-		return "login/kaokaoTest";
-	}
-	
-	@RequestMapping("/login/home.do")
-	public String kaokaoTest2() {
-		logger.info("카카오테스트 화면 보여주기");
-		return "login/home";
-	}
-	
-	
-	
-	    @RequestMapping(value = "/oauth", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
-	    public String kakaoLogin(@RequestParam("code") String code) {
-	  
-	        return "home";
-	    }
-	    
-	  
-	    
-	    @RequestMapping(value = "/oauth", produces = "application/json")
-	    public String kakaoLogin_post(@RequestParam("code") String code, Model model, HttpSession session) {
-	    	
-	    	/*
-	        System.out.println("로그인 할때 임시 코드값");
-	        //카카오 홈페이지에서 받은 결과 코드
-	        System.out.println(code);
-	        System.out.println("로그인 후 결과값"); */
-	    	
-	    	logger.info("파라미터 code={}",code);
-	        
-	        //카카오 rest api 객체 선언
-	        kakao_restapi kr = new kakao_restapi();
-	        //결과값을 node에 담아줌
-	        JsonNode node = kr.getAccessToken(code);
-	        //결과값 출력
-	        logger.info("node={}",node);
-	        
-	        //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-	        String token = node.get("access_token").toString();
-	        //세션에 담아준다.
-	        session.setAttribute("token", token);
-	        
-	        return "login/logininfo";
-	    }
-
-	    
-
-	    
-
-
 	
 }
