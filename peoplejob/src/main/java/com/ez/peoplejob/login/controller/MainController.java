@@ -44,6 +44,7 @@ public class MainController {
 		List<Map<String, Object>> list3=paymentService.selectMainAdvertiseByServiceCode(3);
 		List<Map<String, Object>> list4=paymentService.selectMainAdvertiseByServiceCode(4);
 		
+		
 		logger.info("서비스 결제내역 list.size={}",list.size());
 		List<Map<String, Object>> deadlineList=jobService.deadlineimminentBymonth();
 		logger.info("마감 임박 공채 리스트내역 deadlineList.size={}",deadlineList.size());

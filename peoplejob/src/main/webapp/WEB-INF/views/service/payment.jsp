@@ -396,7 +396,7 @@ padding: 5px;
     <c:forEach var="serviceVo" items="${serviceList}">
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card text-center p-table" id="divcolor" name="divcolor">
-            <input type="text" id="serviceCode" name="serviceCode" value="${serviceVo.serviceCode }">
+            <input type="hidden" id="serviceCode" name="serviceCode" value="${serviceVo.serviceCode }">
             <input type="hidden" name="content" value="${serviceVo.serviceContent }">
                 <div class="card-header">
                     <h3 class="p-name p-name">${serviceVo.serviceName }</h3>
@@ -407,11 +407,11 @@ padding: 5px;
 
                     <ul class="list-unstyled"> 
                         <li>${serviceVo.serviceContent }</li>
-                        <li>노출위치 :  ${serviceVo.serviceName }</li>
+                        <li>노출위치 : 첫 상단 ${serviceVo.serviceName }</li>
                         <li>부가서비스 : 채용관 상단고정</li>
                         <li>PC웹:  ${serviceVo.serviceContent }</li>
-                        <li>모바일 :  ${serviceVo.serviceName }</li>
-                        <li>매월1일</li>
+                        <li>원하는 채용공고와 날짜 선택가능</li>
+                        <li>표시된 가격은 1일 비용</li>
                     </ul>
                     <input type="hidden" name="name" value="${serviceVo.serviceName }">
                      <input type="hidden" name="sprice" value="${serviceVo.servicePrice }">
@@ -463,7 +463,7 @@ padding: 5px;
 						<%-- <input type="hidden" name="payItems[${idx }].paymentway">
 						<input type="hidden" name="payItems[${idx }].progress"> --%>
 						<input type="hidden" value="${memberVo.memberCode }" name="payItems[${idx }].memberCode">
-						<input type="text" name="payItems[${idx }].serviceCode" class="serCode">
+						<input type="hidden" name="payItems[${idx }].serviceCode" class="serCode">
 						<%-- <input type="hidden" value="${jobopeningVo.jobopening }" name="jobno" id="jobnoparam"> --%>
 					<tr> 
 						<td align="center">

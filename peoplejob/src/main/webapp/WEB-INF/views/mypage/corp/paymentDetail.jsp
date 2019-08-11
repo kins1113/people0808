@@ -204,14 +204,14 @@ table tr td, table tr th{
 	<table class="table table-bordered">
 		<thead>
 			<tr> 
-				<th scope="col">번호</th> 
+				<th scope="col" style="width: 65px;">번호</th> 
 				<th scope="col">상품명</th> 
-				<th scope="col">구매자 이름</th>
-				<th scope="col">결제 수단</th>
-				<th scope="col">할부 기간</th>
-				<th scope="col">결제 일시</th>
-				<th scope="col">결제 금액</th>
-				<th scope="col">결제한 채용공고 개수</th> 
+				<th scope="col" style="width: 70px;">구매자</th>
+				<th scope="col" style="width: 87px;">결제 수단</th>
+				<th scope="col" style="width: 67px;">할부 </th>
+				<th scope="col" style="width: 175px;">결제 일시</th>
+				<th scope="col" style="width: 90px;">결제 금액</th>
+				<th scope="col">결제한 공고 개수</th> 
 				<th scope="col">결제 상황</th>
 				<th scope="col">결제 취소</th>
 				<th scope="col">상세보기</th>

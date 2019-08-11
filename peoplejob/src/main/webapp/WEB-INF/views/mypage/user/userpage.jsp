@@ -282,7 +282,7 @@ $(function(){
                      	 <p class="card-title">${applycount }
                       </c:if>
                       <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                     	 <p class="card-title">0
+                     	 <p class="card-title">${fn:length(list) }
                       </c:if>
                         <p>
                     </div>
@@ -292,7 +292,12 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> 자세히보기
+                 <c:if test="${sessionScope.author_code==1 }">
+                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/apply_list.do'/>'">자세히보기</i> 
+              	</c:if>
+              	 <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/Capply_list.do'/>'">자세히보기</i> 
+              	</c:if>
                 </div>
               </div>
             </div>
@@ -325,7 +330,7 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar-o"></i> 상세보기
+                  <i class="fa fa-calendar-o"  style="cursor:pointer;" onclick="location.href='<c:url value='/scrap/scrap_list.do'/>'"> 상세보기</i>
                 </div>
               </div>
             </div>
@@ -362,7 +367,7 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i> 목록보기
+                  <i class="fa fa-clock-o" style="cursor:pointer;" onclick="location.href='<c:url value="/mypage/user/myboard.do"/>'"> 목록보기</i>
                 </div>
               </div>
             </div>
@@ -394,95 +399,17 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> 자세히 보기
+                 <c:if test="${sessionScope.author_code==1 }">
+                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value="/resume/list.do"/>'"> 자세히 보기</i>
+                </c:if>
+                 <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                     <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value="/company/my_jobopening_list.do?companycode1=${sessionScope.companyCode}"/>'"> 자세히 보기</i>
+                 </c:if>
                 </div>
               </div>
             </div>
 							</div>
-							
-          <%--   <ul class="activity_list"> 
-                   <li class="img">
-                   <c:if test="${sessionScope.author_code==1 }">
-                        <a href="<c:url value='/apply/apply_list.do'/>" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                     </c:if>
-                   <c:if test="${sessionScope.author_code==2 }">
-                        <a href="" onclick="alert('관리자의 승인을 받은 기업회원만 이용가능합니다.')" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                     </c:if>
-                   <c:if test="${sessionScope.author_code==3 }">
-                        <a href="<c:url value='/apply/Capply_list.do'/>" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                     </c:if>
-                      
-                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
-                           <div class="text">
-                          <!--  <button type="button" class="btn btn-lg btn-primary" id="pay">신청하기</button>  -->
-                           <span class="doing"><em> 0 </em> </span>
-                            <span class="sname">지원현황</span> 
-                           </div>
-                        </a>
-                    </li>
-                        <li class="img">
-                         <c:if test="${sessionScope.author_code==1 }">
-                       		 <a href="<c:url value='/scrap/scrap_list.do'/>" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                          </c:if>
-                         <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3  }">
-                       		 <a href="#" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                          </c:if>
-                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
-                           <div class="text">
-                            <span class="doing"><em> ${fn:length(scraplist) }</em> </span>
-                            <span class="sname">스크랩</span>
-                           </div> 
-                        </a>
-                    </li> 
-                    
-                    <li class="img">
-                    <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                        <a href="<c:url value='/mypage/corp/paymentDetail.do'/>" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                    </c:if>
-                    <c:if test="${sessionScope.author_code==1}">
-                        <a href="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                    </c:if>
-                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
-                           <div class="text">
-                           <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                            <span class="doing"><em> ${fn:length(list)}  </em> </span>
-                            <span class="sname">결제내역</span>
-                            </c:if>
-                           <c:if test="${sessionScope.author_code==1 }">
-                            <span class="doing"><em> 0  </em> </span>
-                            <span class="sname">관심기업</span>
-                            </c:if>
-                           </div>
-                        </a>
-                    </li> 
-                    
-                    <li class="img">
-                      <c:if test="${sessionScope.author_code==1 }">
-                        <a href="<c:url value='/resume/list.do'/>" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                      </c:if>
-                      <c:if test="${sessionScope.author_code==2 }">
-                        <a href="" onclick="alert('관리자의 승인을 받은 기업회원만 이용가능합니다.')" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                      </c:if>
-                      <c:if test="${sessionScope.author_code==3 }">
-                        <a href="<c:url value='/company/my_jobopening_list.do?companycode1=${sessionScope.companyCode}'/>" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
-                      </c:if>
-                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
-                           <div class="text">
-                           <c:if test="${sessionScope.author_code==1}">
-                            <span class="doing"><em> 0  </em> </span>
-                            <span class="sname">이력서</span> 
-                            </c:if>
-                           <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                            <span class="doing"><em> 0  </em> </span>
-                            <span class="sname">채용공고</span>
-                            </c:if>
-                           </div>
-                        </a>
-                    </li> 
-                                   
-                                   
-                            
-                            </ul> --%>
+	
         </div>
         
 <br><br>

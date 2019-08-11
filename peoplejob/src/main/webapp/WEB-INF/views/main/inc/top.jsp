@@ -201,12 +201,6 @@ button {
 						<ul class="main-menu" style="width: 1274px; margin-left: -115px;margin-right: -65px;">
 							<li class="mega-menu-item">
 								<a href="<c:url value='/company/jobopening_list.do'/>">채용정보</a>
-								<ul class="sub-menu" style="left:-60px;">
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">공채정보</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">직종별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">지역별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">업무별</a></li>
-								</ul>
 							</li>
 
 							<li class="mega-menu-item">
@@ -306,11 +300,10 @@ button {
                         <c:if test="${sessionScope.author_code==1 }">
                            <li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
                         </c:if>
-                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
-                           <li><a href="">스크랩현황</a></li>
-                        </c:if>
                         
+                         <c:if test="${!empty sessionScope.memberid }">
 								<li><a href="<c:url value='/custext/mycustext.do'/>">문의내역</a></li>
+						</c:if>
 								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
 									<li><a href="<c:url value='/mypage/corp/paymentDetail.do'/>">결제/이용 내역</a></li>
 								</c:if>

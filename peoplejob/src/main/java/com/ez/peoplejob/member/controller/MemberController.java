@@ -325,8 +325,11 @@ public class MemberController {
 		String to     =email;
 		
 		String authNum=WebUtility.RandomNum();
-		String coment="인증번호 = "+authNum;
 		logger.info("랜덤생성한 수 authNum={}",authNum);
+		String coment="";
+		coment += "PEOPLEJOB 회원가입용 이메일 인증번호입니다.";
+		coment += "인증번호 = "+authNum;
+		coment += "인증번호를 입력한 뒤 회원가입을 계속 진행해주시길 바랍니다 ^^";
 		
 		// Get the session object
 		Properties props = new Properties();

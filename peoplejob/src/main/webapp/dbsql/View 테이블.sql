@@ -37,7 +37,7 @@ select m.company_code,m.member_code, m.membername, p.progress, p.payend_date, p.
 from member m join payment p
 on p.MEMBER_CODE = m.MEMBER_CODE
 and p.progress='결제완료'
-and paystart_date>=sysdate and payend_Date>=sysdate;
+and paystart_date<=sysdate and payend_Date>=sysdate;
 
 CREATE OR REPLACE VIEW companyJobOpen 
 as
