@@ -1003,10 +1003,10 @@ body {padding-right: 0px !important;}
 }
 
 #modal-video-01 .modal-dialog {
-  max-width: 100%;
+  /* max-width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0; */
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

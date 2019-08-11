@@ -8,7 +8,7 @@ import com.ez.peoplejob.common.SearchVO;
 public interface PaymentDAO {
 	int insertPayment(PaymentVO paymentVo);
 	List<Map<String, Object>> selectPaymentById(String memberid);
-	int cancelPay(int paymentCode);
+	int cancelPay(String paydate);
 	PaymentVO selectPaymentByCode(int paymentCode);
 	List<Map<String , Object>> selectMainAdvertiseByServiceCode(int serviceCode);
 	int getpaymentJobCount(PaymentVO paymentVo);

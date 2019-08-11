@@ -52,7 +52,7 @@ span{
 			<input type="hidden" name="boardCode" value='${param.boardCode }'>
 			<div class="card-body" id="cardBoduPostList">
 				
-				<div class="form-group" id="divTitle">
+				<div class="form-group" id="divTitle" style="    margin-top: 10px;">
 					<label for="boardtitle">게시글 제목</label> 
 					<input type="text" name="boardtitle" id="boardtitle" class="form-control"  placeholder="게시글 제목" class="title"> 
 					
@@ -82,7 +82,7 @@ span{
 					<input type="submit" class="btn" value="등록" style="background: #17b978; color:white;">
 					<input type="reset" class="btn btn-secondary btn-default" value="취소">
 					<a id="" href="<c:url value='/board/boardByCategory.do?boardCode=${param.boardCode }'/>"
-						class="mb-1 btn btn-outline-success" style="float:right; ">목록으로</a>
+						class="mb-1 btn btn-outline-success" style="float:right;     background: lightgray; color: black;">목록으로</a>
 				</div>
 
 		</div>

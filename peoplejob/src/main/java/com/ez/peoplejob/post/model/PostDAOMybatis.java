@@ -93,9 +93,34 @@ public class PostDAOMybatis implements PostDAO{
 	public int deletePost(int boardCode2) {
 		return sqlsession.delete(namespace+"deletePost",boardCode2);
 	}
+	
 	@Override
-	public List<PostVO> selectPostBymemId(String memberid) {
-		return sqlsession.selectList(namespace+"selectPostBymemId",memberid);
+	public PostVO selectByPostByadmin(int boardCode2) {
+		return sqlsession.selectOne(namespace+"selectByPostByadmin",boardCode2);
+	}
+	@Override
+	public List<Map<String, Object>> selectPostBymemId(PostVO postVo) {
+		return sqlsession.selectList(namespace+"selectPostBymemId",postVo);
+	}
+	@Override
+	public int selectTotalCountBymemId(PostVO postVo) {
+		return sqlsession.selectOne(namespace+"selectTotalCountBymemId",postVo);
+	}
+	@Override
+	public int updatecmt(PostCmtVO postcmtVo) {
+		return sqlsession.update(namespace+"updatecmt",postcmtVo);
+	}
+	@Override
+	public int deletecmt(int commentCode) {
+		return sqlsession.delete(namespace+"deletecmt",commentCode);
+	}
+	@Override
+	public int selectmypostcount(int memberCode) {
+		return sqlsession.selectOne(namespace+"selectmypostcount",memberCode);
+	}
+	@Override
+	public PostVO selectPostbyCommentCode(int commentCode) {
+		return sqlsession.selectOne(namespace+"selectPostbyCommentCode",commentCode);
 	}
 	
 

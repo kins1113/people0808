@@ -19,8 +19,8 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 
 	@Override
-	public int cancelPay(int paymentCode) {
-		return paymentDao.cancelPay(paymentCode);
+	public int cancelPay(String paydate) {
+		return paymentDao.cancelPay(paydate);
 	}
 
 	@Override

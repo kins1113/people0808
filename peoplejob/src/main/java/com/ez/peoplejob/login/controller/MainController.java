@@ -40,6 +40,10 @@ public class MainController {
 		}
 		
 		List<Map<String, Object>> list=paymentService.selectMainAdvertiseByServiceCode(1);
+		List<Map<String, Object>> list2=paymentService.selectMainAdvertiseByServiceCode(2);
+		List<Map<String, Object>> list3=paymentService.selectMainAdvertiseByServiceCode(3);
+		List<Map<String, Object>> list4=paymentService.selectMainAdvertiseByServiceCode(4);
+		
 		logger.info("서비스 결제내역 list.size={}",list.size());
 		List<Map<String, Object>> deadlineList=jobService.deadlineimminentBymonth();
 		logger.info("마감 임박 공채 리스트내역 deadlineList.size={}",deadlineList.size());
@@ -48,6 +52,10 @@ public class MainController {
 		
 		model.addAttribute("randomList",randomList);
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		model.addAttribute("list3",list3);
+		model.addAttribute("list4",list4);
+		
 		model.addAttribute("deadlineList",deadlineList);
 		
 		//popup을 위한 추가 -옥환
@@ -100,6 +108,13 @@ public class MainController {
 	public String Test() {
 		logger.info("부트스트랩 Test");
 		return "mypage/user/Test";
+		
+	}
+	
+	@RequestMapping("/references/resumeForm.do")
+	public String resumeForm() {
+		logger.info("이력서 양식 화면 보여주기");
+		return "references/resumeForm";
 		
 	}
 }

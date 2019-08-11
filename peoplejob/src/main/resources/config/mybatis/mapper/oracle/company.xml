@@ -267,7 +267,7 @@
 	 order by j.end_date 
 	 )
  <![CDATA[where rownum<=10
- and (end_date-sysdate)<30 ]]>
+ and dday>=-14 and dday<=0 ]]>
 	</select>
 	
 	<select id="selectRandom" resultType="map">

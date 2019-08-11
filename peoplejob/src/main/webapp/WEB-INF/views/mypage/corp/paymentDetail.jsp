@@ -155,7 +155,7 @@ table tr td, table tr th{
 	var paydate=$('#pd').val();
 	 
 	
-	$('input[type=submit]').click(function(){
+	$('.cancel').click(function(){
 		if(!confirm("해당 상품을 결제취소하시겠습니까?")){
 			event.preventDefault();
 			return false;
@@ -250,16 +250,18 @@ table tr td, table tr th{
 							</td>
 							
 							
-							<form id="frmpay" method="post" action="<c:url value='/mypage/corp/paymentDetail.do?'/>">
-							<input type="hidden" name="paydate" value="${map['BYTIME'] }">
 							<input type="hidden" name="memberCode" value="${map['MEMBER_CODE'] }">
 							<input type="hidden" name="paymentCode" value="${map['PAYMENT_CODE'] }">
 							
 							<td>
+							<form action="<c:url value='/mypage/corp/cancelpay.do'/>" method="post">
+							<input type="hidden" name="paydate" value="${map['BYTIME'] }">
+							
 							<input type="hidden" name="progress" value="${map['PROGRESS']}">
 							<input type="hidden" name="confirmtime" value="${map['CONFIRMTIME'] }">
-							<input type="submit" value="결제 취소" id="cancelpay" style="padding: 5px; font-size: 0.9em; margin: 0 auto;">
-								<!-- <input type="button" id="refund" value="결제 환불"> -->
+							<input type="submit" value="결제 취소" id="cancelpay" style="padding: 5px; font-size: 0.9em; margin: 0 auto;" 
+							class="cancel" >
+							</form>
 								</td> 
 						
 							</form> 
