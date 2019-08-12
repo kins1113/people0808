@@ -21,7 +21,7 @@ public interface TableaplyDAO {
 	List<ResumeVO> selectresumebyid2(int memberCode);
 	TableaplyVO selectresumebyid3(Map<String,Object> map);
 	int applyCnt(int jobopening);
-	int selectTotalCount(SearchVO searchVo);
+	int selectTotalCount(Map<String, Object> map);
 	
 	List<Map<String, Object>> selectAll(Map<String, Object> map);
 	int selectByComCount(Map<String,Object> map);

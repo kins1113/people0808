@@ -91,31 +91,31 @@
 	<select id="applyCnt" parameterType="int" resultType="int">
 		select count(*) from apply where jobopening=#{jobopening}
 	</select>
-			<select id="selectTotalCount" parameterType="searchVo" resultType="int" >
+			<select id="selectTotalCount" parameterType="map" resultType="int" >
 
 			select count(*) from apply a join member m
 				on a.member_code = m.member_code
 				join jobopening j
 				on a.jobopening = j.jobopening
 				<where>
-							<if test="searchCondition!= null and searchCondition!=''
-								and searchKeyword!= null and searchKeyword!=''">
+							<if test="searchVo.searchCondition!= null and searchVo.searchCondition!=''
+								and searchVo.searchKeyword!= null and searchVo.searchKeyword!=''">
 								
-								<if test='searchCondition=="all"'>
+								<if test='searchVo.searchCondition=="all"'>
 								 m.memberid like  '%' || #{searchKeyword} || '%' or
 								 
 								 m.membername like  '%' || #{searchKeyword} || '%' or
 								 
 								  j.jobtitle like  '%' || #{searchKeyword} || '%' 
 								</if>
-							<if test='searchCondition=="memberid"'>
+							<if test='searchVo.searchCondition=="memberid"'>
 									 m.memberid like  '%' || #{searchKeyword} || '%'
 							</if>
 							
-							<if test='searchCondition=="membername"'>
+							<if test='searchVo.searchCondition=="membername"'>
 									  m.membername like  '%' || #{searchKeyword} || '%'
 							</if>
-							<if test='searchCondition=="jobtitle"'>
+							<if test='searchVo.searchCondition=="jobtitle"'>
 									  j.jobtitle like  '%' || #{searchKeyword} || '%'
 							</if>
 							<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
