@@ -348,19 +348,32 @@
               <c:forEach var="map" items="${list }">
                 <tr style="background: white;">
 				   	<td>${i }</td>
-				   	<td><a href="<c:url value='/post/countUpdate.do?pk=${map["BOARD_CODE2"]}&boardCode=${map["BOARD_CODE"] }'/>" style="color:black;">
+				   	<td>
 				   	
+				   	<c:if test="${map['DELETECHECK']=='Y' }">
+							관리자에 의해 삭제된 글입니다.
+					</c:if>
+					
+					   	<c:if test="${map['DELETECHECK']=='N' }">
+				   	<a href="<c:url value='/post/countUpdate.do?pk=${map["BOARD_CODE2"]}&boardCode=${map["BOARD_CODE"] }'/>" style="color:black;">
+				   
 				   	<c:if test="${fn:length(map['BOARDTITLE'])>=30 }">
 						${fn:substring(map['BOARDTITLE'],0,30) }...</c:if>
 						<c:if test="${fn:length(map['BOARDTITLE'])<30 }">
 						${map['BOARDTITLE']}
+						
 						</a>
-						<c:if test="${map['NEW_IMG_TERM']<24 }">
+						
+						<c:if test="${map['NEW_IMG_TERM']<24 && map['DELETECHECK']=='N' }">
 							<img src="<c:url value='/resources/images/new.gif'/>" alt="new이미지">
 						</c:if>
-						<c:if test="${map['COMMENTCNT']!=0 }">
+						<c:if test="${map['COMMENTCNT']!=0 && map['DELETECHECK']=='N' }">
 						<span style="color:green;">&nbsp;&nbsp;	( ${map['COMMENTCNT'] } ) </span>
 						</c:if>
+						
+							
+							
+						 </c:if>
 						 </c:if>
 						</td>
 				   	<td>

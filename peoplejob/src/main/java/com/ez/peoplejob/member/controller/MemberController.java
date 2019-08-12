@@ -431,8 +431,8 @@ public class MemberController {
 		CompanyVO companyVo=memberService.selectCompanyById(memberId);
 		logger.info("아이디로 company select 결과 companyVo={}",companyVo);
 		
-		//String fileInfo=fileUploadUtil.getFileInfo(companyVo.getImage(), 1, request);
-		//model.addAttribute("fileInfo", fileInfo);
+		String fileInfo=fileUploadUtil.getFileInfo(companyVo.getImage(), 1, request);
+		model.addAttribute("fileInfo", fileInfo);
 		
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("companyVo",companyVo);

@@ -54,6 +54,11 @@ public class CustextDAOMybatis implements CustextDAO{
 	public int getTotalrecordManager(Map<String, Object> map) {
 		return sqlSession.selectOne(namespase+"getTotalrecordManager", map);
 	}
+
+	@Override
+	public int selectmycus(int memberCode) {
+		return sqlSession.selectOne(namespase+"selectmycus",memberCode);
+	}
 	
 	
 }

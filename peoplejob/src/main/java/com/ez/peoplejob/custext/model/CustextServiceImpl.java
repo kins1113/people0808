@@ -53,5 +53,10 @@ public class CustextServiceImpl implements CustextService{
 		return custextDao.getTotalrecordManager(map);
 	}
 
+	@Override
+	public int selectmycus(int memberCode) {
+		return custextDao.selectmycus(memberCode);
+	}
+
 	
 }

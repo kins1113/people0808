@@ -212,7 +212,6 @@ button {
 								<ul class="sub-menu">
 									<li><a href="<c:url value='/references/resumeForm.do'/>">이력서 양식</a></li>
 									<li><a href="<c:url value='/references/news.do'/>">취업 뉴스</a></li>
-									<li><a href="<c:url value='/references/FreeLecture.do'/>">무료 강좌</a></li>
 									<li><a href="<c:url value='/main/chkLchar.do'/>">글자수 세기</a></li>
 									
 								</ul>
