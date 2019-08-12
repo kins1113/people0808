@@ -115,6 +115,9 @@ padding: 13px;
 div#hopework {
     padding: 13px;
 }
+select.ui-datepicker-year {
+    color: black;
+}
 
 </style>
     <script type="text/javascript">
@@ -958,7 +961,7 @@ $(document).ready(function (){
     <h3>기본정보</h3>
     <!-- hidden필드에 no 넣기 -->
     
-    <input type="text" name="memberCode" value="${vo.memberCode }">
+    <input type="hidden" name="memberCode" value="${vo.memberCode }">
     
         
 		

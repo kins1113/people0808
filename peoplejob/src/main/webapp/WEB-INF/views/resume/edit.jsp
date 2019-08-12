@@ -148,7 +148,9 @@ padding: 13px;
 div#hopework {
     padding: 13px;
 }
-
+select.ui-datepicker-year {
+    color: black;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
@@ -1667,11 +1669,9 @@ $(document).ready(function (){
      <button type="button" id="awardbt" class="btn btn-success" value="수상내역">수상내역</button>
   	 <section id="registerds3">
     <div class="well" id="award">
-     <c:if test="${!empty vo.award}">
      <h3>수상내역</h3>
       <label for="award">수상명</label>
         <input type="text" class="form-control"  name="award" id="award" value="${vo.award }" style="ime-mode:active">
-        </c:if>
         </div>
         </section>
      &nbsp;

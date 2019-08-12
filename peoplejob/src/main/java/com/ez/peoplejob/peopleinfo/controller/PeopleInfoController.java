@@ -193,21 +193,49 @@ public class PeopleInfoController {
 	 */
 
 	@RequestMapping("/peopleinfodetail.do")
-	public String peopleinfodetail(@RequestParam(defaultValue = "0") int resumeCode,@RequestParam(required = false) String[] term,@ModelAttribute ResumeVO resumeVo,HttpSession session,Model model) {
+	public String peopleinfodetail(@RequestParam(defaultValue = "0") int resumeCode,@ModelAttribute ResumeVO resumeVo,HttpSession session,Model model) {
 		logger.info("resumeCode={}",resumeCode);
-		List<ResumeVO> vo=peopleinfoService.selectResumeView(resumeCode);
+		logger.info("이력서 상세보기, 파라미터 resumeCode={}", resumeCode);
 		String id=(String)session.getAttribute("memberid");
-		if(id==null) {
-			id="비회원";
+		if(resumeCode==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/resume/list.do");
+			
+			return "common/message";
 		}
+		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
 		ResumeVO vo1=resumeService.selectByMemverid(id);
+		logger.info("이력서 조회 vo ={}\nvo.getHopeworkCode()={}" ,vo,vo.getHopeworkCode());
+		ResumeVO vo2=resumeService.selectBydesiredWorkCode(vo.getHopeworkCode());
+		ResumeVO vo3=resumeService.selectByacademicCode(vo.getAcademicCode());
+		ResumeVO vo4=resumeService.selectBydvCode(vo.getDvCode());
+		ResumeVO vo5=resumeService.selectBylanglicenceCode(vo.getLanglicenceCode());
+		ResumeVO vo6=resumeService.selectBylicenceCode(vo.getlNo());
+		ResumeVO vo7=resumeService.selectBylocation(vo2.getLocalCode());
+		ResumeVO vo8=resumeService.selectBylocation2(vo7.getLocalCode2());
+		ResumeVO vo11=resumeService.selectBybtype3(vo2.getBtypeCode3());
+		ResumeVO vo10=resumeService.selectBybtype2(vo11.getBtypeCode2());
+		ResumeVO vo9=resumeService.selectBybtype1(vo10.getBtypeCode1());
+		ResumeVO vo14=resumeService.selectBythird(vo2.getThirdCode());
+		ResumeVO vo13=resumeService.selectBysecond(vo14.getSecondCode());
+		ResumeVO vo12=resumeService.selectByfirst(vo13.getFirstCode());
+		logger.info("상세보기 결과 vo={}", vo);
 		
-		
-		
-		model.addAttribute("회원 정보 vo1={}", vo1);
-		model.addAttribute("전체 vo={}", vo);
-	
-	
+		model.addAttribute("vo", vo);
+		model.addAttribute("vo1", vo1);
+		model.addAttribute("vo2", vo2);
+		model.addAttribute("vo3", vo3);
+		model.addAttribute("vo4", vo4);
+		model.addAttribute("vo5", vo5);
+		model.addAttribute("vo6", vo6);
+		model.addAttribute("vo7", vo7);
+		model.addAttribute("vo8", vo8);
+		model.addAttribute("vo9", vo9);
+		model.addAttribute("vo10", vo10);
+		model.addAttribute("vo11", vo11);
+		model.addAttribute("vo12", vo12);
+		model.addAttribute("vo13", vo13);
+		model.addAttribute("vo14", vo14);
 		return "peopleinfo/peopleinfodetail";
 	}
 	
