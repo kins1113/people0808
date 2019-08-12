@@ -75,9 +75,9 @@ public class TableaplyServiceImpl implements TableaplyService{
 		return tableaplyDao.selectAll(map);
 	}
 	@Override
-	public int selectTotalCount(SearchVO searchVo) {
+	public int selectTotalCount(Map<String, Object> map) {
 		
-		return tableaplyDao.selectTotalCount(searchVo);
+		return tableaplyDao.selectTotalCount(map);
 	}
 	@Override
 	public int selectByComCount(Map<String, Object> map) {

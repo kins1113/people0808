@@ -65,9 +65,10 @@ public class ApplyManagerController {
 		
 		logger.info("지원 목록 결과, list.size={}",list.size());
 		
+		
 		//[4] 전체 레코드 개수 조회
 		int totalRecord=0;
-		totalRecord=tableaplyService.selectTotalCount(searchVo);
+		totalRecord=tableaplyService.selectTotalCount(map);
 		logger.info("전체 레코드 개수 조회 결과, totalRecord={}", totalRecord);
 		
 		//[5] PaginationInfo에 totalRecord 값 셋팅

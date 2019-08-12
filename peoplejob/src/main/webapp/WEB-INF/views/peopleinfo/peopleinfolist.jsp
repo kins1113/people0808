@@ -152,7 +152,7 @@ div#peo {
 			var title=$(this).html();
 			var resumeCode=$(this).next().val();
 			
-			open("<c:url value='/resume/resumedetail.do?resumeCode="+resumeCode+"'/>",title,
+			open("<c:url value='/peopleinfo/peopleinfodetail.do?resumeCode="+resumeCode+"'/>",title,
 					"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
 					)
 		});
@@ -900,7 +900,7 @@ div#peo {
 									<input type="hidden" value="${map['RESUME_CODE']}">
 									<HR>
 									등록일 : <fmt:formatDate value="${map['RESUMEREGDATE']}" pattern="yyyy-MM-dd"/>&nbsp; 
-									지역 :  
+									<%-- 지역 :  
 									<c:forEach var="lCode" items="${localCode}">
 									
 										<c:forEach var="loMap" items="${loList}" >
@@ -909,7 +909,7 @@ div#peo {
 												<c:set var="loCount" value="${loCount+1 }"/> 
 											</c:if> 
 										</c:forEach>	 
-									</c:forEach>
+									</c:forEach> --%>
 								</td>
 								<td>
 									이름 : ${map['MEMBERNAME']}<BR>

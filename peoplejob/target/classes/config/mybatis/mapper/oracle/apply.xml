@@ -91,7 +91,7 @@
 	<select id="applyCnt" parameterType="int" resultType="int">
 		select count(*) from apply where jobopening=#{jobopening}
 	</select>
-			<select id="selectTotalCount" parameterType="searchVo" resultType="int" >
+			<select id="selectTotalCount" parameterType="map" resultType="int" >
 
 			select count(*) from apply a join member m
 				on a.member_code = m.member_code

@@ -1,156 +1,400 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>   
 <style type="text/css">
+.w-100 {
+    padding: 47px;
+}
+form {
+    width: 1277px;
+    margin: 0 auto;
+    border:1px;
+ 	    margin-left: 14.2%;
+ 	    padding: 20px;
+}
 
+button.btn.btn-success {
+    margin: 3px;
+  
+}
+  .center {
+    margin-left: 42%;
+   
+}
+div#detail {
+    background: #f2f4f7;
+    
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: black;
+}
+section.redetail {
+    margin: 5px;
+    background: white;
+}
+img{
+
+    width: 100%;
+    height: 100%;
+
+}
+div#imgDiv {
+    width: 288px;
+    height: 312px;
+    float: left;
+    margin-top: 20px;
+}
+p.lead.mb-7 {
+    margin: 2px;
+    
+}
+
+div#memberinfo {
+   border: 1px solid lightgray;
+    width: 800px;
+    margin-left: 319px;
+    padding: 21px;
+}
+.resume-content {
+    border: 1px solid lightgray;
+    padding: 51px;
+      width: 100%;
+}
+div#hopeworkinfo {
+    border: 1px solid lightgray;
+    padding: 20px;
+}
+.certiinfo {
+    border: 1px solid lightgray;
+        padding: 17px;
+}
+
+span.glyphicon.glyphicon-star {
+    padding-bottom: 18px;
+}
+span.glyphicon.glyphicon-globe {
+    margin-left: 42px;
+}
+span.glyphicon.glyphicon-user {
+    margin-bottom: 22px;
+}
+span.glyphicon.glyphicon-briefcase {
+    margin-bottom: 26px;
+}
+h1.mb-0 {
+    padding-bottom: 39px;
+}
+p.lead.mb-7 {
+    padding-bottom: 22px;
+}
+.center2 {
+    margin-left:  1037px;
+    margin-top: -16px;
+    
+}
+label{
+font-weight: 1;
+}
+h2.mb-5 {
+    color: green;
+        font-size: 27px;
+}
+.text-primary {
+    color: #0ac323!important;
+}
+span.glyphicon.glyphicon-user {
+  
+    font-size: 18px;
+
+}
+span {
+        font-size: 18px;
+}
+@media (min-width: 768px)
+.lead {
+    font-size: 26px;
+}
+
+span.text-primary {
+    font-size: 35px;
+}
+span#text-resume {
+    font-size: 18px;
+}
 </style> 
  
 	<h2>인재 정보</h2>
-	<div class="divForm">
-	<input type="hidden" name="resumeCode" value="${vo.resumeCode }">
-		<div class="firstDiv">
-			<table class="table">
-				<tr>
-				<td>
-					<img src="<c:url value='/peoplejob_upload/${vo.picture }'/>" 
-						alt="이력서이미지" width="50px" height="50px"></span>
-				</td>
- 				<td> <span>${vo.resumeTitle}</span>&nbsp; ${fn:substring(vo1.birth,0,3) } | ${vo1.membergender} | ${vo4.workcheck }</td>
- 				<td><span class="glyphicon glyphicon-user" aria-hidden="true">회사이름</span> <span>${cvo.companyname}</span></td>
- 				</tr>
- 				<tr>
- 				<td><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span>${vo1.email}</span></td>
- 				<td><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> <span>${vo1.tel}</span></td>
- 				<td><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <span>${vo1.zipcode}&nbsp;${vo1.address}&nbsp;${vo1.addressdetail}</span></td>
- 				<td><span class="glyphicon glyphicon-" aria-hidden="true">고용형태</span> <span>${vo.workform}</span></td>
+	<div id="detail">
+
+	<form name="frm1" method="post" 
+	action="<c:url value='/peopleinfo/peopleinfodetail.do'/>" enctype="multipart/form-data">
+  
+
+  <div class="container-fluid p-0" id="section1">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="about">
+      <div class="w-100">
+        <h1 class="mb-0">이력서
+          <span class="text-primary">상세보기</span>
+        </h1><p class="lead mb-7">이력서 제목:${vo.resumeTitle}</p>
+        
+        <div id="imgDiv">
+	        <img src="<c:url value='/peoplejob_upload/${vo.picture }'/>" 
+							alt="${vo1.membername }" width="50">
+        </div>
+						&nbsp;&nbsp;
+		<div id="memberinfo">				
+        	<br><br><span class="glyphicon glyphicon-user" aria-hidden="true">이름:${vo1.membername}</span>&nbsp;&nbsp;
+        	&nbsp;&nbsp;<br>
+ 				
+        <div class="subheading mb-5">
+        <span class="glyphicon glyphicon-gift" aria-hidden="true">생년월일:<span>${vo1.birth}</span></span>
+        &nbsp;&nbsp;
+        	<span class="glyphicon glyphicon-star-empty" aria-hidden="true">성별:<span>${vo1.membergender}</span></span>
+        <span class="glyphicon glyphicon-globe" aria-hidden="true"><span>(${vo1.zipcode})</span></span>&nbsp;<span>${vo1.address}</span>&nbsp;<span>${vo1.addressdetail}</span><br><br>
+        <span class="glyphicon glyphicon-phone" aria-hidden="true"><span>${vo1.tel}</span></span><br><br>
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"><a href="mailto:${vo1.email}">${vo1.email}</a></span>
+        </div>
+        
+        <span class="glyphicon glyphicon-user" aria-hidden="true">자기소개:<span>${vo.introduce}</span></span>
+        
+      </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center redetail" id="experience">
+      <div class="w-100"><div class="subheading mb-3">
+        <h2 class="mb-5">경력사항</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <span>경력구분: ${vo4.workcheck}</span><br><br>
+            <span>회사명 ${vo4.companyname}</span><br>
+            		<span>근무기간:${vo4.workterm}~${vo4.workterm2}</span>
+            		&nbsp;&nbsp;<br>
+            		<span>${vo4.workcondition}</span>&nbsp;&nbsp;
+            		<span>직종:${vo4.chargework}</span>&nbsp;&nbsp;
+            		<span>직급:${vo4.jobgrade}</span></div>
+          </div>
+        </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary" id="text-resume">이력서 등록일:${vo.resumeRegdate}</span>
+          </div>
+
+       <!--  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Web Developer</h3>
+            <div class="subheading mb-3">Intelitec Solutions</div>
+            <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">December 2011 - March 2013</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Junior Web Designer</h3>
+            <div class="subheading mb-3">Shout! Media Productions</div>
+            <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.</p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">July 2010 - December 2011</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
+          <div class="resume-content">
+            <h3 class="mb-0">Web Design Intern</h3>
+            <div class="subheading mb-3">Shout! Media Productions</div>
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">September 2008 - June 2010</span>
+          </div>
+        </div> -->
+
+      </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="education">
+      <div class="w-100"> 
+        <h2 class="mb-5">학력</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0"><span>학교명: ${vo3.schoolname}</span></h3><br>
+            <div class="subheading mb-3"><span>전공: ${vo3.major}</span></div>
+            <div><span>지역:${vo3.schoollocal}</span></div><br>
+            <!-- <p>GPA: 3.23</p> -->
+            <span >졸업년도:<span>${vo3.graduate}</span></span>
+            ~<span>${vo3.graduate2}</span>
+          </div>
+          <div class="resume-date text-md-right">
+          </div>
+        </div>
+
+        <!-- <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
+          <div class="resume-content">
+            <h3 class="mb-0">James Buchanan High School</h3>
+            <div class="subheading mb-3">Technology Magnet Program</div>
+            <p>GPA: 3.56</p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">August 2002 - May 2006</span>
+          </div>
+        </div> -->
+
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="skills">
+      <div class="w-100">
+        <h2 class="mb-5">자격증/어학</h2>
+
+        <div class="certiinfo">
+         <span>${vo5.certificationtype}</span>
 				
-				</tr>
-			</table>
-		</div>
-		<div>
-		<!--이력서 사진 https://kuzuro.blogspot.com/2018/10/11.html 여기 참고 -->
-		</div>
-		<div>
-		<label for="education">학력사항</label> &nbsp;
-			<table class="table">
-			<tr>
-				<th>학력사항</th>
-				<th>경력사항</th>
-				<th>희망연봉/근무형태</th>
-				<th>희망근무지</th>
- 				<td><span class="glyphicon glyphicon-education" aria-hidden="true"></span><br><span>${vo3.graduatetype }</span></td>
- 				<td><span class="glyphicon glyphicon-education" aria-hidden="true"></span><br><span>${vo15.term }</span></td>
- 				<td><span class="glyphicon glyphicon-education" aria-hidden="true">급여/</span><br> <span>${vo2.hopepay }/${vo2.hopeworkform }</span></td> 
- 				<td><span class="glyphicon glyphicon-education" aria-hidden="true">근무형태</span> <br><span>${vo7.sido}</span></td>
-	 			</tr>
-			</table>
-		</div>
-		<div class="pull-right">
-            
-                <!-- 일반회원일경우 -->
-                <c:if test="${vo1.authorityCode==1}">
-                <span>기업회원 로그인 후,<br>
-                인재정보 열람 상품을 신청하시면 본 이력서의 전체 내용을 확인 할 수 있습니다.</span>
-                <input type="button" value="기업회원 로그인">
-                <input type="button" value="인재 정보 열람 상품 신청">
-                
-                </c:if>
-                <a href="<c:url value='/peopleinfo/peopleinfolist.do'/>"><input type="button" id="listBtn" class="btn btn-default btn-mg" role="button" value="목록"></a>
-            </div>
-		<div>
-		<label for="hopework">희망조건</label> &nbsp;
-		<table class="table">
-			<tr>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">근무형태</span> <span>${vo2.hopeworkform}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">희망연봉</span> <span>${vo2.hopepay}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)시도</span> <span>${vo7.sido}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)구군</span> <span>${vo8.gugun}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종1차</span> <span>${vo9.btypename1}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종2차</span> <span>${vo10.btypename2}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종3차</span> <span>${vo11.btypename3}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종1차</span> <span>${vo12.firstname}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종2차</span> <span>${vo13.secondname}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종3차</span> <span>${vo14.thirdname}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">근무일시</span> <span>${vo2.hopeworkdate}</span></td>
-			</tr>
-		</table>
-		 <!-- 일반회원일경우 -->
-                <c:if test="${vo1.authorityCode==1}">
-                <span>기업회원 로그인 후,<br>
-                인재정보 열람 상품을 신청하시면 본 이력서의 전체 내용을 확인 할 수 있습니다.</span>
-                <input type="button" value="기업회원 로그인">
-                <input type="button" value="인재 정보 열람 상품 신청">
-                
-                </c:if>
-                <!--기업회원  -->
-		<c:if test="${vo1.authorityCode==3}">
-		<span>${vo.introduce }</span>
-		</c:if>
-		<div>
-		<label for="workcheck">경력사항</label> &nbsp;
-			   <!-- 기업회원  --> 
-        		 <c:if test="${vo1.authorityCode==3}">
-                
-			<table class="table">
-				<tr>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true">경력구분</span> <span>${vo4.workcheck}</span></td>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true">회사명</span> <span>${vo4.companyname}</span></td>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true">근무기간</span> <span>${vo4.workterm}</span></td>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> <span>${vo4.workcondition}</span></td>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true">직종</span> <span>${vo4.chargework}</span></td>
- 				<td><span class="glyphicon glyphicon-briefcase" aria-hidden="true">직급</span> <span>${vo4.jobgrade}</span></td>
-			</tr>
-			</table>
-                </c:if>
-                 <!-- 일반회원일경우 -->
-                <c:if test="${vo1.authorityCode==1}">
-                <span>기업회원 로그인 후,<br>
-                인재정보 열람 상품을 신청하시면 본 이력서의 전체 내용을 확인 할 수 있습니다.</span>
-                <input type="button" value="기업회원 로그인">
-                <input type="button" value="인재 정보 열람 상품 신청">
-                
-                </c:if>
+ 		 <ul >
+			<c:if test="${vo5.certificationtype=='자격증/면허증,어학시험'}"> 
+				<span class="fa-li fa fa-check">${fn:substring(vo5.certificationtype, 0,6)}</span>
+          <li class="list-inline-item">
+          
+            <i > </i><span >자격증명:</span>
+ 				 <span>${vo6.lName}</span>
+          </li>
+          <li class="list-inline-item">
+            <i ></i><span >발행처/기관:</span>
+ 				 <span>${vo6.lInstitution}</span>
+          </li>
+          <li >
+            <i ></i><span>취득일:</span>
+ 				 <span>${vo6.lGetdate}</span>
+          </li>
+           
+          </c:if>
+        </ul>
+			
+   
+        <ul class="fa-ul mb-0">
+        <c:if test="${vo5.certificationtype=='자격증/면허증,어학시험'}"> 
+				<span class="fa-li fa fa-check">${fn:substring(vo5.certificationtype, 8,12)}</span><br><br> 
+          <li>
+             <i></i>
+            <span >언어:</span>
+ 				 <span>${vo5.language}</span></li>
+          <li>
+            <i ></i>
+            <span>발행처/기관:</span>
+ 				 <span>${vo5.institute}</span></li>
+          <li>
+            <i ></i>
+            <span>시험종류:</span>
+ 				 <span>${vo5.langlicencename}</span></li>
+          <li>
+            <i ></i>
+            <span>시험점수:</span>
+ 				 <span>${vo5.langpoint}</span></li>
+          <li>
+            <i ></i>
+            <span>시험급수:</span>
+ 				 <span>${vo5.langGrade}</span></li>
+          <li>
+            <i ></i>
+            <span>취득일:</span>
+ 				 <span>${vo5.langGetdate}</span>
+            	
+				</li>
+            </c:if>
+        </ul>
+      </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="interests">
+      <div class="w-100">
+        <h2 class="mb-5">희망근무</h2>
+        <div id="hopeworkinfo">
+       	<span> 근무형태:${vo2.hopeworkform}</span><br><br>
+       	<span> 희망연봉: ${vo2.hopepay}</span><br><br>
+       	<span>(희망근무지역)시도: ${vo7.sido}</span><br><br>
+       	 <span>(희망근무지역)구군: ${vo8.gugun}</span><br><br>
+ 		 <span>(희망근무지역)업종1차:${vo9.btypename1}</span><br><br>
+ 		<span>(희망근무지역)업종2차: ${vo10.btypename2}</span><br><br>
+ 		 <span>(희망근무지역)업종3차:${vo11.btypename3}</span><br><br>
+ 		<span>직종1차: ${vo12.firstname}</span><br><br>
+ 		<span>직종2차: ${vo13.secondname}</span><br><br>
+ 		<span>직종3차: ${vo14.thirdname}</span><br><br>
+ 		<span>근무일시:${vo2.hopeworkdate}</span><br>
+      
+      </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="awards">
+      <div class="w-100">
+        <h2 class="mb-5">수상내역</h2>
+        <ul class="fa-ul mb-0">
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            <span class="glyphicon glyphicon-tower" aria-hidden="true"></span> <span>${vo.award}</span></li>
+          <!-- <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            Mobile Web Specialist - Google Certification</li>
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            1<sup>st</sup>
+            Place - University of Colorado Boulder - Emerging Tech Competition 2009</li>
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            1<sup>st</sup>
+            Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)</li>
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            2<sup>nd</sup>
+            Place - University of Colorado Boulder - Emerging Tech Competition 2008</li>
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            1<sup>st</sup>
+            Place - James Buchanan High School - Hackathon 2006</li>
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            3<sup>rd</sup>
+            Place - James Buchanan High School - Hackathon 2005</li> -->
+        </ul>
+      </div>
+    </section>
+    
+      <div>
+			<span>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</span>
+			 <c:if test="${vo.opencheck=='Y'}">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정: <span>공개</span></span>
+			</c:if>
+			 <c:if test="${vo.opencheck=='N'}">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정" <span>공개안함</span></span>
+			</c:if>
 		</div>
 		
-		<div>
-			<label for="certificationtype">자격증/어학/수상 내역</label> &nbsp;
-			<table class="table">
-				<tr>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.certificationtype}</span></td>
-				<c:if test="${vo5.certificationtype=='자격증/면허증'}">            	
-            		 <label for="lName">자격증명</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo6.lName}</span></td>
- 				<label for="lInstitution">발행처/기관</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo6.lInstitution}</span></td>
- 				 <label for="lGetdate">취득일</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo6.lGetdate}</span></td>
-            	</c:if>
-				<c:if test="${vo5.certificationtype=='어학시험'}">            	
-            		 <label for="language">언어</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.language}</span></td>
- 				<label for="institution">발행처/기관</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.institution}</span></td>
- 				 <label for="langlicencename">시험종류</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.langlicencename}</span></td>
- 				 <label for="langpoint">시험점수</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.langpoint}</span></td>
- 				 <label for="langGrade">시험급수</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.langGrade}</span></td>
- 				<label for="langGetdate">취득일</label>
- 				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.langGetdate}</span></td>
-            	</c:if>
-				</tr>
-			</table>
-		
 		</div>
-		<c:if test="${!empty vo.award}">
-		 <label for="award">수상명</label>
- 		<span class="glyphicon glyphicon-tower" aria-hidden="true"></span> <span>${vo.award}</span>
- 		</c:if>
-		
-		
-		</div>
+      </form>
 		</div>
 		 
 	
-<%@include file="../main/inc/bottom.jsp" %>

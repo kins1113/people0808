@@ -78,8 +78,8 @@ public class TableaplyDAOMybatis implements TableaplyDAO{
 		return list;
 	}
 	@Override
-	public int selectTotalCount(SearchVO searchVo) {
-		return sqlSession.selectOne(namespace+"selectTotalCount",searchVo);
+	public int selectTotalCount(Map<String, Object> map) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",map);
 	}
 	@Override
 	public int selectByComCount(Map<String, Object> map) {
