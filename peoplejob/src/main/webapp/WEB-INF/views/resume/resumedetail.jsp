@@ -108,10 +108,12 @@ h2.mb-5 {
     color: #0ac323!important;
 }
 span.glyphicon.glyphicon-user {
-    font-size: 27px;
+  
+    font-size: 18px;
+
 }
 span {
-    font-size: 21px;
+        font-size: 18px;
 }
 @media (min-width: 768px)
 .lead {
@@ -120,6 +122,9 @@ span {
 
 span.text-primary {
     font-size: 35px;
+}
+span#text-resume {
+    font-size: 18px;
 }
 </style>
 <script type="text/javascript">
@@ -193,7 +198,7 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">경력구분: <span>${vo4.workcheck}</span></h3><br><br>
+            <span>경력구분: ${vo4.workcheck}</span><br><br>
             <span>회사명 ${vo4.companyname}</span><br>
             		<span>근무기간:${vo4.workterm}~${vo4.workterm2}</span>
             		&nbsp;&nbsp;<br>
@@ -203,7 +208,7 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
           </div>
         </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">이력서 등록일:${vo.resumeRegdate}</span>
+            <span class="text-primary" id="text-resume">이력서 등록일:${vo.resumeRegdate}</span>
           </div>
 
        <!--  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -400,7 +405,7 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
     </section>
     
       <div>
-			<label>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</label>
+			<span>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</span>
 			 <c:if test="${vo.opencheck=='Y'}">
 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정: <span>공개</span></span>
 			</c:if>

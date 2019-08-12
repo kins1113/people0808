@@ -1,9 +1,6 @@
 package com.ez.peoplejob.jobopening.model;
 
-import java.util.ArrayList;
-
 import com.ez.peoplejob.common.SearchVO;
-import com.ez.peoplejob.payment.model.PaymentVO;
 
 public class JobopeningVO extends SearchVO{
 	public int jobopening;
@@ -36,6 +33,7 @@ public class JobopeningVO extends SearchVO{
 	public String category;
 	public String companyimage;
 	public int companyCode;
+	public String subwayinfo1;
 	
 	public int getJobopening() {
 		return jobopening;
@@ -217,6 +215,12 @@ public class JobopeningVO extends SearchVO{
 	public void setCompanyCode(int companyCode) {
 		this.companyCode = companyCode;
 	}
+	public String getSubwayinfo1() {
+		return subwayinfo1;
+	}
+	public void setSubwayinfo1(String subwayinfo1) {
+		this.subwayinfo1 = subwayinfo1;
+	}
 	@Override
 	public String toString() {
 		return "JobopeningVO [jobopening=" + jobopening + ", jobtitle=" + jobtitle + ", localcheck=" + localcheck
@@ -228,8 +232,27 @@ public class JobopeningVO extends SearchVO{
 				+ ", receiveway=" + receiveway + ", submit=" + submit + ", applicationhandbook=" + applicationhandbook
 				+ ", jobregdate=" + jobregdate + ", hits=" + hits + ", reportcheke=" + reportcheke + ", adminagree="
 				+ adminagree + ", category=" + category + ", companyimage=" + companyimage + ", companyCode="
-				+ companyCode + "]";
+				+ companyCode + ", subwayinfo1=" + subwayinfo1 + ", getJobopening()=" + getJobopening()
+				+ ", getJobtitle()=" + getJobtitle() + ", getLocalcheck()=" + getLocalcheck() + ", getSubwayinfo()="
+				+ getSubwayinfo() + ", getWorkway()=" + getWorkway() + ", getWorkdate()=" + getWorkdate()
+				+ ", getDayofweek()=" + getDayofweek() + ", getWorktime()=" + getWorktime() + ", getPayway()="
+				+ getPayway() + ", getPay()=" + getPay() + ", getWorkform()=" + getWorkform() + ", getWelfare()="
+				+ getWelfare() + ", getGender()=" + getGender() + ", getAgelimit()=" + getAgelimit()
+				+ ", getAcademicCondition()=" + getAcademicCondition() + ", getCareer()=" + getCareer()
+				+ ", getSweetener()=" + getSweetener() + ", getRecruit()=" + getRecruit() + ", getRecruitmentTarget()="
+				+ getRecruitmentTarget() + ", getEndDate()=" + getEndDate() + ", getReceiveway()=" + getReceiveway()
+				+ ", getSubmit()=" + getSubmit() + ", getApplicationhandbook()=" + getApplicationhandbook()
+				+ ", getJobregdate()=" + getJobregdate() + ", getHits()=" + getHits() + ", getReportcheke()="
+				+ getReportcheke() + ", getAdminagree()=" + getAdminagree() + ", getCategory()=" + getCategory()
+				+ ", getCompanyimage()=" + getCompanyimage() + ", getCompanyCode()=" + getCompanyCode()
+				+ ", getSubwayinfo1()=" + getSubwayinfo1() + ", getType()=" + getType() + ", getSearchCondition()="
+				+ getSearchCondition() + ", getSearchKeyword()=" + getSearchKeyword() + ", getSearchUseYn()="
+				+ getSearchUseYn() + ", getCurrentPage()=" + getCurrentPage() + ", getBlockSize()=" + getBlockSize()
+				+ ", getFirstRecordIndex()=" + getFirstRecordIndex() + ", getLastRecordIndex()=" + getLastRecordIndex()
+				+ ", getRecordCountPerPage()=" + getRecordCountPerPage() + ", toString()=" + super.toString()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
+	
 	
 	
 }

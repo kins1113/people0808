@@ -958,7 +958,7 @@ $(document).ready(function (){
     <h3>기본정보</h3>
     <!-- hidden필드에 no 넣기 -->
     
-    <input type="hidden" name="memberCode" value="${vo.memberCode }">
+    <input type="text" name="memberCode" value="${vo.memberCode }">
     
         
 		
@@ -1080,8 +1080,8 @@ $(document).ready(function (){
        <label>전공</label>
 
        		<select class="form-control" name="major" id="major" >
+        	<option value="전공">전공</option>
         	<option value="가공">가공</option>
-
         	<option value="가구디자인">가구디자인</option>
         	<option value="가스냉동">가스냉동</option>
         	<option value="가정">가정</option>
@@ -1160,6 +1160,7 @@ $(document).ready(function (){
 	<div>
 	<label for="chargework">직종</label>
 		<select class="form-control" name="chargework" id="chargework" >
+        	<option value="직종">직종</option>
         	<option value="급여관리">급여관리</option>
         	<option value="기획">기획</option>
         	<option value="전략기획">전략기획</option>
@@ -1194,8 +1195,8 @@ $(document).ready(function (){
     <div>
     <label for="jobgrade">직급</label>
     <select class="form-control" name="jobgrade" id="jobgrade" >
+        	<option value="직급">직급</option>
         	<option value="관리관">관리관</option>
-
         	<option value="교정관">교정관</option>
         	<option value="인쇄담당(5급상당)">인쇄담당(5급상당)</option>
         	<option value="대리">대리</option>
@@ -1229,6 +1230,7 @@ $(document).ready(function (){
          <label for="lName">자격증명</label>
 
          <select class="form-control" name="lName" id="lName" >
+        	<option value="자격증명">자격증명</option>
         	<option value="기계기술사">기계기술사</option>
         	<option value="모터그레이더운전기능사">모터그레이더운전기능사</option>
         	<option value="롤러운전기능사">롤러운전기능사</option>
@@ -1273,6 +1275,7 @@ $(document).ready(function (){
      
         <label for="language">언어</label>
          <select class="form-control" name="language" id="language" >
+        	<option value="언어">언어</option>
         	<option value="한국어">한국어</option>
         	<option value="중국어">중국어</option>
         	<option value="일본어">일본어</option>
@@ -1300,6 +1303,7 @@ $(document).ready(function (){
      <div>
      <label for="institute">시험종류</label>
      	<select class="form-control" name="langlicencename" id="langlicencename" >
+        	<option value="시험종류">시험종류</option>
         	<option value="OPIc">OPIc</option>
         	<option value="TEPS">TEPS</option>
         	<option value="TOEFL">TOEFL</option>

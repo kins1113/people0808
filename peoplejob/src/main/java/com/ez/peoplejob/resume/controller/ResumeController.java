@@ -25,6 +25,7 @@ import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
 import com.ez.peoplejob.member.model.MemberService;
+import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.peopleinfo.model.PeopleInfoService;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.resume.model.ResumeVO;
@@ -87,7 +88,8 @@ public class ResumeController {
 	
 	@RequestMapping("/list.do")
 	public String list(@ModelAttribute SearchVO searchVo,HttpSession session, Model model,@RequestParam(required=false,defaultValue = "10") int recordCountPerPage) {
-		
+		String memberid=(String)session.getAttribute("memberid");
+		MemberVO memberVo=memberService.selectByUserid(memberid);
 			//1
 			logger.info("이력서목록 파라미터 searchVo={}", searchVo);
 
@@ -105,8 +107,10 @@ public class ResumeController {
 			searchVo.setRecordCountPerPage(recordCountPerPage);
 			//searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
 			searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+			
 			logger.info("셋팅 후 serchVo={}",searchVo);
 			logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
+			map.put("memberCode", memberVo.getMemberCode());
 			map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
 			map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
 			//[3] 조회처리
@@ -115,6 +119,7 @@ public class ResumeController {
 				
 			//3
 			
+			model.addAttribute("memberVo",memberVo);
 			model.addAttribute("list", list);
 			model.addAttribute("pagingInfo", pagingInfo);
 			

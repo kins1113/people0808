@@ -288,14 +288,12 @@
 		    from
 		    (
 		        select 
-		        resume_code,resumeTitle, resumeRegdate, opencheck 
+		        r.resume_code,r.resumeTitle, r.resumeRegdate, r.opencheck,r.member_code
+		       
 		        
-					
-				from resume	
+				from resume	r,member m
 				<where>
-				<if test="searchKeyword != null and searchKeyword != ''">
-					${searchCondition} like '%' || #{searchKeyword} || '%'
-				</if>		
+				r.member_code=m.member_code and m.member_code=#{memberCode} 
 				
 				</where>	
 				order by resume_code desc

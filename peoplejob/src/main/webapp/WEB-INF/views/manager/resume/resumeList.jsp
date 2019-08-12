@@ -43,6 +43,8 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 </style>
 <c:set value="${!empty param.firstCode}" var="firstCocode"/>
 <c:set value="${!empty param.btypeCode1 }" var="btypeCocode"/>
+<c:set value="${!empty param.btypeCode2 }" var="btypeCocode2"/>
+<c:set value="${!empty param.localCodeSido }" var="trSidoCode"/>
 <script type="text/javascript">
 	$(document).ready(function (){
 		$("#btResumeAdd").click(function(){
@@ -180,13 +182,13 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 			}
 		}
 		if(type=="Btype3"){
-			if(${btypeCocode}){
+			if(${btypeCocode2}){
 				$("#selectBtype2").find(":selected").trigger("change",function(){
 				});
 			}
 		}
 		if(type=="sido"){
-			if(${btypeCocode}){
+			if(${trSidoCode}){
 				$("#locationSiDo").find(":selected").trigger("change",function(){
 				});
 			}
@@ -245,7 +247,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 				settingSecond(res);
 			},
 			error:function(xhr,status,error){
-				alert(status+":"+error);
+				alert("selectSecond"+status+":"+error);
 			}
 		});
 	}
@@ -294,7 +296,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 				settingThird(res);
 			},
 			error:function(xhr,status,error){
-				alert(status+":"+error);
+				alert("selectThird"+status+":"+error);
 			}
 		});
 		
@@ -434,7 +436,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 				settingLocation(res);
 			},
 			error:function(xht,status,error){
-				alert(status+":"+error);
+				alert("getLocation"+status+":"+error);
 			}
 		});//ajax
 	}
@@ -475,7 +477,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 				settingLocation2(res);
 			},
 			error:function(xht,status,error){
-				alert(status+":"+error);
+				alert("getLocation２"+status+":"+error);
 			}
 		});//ajax
 	}
@@ -519,7 +521,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
  				settingBtype1(res);
 			},
 			error:function(xhr, status, error){
-				alert(status+":"+error);
+				alert("getBtype1"+status+":"+error);
 			}
 		})
 	}
@@ -566,7 +568,7 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
  				settingBtype2(res);
 			},
 			error:function(xhr, status, error){
-				alert(status+":"+error);
+				alert("getBtype２"+status+":"+error);
 			}
 		})
 	}
@@ -607,17 +609,19 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 	}
 	//2차 업종 가져오기
 	function getBtype3(btypeCode2){
-		$.ajax({
-			url:"<c:url value='/manager/occupantion/selectBtype3.do'/>",
-			type:"post",
-			data:"btypeCode2="+btypeCode2,
-			success:function(res){
- 				settingBtype3(res);
-			},
-			error:function(xhr, status, error){
-				alert(status+":"+error);
-			}
-		})
+		if(btypeCode2!="2차 업종"){
+			$.ajax({
+				url:"<c:url value='/manager/occupantion/selectBtype3.do'/>",
+				type:"post",
+				data:"btypeCode2="+btypeCode2,
+				success:function(res){
+	 				settingBtype3(res);
+				},
+				error:function(xhr, status, error){
+					alert("getBtype３"+status+":"+error);
+				}
+			})
+		}
 	}
 	//3차 업종 뿌리기
 	function settingBtype3(res){
@@ -678,7 +682,6 @@ span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative
 		$("input[name=thirdCode]").val('${param.thirdCode}');
 	}
 </script>
-${firstCocode }    :   ${btypeCocode }
 <form name="resumeList" method="post" action="<c:url value='/manager/resume/resumeList.do?authorityCk=member'/>"
 		 enctype="multipart/form-data" >
 <!-- 상세검색인지 일반검색인제 체크하기 위한 hidden -->
