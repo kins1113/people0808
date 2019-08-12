@@ -128,6 +128,8 @@ public class JobopeningManagerController {
 		}
 		vo.setCompanyimage(imageURL);
 		//logger.info("welfare1={}",welfare1);
+		vo.setSubwayinfo1("관리자등록");
+		
 		int cnt=jobopeningService.insertJobOpen(vo);
 		logger.info("공고등록결과 cnt={}",cnt);
 		String msg="",url="/manager/jobopening/jobopeningList/jobopeningAdd.do";

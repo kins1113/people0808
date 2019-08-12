@@ -18,6 +18,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
+		
 		//등록 버튼 넘어가기
 		$("#postWrite").click(function(){
 			location.href="<c:url value='/manager/post/postWrite.do'/>";			
@@ -61,7 +62,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		
 		
 		//신고 내용 보기
-		var modalLayer = $("#modalLayer");
+		  var modalLayer = $("#modalLayer");
 		  var modalLink = $(".modalLink");
 		  var modalCont = $(".modalContent");
 		  var marginLeft = modalCont.outerWidth()/2;
@@ -74,15 +75,16 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			 var reportComent= $(this).parent().find("input[name=reportComent]").val();
 			 var reportDay= $(this).parent().find("input[name=reportDay]").val();
 			  
-			  $("#tdReid").html(reportUser);
-			  $("#tdReDay").html(reportDay);
-			  $("#tdReCo").html(reportComent);
-			  
+			
 			  
 		    modalLayer.fadeIn("slow");
 		    modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
 		    $(this).blur();
 		    $(".modalContent > a").focus(); 
+			  $("#tdReid").html(reportUser);
+			  $("#tdReDay").html(reportDay);
+			  $("#tdReCo").html(reportComent);
+			  
 		    return false;
 		  });
 
@@ -102,6 +104,13 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		$("form[name=postList]").attr("action","<c:url value='/manager/post/postList.do?deleteChange=Y'/>")
 		$("form[name=postList]").submit();
 	}
+	 //게시글 상세보기
+	function showPostDT(code){
+		 alert("들어옴???")
+		open("<c:url value='/board/detail.do?no="+code+"'/>","체용공고",
+				"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
+				)
+	};
 </script>
 <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
 <!-- 페이지 처리를 위한 hidden  -->
@@ -233,7 +242,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 								</td>
 								<td>
 								
-									<div><div class="titleDiv">제목 : </div>${map['BOARDTITLE']}</div>
+									<div><div class="titleDiv">제목 : </div><a href="#" onclick="showPostDT(${map['BOARD_CODE2']})">${map['BOARDTITLE']}</a></div>
 									<div><div class="titleDiv">아이디 : </div>
 										<c:if test="${!empty map['MEMBERID'] }">
 											<span class="spanInfo">user : </span>${map['MEMBERID'] }								
@@ -338,6 +347,10 @@ a{color:#000;}
 #modalLayer table{width: 100%;height: 100%;border-bottom: 1px solid silver;}
 #modalLayer tr:nth-of-type(1),#modalLayer tr:nth-of-type(2){height: 40px;}
 #modalLayer tr:nth-of-type(3){height: 200px;}
+#modalLayer tbody {    background: #fefffa;    border: 1px solid;}
+#modalLayer p {    border: 1px solid silver;    height: 39px;    padding: 9px;}
+#modalLayer td {    border-bottom: 1px solid;}
+
 </style>
 
 <div id="modalLayer">
@@ -347,12 +360,12 @@ a{color:#000;}
     		<th colspan="4"><p>신고 내역</p> <button type="button">Esc</button></th>
     	</tr>
     	<tr>
-    		<td>아이디 : </td><td id="tdReId">아이디는 여기</td>
-    		<th>언제 : </th><td id="tdReDay">날짜는 여기</td>
+    		<td>아이디 : </td><td id="tdReId"></td>
+    		<th>언제 : </th><td id="tdReDay"></td>
     	</tr>
     	<tr >
 			<td>내용</td>
-			<td colspan="3" id="tdReCo">내용은 여기</td>    	
+			<td colspan="3" id="tdReCo"></td>    	
     	</tr>
     </table>
    

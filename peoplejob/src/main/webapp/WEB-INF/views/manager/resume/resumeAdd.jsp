@@ -25,7 +25,7 @@
 	#divSide tr:nth-of-type(3) select{    width: 70px;   float: left;   padding: 0;   margin: 0;   height: 29px;}
 	#divSide td{text-align: center;}
 	h3{color: black;  font-size: 1.5em;  margin: 5px 5px 5px 30px; font-weight: bold;}
-	.floating { width:395px; position:absolute;top: 10%; left: 76%;-webkit-transition: 0.5s ease; transition: 0.5s ease; }
+	.floating { width:395px; position:absolute;top: 8%; left: 78%;-webkit-transition: 0.5s ease; transition: 0.5s ease; }
 	.floating.on {position:fixed; top:11%; z-index: 999}
 	.necessary{    color: #4c84ff;  font-size: 0.7em;}
 	.necessaryInfo{color: #4c84ff; font-size: 1.2em;}
@@ -343,19 +343,19 @@ function setInfo(mCode){
 	</td>
 </tr>
 <tr>
-	<th rowspan="2">
+	<th >
 		<label for="selectBtype1">근무지<span class="necessary">*</span></label>
 	</th>
 	<td colspan="3">
-		<select class="custom-select my-1 FST" id="locationSiDo">
+		<select class="custom-select my-1 FST" id="locationSiDo" name="localCode">
 			<option>시/도</option>
 		</select>
-		<select class="custom-select my-1 FST" name="localCode" id="locationGugun">
+		<select class="custom-select my-1 FST"  id="locationGugun">
 			<option>구/군</option>
 		</select>
 	</td>
 </tr>
-<tr>
+<!-- <tr>
 	<td colspan="3">
 		<select class="custom-select my-1 FST"  id="locationSiDo10">
 			<option>시/도</option>
@@ -364,7 +364,7 @@ function setInfo(mCode){
 			<option>구/군</option>
 		</select>
 	</td>
-</tr>
+</tr> -->
 
 <tr>
 	<th>
@@ -394,7 +394,7 @@ function setInfo(mCode){
 		<select class="custom-select my-1 FST" id="selectThird" name="thirdCode">
 			<option>3차 직종</option>
 		</select>
-		<select class="custom-select my-1 FST" id="selectFirst1">
+		<!-- <select class="custom-select my-1 FST" id="selectFirst1">
 			<option>1차 직종</option>
 		</select>
 		<select class="custom-select my-1 FST" id="selectSecond1">
@@ -411,7 +411,7 @@ function setInfo(mCode){
 		</select>
 		<select class="custom-select my-1 FST" id="selectThird2" name="thirdCode">
 			<option>3차 직종</option>
-		</select> 
+		</select>  -->
 	</td>
 </tr>
 <tr>
