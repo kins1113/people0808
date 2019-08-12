@@ -2,20 +2,25 @@
     pageEncoding="UTF-8"%>
    <style>
 
-.a:nth-of-type(1) {  height: 90px; border: 1px solid;}
-.b:nth-of-type(1) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;}
+.a:nth-of-type(1) {  height: 90px;     border-bottom: 1px solid lightgray;    border-right: 1px solid lightgray;    border-top: 1px solid lightgray;
+}
+.b:nth-of-type(1) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;      font-size: 1.2em;  border-right: 1px solid lightgray;    border-left: 1px solid lightgray;}
 .c:nth-of-type(1){   float: left;    width: 80%;    padding: 6px;}
-.a:nth-of-type(2) {  height: 50px; border: 1px solid;}
-.b:nth-of-type(2) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;}
-.c:nth-of-type(2){   float: left;    width: 80%;    padding: 6px;}
-.a:nth-of-type(3) {  height: 50px; border: 1px solid;}
-.b:nth-of-type(3) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;}
+.a:nth-of-type(2) {  height: 50px;     border-bottom: 1px solid lightgray;    border-right: 1px solid lightgray;
+}
+.b:nth-of-type(2) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;    border-right: 1px solid lightgray;    border-left: 1px solid lightgray;}
+.c:nth-of-type(2){   float: left;    width: 80%;    padding: 15px;}
+.a:nth-of-type(3) {  height: 50px;     border-bottom: 1px solid lightgray;    border-right: 1px solid lightgray;
+}
+.b:nth-of-type(3) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;    border-right: 1px solid lightgray;    border-left: 1px solid lightgray;}
 .c:nth-of-type(3){   float: left;    width: 80%;    padding: 6px;}
-.a:nth-of-type(4) {  height: 70px; border: 1px solid;}
-.b:nth-of-type(4) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;}
+.a:nth-of-type(4) {  height: 70px;     border-bottom: 1px solid lightgray;    border-right: 1px solid lightgray;
+}
+.b:nth-of-type(4) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;    border-right: 1px solid lightgray;    border-left: 1px solid lightgray;}
 .c:nth-of-type(4){   float: left;    width: 80%;    padding: 6px;}
-.a:nth-of-type(5) {  height: 50px; border: 1px solid;}
-.b:nth-of-type(5) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;}
+.a:nth-of-type(5) {  height: 50px;     border-bottom: 1px solid lightgray;    border-right: 1px solid lightgray;
+}
+.b:nth-of-type(5) { width: 14%;   height: 100%;   float: left;   text-align: center;    padding-top: 41px;    border-right: 1px solid lightgray;    border-left: 1px solid lightgray;}
 .c:nth-of-type(5){   float: left;    width: 80%;    padding: 6px;}
 
 </style>
@@ -127,4 +132,4 @@
 <label><input type="checkbox" id="career1" name="career1" value="4~6년">4~6년</label>
 <label><input type="checkbox" id="career1" name="career1" value="7~9년">7~9년</label>
 </div></div>
-<input type="button" id="wheresubmit" name="wheresubmit"value="확인" class="btn btn-primary">
+<input type="button" id="wheresubmit" name="wheresubmit"value="확인" class="btn btn-primary" style="margin-top:10px;">

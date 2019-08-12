@@ -19,6 +19,10 @@ padding: 5px;
   background-color: coral;
   color:white;
   }
+  
+  select.ui-datepicker-year {
+    color: black;
+}
 </style>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 
@@ -321,7 +325,7 @@ padding: 5px;
 											  	pg : 'inicis', // version 1.1.0부터 지원.
 											    pay_method : 'card',
 											    merchant_uid : 'peoplejob_' + new Date().getTime(),
-											    name : 'PEOPLEJOB 채용공고 vvip관',
+											    name : 'PEOPLEJOB 채용광고',
 											    amount : totalprice,
 											    buyer_email : '${memberVo.email}',
 											    buyer_name : '${sessionScope.memberName}',

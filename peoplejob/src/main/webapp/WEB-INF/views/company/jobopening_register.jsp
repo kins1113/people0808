@@ -120,7 +120,7 @@
     width: 900px;
     margin: 0 auto;
     padding: 10px;
-    background: #cccccc;
+    background: #fafafa;
 }
 .form-group{
 	width:90%;

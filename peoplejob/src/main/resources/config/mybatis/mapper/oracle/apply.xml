@@ -18,13 +18,14 @@
 		    from
 		    (
 			select * from apply where member_code=#{memberCode}
-			order by applydate desc
+			
 			)A
 		) 
 		<where>
 		<![CDATA[ RNUM>#{firstRecordIndex}  and
 		RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 		</where>
+		order by applydate desc
 	</select>
 	<select id="selectapplyCount" parameterType="map" resultType="int">
 		select count(*) from apply where member_code=#{memberCode}

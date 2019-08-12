@@ -42,8 +42,9 @@ div #detail {
     background: #f2f4f7;
 }
 .where{
-	min-height: 350px; 
-	background-color: gray;
+	background: aliceblue;
+	height: 370px;
+    padding: 10px;
 }
 .where div input[type="checkbox"]{  
 	width:50px;
@@ -62,10 +63,8 @@ div #detail {
   	border: 1px solid black !important;
 }
 .divList {
-    width: 900px;
     margin: 0 auto;
     padding: 10px;
-    background: #cccccc;
 }
 .where input[name="wheresubmit"]{
 	position: absolute; 
@@ -75,11 +74,17 @@ div #detail {
 .cname{
 	padding-top:40px; 
 }
+
+.divSearch {
+    margin-bottom: 35px;
+}
 </style>
-<article>
+<article style="background: #e8ecef;">
 	<fieldset>
 <div id="detail">
-<div class="divList" style="min-height: 630px">
+<div class="divList" style="min-height: 630px;    margin: 0 auto;
+    padding: 10px;
+    max-width: 1300px;">
         <div class="page-header">
             <h3>채용공고</h3>
        
@@ -101,8 +106,10 @@ div #detail {
    		<input type="button" id="search" class="btn btn-primary" name="search" value="검색조건"> 
    		<input type="hidden" name='currentPage' value="1" >
 		<input type="submit" class="btn btn-primary" value="검색">
-		<div class="form-group" id='pageSize'>
-					<select class="custom-select my-1 mr-sm-2" id="recordCountPerPage" name="recordCountPerPage">
+		<div class="form-group" id='pageSize' style="    margin-top: 15px;">
+					<select class="custom-select my-1 mr-sm-2" id="recordCountPerPage" name="recordCountPerPage" style="    width: 90px;
+    height: 31px;
+    font-size: 1.1em;">
 						<option value="10"
 							<c:if test="${param.recordCountPerPage==10 }">
 								selected="selected"
@@ -148,7 +155,7 @@ div #detail {
 	                 <c:if test="${not loop_flag }">
 				        <c:if test="${vo.companyCode==cvo.companyCode}">   
 				         <img src="<c:url value='/logo_upload/${cvo.image }'/>"   
-							alt="로고이미지" width="60px" height="100px" style="float:right;">   	
+							alt="로고이미지" width="60px" height="100px" style="float:right; height: 100%; width: 275px;">   	
 							<div style="width=100px;float:left;">
 			                <div class="cname"style="height:100px; width:120px;text-align: center;"><h2>${cvo.companyname}</h2></div>
 				            <c:set var="loop_flag" value="true" />

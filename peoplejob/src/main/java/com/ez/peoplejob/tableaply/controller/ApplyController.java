@@ -183,6 +183,15 @@ public class ApplyController {
 		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
 		List<JobopeningVO> list2=jobopeningService.selectJobopeningBycomcode(mvo.getCompanyCode());
 		logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
+		
+		if(list2.size()==0) { //채용공고가 없을때 지원현황 있을 수 없으므로 마이페이지로 보내기
+			
+			model.addAttribute("msg","등록한 채용공고가 없습니다.");
+			model.addAttribute("url","/mypage/user/userpage.do");
+			return "common/message";
+		}else {
+			
+		
 		int []jobopening=new int[list2.size()];
 		for(int i=0;i<list2.size();i++) {
 			jobopening[i]=list2.get(i).getJobopening();
@@ -214,6 +223,7 @@ public class ApplyController {
 		model.addAttribute("list4",list4);
 		model.addAttribute("mvo", mvo);
 		return "apply/Capply_list";
+		}
 	}
 	@RequestMapping("/Check_pay.do") 
 	public String Check_pay(@RequestParam (defaultValue = "0")int member_code,

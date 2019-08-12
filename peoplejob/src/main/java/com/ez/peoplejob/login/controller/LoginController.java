@@ -86,23 +86,31 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		
 		
 		//기업입장 지원현황
-		Map<String, Object> map2=new HashMap<String, Object>();
-		List<JobopeningVO> list2=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
-	      logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
-	      int []jobopening=new int[list2.size()];
-	      for(int i=0;i<list2.size();i++) {
-	         jobopening[i]=list2.get(i).getJobopening();
-	      }
-	      map2.put("jobopening",jobopening);
-	      logger.info("map2={}",map2);
-	  	
-	  	int cnt=applyService.selectByComCount(map2);
-	  	logger.info("기업회원이 받은 지원현황 갯수 cnt={}",cnt);
-	  	model.addAttribute("cnt",cnt);
-	  	
-	  	int cuscount=custextService.selectmycus(memberVo.getMemberCode());
-	  	logger.info("기업회원이 받은 지원현황 갯수 cuscount={}",cuscount);
-	  	model.addAttribute("cuscount",cuscount);
+		List<JobopeningVO> joblistconfirm=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
+		logger.info("joblist 있는지 없는지 확인 joblistconfirm.size={}",joblistconfirm.size());
+		if(joblistconfirm.size()>0) {
+			
+			Map<String, Object> map2=new HashMap<String, Object>();
+			List<JobopeningVO> list2=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
+		      logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
+		      int []jobopening=new int[list2.size()];
+		      for(int i=0;i<list2.size();i++) {
+		         jobopening[i]=list2.get(i).getJobopening();
+		      }
+		      map2.put("jobopening",jobopening);
+		      logger.info("map2={}",map2);
+		  	
+		      
+		    	  int cnt=applyService.selectByComCount(map2);
+				  	logger.info("기업회원이 받은 지원현황 갯수 cnt={}",cnt);
+				  	model.addAttribute("cnt",cnt);
+		      }
+		  	
+		  	
+		  	
+		  	int cuscount=custextService.selectmycus(memberVo.getMemberCode());
+		  	logger.info("기업회원이 받은 지원현황 갯수 cuscount={}",cuscount);
+		  	model.addAttribute("cuscount",cuscount);
 		
 		return "mypage/user/userpage";
 		

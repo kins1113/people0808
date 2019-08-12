@@ -1100,7 +1100,7 @@ span[name=publicname]{
 								<!-- Item latest -->
 								<div class="m-b-45">   
 								<div class="imgclass">
-									<div style="width: 294px; text-align: center;"> 
+									<div style="width: 294px; text-align: center;    min-height: 100px;"> 
 										<img src ="<c:url value='/logo_upload/${map["IMAGE"] }'/>" alt="IMG" class="imgsize">
 									</div>
 									<div class="p-t-16"> 
@@ -1147,7 +1147,7 @@ span[name=publicname]{
 						</div>
 						
 						<div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list }" begin="1" end="16">   
+							<c:forEach var="map" items="${list2 }" begin="1" end="16">   
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1156,7 +1156,7 @@ span[name=publicname]{
 								<!-- Item latest -->
 								<div class="m-b-45">   
 								<div class="imgclass">
-									<div style="width: 294px; text-align: center;"> 
+									<div style="width: 294px; text-align: center;    min-height: 100px;"> 
 										<img src ="<c:url value='/logo_upload/${map["IMAGE"] }'/>" alt="IMG" class="imgsize">
 									</div>
 									<div class="p-t-16"> 
@@ -1205,7 +1205,7 @@ span[name=publicname]{
     
     <!-- 여기2 -->
     <div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list }" begin="1" end="16">   
+							<c:forEach var="map" items="${list3 }" begin="1" end="16">   
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1214,7 +1214,7 @@ span[name=publicname]{
 								<!-- Item latest -->
 								<div class="m-b-45">   
 								<div class="imgclass">
-									<div style="width: 294px; text-align: center;"> 
+									<div style="width: 294px; text-align: center;    min-height: 100px;"> 
 										<img src ="<c:url value='/logo_upload/${map["IMAGE"] }'/>" alt="IMG" class="imgsize">
 									</div>
 									<div class="p-t-16"> 
@@ -1254,7 +1254,7 @@ span[name=publicname]{
 		</div>
 				
 				<div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list }" begin="1" end="16">   
+							<c:forEach var="map" items="${list4 }" begin="1" end="16">   
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1263,7 +1263,7 @@ span[name=publicname]{
 								<!-- Item latest -->
 								<div class="m-b-45">   
 								<div class="imgclass">
-									<div style="width: 294px; text-align: center;"> 
+									<div style="width: 294px; text-align: center;    min-height: 100px;"> 
 										<img src ="<c:url value='/logo_upload/${map["IMAGE"] }'/>" alt="IMG" class="imgsize">
 									</div>
 									<div class="p-t-16"> 

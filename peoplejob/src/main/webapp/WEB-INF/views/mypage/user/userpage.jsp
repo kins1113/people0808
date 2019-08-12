@@ -282,7 +282,8 @@ $(function(){
                      	 <p class="card-title">${applycount }
                       </c:if>
                       <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                     	 <p class="card-title">${cnt }
+                     	 <c:if test="${empty cnt }"><p class="card-title">0</c:if>
+                     	 <c:if test="${!empty cnt }"><p class="card-title">${cnt }</c:if>
                       </c:if>
                         <p>
                     </div>
@@ -373,7 +374,12 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
+                 <c:if test="${sessionScope.author_code==1 }">
                   <i class="fa fa-clock-o" style="cursor:pointer;" onclick="location.href='<c:url value="/mypage/user/myboard.do"/>'"> 목록보기</i>
+               </c:if>
+                 <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                  <i class="fa fa-clock-o" style="cursor:pointer;" onclick="location.href='<c:url value="/mypage/corp/paymentDetail.do"/>'"> 목록보기</i>
+               </c:if>
                 </div>
               </div>
             </div>

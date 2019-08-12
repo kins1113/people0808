@@ -112,6 +112,10 @@ span #companyname{
 	function go(companyCode){ 
 		window.open("<c:url value='/company/map.do?companyCode="+companyCode+"'/>","주소로 장소 표시","height=500,width=700,resizable=yes");
 	}
+	
+	function go2(jobopening){ 
+		window.open("<c:url value='/apply/resumelist.do?jobopening="+jobopening+"'/>","이력서 선택","height=400,width=600,resizable=yes");
+	}
 </script>
 
 
@@ -226,7 +230,7 @@ span #companyname{
      <div style="height:50px;"> 
 	     <a style="position: absolute;  
 	left: 45%; 
-	transform: translateX(-45%);" href="<c:url value='/apply/insertapply.do?jobopening=${vo.jobopening}'/>"><input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원"></a>
+	transform: translateX(-45%);" href=""><input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원" onclick="go2(${vo.jobopening});"></a>
 	     <a style="position: absolute; 
 	left: 50%; 
 	transform: translateX(-50%);" href="<c:url value='/scrap/insertscrap.do?jobopening=${vo.jobopening}&member_code=${mvo.memberCode }'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
@@ -328,7 +332,7 @@ span #companyname{
                 </c:if>
                 <!-- 일반회원일경우 -->
                 <c:if test="${mvo.authorityCode==1}">
-                <a href="<c:url value='/apply/insertapply.do?jobopening=${vo.jobopening}'/>"><input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원"></a>
+                <input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원" onclick="go2(${vo.jobopening});"></a>
                 <a href="<c:url value='/scrap/insertscrap.do?jobopening=${vo.jobopening}&member_code=${mvo.memberCode }'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
                 </c:if>
                 <a href="<c:url value='/company/jobopening_list.do'/>"><input type="button" id="listBtn" class="btn btn-default btn-mg" role="button" value="목록"></a>
