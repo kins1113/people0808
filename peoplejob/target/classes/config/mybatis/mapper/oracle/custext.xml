@@ -108,4 +108,10 @@
 		update custext set answercontent=#{answercontent}, answer_regdate=sysdate, admin_code=#{adminCode}
 		where custext_code=#{custextCode}
 	</update>
+	
+	<select id="selectmycus" parameterType="int" resultType="int">
+	select count(*) from custext 
+             where member_code=#{memberCode} 
+            order by cus_regdate desc
+    </select>
 </mapper>
