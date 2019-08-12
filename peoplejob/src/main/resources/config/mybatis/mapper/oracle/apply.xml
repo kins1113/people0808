@@ -172,6 +172,16 @@
 	</select>
 	
 
+	<select id="selectByComCount" resultType="int" parameterType="map">
+	select count(*) from apply where jobopening in 
+         
+         <foreach collection="jobopening" item="jobopening" 
+               index="index" open="(" close=")" separator=",">
+            #{jobopening}
+         </foreach>
+         order by applydate desc
+         
+         </select>
 	
 </mapper>
 

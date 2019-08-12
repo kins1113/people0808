@@ -14,4 +14,5 @@ public interface CustextService {
 	public List<Map<String, Object>> selectCustextManager(Map<String, Object> map);
 	int updateCustextManager(CustextVO vo);
 	int getTotalrecordManager(Map<String, Object>map);
+	int selectmycus(int memberCode);
 }

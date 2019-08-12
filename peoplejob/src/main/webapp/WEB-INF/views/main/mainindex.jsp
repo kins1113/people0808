@@ -189,9 +189,9 @@ $(function() {
 <style type="text/css">
 
 footer{
-	max-width: 2000px;
-    width: 1560px;
-    margin-left: -205px;
+	max-width: 3000px;
+    width: 209%;
+    margin-left: -623px;
 }
 
 #vvipone:HOVER {     
@@ -243,7 +243,7 @@ a.f1-m-3.cl2.hov-cl10.trans-03 {
 
 .col-sm-6.p-r-25.p-r-15-sr991 {
 	width: 25%;
-	height: 210px;
+	height: 220px;
 }
 
 .col-md-10.col-lg-4 {
@@ -873,8 +873,8 @@ span[name=publicname]{
   
     	<div class="devRankingWrap devStarter" style="display: block;width:200px;">  
     	
-						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 200px;margin-top: 0px;   /*  margin-top: -36px; */
-   							 height: 364px; border: 1px solid white;"> 
+						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 198px;margin-top: 0px;   /*  margin-top: -36px; */
+   							 height: 335px; border: 1px solid white;"> 
 							<h3 class="blind">신입 랭킹</h3>
 							<div id="ranking_carousel" class="rankListWap">
 								<div class="carousel-pagination">
@@ -920,7 +920,7 @@ span[name=publicname]{
 						
 						<div class="devRankingWrap devStarter" style="display: block;">
 
-						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 258px;margin-top: -27px;  height:240px;">
+						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 258px;margin-top: -24px;  height:240px;">
 							<img alt="" src="<c:url value='/resources/main/images/getImage.png'/>" style="">
 						</div>
 					</div>
@@ -935,7 +935,7 @@ span[name=publicname]{
  <!-- 공채 롤링배너 --> 
 <div class="public" style="border: 1px solid lightgray;width: 1300px;height: 80px; margin-left: -100px;">  
 
-		<img alt="이전공채" src="<c:url value="/resources/main/images/prev.PNG"/>" id="prev" style="float:left; margin-top: 20px;">
+		<img alt="이전공채" src="<c:url value="/resources/main/images/prev.PNG"/>" id="prev" style="float:left; margin-top: 20px; margin-left: 2px;">
 	<div class="rolling_panel">
 		<ul>
 			<li>
@@ -1109,10 +1109,10 @@ span[name=publicname]{
 										</a>
 										</div> 
 										<br>
-										<div class="scrapapply" style=" display: block; margin-top: 145px;" >
+										<div class="scrapapply" style=" display: block; margin-top: 155px;" >
 										     <c:if test="${sessionScope.author_code==1 }">
 											<img alt="스크랩임시사진" src="<c:url value='/peoplejob_upload/scrapstarwhite.PNG'/>" 
-											style="  margin-top: 3px;cursor: pointer;margin-left: -105px;" id="apply"
+											style="  margin-top: 3px;cursor: pointer;" id="apply"
 											onclick="location.href='<c:url value='/scrap/insertscrap.do?jobopening=${map["JOBOPENING"]}&member_code=${memVo.memberCode }'/>' ">
 											 <img alt="지원버튼사진" src="<c:url value='/peoplejob_upload/즉시지원.PNG'/>" 
 											 style="float:right;cursor: pointer;" id="apply" onclick="go(${map['JOBOPENING']});"> 
@@ -1165,7 +1165,7 @@ span[name=publicname]{
 										</a>
 										</div> 
 										
-										<div class="scrapapply" style=" display: block; margin-top: 165px;" >
+										<div class="scrapapply" style=" display: block; margin-top: 155px;" >
 										     <c:if test="${sessionScope.author_code==1 }">
 											<img alt="스크랩임시사진" src="<c:url value='/peoplejob_upload/scrapstarwhite.PNG'/>" 
 											style="  margin-top: 3px;cursor: pointer;" id="apply"
@@ -1198,7 +1198,7 @@ span[name=publicname]{
 
     </div>
 		<!-- 여기 -->		
-	<div style="margin-left: -115px;width: 1280px;">
+	<div style="margin-left: -115px;width: 1280px; padding: 10px;">
 						<h1>Premium</h1>  <a href="<c:url value='/service/payment.do'/> " style="font-size:1.1em;color:black;"> >상품문의 </a>
 		</div>
 						
@@ -1223,7 +1223,7 @@ span[name=publicname]{
 										</a>
 										</div> 
 										
-										<div class="scrapapply" style=" display: block; margin-top: 165px;" >
+										<div class="scrapapply" style=" display: block; margin-top: 155px;" >
 										     <c:if test="${sessionScope.author_code==1 }">
 											<img alt="스크랩임시사진" src="<c:url value='/peoplejob_upload/scrapstarwhite.PNG'/>" 
 											style="  margin-top: 3px;cursor: pointer;" id="apply"
@@ -1249,7 +1249,7 @@ span[name=publicname]{
 							</c:forEach> 
 				</div>
 				
-				<div style="margin-left: -115px;width: 1280px;">
+				<div style="margin-left: -115px; width: 1280px; padding: 10px;">
 						<h1>Grand</h1>  <a href="<c:url value='/service/payment.do'/> " style="font-size:1.1em;color:black;"> >상품문의 </a>
 		</div>
 				
@@ -1272,7 +1272,7 @@ span[name=publicname]{
 										</a>
 										</div> 
 										
-										<div class="scrapapply" style=" display: block; margin-top: 165px;" >
+										<div class="scrapapply" style=" display: block; margin-top: 155px;" >
 										     <c:if test="${sessionScope.author_code==1 }">
 											<img alt="스크랩임시사진" src="<c:url value='/peoplejob_upload/scrapstarwhite.PNG'/>" 
 											style="  margin-top: 3px;cursor: pointer;" id="apply"
