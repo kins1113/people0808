@@ -15,7 +15,7 @@
        ,
        #{gender},#{agelimit},#{academicCondition},#{career},#{sweetener},#{recruit},
        #{recruitmentTarget},#{endDate},#{receiveway},#{submit},#{applicationhandbook},
-       sysdate,0,'N',#{adminagree},1,#{companyimage},#{companyCode}
+       sysdate,0,'N',#{adminagree},1,#{companyimage},#{companyCode},#{subwayinfo1}
        )
 	</insert>
 		
@@ -267,7 +267,7 @@
 	 order by j.end_date 
 	 )
  <![CDATA[where rownum<=10
- and (end_date-sysdate)<30 ]]>
+ and dday>=-14 and dday<=0 ]]>
 	</select>
 	
 	<select id="selectRandom" resultType="map">
