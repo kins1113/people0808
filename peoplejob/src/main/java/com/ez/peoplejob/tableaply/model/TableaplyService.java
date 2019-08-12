@@ -24,4 +24,5 @@ public interface TableaplyService {
 	int selectTotalCount(SearchVO searchVo);
 	
 	List<Map<String, Object>> selectAll(Map<String, Object> map);
+	int selectByComCount(Map<String,Object> map);
 }

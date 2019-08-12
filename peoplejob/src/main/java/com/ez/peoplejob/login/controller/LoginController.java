@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
+import com.ez.peoplejob.custext.model.CustextService;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 import com.ez.peoplejob.member.model.CompanyVO;
@@ -44,6 +45,7 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired private ResumeService resumeService;
 	@Autowired private PostService postService;
+	@Autowired private CustextService custextService;
 	
 	
 	@RequestMapping(value="/mypage/user/userpage.do")
@@ -83,58 +85,24 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		model.addAttribute("joblist",joblist);
 		
 		
-		
 		//기업입장 지원현황
-		String id=(String)session.getAttribute("memberid");
-		MemberVO mvo=memberService.selectByUserid(id);
-		logger.info("로그인한 회원정보 mvo={}",mvo);
-		logger.info("회사에 지원한 회원들 리스트");
-		//1]PaginationInfo 객체 생성
-		PaginationInfo pagingInfo=new PaginationInfo();
-		pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		
-		//2]SearchVo에 페이징 관련 변수 세팅
-		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("셋팅 후 serchVo={}",searchVo);
-		
-		Map<String, Object> map1 = new HashMap<String, Object>();
-		logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
-		map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
-		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
+		Map<String, Object> map2=new HashMap<String, Object>();
 		List<JobopeningVO> list2=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
-		logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
-		int []jobopening=new int[list2.size()];
-		for(int i=0;i<list2.size();i++) {
-			jobopening[i]=list2.get(i).getJobopening();
-		}
-		map.put("jobopening",jobopening);
-		logger.info("map={}",map);
-		List<TableaplyVO> list=applyService.selectapplyComp(map);
-		logger.info("지원현황 조회결과{}",list.size());
-		int totalRecord=0;
-		totalRecord=applyService.selectapplyCompcount(map);
-		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
-		List<MemberVO> list3=new ArrayList<MemberVO>() ;
-		int []memberCode=new int[list.size()];
-		List<JobopeningVO> list4=new ArrayList<JobopeningVO>() ;
-		
-		for(int i=0;i<list.size();i++) {
-			memberCode[i]=list.get(i).getMemberCode();
-			list3.add(memberService.selectBymemberCode(memberCode[i]));
-			jobopening[i]=list.get(i).getJobopening();
-			list4.add(jobService.selectJobOpenByNo(jobopening[i]));
-		}
-		logger.info("지원한 회원들에 대한 정보={}",list3.size());
-		//5]PaginationInfo에 totalRecord값셋팅
-		pagingInfo.setTotalRecord(totalRecord);
-		//3
-		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("list",list);
-		model.addAttribute("list3",list3);
-		model.addAttribute("list4",list4);
+	      logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
+	      int []jobopening=new int[list2.size()];
+	      for(int i=0;i<list2.size();i++) {
+	         jobopening[i]=list2.get(i).getJobopening();
+	      }
+	      map2.put("jobopening",jobopening);
+	      logger.info("map2={}",map2);
+	  	
+	  	int cnt=applyService.selectByComCount(map2);
+	  	logger.info("기업회원이 받은 지원현황 갯수 cnt={}",cnt);
+	  	model.addAttribute("cnt",cnt);
+	  	
+	  	int cuscount=custextService.selectmycus(memberVo.getMemberCode());
+	  	logger.info("기업회원이 받은 지원현황 갯수 cuscount={}",cuscount);
+	  	model.addAttribute("cuscount",cuscount);
 		
 		return "mypage/user/userpage";
 		

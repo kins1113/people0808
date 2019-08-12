@@ -171,8 +171,11 @@ $(function(){
 	        <c:forEach var="uploadVo" items="${ uploadList}">
 	             첨부파일 : <a href="<c:url value='/board/filedownload.do?no=${uploadVo.uploadCode }&fileName=${uploadVo.fileName }'/>">${uploadVo.originalFileName }  (${uploadVo.fileSize/1000 }KB)</a>
 	       	다운로드 수 : ${uploadVo.downcount } <br>
-	        </c:forEach>
+	        
         </p>
+        <img alt="첨부파일" src="<c:url value='/post_upload/${uploadVo.fileName }'/>">
+        
+        </c:forEach>
         </c:if>
         ${adpostVo.boardcontent}
 		</c:if>
@@ -226,7 +229,7 @@ $(function(){
 	            
 	            <% pageContext.setAttribute("newLineChar", "\n"); %>
 				
-				<textarea rows="3" id="editcontent" class="editcontent" style="clear:both;">${map['CONTENT']}</textarea>
+				<textarea rows="4" cols="120" id="editcontent" class="editcontent" style="clear:both;">${map['CONTENT']}</textarea>
 				</form>
 				</div>
           </div>

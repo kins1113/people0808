@@ -282,7 +282,7 @@ $(function(){
                      	 <p class="card-title">${applycount }
                       </c:if>
                       <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                     	 <p class="card-title">${fn:length(list) }
+                     	 <p class="card-title">${cnt }
                       </c:if>
                         <p>
                     </div>
@@ -293,10 +293,10 @@ $(function(){
                 <hr>
                 <div class="stats">
                  <c:if test="${sessionScope.author_code==1 }">
-                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/apply_list.do'/>'">자세히보기</i> 
+                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/apply_list.do'/>'"> 자세히보기</i> 
               	</c:if>
               	 <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/Capply_list.do'/>'">자세히보기</i> 
+                  <i class="fa fa-refresh" style="cursor:pointer;" onclick="location.href='<c:url value='/apply/Capply_list.do'/>'"> 자세히보기</i> 
               	</c:if>
                 </div>
               </div>
@@ -314,12 +314,13 @@ $(function(){
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">스크랩</p>
                        <c:if test="${sessionScope.author_code==1 }">
+                      <p class="card-category">스크랩</p>
                      	 <p class="card-title"> ${fn:length(scraplist) }
                       </c:if>
                       <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                     	 <p class="card-title">0
+                       <p class="card-category">문의내역</p>
+                     	 <p class="card-title">${cuscount }
                       </c:if>
                      
                         <p>
@@ -330,7 +331,12 @@ $(function(){
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
+             <c:if test="${sessionScope.author_code==1 }">
                   <i class="fa fa-calendar-o"  style="cursor:pointer;" onclick="location.href='<c:url value='/scrap/scrap_list.do'/>'"> 상세보기</i>
+             </c:if>
+              <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                  <i class="fa fa-calendar-o"  style="cursor:pointer;" onclick="location.href='<c:url value='/custext/mycustext.do'/>'"> 상세보기</i>
+              </c:if>
                 </div>
               </div>
             </div>
