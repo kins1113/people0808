@@ -16,73 +16,19 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #btGroup button{margin-top: 4px;}
 </style>
 <script type="text/javascript">
-	$(document).ready(function (){
-		//맨위에 체크박스 누르면 전체 선택
-		$("#memberCkAll").click(function(){
-			$("input[name=memberCk]").prop("checked",this.checked)
-		});
-		$("#pageSize select[name=recordCountPerPage]").change(function(){
-			$("form[name=postList]").submit();
-		});
-		//필터링
-		$(".fileterCode").each(function(){
-			$(this).click(function(){
-				var filterCode=$(this).attr("id");
-				$("input[name=filterCode]").val(filterCode);
-				var filterKey=$("input[name=filterKey]").val();
+
 		
-				if(filterKey!=''){
-					if(filterKey=='Y'){
-						$("input[name=filterKey]").val("N");
-					}else if(filterKey=='N'){
-						$("input[name=filterKey]").val("Y");
-					}
-				}else{
-						$("input[name=filterKey]").val("Y");
-				}
-			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member'/>");
-	    	$("form[name=memberList]").submit();	    	
-			})
-		});
 		
-		//체크된것 메일 보내기
-	    $("#btMultMail").click(function(){
-	    	$("form[name=memberList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
-	    		.attr("method",'get');
-	    	$("form[name=memberList]").submit();	    	
-	    });
 		
-		$("#postSearch").click(function(){
-			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member&showKey=member'/>");
-			$("form[name=memberList]").submit();
-		})
 		
-	});
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
-		$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member'/>");
-		$("form[name=memberList]").submit();
+		$("form[name=frmSearch]").submit();
 	}
-	//엑셀 다운로드 함수
-	function doExcelDownloadProcess(ckAll){
-		if(ckAll=="all"){
-		//전체 회원 엑셀다운 처리
-			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do?all=all'/>");
-	        $("form[name=memberList]").submit();
-		}else{
-		//지금 화면에 있는 회원만 엑셀 다운
-			if($("input[name=searchKeyword]")==''){
-				$("input[name=searchCondition]").val('');
-			}
-	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do'/>");
-	        $("form[name=memberList]").submit();
-		}
-		
-    }
+	
 </script>
-<form name="memberList" method="post"  action="<c:url value='/manager/member/memberList.do?authorityCk=member&showKey=member'/>"
-		 enctype="multipart/form-data" >
+<form name="frmSearch" method="post"  action="<c:url value='/manager/apply/applyList.do'/>"  >
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
@@ -110,13 +56,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			</div>
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
-				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택한 메일">
-					<input type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('all')" id="" value="전체회원 엑셀"> 
-					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
-				</div>
+				
 				<div class="form-group serDiv">
-					<input type="button" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
+					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
 				</div>
 				<div class="form-group serDiv">
 					<input type="text" class="form-control" placeholder="검색어"
@@ -187,16 +129,13 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th><label class="control control-checkbox checkbox-primary">
-									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
-									<div class="control-indicator"></div>
-							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">지원 코드</a></th>
+							
+							<th scope="col"><a href="#" class="fileterCode" id="apply_Code">지원 코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="address">채용공고</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="birth">열람여부</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">지원날짜</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="jobtitle">채용공고</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="opencheck">열람여부</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="applydate">지원날짜</a></th>
 
 						</tr>
 					</thead>
@@ -206,20 +145,15 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 						<td colspan="11" align="center">만족하는 사용자가 없습니다....</td>
 					</c:if>
 					<c:if test="${!empty list }">
-						<c:forEach var="memberVo" items="${list}">
+						<c:forEach var="vo" items="${list}">
 							<tr>
-								<td>
-									<label class="control control-checkbox checkbox-primary">
-											<input type="checkbox" name="memberCk" id="memberCk" value="${memberVo.email}" />
-											<div class="control-indicator"></div>
-									</label>
-								</td>
-								<td>${memberVo.memberCode}</td>
-								<td>${memberVo.memberid}</td>
-								<td>${memberVo.membername}</td>
-								<td>${memberVo.address} ${memberVo.addressdetail }</td>
-								<td>${memberVo.birth}</td>
-								<td>${memberVo.membergender}</td>
+							
+								<td>${vo['APPLY_CODE']}</td>
+								<td>${vo['MEMBERID']}</td>
+								<td>${vo['MEMBERNAME']}</td>
+								<td>${vo['JOBTITLE']}</td>
+								<td>${vo['OPENCHECK']}</td>
+								<td>${vo['APPLYDATE']}</td>
 							</tr>
 						</c:forEach>
 					</c:if>

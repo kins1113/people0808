@@ -35,7 +35,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService{
 		//certificate 자격증 insert 선택
 		if(ceritificateVo!=null) {
 			checkRe=resumeManagerDao.insertCertificateMN(ceritificateVo);
-			resumeVo.setLicenceCode(ceritificateVo.getlNo());
+			resumeVo.setlNo(ceritificateVo.getlNo());
 			logger.info("서비스에 자격증 checkRe={}",checkRe);
 			checkRe=0;
 		}
