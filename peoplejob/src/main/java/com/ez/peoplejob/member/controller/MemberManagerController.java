@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ez.peoplejob.common.PaginationInfo;
+import com.ez.peoplejob.jobopening.model.JobopeningManagerService;
 import com.ez.peoplejob.manager.member.model.MemberServiceAdmin;
 import com.ez.peoplejob.member.model.CompanyService;
 import com.ez.peoplejob.member.model.MemberVO;
@@ -27,6 +28,8 @@ public class MemberManagerController {
 	private MemberServiceAdmin memberserviceAdmin;
 	@Autowired
 	private CompanyService companyService;
+	@Autowired
+	private JobopeningManagerService jobMangerService;
 	
 	@RequestMapping("/manager/member/memberList.do")
 	public String manager_memberList(@ModelAttribute MemberVO memberVo,
@@ -107,6 +110,11 @@ public class MemberManagerController {
 		}
 		logger.info("회원 보여주기 결과 url={}",url);
 		
+		//체용공고 보여주기위한 처리
+		List<Map<String, Object>>jobList=jobMangerService.selectJobTile();
+		model.addAttribute("jobList", jobList);
+		logger.info("채용공고 조회 결과 jobList={}",jobList.size());
+		
 		return url;
 	}
 		
@@ -150,23 +158,42 @@ public class MemberManagerController {
 	@RequestMapping("/manager/member/getMemberSearchManager.do")
 	@ResponseBody
 	public List<Map<String, Object>> getMemberSearch(@RequestParam String searchCon,
-						@RequestParam String searchKey){
+						@RequestParam String searchKey, @RequestParam String type){
 		logger.info("ajax - 검색으로 기업 회원 가져오기 파라미터 searchCon={}, searchKey={}",searchCon, searchKey);
+		logger.info("파라미터 type= {} ",type);
 		Map<String, String> map =new HashMap<String, String>();
 		map.put("searchCon", searchCon);
 		map.put("searchKey", searchKey);
+		map.put("type", type);
 		List<Map<String, Object>>list=companyService.selectMemberSearch(map);
-		logger.info("기업회원 가져온 결과 list.size={}",list.size());
+		logger.info("검색 후 회원 가져온 결과 list.size={}",list.size());
 		return list;
 	}
 	
 	@RequestMapping("/manager/member/getMemberSelectMCode.do")
 	@ResponseBody
-	public MemberVO getMemberSelectMcode(@RequestParam int mCode) {
-		logger.info("ajax - 기업회원 아이디만 가져오는 곳 파라미터 mCode={}",mCode);
-		return companyService.selectMemberByMcode(mCode);
+	public MemberVO getMemberSelectMcode(@RequestParam(defaultValue = "0") int mCode) {
+		logger.info("ajax - 회원 아이디만 가져오는 곳 파라미터 mCode={}",mCode);
+		
+		
+		MemberVO vo=companyService.selectMemberByMcode(mCode);
+		logger.info("결과 vo={}",vo);
+			return vo;
 	}
 	
+	@RequestMapping("/manager/member/getMemSearchManager.do")
+	@ResponseBody
+	public List<MemberVO> getMemSearchManager(@RequestParam String searchCon,
+						@RequestParam String searchKey){
+		logger.info("ajax - 검색으로 일반 회원 가져오기 파라미터 searchCon={}, searchKey={}",searchCon, searchKey);
+		Map<String, String> map =new HashMap<String, String>();
+		map.put("searchCon", searchCon);
+		map.put("searchKey", searchKey);
+		List<MemberVO>list=companyService.selectMemSearch(map);
+		logger.info("검색 후 회원 가져온 결과 list.size={}",list.size());
+		return list;
+		
+	}
 	
 
 }

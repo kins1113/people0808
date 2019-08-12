@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.sl.usermodel.ObjectMetaData.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,12 +102,18 @@ logger.info("boardByCategory 목록 파라미터, boardCode={}, postVo={}",board
 	public String detail(@RequestParam(defaultValue = "0") int no, Model model) {
 		logger.info("게시판 상세보기 파라미터 pk={}",no);
 		
+		BoardVO boardVo=postService.selectBoardByboardCode2(no);
+		logger.info("boardVo={}",boardVo);
+		
 		if(no==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/board/boardByCategory.do?boardCode="+no);
+			model.addAttribute("url", "/board/boardByCategory.do?boardCode="+boardVo.getBoardCode1());
 			
 			return "common/message";
 		}
+		
+		PostVO adpostVo=postService.selectByPostByadmin(no);
+		logger.info("adpostVo={}",adpostVo);
 		
 		List<Map<String, Object>> postList=postService.selectByboardCode2(no);
 		logger.info("상세보기 결과 postList.size={}",postList.size());
@@ -119,6 +124,8 @@ logger.info("boardByCategory 목록 파라미터, boardCode={}, postVo={}",board
 		List<UploadInfoVO> uploadList=uploadInfoService.uploadInfoSelectByBoardCode2(no);
 		logger.info("게시판 detail, uploadList.size={}",uploadList.size());
 		
+		model.addAttribute("adpostVo",adpostVo);
+		model.addAttribute("boardVo",boardVo);
 		model.addAttribute("uploadList",uploadList);
 		model.addAttribute("postVo",postVo);
 		model.addAttribute("list",list);
@@ -235,7 +242,7 @@ logger.info("boardByCategory 목록 파라미터, boardCode={}, postVo={}",board
 		BoardVO boardVo=postService.selectBoardByboardCode2(no);
 		logger.info("게시판 글 수정화면, boardVo={}",boardVo);
 		List<UploadInfoVO> uploadList=uploadInfoService.uploadInfoSelectByBoardCode2(no);
-		logger.info("게시판 글 수정화면, uploadList={}",uploadList);
+		logger.info("게시판 글 수정화면, uploadList.size={}",uploadList.size());
 		
 		model.addAttribute("uploadList",uploadList);
 		model.addAttribute("boardVo",boardVo);
@@ -355,8 +362,11 @@ logger.info("boardByCategory 목록 파라미터, boardCode={}, postVo={}",board
 	
 	
 	@RequestMapping(value="/board/report.do", method=RequestMethod.GET)
-	public String report(@RequestParam(defaultValue = "0", required = false ) int no) {
-		logger.info("게시판 글 신고 화면 보여주기");
+	public String report(@RequestParam(defaultValue = "0", required = false ) int no, Model model) {
+		logger.info("게시판 글 신고 화면 보여주기 파라미터, no={}",no);
+		PostVO postVo=postService.selectByPostByadmin(no);
+		
+		model.addAttribute("postVo",postVo);
 		return "board/report";
 	}
 	
@@ -437,6 +447,127 @@ logger.info("boardByCategory 목록 파라미터, boardCode={}, postVo={}",board
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("/resumedown.do")
+	public void resumedown(HttpServletRequest request,HttpServletResponse response) {
+		logger.info("이력서 양식 다운");
+		String fileName="File.docx";
+		
+		@SuppressWarnings("deprecation")
+		String dirPath= request.getRealPath("post_upload");
+		//파일이름을 인코딩한다.(euc-kr => ISO-8859-1)
+		//=> url전송시에는 모든 문자가 ISO-8859-1로 인코딩 되기 때문에
+		//강제 다운로드 창 띄우기
+		try{
+		File myfile = new File(dirPath, fileName);
+		//page의 설정을 바꾸기 위해서 response를 다 날려버림
+		response.reset();
+		//setContentType는 MIME 타입을 지정-octet-stream으로 지정시, 형식을 지정하지 않겠다는 것
+		response.setContentType("application/octet-stream");
+		//브라우저 파일 확장자를 포함하여 모든 확장자의 파일들에 대해 다운로드시 무조건 파일다운로드
+		//대화상자가 뜨도록 하는 헤더속성
+		response.setHeader("Content-Disposition", "attachment;filename="
+		+ new String(fileName.getBytes("euc-kr"),"ISO-8859-1")+"");
+
+		
+
+		//url 전송시 ISO-8859-1 로 인코딩되므로 한글 처리 위해 인코딩 42
+
+		response.setContentLength((int)myfile.length());
+		//바이너리 데이터를 아스키 텍스트 형식으로 변환하기 위한 방법
+		response.setHeader("Content-Treansper-Encoding", "binary");
+		//cache에서 해당 페이지 읽기방지, 로딩시마다 새로고침한 것
+		response.setHeader("Pargma","no-cache");
+		//cache 막기
+		response.setHeader("Expires","-1");
+		//out.clear();
+		//out=pageContext.pushBody();
+		byte[] data = new byte[1024 * 1024];
+		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(myfile));
+		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+		int count = 0;
+		while((count = bis.read(data))!= -1){
+
+		bos.write(data);
+
+	}
+		if(bis !=null) bis.close();
+		if(bos != null) bos.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/mypage/user/myboard.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String myboard(HttpSession session, Model model, @ModelAttribute PostVO postVo) {
+		logger.info("내가 쓴 글 화면 보여주기");
+		String memberid=(String)session.getAttribute("memberid");
+		MemberVO memberVo=memberService.selectByUserid(memberid);
+		logger.info("memberVo={}",memberVo);
+		logger.info("내가 쓴 글-파라미터 postVo={}",postVo);
+		postVo.setMemberCode(memberVo.getMemberCode());
+		
+		//[1] PaginationInfo 객체 생성
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(postVo.getCurrentPage());
+		
+		//[2] SearchVo에 페이징 관련 변수 셋팅
+		postVo.setRecordCountPerPage(pagingInfo.getRecordCountPerPage());
+		postVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		//postVo.setBlockSize(WebUtility.BLOCK_SIZE);
+		//logger.info("셋팅 후 postVo={}", postVo);
+		
+		//[3] 조회처리
+		List<Map<String, Object>> list=postService.selectPostBymemId(postVo);
+		logger.info("내가 쓴 글 목록 결과, list.size={}",list.size());
+		
+		//[4] 전체 레코드 개수 조회
+		int totalRecord=0;
+		totalRecord=postService.selectTotalCountBymemId(postVo);
+		logger.info("내가 쓴 글 : 전체 레코드 개수 조회 결과, totalRecord={}", totalRecord);
+		
+		//[5] PaginationInfo에 totalRecord 값 셋팅
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "mypage/user/myboard";
+	}
+	
+	@RequestMapping("/updatecmt.do")
+	public String updatecmt(@RequestParam int commentCode, @RequestParam String content) {
+		logger.info("댓글 수정 파라미터, commentCode={}, content={}", commentCode, content);
+		PostCmtVO postcmtVo=new PostCmtVO();
+		postcmtVo.setCommentCode(commentCode);
+		postcmtVo.setContent(content);
+		
+		PostVO postVo=postService.selectPostbyCommentCode(commentCode);
+		logger.info("postVo={}",postVo);
+		
+		int cnt=postService.updatecmt(postcmtVo);
+		logger.info("댓글 수정 결과 cnt={}",cnt);
+		
+		return "redirect:/board/detail.do?no="+postVo.getBoardCode2();
+		
+	}
+	
+	@RequestMapping("/deletecmt.do")
+	public String deletecmt(@RequestParam int commentCode) {
+		logger.info("댓글 삭제 파라미터, commentCode={}", commentCode);
+		
+		PostVO postVo=postService.selectPostbyCommentCode(commentCode);
+		logger.info("postVo={}",postVo);
+		
+		int cnt=postService.deletecmt(commentCode);
+		
+		logger.info("댓글 삭제 결과 cnt={}",cnt);
+		
+		return "redirect:/board/detail.do?no="+postVo.getBoardCode2();
+		
 	}
 	
 	

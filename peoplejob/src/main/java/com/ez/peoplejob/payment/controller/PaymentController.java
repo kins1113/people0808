@@ -100,31 +100,19 @@ public class PaymentController {
 		
 	}
 	
-	@RequestMapping(value="/mypage/corp/paymentDetail.do", method = RequestMethod.POST)
-	public String cancelpay(@RequestParam int paymentCode, Model model) {
-		logger.info("결제 취소 파라미터 paymentCode={}",paymentCode);
+	@RequestMapping(value="/mypage/corp/cancelpay.do", method = RequestMethod.POST)
+	public String cancelpay(@RequestParam String paydate, Model model) {
+		logger.info("결제 취소 파라미터 paydate={}",paydate);
 
-		PaymentVO paymentVo=paymentService.selectPaymentByCode(paymentCode);
-		logger.info("paymentCode로 select 결과 paymentVo={}",paymentVo);
+		int cnt=paymentService.cancelPay(paydate);
+		logger.info("결제 취소 요청 결과 cnt={}",cnt);
 		
-		int cnt=0;
 		String msg="", url="/mypage/corp/paymentDetail.do";
-		if(paymentVo.getProgress().equals("결제완료")) {
-			cnt=paymentService.cancelPay(paymentCode);
-			logger.info("결제 취소 처리 결과 cnt={}",cnt);
-				if(cnt>0) {
-					msg="결제 취소되었습니다.";
-				}else {
-					msg="결제 취소 실패";
-				}
-			
-		}else if(paymentVo.getProgress().equals("결제취소요청")){
-			msg="이미 결제 취소 요청 하신 상품입니다.";
-		}else { //결제취소완료
-			msg="결제취소 완료된 상품입니다.";
+		if(cnt>0) {
+			msg="관리자의 승인 이후 결제취소완료됩니다.";
+		}else {
+			msg="결제 취소 요청 실패";
 		}
-		
-		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		
@@ -183,7 +171,7 @@ public class PaymentController {
 		}
 		
 		logger.info("payment 등록 cnt={}",cnt+"\n");
-		return "service/payment";
+		return "redirect:/service/payment.do";
 	}
 	
 	@RequestMapping(value="/mypage/corp/paymoreDetail.do", method = RequestMethod.GET)

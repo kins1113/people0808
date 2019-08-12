@@ -36,5 +36,16 @@ public class BoardKindServiceImpl implements BoardKindService{
 		}
 		return count;
 	}
+
+	@Override
+	public int changUsage(BoardKindVO vo) {
+		vo.setUsage(boardKindDao.selectByTypeCode(vo.getTypeCode()));
+		return boardKindDao.changUsage(vo);
+	}
+
+	@Override
+	public String selectByTypeCode(int typeCode) {
+		return boardKindDao.selectByTypeCode(typeCode);
+	}
 	
 }

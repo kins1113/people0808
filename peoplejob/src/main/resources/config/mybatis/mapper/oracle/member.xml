@@ -57,10 +57,14 @@
 	
 	<update id="updateCompany" parameterType="companyVo">
 	update company
-	set image=#{image}, company_zipcode=#{companyZipcode}, company_address=#{companyAddress},company_addressdetail=#{companyAddressdetail},
+	 set company_zipcode=#{companyZipcode}, company_address=#{companyAddress},company_addressdetail=#{companyAddressdetail},
 	womannum=#{womannum} , mannum=#{mannum}, establishyear=#{establishyear}, companytype=#{companytype}, site=#{site}, 
 	sales=#{sales}, capital=#{capital}, majorbusiness=#{majorbusiness} , introduction=#{introduction}  
+	<if test="image!=null and image!=''">
+       ,image=#{image}
+       </if>
 	where company_code=#{companyCode}
+	
 	</update>
 	
 	 <update id="updatePwd" parameterType="memberVo">
@@ -304,7 +308,7 @@
 	<select id="getTotalRecordCompanyManager" parameterType="map" resultType="int"> 
 			select count(*) from
 				(
-				select * from member m
+				select m.*,c.* from member m
 	            left join company c
 	            on m.COMPANY_CODE = c.company_code
 	              <where>        

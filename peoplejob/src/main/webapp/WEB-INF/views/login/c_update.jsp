@@ -343,6 +343,7 @@ option{
 								<input type="hidden" name="oldFileName" value="${companyVo.image}" />
 								</div>
 
+
 <br><br>
 									<div class="form-group">
 										<div class="col-sm-6 col-sm-offset-3">

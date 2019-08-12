@@ -323,13 +323,17 @@ function highChartsMember(item){
 			var thEl=$("<th></th>");
 			var tdEl=$("<td></td>");
 			thEl.html(item.custextcategory);
-			tdEl.html("<a href='#'>"+item.custitle+"</a>");
+			tdEl.html("<a href='#' onclick='custextShow("+item.custextCode+")'>"+item.custitle+"</a>");
 			trEl.html(thEl).append(tdEl);
 			$("#custextTable tbody").append(trEl);
 			
 		})
 	}
-
+	function custextShow(code){
+		location.href="<c:url value='/manager/custext/custextList.do?custextCode="+code+"'/>";
+	}
+	
+	
 </script>
           
           <!-- 여기가 top이였음 -->

@@ -97,11 +97,12 @@ padding: 5px;
 					$('#totalPrice').val(sum);
 				 
 		  });
-	  
 	 
+
 	  	var sum=0;
 		var eachprice=0;	  
 	  $('button[name=pay]').click(function(){
+		
 		  
 		  sum=0;
 		  
@@ -115,13 +116,14 @@ padding: 5px;
 		  $('input[name=totalPrice]').val(sum);
 		  $('.workdate1').val('');
 		  
-		  
-		  var scode=$(this).parents("div[name=divcolor]").find("input[name=serviceCode1]").val();
+		  var scode=$(this).parents("div[name=divcolor]").find("input[name=serviceCode]").val();
 		  
 		  eachprice=$(this).parents("div[name=divcolor]").find("input[name=sprice]").val();
 		  $('#serviceName').text($(this).parents("div[name=divcolor]").find("input[name=name]").val());
-		  $('input[name=serviceCode]').val(scode);
 		 // $('#servicePrice').text(eachprice+"원");
+		  $('.serCode').val($(this).parents("div[name=divcolor]").find("input[name=serviceCode]").val()); 
+		 
+		
 		 
 		  
 		  /* checkbox 체크될때마다 체크개수, 가격 변동 */
@@ -210,7 +212,7 @@ padding: 5px;
 						$(".selectclass").val("2").prop("selected", true);
 						//$('input[title=price]').attr('value','0');
 					}
-			});
+			});//chkall click
 			 
 			  
 		  $('input[type=checkbox]:checked').each(function(){
@@ -299,7 +301,6 @@ padding: 5px;
 						var param=$("#frmList").serialize();
 						var length=  $('.check:checked').length;
 						var totalprice=$('#totalPrice').val();
-						//var merchantId=$('#merchantId').val();
 						
 						$.ajax({
 							url : "<c:url value='/service/ajaxpayList.do'/>",
@@ -345,7 +346,6 @@ padding: 5px;
 											        msg += ' : ' + rsp.error_msg;
 											    }
 											    alert(msg);
-											    
 											}); 
 									}
 								 }else{
@@ -356,6 +356,7 @@ padding: 5px;
 							},
 							error : function(xhr, status, error) {
 								alert(status + ":" + error);
+								event.preventDefault();
 							}
 						});//ajax
 				 }
@@ -395,7 +396,7 @@ padding: 5px;
     <c:forEach var="serviceVo" items="${serviceList}">
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card text-center p-table" id="divcolor" name="divcolor">
-            <input type="hidden" id="serviceCode1" name="serviceCode1" value="${serviceVo.serviceCode }">
+            <input type="hidden" id="serviceCode" name="serviceCode" value="${serviceVo.serviceCode }">
             <input type="hidden" name="content" value="${serviceVo.serviceContent }">
                 <div class="card-header">
                     <h3 class="p-name p-name">${serviceVo.serviceName }</h3>
@@ -406,11 +407,11 @@ padding: 5px;
 
                     <ul class="list-unstyled"> 
                         <li>${serviceVo.serviceContent }</li>
-                        <li>노출위치 :  ${serviceVo.serviceName }</li>
+                        <li>노출위치 : 첫 상단 ${serviceVo.serviceName }</li>
                         <li>부가서비스 : 채용관 상단고정</li>
                         <li>PC웹:  ${serviceVo.serviceContent }</li>
-                        <li>모바일 :  ${serviceVo.serviceName }</li>
-                        <li>매월1일</li>
+                        <li>원하는 채용공고와 날짜 선택가능</li>
+                        <li>표시된 가격은 1일 비용</li>
                     </ul>
                     <input type="hidden" name="name" value="${serviceVo.serviceName }">
                      <input type="hidden" name="sprice" value="${serviceVo.servicePrice }">
@@ -459,11 +460,10 @@ padding: 5px;
 				<c:forEach var="jobopeningVo" items="${list }">
 				<form id="frmList" method="post" name="frmList"> 
 				
-						<input type="hidden" name="merchantId" id="merchantId">
 						<%-- <input type="hidden" name="payItems[${idx }].paymentway">
 						<input type="hidden" name="payItems[${idx }].progress"> --%>
 						<input type="hidden" value="${memberVo.memberCode }" name="payItems[${idx }].memberCode">
-						<input type="hidden" value="1" name="payItems[${idx }].serviceCode">
+						<input type="hidden" name="payItems[${idx }].serviceCode" class="serCode">
 						<%-- <input type="hidden" value="${jobopeningVo.jobopening }" name="jobno" id="jobnoparam"> --%>
 					<tr> 
 						<td align="center">
@@ -475,7 +475,7 @@ padding: 5px;
 						${fn:substring(jobopeningVo.workdate,0,10) }
 						 ~ 	${fn:substring(jobopeningVo.endDate,0,10) } </td>  
 						<td align="center">
-						 <c:import url="../inc/date.jsp">
+						 <c:import url="../main/inc/date.jsp">
 							<c:param name="name" value="payItems[${idx }].paystartDate"></c:param> 
 							<c:param name="id" value="payItems[${idx }].paystartDate"></c:param> 
 						 </c:import> 

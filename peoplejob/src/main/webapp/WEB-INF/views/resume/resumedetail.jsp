@@ -11,6 +11,7 @@ form {
     margin: 0 auto;
     border:1px;
  	    margin-left: 14.2%;
+ 	    padding: 20px;
 }
 
 button.btn.btn-success {
@@ -50,7 +51,7 @@ div#imgDiv {
 }
 p.lead.mb-7 {
     margin: 2px;
-    font-family: serif;
+    
 }
 
 div#memberinfo {
@@ -72,9 +73,7 @@ div#hopeworkinfo {
     border: 1px solid lightgray;
         padding: 17px;
 }
-h2.mb-5 {
-    font-weight: bold;
-}
+
 span.glyphicon.glyphicon-star {
     padding-bottom: 18px;
 }
@@ -94,15 +93,38 @@ p.lead.mb-7 {
     padding-bottom: 22px;
 }
 .center2 {
-    margin-left: 1086px;
+    margin-left:  1037px;
     margin-top: -16px;
     
 }
-p.lead.mb-7 {
-    font-weight: bold;
+label{
+font-weight: 1;
 }
 h2.mb-5 {
     color: green;
+        font-size: 27px;
+}
+.text-primary {
+    color: #0ac323!important;
+}
+span.glyphicon.glyphicon-user {
+  
+    font-size: 18px;
+
+}
+span {
+        font-size: 18px;
+}
+@media (min-width: 768px)
+.lead {
+    font-size: 26px;
+}
+
+span.text-primary {
+    font-size: 35px;
+}
+span#text-resume {
+    font-size: 18px;
 }
 </style>
 <script type="text/javascript">
@@ -130,39 +152,7 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
 
 	<form name="frm1" method="post" 
 	action="<c:url value='/resume/resumedetail.do'/>" enctype="multipart/form-data">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">Clarence Taylor</span>
-      <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-      </span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">기본정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#experience">경력사항</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#education">학력사항</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#skills">자격증/어학</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#interests">희망근무</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#awards">수상내역</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  
 <div class="center2" >
 		<button type="button" class="btn btn-success"><a href="<c:url value='/resume/edit.do?resumeCode=${param.resumeCode}'/>">수정</a></button> 
 		<button type="button" class="btn btn-success"><a href="<c:url value='/resume/delete.do?resumeCode=${param.resumeCode}'/>">삭제</a></button> 
@@ -186,15 +176,15 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
         	&nbsp;&nbsp;<br>
  				
         <div class="subheading mb-5">
-        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>생년월일:<span>${vo1.birth}</span>
+        <span class="glyphicon glyphicon-gift" aria-hidden="true">생년월일:<span>${vo1.birth}</span></span>
         &nbsp;&nbsp;
-        	<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>성별:<span>${vo1.membergender}</span>
-        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>(${vo1.zipcode})</span>&nbsp;<span>${vo1.address}</span>&nbsp;<span>${vo1.addressdetail}</span><br><br>
-        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span><span>${vo1.tel}</span><br><br>
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:${vo1.email}">${vo1.email}</a>
+        	<span class="glyphicon glyphicon-star-empty" aria-hidden="true">성별:<span>${vo1.membergender}</span></span>
+        <span class="glyphicon glyphicon-globe" aria-hidden="true"><span>(${vo1.zipcode})</span></span>&nbsp;<span>${vo1.address}</span>&nbsp;<span>${vo1.addressdetail}</span><br><br>
+        <span class="glyphicon glyphicon-phone" aria-hidden="true"><span>${vo1.tel}</span></span><br><br>
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"><a href="mailto:${vo1.email}">${vo1.email}</a></span>
         </div>
         
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>자기소개:<span>${vo.introduce}</span>
+        <span class="glyphicon glyphicon-user" aria-hidden="true">자기소개:<span>${vo.introduce}</span></span>
         
       </div>
       </div>
@@ -203,22 +193,22 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
     <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center redetail" id="experience">
-      <div class="w-100">
+      <div class="w-100"><div class="subheading mb-3">
         <h2 class="mb-5">경력사항</h2>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">경력구분: <span>${vo4.workcheck}</span></h3><br><br>
-            <div class="subheading mb-3"><span class="glyphicon glyphicon-briefcase" aria-hidden="true">회사명</span> <span>${vo4.companyname}</span></div><br>
-            		<span class="glyphicon glyphicon-briefcase" aria-hidden="true">근무기간:${vo4.workterm}~${vo4.workterm2}</span>
+            <span>경력구분: ${vo4.workcheck}</span><br><br>
+            <span>회사명 ${vo4.companyname}</span><br>
+            		<span>근무기간:${vo4.workterm}~${vo4.workterm2}</span>
             		&nbsp;&nbsp;<br>
-            		<span class="glyphicon glyphicon-briefcase" aria-hidden="true">${vo4.workcondition}</span>&nbsp;&nbsp;
+            		<span>${vo4.workcondition}</span>&nbsp;&nbsp;
             		<span>직종:${vo4.chargework}</span>&nbsp;&nbsp;
-            		<span>직급:${vo4.jobgrade}</span>
+            		<span>직급:${vo4.jobgrade}</span></div>
           </div>
         </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">이력서 등록일:${vo.resumeRegdate}</span>
+            <span class="text-primary" id="text-resume">이력서 등록일:${vo.resumeRegdate}</span>
           </div>
 
        <!--  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -261,14 +251,14 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
     <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center redetail" id="education">
-      <div class="w-100">
+      <div class="w-100"> 
         <h2 class="mb-5">학력</h2>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0"><span class="glyphicon glyphicon-education" aria-hidden="true">학교명:</span> <span>${vo3.schoolname}</span></h3><br>
-            <div class="subheading mb-3"><span class="glyphicon glyphicon-education" aria-hidden="true">전공:</span> <span>${vo3.major}</span></div>
-            <div>지역:<span>${vo3.schoollocal}</span></div><br>
+            <h3 class="mb-0"><span>학교명: ${vo3.schoolname}</span></h3><br>
+            <div class="subheading mb-3"><span>전공: ${vo3.major}</span></div>
+            <div><span>지역:${vo3.schoollocal}</span></div><br>
             <!-- <p>GPA: 3.23</p> -->
             <span >졸업년도:<span>${vo3.graduate}</span></span>
             ~<span>${vo3.graduate2}</span>
@@ -298,22 +288,22 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
         <h2 class="mb-5">자격증/어학</h2>
 
         <div class="certiinfo">
-        <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.certificationtype}</span>
+         <span>${vo5.certificationtype}</span>
 				
- 		 <ul class="list-inline dev-icons">
+ 		 <ul >
 			<c:if test="${vo5.certificationtype=='자격증/면허증,어학시험'}"> 
-			<span class="glyphicon glyphicon-card" aria-hidden="true" style="font-weight: bold">	${fn:substring(vo5.certificationtype, 0,6)}</span> 
+				<span class="fa-li fa fa-check">${fn:substring(vo5.certificationtype, 0,6)}</span>
           <li class="list-inline-item">
           
-            <i class="fab fa-html5"> </i><label for="lName">자격증명:</label>
+            <i > </i><span >자격증명:</span>
  				 <span>${vo6.lName}</span>
           </li>
           <li class="list-inline-item">
-            <i class="fab fa-css3-alt"></i><label for="lInstitution">발행처/기관:</label>
+            <i ></i><span >발행처/기관:</span>
  				 <span>${vo6.lInstitution}</span>
           </li>
-          <li class="list-inline-item">
-            <i class="fab fa-js-square"></i><label for="lGetdate">취득일:</label>
+          <li >
+            <i ></i><span>취득일:</span>
  				 <span>${vo6.lGetdate}</span>
           </li>
            
@@ -323,30 +313,30 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
    
         <ul class="fa-ul mb-0">
         <c:if test="${vo5.certificationtype=='자격증/면허증,어학시험'}"> 
-				<span class="glyphicon glyphicon-card" aria-hidden="true" style="font-weight: bold">${fn:substring(vo5.certificationtype, 8,12)}</span><br><br> 
+				<span class="fa-li fa fa-check">${fn:substring(vo5.certificationtype, 8,12)}</span><br><br> 
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="language">언어:</label>
+             <i></i>
+            <span >언어:</span>
  				 <span>${vo5.language}</span></li>
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="institute">발행처/기관:</label>
+            <i ></i>
+            <span>발행처/기관:</span>
  				 <span>${vo5.institute}</span></li>
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="langlicencename">시험종류:</label>
+            <i ></i>
+            <span>시험종류:</span>
  				 <span>${vo5.langlicencename}</span></li>
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="langpoint">시험점수:</label>
+            <i ></i>
+            <span>시험점수:</span>
  				 <span>${vo5.langpoint}</span></li>
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="langGrade">시험급수:</label>
+            <i ></i>
+            <span>시험급수:</span>
  				 <span>${vo5.langGrade}</span></li>
           <li>
-            <i class="fa-li fa fa-check"></i>
-            <label for="langGetdate">취득일:</label>
+            <i ></i>
+            <span>취득일:</span>
  				 <span>${vo5.langGetdate}</span>
             	
 				</li>
@@ -362,17 +352,17 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
       <div class="w-100">
         <h2 class="mb-5">희망근무</h2>
         <div id="hopeworkinfo">
-       	 <span class="glyphicon glyphicon-star" aria-hidden="true">근무형태:</span><span>${vo2.hopeworkform}</span><br><br>
-       	 <span class="glyphicon glyphicon-star" aria-hidden="true">희망연봉:</span> <span>${vo2.hopepay}</span><br><br>
-       	 <span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)시도:</span> <span>${vo7.sido}</span><br><br>
-       	 <span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)구군:</span> <span>${vo8.gugun}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종1차:</span> <span>${vo9.btypename1}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종2차:</span> <span>${vo10.btypename2}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종3차:</span> <span>${vo11.btypename3}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">직종1차:</span> <span>${vo12.firstname}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">직종2차:</span> <span>${vo13.secondname}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">직종3차:</span> <span>${vo14.thirdname}</span><br><br>
- 		<span class="glyphicon glyphicon-star" aria-hidden="true">근무일시:</span> <span>${vo2.hopeworkdate}</span><br>
+       	<span> 근무형태:${vo2.hopeworkform}</span><br><br>
+       	<span> 희망연봉: ${vo2.hopepay}</span><br><br>
+       	<span>(희망근무지역)시도: ${vo7.sido}</span><br><br>
+       	 <span>(희망근무지역)구군: ${vo8.gugun}</span><br><br>
+ 		 <span>(희망근무지역)업종1차:${vo9.btypename1}</span><br><br>
+ 		<span>(희망근무지역)업종2차: ${vo10.btypename2}</span><br><br>
+ 		 <span>(희망근무지역)업종3차:${vo11.btypename3}</span><br><br>
+ 		<span>직종1차: ${vo12.firstname}</span><br><br>
+ 		<span>직종2차: ${vo13.secondname}</span><br><br>
+ 		<span>직종3차: ${vo14.thirdname}</span><br><br>
+ 		<span>근무일시:${vo2.hopeworkdate}</span><br>
       
       </div>
       </div>
@@ -415,12 +405,12 @@ $(window).scroll(function( ){  //스크롤이 움직일때마다 이벤트 발�
     </section>
     
       <div>
-			<label>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</label>
+			<span>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</span>
 			 <c:if test="${vo.opencheck=='Y'}">
-			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정:</span> <span>공개</span>
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정: <span>공개</span></span>
 			</c:if>
 			 <c:if test="${vo.opencheck=='N'}">
-			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정"</span> <span>공개안함</span>
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true">공개설정" <span>공개안함</span></span>
 			</c:if>
 		</div>
 		

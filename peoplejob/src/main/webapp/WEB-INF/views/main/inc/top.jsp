@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>People Job-index</title>
+	<title>People Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -201,12 +201,6 @@ button {
 						<ul class="main-menu" style="width: 1274px; margin-left: -115px;margin-right: -65px;">
 							<li class="mega-menu-item">
 								<a href="<c:url value='/company/jobopening_list.do'/>">채용정보</a>
-								<ul class="sub-menu" style="left:-60px;">
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">공채정보</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">직종별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">지역별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">업무별</a></li>
-								</ul>
 							</li>
 
 							<li class="mega-menu-item">
@@ -216,9 +210,9 @@ button {
 							<li style="width: 98px;">
 								<a href="">자료실</a>
 								<ul class="sub-menu">
-									<li><a href="">이력서 양식</a></li>
+									<li><a href="<c:url value='/references/resumeForm.do'/>">이력서 양식</a></li>
 									<li><a href="<c:url value='/references/news.do'/>">취업 뉴스</a></li>
-									<li><a href="<c:url value='/references/FreeLecture.do'/>">무료 강좌</a></li>
+									<li><a href="<c:url value='/main/chkLchar.do'/>">글자수 세기</a></li>
 									
 								</ul>
 							</li>
@@ -305,11 +299,10 @@ button {
                         <c:if test="${sessionScope.author_code==1 }">
                            <li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
                         </c:if>
-                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
-                           <li><a href="">스크랩현황</a></li>
-                        </c:if>
                         
+                         <c:if test="${!empty sessionScope.memberid }">
 								<li><a href="<c:url value='/custext/mycustext.do'/>">문의내역</a></li>
+						</c:if>
 								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
 									<li><a href="<c:url value='/mypage/corp/paymentDetail.do'/>">결제/이용 내역</a></li>
 								</c:if>

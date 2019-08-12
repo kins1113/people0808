@@ -8,7 +8,7 @@
 	#divBoardInfo span{width: 70px;}
 	#divBoardInfo{background: #f2f4f7;padding: 5px;}
 	div#cardBoduPostList { padding-top: 0;}
-	div#comboPost {background: #f2f4f7; height: 105px;margin-top: 3px;padding: 5px;}
+	div#comboPost {background: #f2f4f7;height: 83px;margin-top: 3px; padding: 8px; color: #0000009e;}
 </style>
 <c:set var="upage" value="N" />
 <script type="text/javascript">
@@ -23,8 +23,8 @@
 			success:function(res){
 				divEl.append("<h3>"+res.boardname+" 게시판 정보</h3><br>");
 				divEl.append("<span>댓 글  여부 : </span>").append("<span>"+res.commentage+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
-				divEl.append("<span>업로드 여부 : </span>").append("<span>"+res.upage+"</span><br>");
-				divEl.append("<span>업로드 사이즈 : </span>").append("<span>"+res.upsizeage+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+				divEl.append("<span>업로드 여부 : </span>").append("<span>"+res.upage+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+				//divEl.append("<span>업로드 사이즈 : </span>").append("<span>"+res.upsizeage+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
 				divEl.append("<span>업로드 갯수 : </span>").append("<span>"+res.upnumage+"</span>");
 				
 				$("#comboPost").html(divEl);
@@ -71,7 +71,6 @@
 				<div class="form-group" id="divTitle">
 					<label for="boardtitle">게시글 제목</label> 
 					<input type="text" name="boardtitle" id="boardtitle" class="form-control"  placeholder="게시글 제목"> 
-					<span class="mt-2 d-block">입력하세요.</span>
 				</div>
 					<div class="form-group" >
 					<label>게시글 내용</label>
@@ -85,7 +84,7 @@
 				<div>
 					<input type="submit" class="btn btn-primary btn-default" value="등록">
 					<input type="reset" class="btn btn-secondary btn-default" value="취소">
-					<a id="btpopupList" href="<c:url value='/manager/popup/popupList.do'/>"
+					<a id="btpopupList" href="<c:url value='/manager/post/postList.do?showKey=post'/>"
 						class="mb-1 btn btn-outline-success">목록으로</a> 
 				</div>
 

@@ -67,6 +67,7 @@
 	<select id="selectCustextManagerIndex" resultType="custextVo">
 		select * from (
 			SELECT * FROM CUSTEXT
+			where answercontent is null
 			order by cus_regdate desc
 		)where rownum <![CDATA[ <= ]]>5
 	</select>

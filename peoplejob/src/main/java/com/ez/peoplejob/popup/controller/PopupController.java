@@ -248,6 +248,16 @@ public class PopupController {
 		return list;
 	}
 	
+	@RequestMapping("/popupSizeCheng.do")
+	@ResponseBody
+	public int popupSizeChenge(@ModelAttribute PopupVO vo,
+			@RequestParam(required = false, defaultValue = "0") int width
+			) {
+		logger.info("ajax - 팝업 사이즈 변경 파라미터 vo={}",vo);
+		return popupService.popupSizeUpdate(vo);
+	}
+	
+	
 	
 	@RequestMapping("/testUpdate.do")
 	@ResponseBody
@@ -256,4 +266,5 @@ public class PopupController {
 		
 		return 1000000;
 	}
+	
 }

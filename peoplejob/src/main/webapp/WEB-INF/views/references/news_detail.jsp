@@ -2,184 +2,57 @@
     pageEncoding="UTF-8"%>
 <%@include file="../main/inc/top.jsp" %>
     
-	<!-- Breadcrumb -->
-	<div class="container">
-		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-			<div class="f2-s-1 p-r-30 m-tb-6">
-				<a href="index.html" class="breadcrumb-item f1-s-3 cl9">
-					Home 
-				</a>
-
-				<a href="blog-list-01.html" class="breadcrumb-item f1-s-3 cl9">
-					Blog 
-				</a>
-
-				<span class="breadcrumb-item f1-s-3 cl9">
-					 Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
-				</span>
+		
+<div class="row" style=" margin: 45px; ">
+	<div class="col-lg-12" style="min-height: 629px;">
+		<div class="card card-default" style="    width: 70%;
+    margin: 0 auto;
+		">
+			<div class="card-header card-header-border-bottom">
+				<h2 style="    font-size: 2.0em;
+    padding: 5px;
+    margin: 0;">인문계 ‘서비스직’ vs 이공계 ‘IT.연구개발직'</h2>
 			</div>
-
-			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
-				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-			
-	<!-- Content -->
-	<section class="bg0 p-b-70 p-t-5">
-		<!-- Title -->
-		<div class="bg-img1 size-a-18 how-overlay1" style="background-image: url(images/blog-detail-01.jpg);">
-			<div class="container h-full flex-col-e-c p-b-58">
-				<a href="#" class="f1-s-10 cl0 hov-cl10 trans-03 text-uppercase txt-center m-b-33">
-					Technology
-				</a>
-
-				<h3 class="f1-l-5 cl0 p-b-16 txt-center respon2">
-					Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
-				</h3>
-
-				<div class="flex-wr-c-s">
-					<span class="f1-s-3 cl8 m-rl-7 txt-center">
-						<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-							by John Alvarado
-						</a>
-
-						<span class="m-rl-3">-</span>
-
-						<span>
-							Feb 18
-						</span>
-					</span>
-
-					<span class="f1-s-3 cl8 m-rl-7 txt-center">
-						5239 Views
-					</span>
-
-					<a href="" class="f1-s-3 cl8 m-rl-7 txt-center hov-cl10 trans-03">
-						0 Comment
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Detail -->
-		<div class="container p-t-82">
-			<div class="row justify-content-center">
-				<div class="col-md-10 col-lg-8 p-b-100">
-					<div class="p-r-10 p-r-0-sr991">
-						<!-- Blog Detail -->
-						<div class="p-b-70">
-							<p class="f1-s-11 cl6 p-b-25">
-								Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo. Vivamus sapien arcu, mollis eu pharetra vitae, condimentum in orci. Integer eu sodales dolor. Maecenas elementum arcu eu convallis rhoncus. Donec tortor sapien, euismod a faucibus eget, porttitor quis libero. 
-							</p>
-
-							<p class="f1-s-11 cl6 p-b-25">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
-							</p>
-
-							<p class="f1-s-11 cl6 p-b-25">
-								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
-							</p>
-
-							<!-- Tag -->
-							<div class="flex-s-s p-t-12 p-b-15">
-								<span class="f1-s-12 cl5 m-r-8">
-									Tags:
-								</span>
-								
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Streetstyle
-									</a>
-
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Crafts
-									</a>
-								</div>
-							</div>
-
-							<!-- Share -->
-							<div class="flex-s-s">
-								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-									Share:
-								</span>
-								
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-facebook-f m-r-7"></i>
-										Facebook
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-twitter m-r-7"></i>
-										Twitter
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-google-plus-g m-r-7"></i>
-										Google+
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-pinterest-p m-r-7"></i>
-										Pinterest
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Leave a comment -->
-						<div>
-							<h4 class="f1-l-4 cl3 p-b-12">
-								Leave a Comment
-							</h4>
-
-							<p class="f1-s-13 cl8 p-b-40">
-								Your email address will not be published. Required fields are marked *
-							</p>
-
-							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
-
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Post Comment
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
+				<div class="card-body" id="cardBoduPostList">
+				<br>
+				<h1 style="margin:0 auto; text-align:center;">인문계 ‘서비스직’ vs 이공계 ‘IT.연구개발직'</h1>
+				<div style="font-size:1.3em; text-align:center; width:80%; margin:0 auto;">
+				<br><br><br><br>
+				잡코리아와 알바몬이 올해 구직활동을 한 취업준비생 4,656명을 대상으로 취업선호도를 조사해 발표했다. 
+				먼저 가장 취업하고 싶은 산업분야에 대해 질문한 결과 △서비스업이 23.1%로 1위를 차지했다.
+				다음으로 △미디어/광고업(14.0%) △제조/생산업(12.5%) △문화/예술/디자인업(10.7%) △판매/유통업(9.3%) △IT/정보통신업(8.0%) 등이 뒤를 이었다.
+<br><br>
+				특히 전공에 따라 취업을 희망하는 산업이 다르게 나타났다고 설명했다.
+				조사 결과 인문계열(33.9%)과 사회과학계열(34.2%) 전공 구직자가 가장 취업하고 싶어하는 산업은 △서비스업이었다. 
+				경상계열은 △금융/은행업(35.1%)을, 이공계열은 △제조/생산/화학업(31.4%)을 각각 가장 취업하고 싶은 산업으로 꼽았다.
+				 또 예체능계열은 △문화/예술/디자인업(46.9%)을, 의학계열은 △의료/제약업(63.8%), 사범계열은 △교육업(68.5%)을 각각 1위에 꼽았다.
 				
-				<div class="col-md-10 col-lg-4 p-b-100">
-					<div class="p-l-10 p-rl-0-sr991">
-						<!-- Banner -->
-						<div class="flex-c-s">
-							<a href="#">
-								<img class="max-w-full" src="images/banner-02.jpg" alt="IMG">
-							</a>
-						</div>
-					</div>
+								<div class="form-group" id="divTitle" style="    margin-top: 10px;">
+					<img src="<c:url value='/resources/main/images/newsdetail.jpg'/>" alt="IMG">
 				</div>
-			</div>
+					성별에 따른 산업 선호도도 달랐다. 남성구직자의 경우 △제조/생산/화학업 선호도가 19.1%로 가장 높았다. 다음으로 △서비스업(17.3%), △IT/정보통신업(15.1%)의 비중도 높은 편이었다. 반면 여성구직자는 △서비스업(26.7%) 선호도가 가장 높았고 △미디어/광고업(16.6%)이 그 뒤를 따랐다.
+
+ 
+
+전공계열별로 취업 희망 직무도 달랐다. 잡코리아X알바몬 설문결과 경상계열은 △재무/회계직(30.0%)을 가장 선호하는 직무로 꼽았다. 사회과학계열과 인문계열은 각각 18.4%, 22.1%로 △서비스직이 1위를 차지했지만, 사회과학은 △마케팅/홍보(15.4%)를, 인문은 △전문직(13.3%)을 2위로 꼽아 차이를 보였다. 이공계열은 △IT/연구개발직(28.6%)과 △생산/기술직(20.5%)을, 법학계열은 △전문직(24.1%)과 △인사.HR.총무(22.2%)를 가장 희망하는 직무로 꼽았다. 이외에도 의학계열은 △전문직, 사범계열은 △교육직이 각각 63.3%, 67.4%로 압도적으로 높았다.
+
+ 
+
+성별로는 남성구직자들은 여성구직자들에 비해 상대적으로 △IT/연구개발직(9.3%P↑)과 △생산/기술직(8.4%P↑)에 대해 선호하는 경향이 높았으며, 반면 여성들은 △서비스직(5.6%P↑)과 △재무.회계직(4.8%P↑) 선호 비율이 남성들에 비해 다소 높았다..
+
+ 
+
+한편, 취업을 선호하는 기업형태로는 △중소기업이 43.3%로 가장 높았으며, △대기업 23.2% △공기업 22.5% △외국계기업 10.9% 순이었다. 특히 중소기업 취업 선호도는 여성구직자들이 남성구직자들에 비해 12.0%P나 높았으며, 남성구직자들은 대기업 취업을 선호하는 경향이 여성들에 비해 8.4%P높았다. 
+이는 취업을 선호하는 기업을 선택하는 이유에서도 차이가 있었다. 오래 일할 수 있는 기업을 우선 순위로 선택하는 경향은 여성구직자(31.7%), 남성구직자(27.2%) 모두 비슷했지만, 남성구직자들은 상대적으로 △높은 연봉(4.2%P↑)을, 여성구직자들은 △고용의 안정성(4.5%P↑)을 좀 더 고려하는 것으로 나타났다.
+	
+	<br><br><br>
+	<input type="button" value="목록으로" onclick="location.href='<c:url value="/references/news.do"/>'" style="float:right; background-color: #17b978;padding:7px;"/>
 		</div>
-	</section>
-
-
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<span class="fas fa-angle-up"></span>
-		</span>
 	</div>
+</div>
+</div>
 
 
+</div>
 <!-- Footer -->
 <%@include file="../main/inc/bottom.jsp"%>

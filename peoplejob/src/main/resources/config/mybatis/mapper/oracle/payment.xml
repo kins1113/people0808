@@ -15,10 +15,10 @@
 	select count(*) from payment where jobopening=#{jobopening}
 	</select>
 	
-	<update id="cancelPay" parameterType="int">
+	<update id="cancelPay" parameterType="string">
 	update payment
 	set progress='결제취소요청'
-	where payment_code=#{paymentCode}
+	where to_char(paydate,'yyyy-MM-dd HH:mm:ss')=#{paydate}
 	</update>
 	
 	<select id="selectPaymentById" parameterType="string" resultType="map">

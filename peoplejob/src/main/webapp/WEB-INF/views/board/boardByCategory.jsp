@@ -240,13 +240,13 @@
  
  
  <div class="wraper" style="min-height: 710px;">
-				<div class="sidebar" style="width:210px; border:1px solid lightgray; height: 200px;    margin-top: 8px;">
+				<div class="sidebar" style="width:170px; border:1px solid lightgray; margin-top: 8px;    margin-right: 43px;">
 					<div id='cssmenu'>
-						<ul>
+						<ul style="width: 168px;">
 						<c:forEach var="boardVo" items="${boardkindlist }">
-						   <li><a href='#'><span>${boardVo.boardname }</span></a></li>
+						   <li><a href="<c:url value='/board/boardByCategory.do?boardCode=${boardVo.boardCode1 }'/>"><span>${boardVo.boardname }</span></a></li>
 						   </c:forEach>
-						   <li><a href='#'><span>공지사항</span></a></li>
+						   <li><a href="<c:url value='/notice/list.do'/>"><span>공지사항</span></a></li>
 						</ul>
 				</div>
 				</div>
@@ -290,6 +290,7 @@
 									<c:if test="${param.searchCondition=='boardcontent'}">
             		selected="selected"
             	</c:if>>내용</option>
+            
 
 							</select>
 
@@ -347,16 +348,32 @@
               <c:forEach var="map" items="${list }">
                 <tr style="background: white;">
 				   	<td>${i }</td>
-				   	<td><a href="<c:url value='/post/countUpdate.do?pk=${map["BOARD_CODE2"]}&boardCode=${map["BOARD_CODE"] }'/>" style="color:black;">
+				   	<td>
 				   	
+				   	<c:if test="${map['DELETECHECK']=='Y' }">
+							관리자에 의해 삭제된 글입니다.
+					</c:if>
+					
+					   	<c:if test="${map['DELETECHECK']=='N' }">
+				   	<a href="<c:url value='/post/countUpdate.do?pk=${map["BOARD_CODE2"]}&boardCode=${map["BOARD_CODE"] }'/>" style="color:black;">
+				   
 				   	<c:if test="${fn:length(map['BOARDTITLE'])>=30 }">
 						${fn:substring(map['BOARDTITLE'],0,30) }...</c:if>
 						<c:if test="${fn:length(map['BOARDTITLE'])<30 }">
 						${map['BOARDTITLE']}
 						
-						</a><c:if test="${map['COMMENTCNT']!=0 }">
+						</a>
+						
+						<c:if test="${map['NEW_IMG_TERM']<24 && map['DELETECHECK']=='N' }">
+							<img src="<c:url value='/resources/images/new.gif'/>" alt="new이미지">
+						</c:if>
+						<c:if test="${map['COMMENTCNT']!=0 && map['DELETECHECK']=='N' }">
 						<span style="color:green;">&nbsp;&nbsp;	( ${map['COMMENTCNT'] } ) </span>
 						</c:if>
+						
+							
+							
+						 </c:if>
 						 </c:if>
 						</td>
 				   	<td>
@@ -391,15 +408,11 @@
     color: white;">
           <!-- 페이지 처리 -->
           
-          <div class="divPage">
+          <div class="divPage" style="margin-left: 225px;">
 										<!-- 이전블럭으로 이동하기 -->
 										<c:if test="${pagingInfo.firstPage>1 }">
-												<a class="page-link" href="#"
-													aria-label="Previous"
-													onclick="pageFunc1(${pagingInfo.firstPage-1})"> <span
-														aria-hidden="true" class="mdi mdi-chevron-left"></span> <span
-														class="sr-only">Previous</span>
-												</a>
+												<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7" 
+												style="float: left;" onclick="pageFunc1(${pagingInfo.firstPage-1})"><</a>
 											</c:if>
 										<!-- 페이지 번호 추가 -->
 										<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -420,12 +433,8 @@
 
 										<!-- 다음 블럭으로 이동하기 -->
 										<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Next"
-												onclick="pageFunc1(${pagingInfo.lastPage+1})"> <span
-													aria-hidden="true" class="mdi mdi-chevron-right"></span> <span
-													class="sr-only">Next</span>
-											</a></li>
+											<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7" 
+												style="float: left;" onclick="pageFunc1(${pagingInfo.lastPage+1})">></a>
 										</c:if>
 							</div>
 				<div class="divSearch"></div>

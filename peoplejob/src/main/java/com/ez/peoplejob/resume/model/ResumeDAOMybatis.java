@@ -101,8 +101,8 @@ public class ResumeDAOMybatis implements ResumeDAO {
 	}
 
 	@Override
-	public List<ResumeVO> selectAll(SearchVO searscVo) {
-		List<ResumeVO> list=sqlsession.selectList(namespace+"selectSearch",searscVo);
+	public List<ResumeVO> selectSearch(Map<String, Object> map) {
+		List<ResumeVO> list=sqlsession.selectList(namespace+"selectSearch",map);
 		return list;
 	}
 

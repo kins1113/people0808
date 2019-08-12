@@ -33,7 +33,7 @@ input[name=searchKeyword]{width: 400px;margin-right: 3px;}
 .genderShow{width: 95px;margin: 10px 0 10px 5px;float: left;}
 .labelFont{width: 160px;}
 #cardBoduPostList table thead tr th:nth-of-type(1) {width: 1%; padding-left: 16px; padding-right: 0px;}
-#cardBoduPostList table thead tr th:nth-of-type(2) {width: 11.5%;}
+#cardBoduPostList table thead tr th:nth-of-type(2) {width: 12.5%;}
 #cardBoduPostList table thead tr th:nth-of-type(3) {width: 18%;}
 #cardBoduPostList table thead tr th:nth-of-type(4) {width: 39%;}
 #cardBoduPostList table thead tr th:nth-of-type(5) {width: 20%;}
@@ -46,6 +46,10 @@ input[name=searchKeyword]{width: 400px;margin-right: 3px;}
 #cardBoduPostList table tbody tr td:nth-of-type(6) {width: 10px;}
 input#endDate {    margin-bottom: 4px;}
 hr {MARGIN: 0;}
+.divServiceInfo{overflow: scroll;height: 50px;}
+.divServiceInfo::-webkit-scrollbar {display:none;}
+span.infoSpan {    font-size: 0.9em;    padding-left: 1px;    position: relative;    top: 11px;}
+.custom-select{background-image: none; background: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -256,7 +260,13 @@ hr {MARGIN: 0;}
 			}
 		});
 	}
-	
+
+	//채용공고 상세보기 함수
+	function showJobopening(jobopening){
+		open("<c:url value='/company/jobopening_view.do?jobopening="+jobopening+"'/>","체용공고",
+				"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
+				)
+	}
 	//메서드추가
 	
 	//페이지 처리 함수
@@ -565,7 +575,7 @@ hr {MARGIN: 0;}
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사명/담당자/아이디</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="birth">채용정보</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="birth">서비스 정보</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">편집</a></th>
+							<!-- <th scope="col"><a href="#" class="fileterCode" id="membergender">편집</a></th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -584,12 +594,25 @@ hr {MARGIN: 0;}
 								</td>
 								<td>${memberVo['MEMBER_CODE']} / ${memberVo['COMPANY_CODE'] }</td>
 								<td>${memberVo['COMPANYNAME']} <br> ${memberVo['MEMBERNAME']} / ${memberVo['MEMBERID']}</td>
-								<td><a href="#">${memberVo['JOBTITLE']}</a><hr>지역 : ${memberVo['LOCALCHECK']} / 
+								<td><a href="#" onclick="showJobopening(${memberVo['JOBOPENING']})">${memberVo['JOBTITLE']}</a><hr>지역 : ${memberVo['LOCALCHECK']} / 
 										등록일 : <fmt:formatDate value="${memberVo['JOBREGDATE']}" pattern="yyyy-MM-dd"/> / 
 										모집 종료일 : <fmt:formatDate value="${memberVo['END_DATE']}" pattern="yyyy-MM-dd"/>
 										</td>
-								<td></td>
-								<td></td>
+								<td>
+								<div class="divServiceInfo">
+									<c:set var="count" value="0"/>
+									<c:forEach var="service" items="${serList}">
+										<c:if test="${memberVo['JOBOPENING'] eq service['JOBOPENING'] }">
+											<div class="divTitleCode">${service['SERVICENAME']} : <fmt:formatDate value="${service['PAYEND_DATE']}" pattern="yyyy-MM-dd"/></div>
+											<c:set var="count" value="${count+1 }"/>
+										</c:if>
+									</c:forEach>
+									<c:if test="${count == 0}">
+										가입한 서비스가 없습니다.
+									</c:if>
+								</div>
+								</td>
+								<!-- <td></td> -->
 							</tr>
 						</c:forEach>
 					</c:if>

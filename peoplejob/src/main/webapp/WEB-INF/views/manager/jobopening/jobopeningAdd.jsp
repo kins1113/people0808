@@ -38,6 +38,7 @@
 	#infoTable th {text-align: center;    border: 1.5px solid;    padding: 4px;    background: aliceblue;    color: #000000a6;}
 	#infoTable td {border-bottom: 1px dashed #204bab91;}
 	#infoTable tr:last-of-type td {border-bottom: none;}
+select.ui-datepicker-year {    height: 22px;}
 	</style>
 <script src="<c:url value='/resources/js/resumeHope.js'/>"></script>	
 <script type="text/javascript">
@@ -149,7 +150,7 @@
 									var tdEl1=$("<td>"+item["MEMBERID"]+"</td>");
 									var tdEl2=$("<td>"+item["COMPANYNAME"]+"</td>");
 									var tdEl3=$("<td>"+item["BUSSINESS_NUMBER"]+"</td>");
-									var tdEl4=$('<td><button onclick="setInfo('+item['MEMBER_CODE']+')">등록</button></td>');
+									var tdEl4=$('<td><button type="button" onclick="setInfo('+item['MEMBER_CODE']+')">등록</button></td>');
 									trEl2.html(tdEl1).append(tdEl2).append(tdEl3).append(tdEl4);
 									infoT.append(trEl2);
 								});
@@ -193,12 +194,13 @@
 	}
 	
 	function setInfo(mCode){
-		alert("mCode="+mCode);
+		//alert("mCode="+mCode);
 		 $.ajax({
 				url:"<c:url value='/manager/member/getMemberSelectMCode.do'/>",
 				type:"post",
 				data:"mCode="+mCode,
 				success:function(res){
+					//alert("성공"+res)
 					$("input[name=companyCode]").val(res.companyCode);
 					$("#membername").val(res.membername);
 					$("#tel").val(res.tel);
@@ -228,7 +230,7 @@
 		<tr>
 			<th><label for="membername">담당자</label></th>
 			<td>
-				<input type="text" class="form-control inputSizeS" name="membername" id="membername" placeholder="담당자를 입력하세요" >
+				<input type="text" class="form-control inputSizeS" name="membername" id="membername" placeholder="담당자를 입력하세요"  readonly="readonly">
 			</td>
 		</tr>
 		<!-- <tr>
@@ -238,13 +240,13 @@
 		<tr>
 			<th><label for="email">이메일</label></th>
 			<td>
-			<input type="text" class="form-control inputSizeS" name="email" id="email" placeholder="이메일을 입력하세요">
+			<input type="text" class="form-control inputSizeS" name="email" id="email" placeholder="이메일을 입력하세요" readonly="readonly">
 	</td>	
 </tr>
 <tr>
 	<th><label for="tel">전화번호</label></th>
 	<td>
-		<input type="text" class="form-control inputSizeS" name="tel" id="tel" placeholder="010-0000-0000">
+		<input type="text" class="form-control inputSizeS" name="tel" id="tel" placeholder="010-0000-0000" readonly="readonly">
 	</td>
 </tr>
 <!-- <tr>

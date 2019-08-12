@@ -30,7 +30,7 @@ public interface ResumeService {
 	
 	public ResumeVO selectByMemverid (String memberid);
 	
-	public List<ResumeVO> selectAll(SearchVO searscVo);
+	public List<ResumeVO> selectSearch(Map<String, Object> map);
 	
 	public ResumeVO selectBylanglicenceCode(int langlicenceCode);
 	public ResumeVO selectBylicenceCode(int lNo);

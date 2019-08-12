@@ -91,7 +91,7 @@ table{
 						</td>
 						<td>${serviceName }</td>
 						<td>${sessionScope.memberName }</td>
-						<td>${map['PAYMENTWAY'] }</td> 
+						<td>카드</td> 
 						<td>일시불</td>
 						<td>
 						<fmt:formatDate value="${map['PAYDATE'] }" pattern="yyyy/MM/dd HH:mm:ss"/></td>

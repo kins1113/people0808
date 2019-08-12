@@ -45,25 +45,26 @@ select#hopepay {
 select#hopeworkdate {
     height: 35px;
 }
+section#registerds {
+    margin: 12px;
+    background: white;
+    padding: 20px;
+}
 section#registerds1 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds2 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds3 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds4 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 h3 {
     color: green;
@@ -117,10 +118,198 @@ p.lead.mb-7 {
 h2.mb-5 {
     color: green;
 }
+select#major {
+    height: 33px;
+}
+select#chargework {
+    height: 33px;
+}
+select#jobgrade {
+    height: 33px;
+}
+select#lName {
+    height: 33px;
+}
+select#language {
+    height: 33px;
+}
+select#langlicencename {
+    height: 33px;
+}
+div#certificationtype {
+    padding: 13px;
+}
+div#langcert {
+    padding: 13px;
+}
+div#award {
+padding: 13px;
+}
+div#hopework {
+    padding: 13px;
+}
+
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
-	$('textarea[value=introduce]').html('${vo.introduce}');
+	 //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#majorinput").hide();
+
+
+
+	$("#major").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#major").val() == "direct") {
+
+				$("#majorinput").show();
+
+			}  else {
+
+				$("#majorinput").hide();
+
+			}
+
+			
+
+		}) 
+
+		
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#chargeworkinput").hide();
+
+
+
+	$("#chargework").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#chargework").val() == "direct") {
+
+				$("#chargeworkinput").show();
+
+			}  else {
+
+				$("#chargeworkinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#jobgradeinput").hide();
+
+
+
+	$("#jobgrade").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#jobgrade").val() == "direct") {
+
+				$("#jobgradeinput").show();
+
+			}  else {
+
+				$("#jobgradeinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#lNameinput").hide();
+
+
+
+	$("#lName").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#lName").val() == "direct") {
+
+				$("#lNameinput").show();
+
+			}  else {
+
+				$("#lNameinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#languageinput").hide();
+
+
+
+	$("#language").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#language").val() == "direct") {
+
+				$("#languageinput").show();
+
+			}  else {
+
+				$("#languageinput").hide();
+
+			}
+
+			
+
+		}) 
+    //직접입력 인풋박스 기존에는 숨어있다가
+
+	$("#langlicencenameinput").hide();
+
+
+
+	$("#langlicencename").change(function() {
+
+			
+
+	                //직접입력을 누를 때 나타남
+
+			if($("#langlicencename").val() == "direct") {
+
+				$("#langlicencenameinput").show();
+
+			}  else {
+
+				$("#langlicencenameinput").hide();
+
+			}
+
+			
+
+		}) 
+
+		
+	
+	
+	
+	$('textarea[name="introduce"]').html('${vo.introduce}');
 	//자격증을 가져오는
 	$("#certification").click(function(){
 		getCertificate();
@@ -808,7 +997,7 @@ $(document).ready(function (){
        
  
 		
-		<section id="registerds1" >
+		<section id="registerds" >
 	<div>        
         <h3>이력서 제목</h3>
         <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox" value="${vo.resumeTitle }"  style="ime-mode:active">
@@ -854,7 +1043,7 @@ $(document).ready(function (){
         	class="width_80">
     </div>
     </section>
-    <section id="registerds2">
+    <section id="registerds">
     <h3>학력사항</h3>
     <div>
         <label for="education">학력사항</label>&nbsp;
@@ -958,18 +1147,94 @@ $(document).ready(function (){
         </select>   
        </div>
        <div>
-       <table>
-       <tr>
-			<th>전공</th>
-		<td colspan="1">
-		<select class="custom-select my-1 FST" name="academicCode" data-name="major" id="selectMajor">
-		<option <c:if test="${vo3.major}">            	
+     <label>전공</label>
+
+       		<select class="form-control" name="major" id="major" >
+        	<option value="전공" <c:if test="${vo3.major=='전공'}">            	
             		selected="selected"
             	</c:if>>전공</option>
-		</select>
-		</td>
-		</tr>
-		</table>
+        	<option value="가공" <c:if test="${vo3.major=='가공'}">            	
+            		selected="selected"
+            	</c:if>>가공</option>
+
+        	<option value="가구디자인" <c:if test="${vo3.major=='가구디자인'}">            	
+            		selected="selected"
+            	</c:if>>가구디자인</option>
+        	<option value="가스냉동" <c:if test="${vo3.major=='가스냉동'}">            	
+            		selected="selected"
+            	</c:if>>가스냉동</option>
+        	<option value="가정" <c:if test="${vo3.major=='가정'}">            	
+            		selected="selected"
+            	</c:if>>가정</option>
+        	<option value="가정경제" <c:if test="${vo3.major=='가정경제'}">            	
+            		selected="selected"
+            	</c:if>>가정경제</option>
+        	<option value="가정과교육" <c:if test="${vo3.major=='가정과교육'}">            	
+            		selected="selected"
+            	</c:if>>가정과교육</option>
+        	<option value="가정관리학" <c:if test="${vo3.major=='가정관리학'}">            	
+            		selected="selected"
+            	</c:if>>가정관리학</option>
+        	<option value="가정복지" <c:if test="${vo3.major=='가정복지'}">            	
+            		selected="selected"
+            	</c:if>>가정복지</option>
+        	<option value="가정의학" <c:if test="${vo3.major=='가정의학'}">            	
+            		selected="selected"
+            	</c:if>>가정의학</option>
+        	<option value="가정학" <c:if test="${vo3.major=='가정학'}">            	
+            		selected="selected"
+            	</c:if>>가정학</option>
+        	<option value="가족관계" <c:if test="${vo3.major=='가족관계'}">            	
+            		selected="selected"
+            	</c:if>>가족관계</option>
+        	<option value="가축질병학" <c:if test="${vo3.major=='가축질병학'}">            	
+            		selected="selected"
+            	</c:if>>가축질병학</option>
+        	<option value="가축학" <c:if test="${vo3.major=='가축학'}">            	
+            		selected="selected"
+            	</c:if>>가축학</option>
+        	<option value="간호" <c:if test="${vo3.major=='간호'}">            	
+            		selected="selected"
+            	</c:if>>간호</option>
+        	<option value="간호교육" <c:if test="${vo3.major=='간호교육'}">            	
+            		selected="selected"
+            	</c:if>>간호교육</option>
+        	<option value="간호교육학" <c:if test="${vo3.major=='간호교육학'}">            	
+            		selected="selected"
+            	</c:if>>간호교육학</option>
+        	<option value="건설경영학" <c:if test="${vo3.major=='건설경영학'}">            	
+            		selected="selected"
+            	</c:if>>건설경영학</option>
+        	<option value="개발행정학" <c:if test="${vo3.major=='개발행정학'}">            	
+            		selected="selected"
+            	</c:if>>개발행정학</option>
+        	<option value="경영" <c:if test="${vo3.major=='경영'}">            	
+            		selected="selected"
+            	</c:if>>경영</option>
+        	<option value="경제" <c:if test="${vo3.major=='경제'}">            	
+            		selected="selected"
+            	</c:if>>경제</option>
+        	<option value="고고미술학" <c:if test="${vo3.major=='고고미술학'}">            	
+            		selected="selected"
+            	</c:if>>고고미술학</option>
+        	<option value="낙농학" <c:if test="${vo3.major=='낙농학'}">            	
+            		selected="selected"
+            	</c:if>>낙농학</option>
+        	<option value="내과" <c:if test="${vo3.major=='내과'}">            	
+            		selected="selected"
+            	</c:if>>내과</option>
+        	<option value="도시계획" <c:if test="${vo3.major=='도시계획'}">            	
+            		selected="selected"
+            	</c:if>>도시계획</option>
+        	<option value="도시공학" <c:if test="${vo3.major=='도시공학'}">            	
+            		selected="selected"
+            	</c:if>>도시공학</option>
+        	<option value="direct" <c:if test="${vo3.major=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="majorinput" name="major" value="${vo3.major }"/>
+       
        </div>
        <div>
        <label>학위</label>
@@ -992,7 +1257,7 @@ $(document).ready(function (){
         </select>
        </div>
        </section>	
-    <section id="registerds3">
+    <section id="registerds">
     <h3>경력사항</h3>
     <div>
     <label for="workcheck">경력구분</label>&nbsp;
@@ -1029,33 +1294,152 @@ $(document).ready(function (){
         </select>
 	</div>
 	<div>
-      	<table>
-       <tr>
-			<th>직종</th>
-		<td colspan="1">
-		<select class="custom-select my-1 FST" name="dvCode"  id="selectcareer">
-		<option <c:if test="${vo4.chargework}">            	
+    <label for="chargework">직종</label>
+		<select class="form-control" name="chargework" id="chargework" >
+        	<option value="직종" <c:if test="${vo4.chargework=='직종'}">            	
             		selected="selected"
             	</c:if>>직종</option>
-		</select>
-		</td>
-		</tr>
-		</table>
+        	<option value="급여관리" <c:if test="${vo4.chargework=='급여관리'}">            	
+            		selected="selected"
+            	</c:if>>급여관리</option>
+        	<option value="기획" <c:if test="${vo4.chargework=='기획'}">            	
+            		selected="selected"
+            	</c:if>>기획</option>
+        	<option value="전략기획" <c:if test="${vo4.chargework=='전략기획'}">            	
+            		selected="selected"
+            	</c:if>>전략기획</option>
+        	<option value="사업기획" <c:if test="${vo4.chargework=='사업기획'}">            	
+            		selected="selected"
+            	</c:if>>사업기획</option>
+        	<option value="사업제휴" <c:if test="${vo4.chargework=='사업제휴'}">            	
+            		selected="selected"
+            	</c:if>>사업제휴</option>
+        	<option value="타당성분석" <c:if test="${vo4.chargework=='타당성분석'}">            	
+            		selected="selected"
+            	</c:if>>타당성분석</option>
+        	<option value="MBA출신" <c:if test="${vo4.chargework=='MBA출신'}">            	
+            		selected="selected"
+            	</c:if>>MBA출신</option>
+        	<option value="경영기획" <c:if test="${vo4.chargework=='경영기획'}">            	
+            		selected="selected"
+            	</c:if>>경영기획</option>
+        	<option value="조직관리" <c:if test="${vo4.chargework=='조직관리'}">            	
+            		selected="selected"
+            	</c:if>>조직관리</option>
+        	<option value="변화관리" <c:if test="${vo4.chargework=='변화관리'}">            	
+            		selected="selected"
+            	</c:if>>변화관리</option>
+        	<option value="경영혁신·PI" <c:if test="${vo4.chargework=='경영혁신·PI'}">            	
+            		selected="selected"
+            	</c:if>>경영혁신·PI</option>
+        	<option value="출판기획" <c:if test="${vo4.chargework=='출판기획'}">            	
+            		selected="selected"
+            	</c:if>>출판기획</option>
+        	<option value="인수·합병" <c:if test="${vo4.chargework=='인수·합병'}">            	
+            		selected="selected"
+            	</c:if>>인수·합병</option>
+        	<option value="COO" <c:if test="${vo4.chargework=='COO'}">            	
+            		selected="selected"
+            	</c:if>>COO</option>
+        	<option value="CEO" <c:if test="${vo4.chargework=='CEO'}">            	
+            		selected="selected"
+            	</c:if>>CEO</option>
+        	<option value="기획조사" <c:if test="${vo4.chargework=='기획조사'}">            	
+            		selected="selected"
+            	</c:if>>기획조사</option>
+        	<option value="자산관리" <c:if test="${vo4.chargework=='자산관리'}">            	
+            		selected="selected"
+            	</c:if>>자산관리</option>
+        	<option value="특허업무" <c:if test="${vo4.chargework=='특허업무'}">            	
+            		selected="selected"
+            	</c:if>>특허업무</option>
+        	<option value="법무" <c:if test="${vo4.chargework=='법무'}">            	
+            		selected="selected"
+            	</c:if>>법무</option>
+        	<option value="총무" <c:if test="${vo4.chargework=='총무'}">            	
+            		selected="selected"
+            	</c:if>>총무</option>
+        	<option value="사무" <c:if test="${vo4.chargework=='사무'}">            	
+            		selected="selected"
+            	</c:if>>사무</option>
+        	<option value="인허가업무" <c:if test="${vo4.chargework=='인허가업무'}">            	
+            		selected="selected"
+            	</c:if>>인허가업무</option>
+        	<option value="저작권관리" <c:if test="${vo4.chargework=='저작권관리'}">            	
+            		selected="selected"
+            	</c:if>>저작권관리</option>
+        	<option value="수행비서" <c:if test="${vo4.chargework=='수행비서'}">            	
+            		selected="selected"
+            	</c:if>>수행비서</option>
+        	<option value="PR" <c:if test="${vo4.chargework=='PR'}">            	
+            		selected="selected"
+            	</c:if>>PR</option>
+        	<option value="direct" <c:if test="${vo4.chargework=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="chargeworkinput" name="chargework" value="${vo4.chargework }"/>
         
     </div>	
     <div>
-      <table>
-       <tr>
-			<th>직급</th>
-		<td colspan="1">
-		<select class="custom-select my-1 FST" name="dvCode"  id="selectBydvCode">
-		<option <c:if test="${vo4.jobgrade}">            	
+      <label for="jobgrade">직급</label>
+    <select class="form-control" name="jobgrade" id="jobgrade" >
+        	<option value="직급" <c:if test="${vo4.chargework=='직급'}">            	
             		selected="selected"
             	</c:if>>직급</option>
-		</select>
-		</td>
-		</tr>
-		</table>
+        	<option value="관리관" <c:if test="${vo4.chargework=='관리관'}">            	
+            		selected="selected"
+            	</c:if>>관리관</option>
+
+        	<option value="교정관" <c:if test="${vo4.chargework=='교정관'}">            	
+            		selected="selected"
+            	</c:if>>교정관</option>
+        	<option value="인쇄담당(5급상당)" <c:if test="${vo4.chargework=='인쇄담당(5급상당)'}">            	
+            		selected="selected"
+            	</c:if>>인쇄담당(5급상당)</option>
+        	<option value="대리" <c:if test="${vo4.chargework=='대리'}">            	
+            		selected="selected"
+            	</c:if>>대리</option>
+        	<option value="사원" <c:if test="${vo4.chargework=='사원'}">            	
+            		selected="selected"
+            	</c:if>>사원</option>
+        	<option value="과장" <c:if test="${vo4.chargework=='과장'}">            	
+            		selected="selected"
+            	</c:if>>과장</option>
+        	<option value="사장" <c:if test="${vo4.chargework=='사장'}">            	
+            		selected="selected"
+            	</c:if>>사장</option>
+        	<option value="부장" <c:if test="${vo4.chargework=='부장'}">            	
+            		selected="selected"
+            	</c:if>>부장</option>
+        	<option value="이사" <c:if test="${vo4.chargework=='이사'}">            	
+            		selected="selected"
+            	</c:if>>이사</option>
+        	<option value="전무" <c:if test="${vo4.chargework=='전무'}">            	
+            		selected="selected"
+            	</c:if>>전무</option>
+        	<option value="계약직" <c:if test="${vo4.chargework=='계약직'}">            	
+            		selected="selected"
+            	</c:if>>계약직</option>
+        	<option value="의료기사(6급상당)" <c:if test="${vo4.chargework=='의료기사(6급상당)'}">            	
+            		selected="selected"
+            	</c:if>>의료기사(6급상당)</option>
+        	<option value="위원(3급상당)" <c:if test="${vo4.chargework=='위원(3급상당)'}">            	
+            		selected="selected"
+            	</c:if>>위원(3급상당)</option>
+        	<option value="COO" <c:if test="${vo4.chargework=='COO'}">            	
+            		selected="selected"
+            	</c:if>>COO</option>
+        	<option value="CEO" <c:if test="${vo4.chargework=='CEO'}">            	
+            		selected="selected"
+            	</c:if>>CEO</option>
+        	
+        	<option value="direct" <c:if test="${vo4.chargework=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="jobgradeinput" name="jobgrade" value="${vo4.jobgrade }"/>
+        
    </div>
   </section>
    
@@ -1063,24 +1447,82 @@ $(document).ready(function (){
 <button type="button" id="certification" class="btn btn-success" value="자격증">자격증</button>
    
    &nbsp;&nbsp;
-   <section id="registerds4">
+   <section id="registerds1">
    <div id="certificationtype">
      
    <h3>자격증/면허증</h3>
      <div>
      <input class="form-control" name="certificationtype" id="certificationtype" value="자격증/면허증">
-         <table>
-       <tr>
-			<th>자격증명</th>
-		<td colspan="1">
-		<select class="custom-select my-1 FST" name="lNo"  id="selectLname">
-		<option <c:if test="${vo6.lName}">            	
+      <label for="lName">자격증명</label>
+
+         <select class="form-control" name="lName" id="lName" >
+        	<option value="자격증명" <c:if test="${vo6.lName=='자격증명'}">            	
             		selected="selected"
             	</c:if>>자격증명</option>
-		</select> 
-		</td>
-		</tr>
-		</table>
+        	<option value="기계기술사" <c:if test="${vo6.lName=='기계기술사'}">            	
+            		selected="selected"
+            	</c:if>>기계기술사</option>
+        	<option value="모터그레이더운전기능사" <c:if test="${vo6.lName=='모터그레이더운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>모터그레이더운전기능사</option>
+        	<option value="롤러운전기능사" <c:if test="${vo6.lName=='롤러운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>롤러운전기능사</option>
+        	<option value="로더운전기능사" <c:if test="${vo6.lName=='로더운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>로더운전기능사</option>
+        	<option value="불도저운전기능사" <c:if test="${vo6.lName=='불도저운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>불도저운전기능사</option>
+        	<option value="굴삭기운전기능사" <c:if test="${vo6.lName=='굴삭기운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>굴삭기운전기능사</option>
+        	<option value="기중기운전기능사" <c:if test="${vo6.lName=='기중기운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>기중기운전기능사</option>
+        	<option value="건설기계정비산업기사" <c:if test="${vo6.lName=='건설기계정비산업기사'}">            	
+            		selected="selected"
+            	</c:if>>건설기계정비산업기사</option>
+        	<option value="기중기운전기능사" <c:if test="${vo6.lName=='기중기운전기능사'}">            	
+            		selected="selected"
+            	</c:if>>기중기운전기능사</option>
+        	<option value="건설기계정비산업기사" <c:if test="${vo6.lName=='건설기계정비산업기사'}">            	
+            		selected="selected"
+            	</c:if>>건설기계정비산업기사</option>
+        	<option value="자동차차체수리기능사" <c:if test="${vo6.lName=='자동차차체수리기능사'}">            	
+            		selected="selected"
+            	</c:if>>자동차차체수리기능사</option>
+        	<option value="철도차량기사" <c:if test="${vo6.lName=='철도차량기사'}">            	
+            		selected="selected"
+            	</c:if>>철도차량기사</option>
+        	<option value="보일러기능사" <c:if test="${vo6.lName=='보일러기능사'}">            	
+            		selected="selected"
+            	</c:if>>보일러기능사</option>
+        	<option value="전자부품장착(SMT)기능사" <c:if test="${vo6.lName=='전자부품장착(SMT)기능사'}">            	
+            		selected="selected"
+            	</c:if>>전자부품장착(SMT)기능사</option>
+        	<option value="기계조립기능사" <c:if test="${vo6.lName=='기계조립기능사'}">            	
+            		selected="selected"
+            	</c:if>>기계조립기능사</option>
+        	<option value="컴퓨터응용밀링기능사" <c:if test="${vo6.lName=='컴퓨터응용밀링기능사'}">            	
+            		selected="selected"
+            	</c:if>>컴퓨터응용밀링기능사</option>
+        	<option value="차량기술사" <c:if test="${vo6.lName=='차량기술사'}">            	
+            		selected="selected"
+            	</c:if>>차량기술사</option>
+        	<option value="공조냉동기계산업기사" <c:if test="${vo6.lName=='공조냉동기계산업기사'}">            	
+            		selected="selected"
+            	</c:if>>공조냉동기계산업기사</option>
+        	<option value="일반기계기사" <c:if test="${vo6.lName=='일반기계기사'}">            	
+            		selected="selected"
+            	</c:if>>일반기계기사</option>
+        	
+        	<option value="direct" <c:if test="${vo6.lName=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        	<input type="text" class="form-control" id="lNameinput" name="lName" value="${vo6.lName}"/>
+        
     </div>
     <div>    
         <label for="lInstitution">발행처/기관</label>
@@ -1094,32 +1536,116 @@ $(document).ready(function (){
     </section>
     &nbsp;
     <button type="button" id="langcertbt" class="btn btn-success" value="어학">어학</button>
-    <section id="registerds5">
+    <section id="registerds2">
     <div id="langcert">
     
     <h3>어학시험</h3>  
     <div>	
     <input class="form-control" name="certificationtype" id="certificationtype" value="어학시험">
         <label for="language">언어</label>
-        <input type="text" class="form-control"  name="language" id="language" value="${vo5.language }" style="ime-mode:active">
+         <select class="form-control" name="language" id="language" >
+        	<option value="언어" <c:if test="${vo5.language=='언어'}">            	
+            		selected="selected"
+            	</c:if>>언어</option>
+        	<option value="한국어" <c:if test="${vo5.language=='한국어'}">            	
+            		selected="selected"
+            	</c:if>>한국어</option>
+        	<option value="중국어" <c:if test="${vo5.language=='중국어'}">            	
+            		selected="selected"
+            	</c:if>>중국어</option>
+        	<option value="일본어" <c:if test="${vo5.language=='일본어'}">            	
+            		selected="selected"
+            	</c:if>>일본어</option>
+        	<option value="네팔어" <c:if test="${vo5.language=='네팔어'}">            	
+            		selected="selected"
+            	</c:if>>네팔어</option>
+        	<option value="포르투갈어" <c:if test="${vo5.language=='포르투갈어'}">            	
+            		selected="selected"
+            	</c:if>>포르투갈어</option>
+        	<option value="라오스어" <c:if test="${vo5.language=='라오스어'}">            	
+            		selected="selected"
+            	</c:if>>라오스어</option>
+        	<option value="말레이어" <c:if test="${vo5.language=='말레이어'}">            	
+            		selected="selected"
+            	</c:if>>말레이어</option>
+        	<option value="몽골어" <c:if test="${vo5.language=='몽골어'}">            	
+            		selected="selected"
+            	</c:if>>몽골어</option>
+        	<option value="영어" <c:if test="${vo5.language=='영어'}">            	
+            		selected="selected"
+            	</c:if>>영어</option>
+        	<option value="독일어" <c:if test="${vo5.language=='독일어'}">            	
+            		selected="selected"
+            	</c:if>>독일어</option>
+        	<option value="아랍어" <c:if test="${vo5.language=='아랍어'}">            	
+            		selected="selected"
+            	</c:if>>아랍어</option>
+        	<option value="스페인어" <c:if test="${vo5.language=='스페인어'}">            	
+            		selected="selected"
+            	</c:if>>스페인어</option>
+        	<option value="프랑스어" <c:if test="${vo5.language=='프랑스어'}">            	
+            		selected="selected"
+            	</c:if>>프랑스어</option>
+        	
+        	
+        	<option value="direct" <c:if test="${vo5.language=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        <input type="text" class="form-control" id="languageinput" name="language" value="${vo5.language }"/>
+        
     </div>
      <div>
         <label for="institute">발행처/기관</label>
         <input type="text" class="form-control"  name="institute" id="institute" value="${vo5.institute }" style="ime-mode:active">
      </div>
      <div>
-      <table>
-       <tr>
-			<th>시험종류</th>
-		<td colspan="1">
-		<select class="custom-select my-1 FST" name="langlicenceCode"  id="selectlanglicencename">
-		<option <c:if test="${vo5.langlicencename}">            	
+       <label for="institute">시험종류</label>
+     	<select class="form-control" name="langlicencename" id="langlicencename" >
+        	<option value="시험종류" <c:if test="${vo5.langlicencename=='시험종류'}">            	
             		selected="selected"
-            	</c:if>>시험종류</option>
-		</select> 
-		</td>
-		</tr>
-		</table>
+            	</c:if>>OPIc</option>
+        	<option value="OPIc" <c:if test="${vo5.langlicencename=='OPIc'}">            	
+            		selected="selected"
+            	</c:if>>OPIc</option>
+        	<option value="TEPS" <c:if test="${vo5.langlicencename=='TEPS'}">            	
+            		selected="selected"
+            	</c:if>>TEPS</option>
+        	<option value="TOEFL" <c:if test="${vo5.langlicencename=='TOEFL'}">            	
+            		selected="selected"
+            	</c:if>>TOEFL</option>
+        	<option value="TOEIC" <c:if test="${vo5.langlicencename=='TOEIC'}">            	
+            		selected="selected"
+            	</c:if>>TOEIC</option>
+        	<option value="SAT" <c:if test="${vo5.langlicencename=='SAT'}">            	
+            		selected="selected"
+            	</c:if>>SAT</option>
+        	<option value="ACT" <c:if test="${vo5.langlicencename=='ACT'}">            	
+            		selected="selected"
+            	</c:if>>ACT</option>
+        	<option value="GRE" <c:if test="${vo5.langlicencename=='GRE'}">            	
+            		selected="selected"
+            	</c:if>>GRE</option>
+        	<option value="IELTS" <c:if test="${vo5.langlicencename=='IELTS'}">            	
+            		selected="selected"
+            	</c:if>>IELTS</option>
+        	<option value="NEAT" <c:if test="${vo5.langlicencename=='NEAT'}">            	
+            		selected="selected"
+            	</c:if>>NEAT</option>
+        	<option value="G-TELP" <c:if test="${vo5.langlicencename=='G-TELP'}">            	
+            		selected="selected"
+            	</c:if>>G-TELP</option>
+        	<option value="TOSEL" <c:if test="${vo5.langlicencename=='TOSEL'}">            	
+            		selected="selected"
+            	</c:if>>TOSEL</option>
+        	
+        	
+        	
+        	<option value="direct" <c:if test="${vo5.langlicencename=='direct'}">            	
+            		selected="selected"
+            	</c:if>>직접입력</option>
+        </select>
+        <input type="text" class="form-control" id="langlicencenameinput" name="langlicencename" value="${vo5.langlicencename }"/>
      </div> 
      <div>
         <label for="langpoint">점수</label>
@@ -1139,7 +1665,7 @@ $(document).ready(function (){
 
      &nbsp;
      <button type="button" id="awardbt" class="btn btn-success" value="수상내역">수상내역</button>
-  	 <section id="registerds6">
+  	 <section id="registerds3">
     <div class="well" id="award">
      <c:if test="${!empty vo.award}">
      <h3>수상내역</h3>
@@ -1149,7 +1675,7 @@ $(document).ready(function (){
         </div>
         </section>
      &nbsp;
- <section id="registerds7">
+ <section id="registerds">
      <h3>자기소개서</h3>
       <div>	
     	<!-- <label for="introduce">자기소개서</label>
@@ -1170,7 +1696,7 @@ $(document).ready(function (){
    </section>
       &nbsp;
 	 <button type="button" id="hopeworkbt" class="btn btn-success" value="희망근무">희망근무</button>
-       <section id="registerds8">
+       <section id="registerds4">
 	 <div  id="hopework">
       <h3>희망근무 선택</h3>
       <div>	
@@ -1256,12 +1782,12 @@ $(document).ready(function (){
 				<th>지역</th>
 								<td>
 									<select class="custom-select my-1 mr-sm-2 FST" name="localCode" id="locationSiDo">
-										<option <c:if test="${vo7.sido}">            	
+										<option <c:if test="${vo7.sido=='vo7.sido'}">            	
             		selected="selected"
             	</c:if>>시/도</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" name="localCode2" id="locationGugun">
-										<option <c:if test="${vo8.gugun}">            	
+										<option <c:if test="${vo8.gugun=='vo8.gugun'}">            	
             		selected="selected"
             	</c:if>>구/군</option>
 										<option>먼저 시/도를 선택하세요</option>
@@ -1279,18 +1805,18 @@ $(document).ready(function (){
 								<th>직종</th>
 								<td colspan="1">
 									<select class="custom-select my-1 FST" name="firstCode" id="selectFirst">
-										<option <c:if test="${vo12.firstname}">            	
+										<option <c:if test="${vo12.firstname=='vo12.firstname'}">            	
             		selected="selected"
             	</c:if>>1차 직종</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" name="secondCode" id="selectSecond">
-										<option <c:if test="${vo13.secondname}">            	
+										<option <c:if test="${vo13.secondname=='vo13.secondname'}">            	
             		selected="selected"
             	</c:if>>2차 직종</option>
 										<option>먼저 1차 직종을 선택하세요</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" name="thirdCode" id="selectThird">
-										<option <c:if test="${vo14.thirdname}">            	
+										<option <c:if test="${vo14.thirdname=='vo14.thirdname'}">            	
             		selected="selected"
             	</c:if>>3차 직종</option>
 										<option>먼저 2차 직종을 선택하세요</option>
@@ -1302,18 +1828,18 @@ $(document).ready(function (){
 								<th>업종</th>
 								<td colspan="2">
 									<select class="custom-select my-1 FST" name="btypeCode1" id="selectBtype1">
-										<option <c:if test="${vo9.btypename1}">            	
+										<option <c:if test="${vo9.btypename1=='vo9.btypename1'}">            	
             		selected="selected"
             	</c:if>>1차 업종</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" name="btypeCode2" id="selectBtype2">
-										<option <c:if test="${vo10.btypename2}">            	
+										<option <c:if test="${vo10.btypename2=='vo10.btypename2'}">            	
             		selected="selected"
             	</c:if>>2차 업종</option>
 										<option>먼저 1차 업종을 선택하세요</option>
 									</select>
 									<select class="custom-select my-1 mr-sm-2 FST" name="btypeCode3" id="selectBtype3">
-										<option <c:if test="${vo11.btypename3}">            	
+										<option <c:if test="${vo11.btypename3=='vo11.btypename3'}">            	
             		selected="selected"
             	</c:if>>3차 업종</option>
 										<option>먼저 2차 업종을 선택하세요</option>

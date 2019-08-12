@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
+<style>
+	.content {padding: 0;}
+	div#boardKindDiv a { color: #aaa9bd;}
+</style>
 <script type="text/javascript">
 	$(function(){
 		$("#uploadCK").hide();
@@ -38,11 +42,6 @@
 					$("input[name=upnumage]").focus()
 					event.preventDefault();
 					return false;
-				}else if($("input[name=upsizeage]").val().length<1){
-					alert("업로드 사이즈를 입력하세요");
-					$("input[name=upsizeage]").focus()
-					event.preventDefault();
-					return false;
 				}
 			}
 			 	  
@@ -68,15 +67,36 @@
 	})
 	//카테고리 사용중 / 미사용중
 	function boardKindChange(useCk,typeCode){
-		$("input[name=useCk]").val(useCk);
-		$("input[name=typeCode]").val(typeCode);
-		$("#BKChange").submit();
+		if(useCk=="Y"){
+			if(confirm("선택하신 카태고리를 미사용 하시겠습니까?")){
+				boardKindChangeAjax(useCk,typeCode);
+			}
+		}else if(useCk=="N"){
+			if(confirm("선택하신 카태고리를 사용  하시겠습니까?")){
+				boardKindChangeAjax(useCk,typeCode);
+			}
+		}
+	}
+	function boardKindChangeAjax(useCk,typeCode){
+		$.ajax({
+			url:"<c:url value='/manager/board/boardKindChange.do'/>",
+			data:{useCk:useCk,typeCode:typeCode},
+			success:function(res){
+				if(res==1){
+					if(useCk=="Y"){
+						$("#usageA"+typeCode).html("미사용")
+					}else if(useCk=="N"){
+						$("#usageA"+typeCode).html("사용중")
+					}
+					
+				}
+			},
+			error:function(htx,status,error){
+				alert(status +" : "+error);
+			}
+		});
 	}
 </script>
-<form id="BKChange" action="<c:url value='/manager/board/boardKindChange.do'/>" method="post"> 
-	<input type="hidden" name="useCk">
-	<input type="hidden" name="typeCode">
-</form>
  <div class="content-wrapper">
           <div class="content">		
           	<div class="breadcrumb-wrapper">
@@ -142,11 +162,11 @@
 										<label for="exampleFormControlPassword3">업로드 가능 한 숫자(1~5개)</label>
 										<input type="Upload Count" name="upnumage" class="form-control" id="exampleFormControlPassword3" placeholder="Password">
 									</div>				
-									<div class="form-group">
+<!-- 									<div class="form-group">
 										<label for="exampleFormControlPassword3">업로드가능한 파일 사이즈</label>
 										<input type="Upload Size" name="upsizeage" class="form-control" id="exampleFormControlPassword3" placeholder="Password">
 									</div>
-										</div>  
+ -->										</div>  
 								</div>
 								
 											</form>
@@ -201,10 +221,10 @@
 														<td scope="row">${vo.type }</td>
 														<td>
 														<c:if test="${vo.usage=='Y' }">
-															<a href="#" onclick="boardKindChange('${vo.usage }','${vo.typeCode}')">사용중</a>
+															<a href="#" id="usageA${vo.typeCode}" onclick="boardKindChange('${vo.usage }','${vo.typeCode}')">사용중</a>
 														</c:if>
 														<c:if test="${vo.usage!='Y' }">
-															<a href="#" onclick="boardKindChange('${vo.usage }','${vo.typeCode }')">미사용</a>
+															<a href="#" id="usageA${vo.typeCode}" onclick="boardKindChange('${vo.usage }','${vo.typeCode }')">미사용</a>
 														</c:if>
 														</td>
 														<td>

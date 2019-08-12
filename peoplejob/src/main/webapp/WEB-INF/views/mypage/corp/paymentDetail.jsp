@@ -155,7 +155,7 @@ table tr td, table tr th{
 	var paydate=$('#pd').val();
 	 
 	
-	$('input[type=submit]').click(function(){
+	$('.cancel').click(function(){
 		if(!confirm("해당 상품을 결제취소하시겠습니까?")){
 			event.preventDefault();
 			return false;
@@ -204,14 +204,14 @@ table tr td, table tr th{
 	<table class="table table-bordered">
 		<thead>
 			<tr> 
-				<th scope="col">번호</th> 
+				<th scope="col" style="width: 65px;">번호</th> 
 				<th scope="col">상품명</th> 
-				<th scope="col">구매자 이름</th>
-				<th scope="col">결제 수단</th>
-				<th scope="col">할부 기간</th>
-				<th scope="col">결제 일시</th>
-				<th scope="col">결제 금액</th>
-				<th scope="col">결제한 채용공고 개수</th> 
+				<th scope="col" style="width: 70px;">구매자</th>
+				<th scope="col" style="width: 87px;">결제 수단</th>
+				<th scope="col" style="width: 67px;">할부 </th>
+				<th scope="col" style="width: 175px;">결제 일시</th>
+				<th scope="col" style="width: 90px;">결제 금액</th>
+				<th scope="col">결제한 공고 개수</th> 
 				<th scope="col">결제 상황</th>
 				<th scope="col">결제 취소</th>
 				<th scope="col">상세보기</th>
@@ -250,16 +250,18 @@ table tr td, table tr th{
 							</td>
 							
 							
-							<form id="frmpay" method="post" action="<c:url value='/mypage/corp/paymentDetail.do?'/>">
-							<input type="hidden" name="paydate" value="${map['BYTIME'] }">
 							<input type="hidden" name="memberCode" value="${map['MEMBER_CODE'] }">
 							<input type="hidden" name="paymentCode" value="${map['PAYMENT_CODE'] }">
 							
 							<td>
+							<form action="<c:url value='/mypage/corp/cancelpay.do'/>" method="post">
+							<input type="hidden" name="paydate" value="${map['BYTIME'] }">
+							
 							<input type="hidden" name="progress" value="${map['PROGRESS']}">
 							<input type="hidden" name="confirmtime" value="${map['CONFIRMTIME'] }">
-							<input type="submit" value="결제 취소" id="cancelpay" style="padding: 5px; font-size: 0.9em; margin: 0 auto;">
-								<!-- <input type="button" id="refund" value="결제 환불"> -->
+							<input type="submit" value="결제 취소" id="cancelpay" style="padding: 5px; font-size: 0.9em; margin: 0 auto;" 
+							class="cancel" >
+							</form>
 								</td> 
 						
 							</form> 

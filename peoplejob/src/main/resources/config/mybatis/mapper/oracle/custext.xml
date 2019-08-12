@@ -49,7 +49,7 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		    	select c.*, m.MEMBERNAME from custext c join member m on c.MEMBER_CODE = m.MEMBER_CODE
+		    	select c.*, m.MEMBERNAME, m.MEMBERID from custext c join member m on c.MEMBER_CODE = m.MEMBER_CODE
 				<where>
 					<if test="searchKeyword!='' and searchKeyword!=null">
 						<if test="searchCondition=='all'">
@@ -108,4 +108,10 @@
 		update custext set answercontent=#{answercontent}, answer_regdate=sysdate, admin_code=#{adminCode}
 		where custext_code=#{custextCode}
 	</update>
+	
+	<select id="selectmycus" parameterType="int" resultType="int">
+	select count(*) from custext 
+             where member_code=#{memberCode} 
+            order by cus_regdate desc
+    </select>
 </mapper>

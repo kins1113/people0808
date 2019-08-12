@@ -35,7 +35,7 @@ public interface ResumeDAO {
 	
 	public int updateResume(ResumeVO vo);
 	
-	public List<ResumeVO>selectAll(SearchVO searscVo);
+	public List<ResumeVO>selectSearch(Map<String, Object> map);
 	
 	public ResumeVO selectBylanglicenceCode(int langlicenceCode);
 	public ResumeVO selectBylicenceCode(int lNo);

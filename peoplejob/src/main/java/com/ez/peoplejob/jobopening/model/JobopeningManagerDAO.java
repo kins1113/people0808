@@ -6,4 +6,5 @@ import java.util.Map;
 public interface JobopeningManagerDAO {
 	List<Map<String, Object>>selectJobopeningManager(Map<String, Object>map);
 	int getTotalCountJobopeningManager(Map<String, Object>map);
+	List<Map<String, Object>> selectJobTile();
 }

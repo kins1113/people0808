@@ -280,7 +280,7 @@
 		where  first_code=#{firstCode}
 		
 	</insert>  -->
-	<select id="selectSearch" parameterType="searchVo" resultType="resumeVo">
+	<select id="selectSearch" parameterType="map"  resultType="resumeVo">
 		select *
 		from
 		(
@@ -288,13 +288,14 @@
 		    from
 		    (
 		        select 
-		        resume_code,resumeTitle, resumeRegdate, opencheck 
+		        r.resume_code,r.resumeTitle, r.resumeRegdate, r.opencheck,r.member_code
+		       
 		        
-					
-				from resume		
-				<if test="searchKeyword != null and searchKeyword != ''">
-					where ${searchCondition} like '%' || #{searchKeyword} || '%'
-				</if>		
+				from resume	r,member m
+				<where>
+				r.member_code=m.member_code and m.member_code=#{memberCode} 
+				
+				</where>	
 				order by resume_code desc
 		    ) A
 		)

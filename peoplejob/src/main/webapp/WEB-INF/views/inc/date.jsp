@@ -35,9 +35,8 @@
 </head>
 <body>
 
-        <input id="${param.id }" name="${param.name}" class="form-control workdate1" type="text" readonly    title="${param.title }"/>
-
-       
+  <input id="${param.id }" name="${param.name}" class="form-control workdate1"
+         type="text" readonly    title="${param.title }" value="${param.value }"/>     
 
 </body>
 </html>

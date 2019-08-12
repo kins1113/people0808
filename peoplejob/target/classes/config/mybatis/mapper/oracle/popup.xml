@@ -63,6 +63,12 @@
 		where usage='Y' 
 		<![CDATA[and end_day>sysdate and start_day <sysdate]]>
 	</select>
+	
+	<update id="popupSizeUpdate" parameterType="popupvo">
+		update popup
+	    set width=#{width}, height=#{height}, left=#{left}, top=#{top}
+	    where popup_Code=#{popupCode}
+	</update>
 </mapper>
 
 

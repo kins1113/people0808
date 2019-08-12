@@ -104,6 +104,10 @@
 	 where p.board_code2=#{boardCode2}
 	</select>
 	
+	<select id="selectByPostByadmin" resultType="postVo" parameterType="int"> 
+		select * from post where board_code2=#{boardCode2}
+	</select>
+	
 	<update id="postcountUpdate" parameterType="int">
 	update post
 	set boardhits=boardhits+1
@@ -127,7 +131,7 @@
 	</insert>
 	
 	<select id="selectCmt" resultType="map" parameterType="int">
-		select p.CONTENT, p.BOARD_DATE, m.membername 
+		select p.*, m.membername 
 		from post_cmt p join member m 
 		on p.member_Code=m.member_Code 
 		where board_code2=#{boardCode2}
@@ -190,9 +194,55 @@
 	 delete from post where board_code2=#{boardCode2}
 	 </delete>
 	 
-	 <select id="selectPostBymemId" parameterType="string" resultType="map">
-	 	select * from post where member_code=(select member_code from member where memberid=#{memberid})
+	 <select id="selectPostBymemId" parameterType="postVo" resultType="map">
+	select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+		         select p.*, b.boardname,(sysdate-p.boardregdate2)*24 as new_Img_Term,
+		          (select count(*) as cnt from post_cmt where post_cmt.board_code2=p.board_code2) as commentcnt  
+                from post p join board b 
+                on p.BOARD_CODE=b.BOARD_CODE1
+		         where member_Code=#{memberCode}
+				<if test="searchKeyword != null and searchKeyword != ''">
+					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>		
+				order by p.board_Code2 desc
+		    ) A
+		)
+		<![CDATA[ where RNUM>#{firstRecordIndex}  
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 	 </select>
+	 
+	 <select id="selectTotalCountBymemId" parameterType="postVo" resultType="int">
+	 select count(*) from post
+	 where member_Code=#{memberCode}
+	 <if test="searchKeyword != null and searchKeyword !=''">
+	 	and ${searchCondition} like '%' || #{searchKeyword} || '%'
+	 </if>
+	 </select>
+	 
+	<update id="updatecmt" parameterType="postCmtVo">
+	update post_cmt
+	set board_date=sysdate, content=#{content}
+	where comment_code=#{commentCode}
+	</update>	
+	
+	<delete id="deletecmt" parameterType="int">
+		delete from post_cmt where comment_Code=#{commentCode}
+	</delete> 
+	
+	<select id="selectmypostcount" parameterType="int" resultType="int">
+	select count(*) from post where member_code=#{memberCode}
+	</select>
+	
+	<select id="selectPostbyCommentCode" resultType="postVo" parameterType="int">
+		select * from post 
+		where board_code2=(select board_Code2 from post_cmt where comment_code=#{commentCode})
+	</select>
+	
 </mapper>
 
 
