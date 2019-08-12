@@ -1091,7 +1091,7 @@ span[name=publicname]{
 						<h1>VVIP</h1>  <a href="<c:url value='/service/payment.do'/> " style="font-size:1.1em;color:black;"> >상품문의 </a>
 						</div>
 						<div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list }" begin="1" end="16">    
+							<c:forEach var="map" items="${list4 }" begin="1" end="16">    
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1147,7 +1147,7 @@ span[name=publicname]{
 						</div>
 						
 						<div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list2 }" begin="1" end="16">   
+							<c:forEach var="map" items="${list4 }" begin="1" end="16">   
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1205,7 +1205,7 @@ span[name=publicname]{
     
     <!-- 여기2 -->
     <div class="row p-t-35" style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<c:forEach var="map" items="${list3 }" begin="1" end="16">   
+							<c:forEach var="map" items="${list4 }" begin="1" end="16">   
 							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
 								 <a href="<c:url value='/company/jobopening_view.do?jobopening=${map["JOBOPENING"] } ' />" 
 								class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em;text-decoration: none;color: darkslategray;float: left;"> 
@@ -1272,7 +1272,7 @@ span[name=publicname]{
 										</a>
 										</div> 
 										
-										<div class="scrapapply" style=" display: block; margin-top: 155px;" >
+										<div class="scrapapply" style=" display: block; margin-top: 175px;" >
 										     <c:if test="${sessionScope.author_code==1 }">
 											<img alt="스크랩임시사진" src="<c:url value='/peoplejob_upload/scrapstarwhite.PNG'/>" 
 											style="  margin-top: 3px;cursor: pointer;" id="apply"
