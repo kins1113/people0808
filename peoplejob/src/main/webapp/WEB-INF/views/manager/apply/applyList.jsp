@@ -18,8 +18,8 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 <script type="text/javascript">
 	$(document).ready(function (){
 		//맨위에 체크박스 누르면 전체 선택
-		$("#memberCkAll").click(function(){
-			$("input[name=memberCk]").prop("checked",this.checked)
+		$("#applyCkAll").click(function(){
+			$("input[name=applyCk]").prop("checked",this.checked)
 		});
 		$("#pageSize select[name=recordCountPerPage]").change(function(){
 			$("form[name=postList]").submit();
@@ -188,15 +188,15 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<thead>
 						<tr>
 							<th><label class="control control-checkbox checkbox-primary">
-									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
+									<input type="checkbox" name="applyCkAll" id="applyCkAll" />
 									<div class="control-indicator"></div>
 							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">지원 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="apply_Code">지원 코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="address">채용공고</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="birth">열람여부</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">지원날짜</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="jobtitle">채용공고</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="opencheck">열람여부</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="applydate">지원날짜</a></th>
 
 						</tr>
 					</thead>
@@ -206,20 +206,20 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 						<td colspan="11" align="center">만족하는 사용자가 없습니다....</td>
 					</c:if>
 					<c:if test="${!empty list }">
-						<c:forEach var="memberVo" items="${list}">
+						<c:forEach var="vo" items="${list}">
 							<tr>
 								<td>
 									<label class="control control-checkbox checkbox-primary">
-											<input type="checkbox" name="memberCk" id="memberCk" value="${memberVo.email}" />
+											<input type="checkbox" name="applyCk" id="applyCk" value="${vo['APPLY_CODE']}" />
 											<div class="control-indicator"></div>
 									</label>
 								</td>
-								<td>${memberVo.memberCode}</td>
-								<td>${memberVo.memberid}</td>
-								<td>${memberVo.membername}</td>
-								<td>${memberVo.address} ${memberVo.addressdetail }</td>
-								<td>${memberVo.birth}</td>
-								<td>${memberVo.membergender}</td>
+								<td>${vo['APPLY_CODE']}</td>
+								<td>${vo['MEMBERID']}</td>
+								<td>${vo['MEMBERNAME']}</td>
+								<td>${vo['JOBTITLE']}</td>
+								<td>${vo['OPENCHECK']}</td>
+								<td>${vo['APPLYDATE']}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
