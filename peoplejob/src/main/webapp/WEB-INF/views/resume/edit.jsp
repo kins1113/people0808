@@ -45,25 +45,26 @@ select#hopepay {
 select#hopeworkdate {
     height: 35px;
 }
+section#registerds {
+    margin: 12px;
+    background: white;
+    padding: 20px;
+}
 section#registerds1 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds2 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds3 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 section#registerds4 {
     margin: 12px;
     background: white;
-    padding: 10px;
 }
 h3 {
     color: green;
@@ -117,6 +118,37 @@ p.lead.mb-7 {
 h2.mb-5 {
     color: green;
 }
+select#major {
+    height: 33px;
+}
+select#chargework {
+    height: 33px;
+}
+select#jobgrade {
+    height: 33px;
+}
+select#lName {
+    height: 33px;
+}
+select#language {
+    height: 33px;
+}
+select#langlicencename {
+    height: 33px;
+}
+div#certificationtype {
+    padding: 13px;
+}
+div#langcert {
+    padding: 13px;
+}
+div#award {
+padding: 13px;
+}
+div#hopework {
+    padding: 13px;
+}
+
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
@@ -965,7 +997,7 @@ $(document).ready(function (){
        
  
 		
-		<section id="registerds1" >
+		<section id="registerds" >
 	<div>        
         <h3>이력서 제목</h3>
         <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox" value="${vo.resumeTitle }"  style="ime-mode:active">
@@ -1011,7 +1043,7 @@ $(document).ready(function (){
         	class="width_80">
     </div>
     </section>
-    <section id="registerds2">
+    <section id="registerds">
     <h3>학력사항</h3>
     <div>
         <label for="education">학력사항</label>&nbsp;
@@ -1225,7 +1257,7 @@ $(document).ready(function (){
         </select>
        </div>
        </section>	
-    <section id="registerds3">
+    <section id="registerds">
     <h3>경력사항</h3>
     <div>
     <label for="workcheck">경력구분</label>&nbsp;
@@ -1415,7 +1447,7 @@ $(document).ready(function (){
 <button type="button" id="certification" class="btn btn-success" value="자격증">자격증</button>
    
    &nbsp;&nbsp;
-   <section id="registerds4">
+   <section id="registerds1">
    <div id="certificationtype">
      
    <h3>자격증/면허증</h3>
@@ -1504,7 +1536,7 @@ $(document).ready(function (){
     </section>
     &nbsp;
     <button type="button" id="langcertbt" class="btn btn-success" value="어학">어학</button>
-    <section id="registerds5">
+    <section id="registerds2">
     <div id="langcert">
     
     <h3>어학시험</h3>  
@@ -1633,7 +1665,7 @@ $(document).ready(function (){
 
      &nbsp;
      <button type="button" id="awardbt" class="btn btn-success" value="수상내역">수상내역</button>
-  	 <section id="registerds6">
+  	 <section id="registerds3">
     <div class="well" id="award">
      <c:if test="${!empty vo.award}">
      <h3>수상내역</h3>
@@ -1643,7 +1675,7 @@ $(document).ready(function (){
         </div>
         </section>
      &nbsp;
- <section id="registerds7">
+ <section id="registerds">
      <h3>자기소개서</h3>
       <div>	
     	<!-- <label for="introduce">자기소개서</label>
@@ -1664,7 +1696,7 @@ $(document).ready(function (){
    </section>
       &nbsp;
 	 <button type="button" id="hopeworkbt" class="btn btn-success" value="희망근무">희망근무</button>
-       <section id="registerds8">
+       <section id="registerds4">
 	 <div  id="hopework">
       <h3>희망근무 선택</h3>
       <div>	
