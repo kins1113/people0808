@@ -243,7 +243,7 @@ span #companyname{
             		
 			        <span  aria-hidden="true"></span>고용형태:<span>${vo.workway}</span><br><br>
 			        <span  aria-hidden="true"></span>근무지역:<span>${vo.localcheck}</span><br><br>
-			        <span  aria-hidden="true"></span>역정보:<span>${vo.subwayinfo}</span><br><br>
+			        <span  aria-hidden="true"></span>역정보:<span>${vo.subwayinfo}역</span><br><br>
 			        <span  aria-hidden="true"></span>고용형태:<span>${vo.workform}</span><br><br>
 					
             		<span  aria-hidden="true">급여/급여방식:<fmt:formatNumber value="${vo.pay }" pattern="#,###"/>원/${vo.payway }</span><br><br>
