@@ -87,7 +87,7 @@ $(function(){
 			<div class="card-header card-header-border-bottom">
 				<h2>
 					<c:if test="${empty popupVo}">
-						팝업 관리
+						팝업 등록
 					</c:if>
 					<c:if test="${!empty popupVo}">
 						팝업 수정
@@ -104,7 +104,6 @@ $(function(){
 				<div class="modal-body">
 				<p class="mb-5">기본 사이즈는  가로 400px, 세로 500px, left 0, top 0입니다. <br>
 								기본 날짜는 등록일부터 1달입니다.<br>
-				<a href="#" target="_blank">새창 여는 아직 미정</a>
 				</p>
 					<div class="row">
 						<div class="col-lg-12">

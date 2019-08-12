@@ -132,7 +132,7 @@
 							<div>
 								<div class="uploadCK">
 									<div class="row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-6 mb-6">
 											<label for="fileCount">파일 수</label>
 											 <input type="text"	class="form-control is-invalid infoBox" id="upnumage${vo.boardCode1 }"
 												placeholder="State" name="upnumage"
@@ -141,7 +141,7 @@
 										</c:if>>
 											<div class="invalid-feedback">값을 입력하세요</div>
 										</div>
-										<div class="col-md-6 mb-3">
+										<%-- <div class="col-md-6 mb-3">
 											<label for="filesize">파일 크기</label> 
 											<input id="filesize" type="text" class="form-control is-invalid infoBox"
 												placeholder="State" name="upsizeage" id="upsizeage${vo.boardCode1 }"
@@ -149,7 +149,7 @@
 											value="${vo.upnumage }"
 										</c:if>>
 											<div class="invalid-feedback">값을 입력하세요</div>
-										</div>
+										</div> --%>
 									</div>
 								</div>
 							</div>

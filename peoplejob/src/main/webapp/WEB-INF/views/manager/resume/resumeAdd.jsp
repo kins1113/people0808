@@ -25,7 +25,7 @@
 	#divSide tr:nth-of-type(3) select{    width: 70px;   float: left;   padding: 0;   margin: 0;   height: 29px;}
 	#divSide td{text-align: center;}
 	h3{color: black;  font-size: 1.5em;  margin: 5px 5px 5px 30px; font-weight: bold;}
-	.floating { width:395px; position:absolute;top: 8%; left: 78%;-webkit-transition: 0.5s ease; transition: 0.5s ease; }
+	.floating { width:395px; position:absolute;top: 8%; left: 75%;-webkit-transition: 0.5s ease; transition: 0.5s ease; }
 	.floating.on {position:fixed; top:11%; z-index: 999}
 	.necessary{    color: #4c84ff;  font-size: 0.7em;}
 	.necessaryInfo{color: #4c84ff; font-size: 1.2em;}
@@ -37,6 +37,8 @@
 	select#searchCon {    float: left;    margin: 0 5px 0 0;    height: 32px;}
 	button#btSideSearch {    padding: 0;   margin-top: 7px;}
 	#resumeAdd,#resumeList {width: 100%;    height: 30px;    padding: 0;}
+	
+	#colDiv{flex: 0 0 75%; max-width: 71%;}
 </style>
 
 
@@ -240,7 +242,7 @@ $(function(){
 					var infoT=$("#infoTable");
 					var trEl=$("<tr></tr>");
 					var tdEl=$("<td colspan='3'></td>");
-					tdEl.html("검색어를 입력하세요...")
+					tdEl.html("WWW.검색어를 입력하세요...")
 					trEl.html(tdEl);
 					infoT.html(trEl);
 				}
@@ -248,7 +250,7 @@ $(function(){
 				var infoT=$("#infoTable");
 				var trEl=$("<tr></tr>");
 				var tdEl=$("<td colspan='3'></td>");
-				tdEl.html("검색 키워드를 선택하세요")
+				tdEl.html("WWW.검색 키워드를 선택하세요")
 				trEl.html(tdEl);
 				infoT.html(trEl);
 			}
@@ -290,7 +292,7 @@ function setInfo(mCode){
           <div class="content">		
 			<div class="row">
 <h2>이력서 등록</h2>
-	<div class="col-lg-9">
+	<div class="col-lg-9" id="colDiv">
 		<div class="card card-default">
 <div class="card-body">
 	

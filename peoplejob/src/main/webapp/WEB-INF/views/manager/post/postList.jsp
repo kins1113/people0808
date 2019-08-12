@@ -139,7 +139,6 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
 					<input type="button" class="btn btn-secondary btn-default" id="postWrite" value="등록"> 
-					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
 					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제">
 				</div>
 				<div class="form-group serDiv">

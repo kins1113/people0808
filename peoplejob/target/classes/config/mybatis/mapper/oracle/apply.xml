@@ -18,13 +18,14 @@
 		    from
 		    (
 			select * from apply where member_code=#{memberCode}
-			order by applydate desc
+			
 			)A
 		) 
 		<where>
 		<![CDATA[ RNUM>#{firstRecordIndex}  and
 		RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 		</where>
+		order by applydate desc
 	</select>
 	<select id="selectapplyCount" parameterType="map" resultType="int">
 		select count(*) from apply where member_code=#{memberCode}
@@ -98,24 +99,24 @@
 				join jobopening j
 				on a.jobopening = j.jobopening
 				<where>
-							<if test="searchCondition!= null and searchCondition!=''
-								and searchKeyword!= null and searchKeyword!=''">
+							<if test="searchVo.searchCondition!= null and searchVo.searchCondition!=''
+								and searchVo.searchKeyword!= null and searchVo.searchKeyword!=''">
 								
-								<if test='searchCondition=="all"'>
+								<if test='searchVo.searchCondition=="all"'>
 								 m.memberid like  '%' || #{searchKeyword} || '%' or
 								 
 								 m.membername like  '%' || #{searchKeyword} || '%' or
 								 
 								  j.jobtitle like  '%' || #{searchKeyword} || '%' 
 								</if>
-							<if test='searchCondition=="memberid"'>
+							<if test='searchVo.searchCondition=="memberid"'>
 									 m.memberid like  '%' || #{searchKeyword} || '%'
 							</if>
 							
-							<if test='searchCondition=="membername"'>
+							<if test='searchVo.searchCondition=="membername"'>
 									  m.membername like  '%' || #{searchKeyword} || '%'
 							</if>
-							<if test='searchCondition=="jobtitle"'>
+							<if test='searchVo.searchCondition=="jobtitle"'>
 									  j.jobtitle like  '%' || #{searchKeyword} || '%'
 							</if>
 							<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
