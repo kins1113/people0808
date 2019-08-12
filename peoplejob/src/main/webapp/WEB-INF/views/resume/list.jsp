@@ -42,7 +42,6 @@ button.btn.btn-success {
     height: 40px;
 }
 </style>    
-
 <div class="divSearch">
 	<!-- 페이징 처리에도 사용 -->
    	<form name="frmSearch" method="post" 
@@ -53,8 +52,7 @@ button.btn.btn-success {
        <div id="divlist">
 <div class="divList" style="min-height: 871px;">
 	  <input type="hidden" name="resumeCode" value="${param.resumeCode }"/>
-	  <input type="hidden" name="memberCode" value="${vo.memberCode }"/>
-	  <input type="hidden" name="memberCode" value="${mvo.memberCode }"/>
+	  <input type="hidden" name="memberCode" value="${memberVo.memberCode }"/>
 <table class="table"
 	 	summary="이력서 현황에 관한 표로써, 이력서제목, 이력서 공개 설정, 내 이력서 열람 기업에 대한 정보를 제공합니다.">
 	 	<div class="form-group" id='pageSize'>
@@ -85,7 +83,6 @@ button.btn.btn-success {
 	<h3>이력서리스트</h3>
 	
 	<button type="button" class="btn btn-success"><a id="registerbt" href="<c:url value='/resume/register.do'/>">등록</a> 
-	     <c:if test="${vo.memberCode==mvo.memberCode }">
 	    <c:if test="${!empty list }">
 	    <th scope="col"> 이력서제목</th>
 	    <th scope="col">이력서 공개 설정</th>
@@ -125,18 +122,15 @@ button.btn.btn-success {
 				</tr>
 	    	</c:forEach>
 	</c:if>
-	</c:if>
 	   
 
   <!--반복처리 끝  -->	
 	<tbody> 
 	<c:if test="${empty list }">
-	<c:if test="${vo.memberCode==mvo.memberCode}">	 
 	 	<tr>
 	 		<td colspan="5" class="align_center">데이터가 존재하지 않습니다.</td>
 	 	</tr>
 	</c:if> 
-	</c:if>	
 	  </tbody>
 </table>	   
 </div>

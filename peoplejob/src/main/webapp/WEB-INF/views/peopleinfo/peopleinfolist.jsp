@@ -724,11 +724,11 @@ div#peo {
 							<th>성별</th>
 								<td>
 									<label class="control control-checkbox checkbox-primary genderShow">
-										<input type="checkbox" name="gender" value="여자"/>
+										<input type="checkbox" name="gender" value="여"/>
 										<div class="control-indicator float"></div>여자
 									</label>
 									<label class="control control-checkbox checkbox-primary genderShow">
-											<input type="checkbox" name="gender" value="남자"/>
+											<input type="checkbox" name="gender" value="남"/>
 											<div class="control-indicator float"></div>남자
 									</label>
 								</td>
