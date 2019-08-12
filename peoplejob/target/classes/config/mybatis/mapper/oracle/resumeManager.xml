@@ -58,7 +58,7 @@
 		insert into resume (resume_code, resumeTitle, introduce, 
 		<if test='award!=""'>award,</if>
 		<if test='langlicenceCode!=0'>langlicence_code,</if>
-		<if test='licenceCode!=0'>licence_code,</if>
+		<if test='lNo!=0'>l_no,</if>
 		<if test='dvCode!=0'>dv_code,</if>
 		<if test='academicCode!=0'>academic_code,</if>
 		<if test='hopeworkCode!=0'>HOPEWORK_CODE,</if>
@@ -66,7 +66,7 @@
 		values(#{resumeCode}, #{resumeTitle}, #{introduce},
 		<if test='award!=""'>#{award},</if>
 		<if test='langlicenceCode!=0'> #{langlicenceCode},</if>
-		<if test='licenceCode!=0'>#{licenceCode},</if>
+		<if test='lNo!=0'>#{lNo},</if>
 		<if test='dvCode!=0'>#{dvCode},</if>
 		<if test='academicCode!=0'>#{academicCode},</if>
 		<if test='hopeworkCode!=0'>#{hopeworkCode},</if>

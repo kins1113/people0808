@@ -81,7 +81,6 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		    modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
 		    $(this).blur();
 		    $(".modalContent > a").focus(); 
-		    alert("reportDay="+reportDay+", reportComent="+reportComent+", reportUser="+reportUser);
 			  $("#tdReid").html(reportUser);
 			  $("#tdReDay").html(reportDay);
 			  $("#tdReCo").html(reportComent);

@@ -8,7 +8,7 @@ public class ResumeManagerVO {
 	private String introduce;
 	private String award;
 	private int langlicenceCode;
-	private int licenceCode;
+	private int lNo;
 	private int dvCode;
 	private int academicCode;
 	private int hopeworkCode;
@@ -51,11 +51,11 @@ public class ResumeManagerVO {
 	public void setLanglicenceCode(int langlicenceCode) {
 		this.langlicenceCode = langlicenceCode;
 	}
-	public int getLicenceCode() {
-		return licenceCode;
+	public int getlNo() {
+		return lNo;
 	}
-	public void setLicenceCode(int licenceCode) {
-		this.licenceCode = licenceCode;
+	public void setlNo(int lNo) {
+		this.lNo = lNo;
 	}
 	public int getDvCode() {
 		return dvCode;
@@ -97,9 +97,9 @@ public class ResumeManagerVO {
 	public String toString() {
 		return "ResumeManagerVO [resumeCode=" + resumeCode + ", resumeTitle=" + resumeTitle + ", resumeRegdate="
 				+ resumeRegdate + ", introduce=" + introduce + ", award=" + award + ", langlicenceCode="
-				+ langlicenceCode + ", licenceCode=" + licenceCode + ", dvCode=" + dvCode + ", academicCode="
-				+ academicCode + ", hopeworkCode=" + hopeworkCode + ", opencheck=" + opencheck + ", memberCode="
-				+ memberCode + ", picture=" + picture + "]";
+				+ langlicenceCode + ", lNo=" + lNo + ", dvCode=" + dvCode + ", academicCode=" + academicCode
+				+ ", hopeworkCode=" + hopeworkCode + ", opencheck=" + opencheck + ", memberCode=" + memberCode
+				+ ", picture=" + picture + "]";
 	}
 	
 	
