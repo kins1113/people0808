@@ -86,6 +86,9 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		
 		
 		//기업입장 지원현황
+		if(memberVo.getCompanyCode()!=0) {
+			
+		
 		List<JobopeningVO> joblistconfirm=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
 		logger.info("joblist 있는지 없는지 확인 joblistconfirm.size={}",joblistconfirm.size());
 		if(joblistconfirm.size()>0) {
@@ -105,12 +108,13 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 				  	logger.info("기업회원이 받은 지원현황 갯수 cnt={}",cnt);
 				  	model.addAttribute("cnt",cnt);
 		      }
-		  	
+			
 		  	
 		  	
 		  	int cuscount=custextService.selectmycus(memberVo.getMemberCode());
 		  	logger.info("기업회원이 받은 지원현황 갯수 cuscount={}",cuscount);
 		  	model.addAttribute("cuscount",cuscount);
+		} 
 		
 		return "mypage/user/userpage";
 		
