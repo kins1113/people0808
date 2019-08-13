@@ -35,7 +35,7 @@ input#workdate2,input#workdate1 { font-size: 15px;}
 		
 		$("#btProgressEdit").click(function(){
 			
-			$("form[name=frmList]").attr("action","<c:url value='/mana ger/payment/progressEdit.do'/>")
+			$("form[name=frmList]").attr("action","<c:url value='/manager/payment/progressEdit.do'/>")
 			$("form[name=frmList]").submit();
 			
 		});
