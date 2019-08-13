@@ -299,7 +299,7 @@
 											<span class="nav-text">통합 관리</span>
 									</a></li>
 
-									<li><a class="sidenav-item-link" href="#"> <span
+									<!-- <li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">결제 내역</span>
 
 									</a></li>
@@ -314,7 +314,7 @@
 									
 									<li><a class="sidenav-item-link" href="#">
 											<span class="nav-text">취소 완료</span>
-									</a></li>
+									</a></li> -->
 
 
 								</div>
