@@ -1068,17 +1068,17 @@ $(document).ready(function (){
             	</c:if>> 고등학교졸업
 		</label>
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="대학졸업 (2,3년)" <c:if test="${vo.graduatetype=='대학졸업 (2,3년)'}">            	
+  		<input type="radio" name="graduatetype" id="graduatetype" value="대학졸업 (2,3년)" <c:if test="${vo3.graduatetype=='대학졸업 (2,3년)'}">            	
             		checked="checked"
             	</c:if>> 대학졸업 (2,3년)
 		</label>
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="대학교졸업 (4년)" <c:if test="${vo.graduatetype=='대학교졸업 (4년)'}">            	
+  		<input type="radio" name="graduatetype" id="graduatetype" value="대학교졸업 (4년)" <c:if test="${vo3.graduatetype=='대학교졸업 (4년)'}">            	
             		checked="checked"
             	</c:if>> 대학교졸업 (4년)
 		</label>
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="석사졸업이상" <c:if test="${vo.graduatetype=='석사졸업이상'}">            	
+  		<input type="radio" name="graduatetype" id="graduatetype" value="석사졸업이상" <c:if test="${vo3.graduatetype=='석사졸업이상'}">            	
             		checked="checked"
             	</c:if>> 석사졸업이상
 		</label>

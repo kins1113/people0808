@@ -252,30 +252,6 @@
 				</div>
           <div class="container" style="height: 96%;">
   
-				    <%--  <div class="form-group" id='pageSize'>
-					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
-						<option value="10"
-							<c:if test="${param.recordCountPerPage==10 }">
-								selected="selected"
-							</c:if>>10개씩
-						</option>
-						<option value="20"
-							<c:if test="${param.recordCountPerPage==20 }">
-								selected="selected"
-							</c:if>>20개씩
-						</option>
-						<option value="30"
-							<c:if test="${param.recordCountPerPage==30 }">
-								selected="selected"
-							</c:if>>30개씩
-						</option>
-						<option value="50"
-							<c:if test="${param.recordCountPerPage==50 }">
-								selected="selected"
-							</c:if>>50개씩
-						</option>
-					</select>
-				</div>    --%>
 				
 				<form class="form-inline" method="post"
 								action='<c:url value="/board/boardByCategory.do?boardCode=${param.boardCode }"/>' style="    margin-left: -15px;">

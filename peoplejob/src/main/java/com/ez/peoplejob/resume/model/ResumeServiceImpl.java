@@ -203,4 +203,8 @@ public class ResumeServiceImpl implements ResumeService{
 	public int insertCopy(int resumeCode) {
 		return resumeDao.insertCopy(resumeCode);
 	}
+	@Override
+	public List<ResumeVO> myresume(int memberCode) {
+		return resumeDao.myresume(memberCode);
+	}
 }

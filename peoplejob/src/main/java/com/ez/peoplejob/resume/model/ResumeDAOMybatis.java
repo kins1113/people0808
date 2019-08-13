@@ -271,4 +271,9 @@ public class ResumeDAOMybatis implements ResumeDAO {
 	public int insertCopy(int resumeCode) {
 		return sqlsession.insert(namespace+"insertCopy",resumeCode);
 	}
+
+	@Override
+	public List<ResumeVO> myresume(int memberCode) {
+		return sqlsession.selectList(namespace+"myresume",memberCode);
+	}
 }

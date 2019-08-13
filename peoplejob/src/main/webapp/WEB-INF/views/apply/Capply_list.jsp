@@ -53,10 +53,10 @@
 </script>
 <style type="text/css">
 .divList {
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
     padding: 10px;
-    background: #cccccc;
+    background: #f3f5f7;
 }
 </style>
 <article>

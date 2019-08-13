@@ -316,7 +316,6 @@ padding: 5px;
 							//async: false,
 							success : function(res) {
 								 if(res){
-									if(confirm(length+'개 채용광고를 결제하시겠습니까?')){
 									
 										var IMP = window.IMP; // 생략가능
 										  IMP.init("imp49241177"); 
@@ -351,7 +350,7 @@ padding: 5px;
 											    }
 											    alert(msg);
 											}); 
-									}
+										  //
 								 }else{
 									alert('이미 결제완료한 채용공고 상품입니다.');
 									event.preventDefault();
@@ -515,7 +514,6 @@ padding: 5px;
 			<tr> 
 				<th scope="col">서비스명</th>
 				<th scope="col">선택한 상품 개수</th>
-				<th scope="col">세부내용</th>
 				<th scope="col">총 합계금액</th>
 			</tr>
 		</thead>
@@ -525,7 +523,6 @@ padding: 5px;
 				<td id="serviceName"></td>
 				<td id="chklength">0개
 				</td>
-				<td id="serviceContent"></td>
 				<td id="servicePrice" name="servicePrice" style="color: orangered;">
 				<input type="text" name="totalPrice" id="totalPrice" style="    color: orangered;
     cursor: default;

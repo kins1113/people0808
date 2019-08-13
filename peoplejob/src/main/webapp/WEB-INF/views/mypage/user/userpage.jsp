@@ -146,8 +146,22 @@ $(function(){
 			<div style="border: 1px solid lightgray; width:260px;float: left;margin-top:29px;">
 			<div name="photo" style="border-bottom: 1px solid lightgray;width:260px;
     height: 285px;">
-				<img alt="회원이미지" src="<c:url value='/resources/main/images/people.PNG'/>" width="100%"
+    
+    <c:if test="${empty resumeVo }">
+					<img alt="회원이미지" src="<c:url value='/resources/main/images/people.PNG'/>" width="100%"
 				style="    max-width: 69%; border-radius: 3px; margin-left: 42px; display: block;">
+				</c:if>
+				<c:if test="${!empty resumeVo }">
+					<img alt="이력서이미지" src="<c:url value='/peoplejob_upload/${resumeVo.picture }'/>" 
+					style="    width: 40%;
+    margin: 0 auto;
+    margin-left: 75px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+">
+				</c:if>
+				
+				
     
 				<span style="margin:0 auto; font-size: 1.1em; display: table;">${sessionScope.memberName }님</span>
 				<br><br>
@@ -500,12 +514,14 @@ $(function(){
 	    font-weight: bold; margin: 0 auto; cursor: pointer; width: 50px; height: 30px; display: inline-block;" class="btnmore" 
 	    onclick="location.href='<c:url value="/user/copyresume.do?resumeCode=${map['RESUME_CODE'] }"/>'">
 	   
-				   		<input type="button" value="수정" style="background: white; border: 1px solid lightgray; display: inline-block;
+				   	<input type="button" value="수정" style="background: white; border: 1px solid lightgray; display: inline-block;
 	    font-weight: bold; cursor: pointer; width: 50px; height: 30px;" class="btnmore"
-	    onclick="location.href='<c:url value=" /resume/edit.do?resumeCode=${map['RESUME_CODE'] }"/>'">
+	    onclick="location.href='<c:url value="/resume/edit.do?resumeCode=${map['RESUME_CODE'] }"/>'"> 
+				   		
+				   		
 				   		<input type="button" value="삭제" style="background: white; border: 1px solid lightgray; display: inline-block;
 	    font-weight: bold; cursor: pointer; width: 50px; height: 30px;" class="btnmore"
-	     onclick="location.href='<c:url value=" /resume/delete.do?resumeCode=${map['RESUME_CODE'] }"/>'">
+	     onclick="location.href='<c:url value="/resume/delete.do?resumeCode=${map['RESUME_CODE'] }"/>'">
 	    </td>
 	    			<td>
 				   		<span>

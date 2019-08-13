@@ -460,6 +460,10 @@
 		SELECT resume_seq.nextval,resumetitle, introduce, award, langlicence_code, l_no, dv_code, academic_code, hopework_code, opencheck,
 		member_code, picture FROM resume where resume_code=#{resumeCode}
 	</insert>
+	
+	<select id="myresume" resultType="resumeVo" parameterType="int">
+		select * from resume where member_code=#{memberCode}
+	</select>
 </mapper>
 
 

@@ -28,6 +28,7 @@ import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.payment.model.PaymentService;
 import com.ez.peoplejob.post.model.PostService;
 import com.ez.peoplejob.resume.model.ResumeService;
+import com.ez.peoplejob.resume.model.ResumeVO;
 import com.ez.peoplejob.scrap.model.ScrapService;
 import com.ez.peoplejob.scrap.model.ScrapVO;
 import com.ez.peoplejob.tableaply.model.TableaplyService;
@@ -57,6 +58,22 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 			CompanyVO companyVo=jobService.selectcompany(memberVo.getCompanyCode());
 			logger.info("companyVo={}",companyVo);
 			model.addAttribute("companVo",companyVo);
+			
+			if(memberVo.getCompanyCode()==0) {
+				List<ResumeVO> resumelist=resumeService.myresume(memberVo.getMemberCode());
+				logger.info("resumelist.size={}",resumelist.size());
+				
+				if(resumelist.size()>0) {
+					for(int i=0;i<resumelist.size();i++) {
+						ResumeVO resumeVo=(ResumeVO) resumelist.get(i);
+						logger.info("i번째={},resumeVo={}",i,resumeVo);
+						if(i==0) {
+							model.addAttribute("resumeVo",resumeVo);
+						}
+					}
+					
+				}
+			}
 		
 		//
 		List<Map<String , Object>> paylist=paymentService.selectPaymentById(memberid);

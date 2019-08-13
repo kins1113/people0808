@@ -14,7 +14,7 @@
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 function go(jobopening){ 
-	   window.open("<c:url value='/apply/resumelist.do?jobopening="+jobopening+"'/>","이력서 선택","height=400,width=600,resizable=yes");
+	   window.open("<c:url value='/apply/resumelist.do?jobopening="+jobopening+"'/>","이력서 선택","height=400,width=1300,resizable=yes");
 	}
 $(function() {
 	
@@ -738,11 +738,19 @@ span[name=publicname]{
 				</c:if> 
 				<c:if test="${!empty sessionScope.memberName }"> 
 				<div class="logintop">
+				<c:if test="${empty resumeVo }">
 					<img alt="회원이미지" src="<c:url value='/resources/main/images/people.PNG'/>" width="100px;">
+				</c:if>
+				<c:if test="${!empty resumeVo }">
+					<img alt="이력서이미지" src="<c:url value='/peoplejob_upload/${resumeVo.picture }'/>" 
+					style="    height: 107px;
+    width: 87px;
+    margin-right: 20px;">
+				</c:if>
 		        	<span style="margin-bottom: 10px;display: inline-block;margin-left: -7px;">
 		        	<strong>${sessionScope.memberName }</strong>님, 환영합니다.</span>
 					<input type="button" value="로그아웃" onclick="location='<c:url value='/login/logout.do'/>'" style="    margin-left: 174px;
-    margin-top: -25px;
+    margin-top: -33px;
     background: white;
     border: 1px solid gray;
     padding: 2px;">

@@ -153,7 +153,7 @@ div#peo {
 			var resumeCode=$(this).next().val();
 			
 			open("<c:url value='/peopleinfo/peopleinfodetail.do?resumeCode="+resumeCode+"'/>",title,
-					"width=800px,height=600px,top=40px,left=100px,location=yes,resizable=yes"
+					"width=1500px,height=1000px,top=40px,left=100px,location=yes,resizable=yes"
 					)
 		});
 		

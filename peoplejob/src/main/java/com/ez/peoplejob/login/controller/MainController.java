@@ -18,6 +18,8 @@ import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.payment.model.PaymentService;
 import com.ez.peoplejob.popup.model.PopupService;
 import com.ez.peoplejob.popup.model.PopupVO;
+import com.ez.peoplejob.resume.model.ResumeService;
+import com.ez.peoplejob.resume.model.ResumeVO;
 
 @Controller
 public class MainController {
@@ -27,6 +29,7 @@ public class MainController {
 	@Autowired private JobopeningService jobService;
 	@Autowired private MemberService memberService;
 	@Autowired private PopupService popupService;
+	@Autowired private ResumeService resumeService;
 	
 	@RequestMapping("/main/mainindex.do")
 	public String mainindex(Model model,HttpSession session) {
@@ -37,7 +40,24 @@ public class MainController {
 			logger.info("memberVo={}",memVo);
 			model.addAttribute("memVo",memVo);
 			
+			List<ResumeVO> resumelist=resumeService.myresume(memVo.getMemberCode());
+			logger.info("resumelist.size={}",resumelist.size());
+			
+			if(resumelist.size()>0) {
+				for(int i=0;i<resumelist.size();i++) {
+					ResumeVO resumeVo=(ResumeVO) resumelist.get(i);
+					logger.info("i번째={},resumeVo={}",i,resumeVo);
+					if(i==0) {
+						model.addAttribute("resumeVo",resumeVo);
+					}
+				}
+				
+			}
+			
+			
 		}
+		
+		
 		
 		List<Map<String, Object>> list=paymentService.selectMainAdvertiseByServiceCode(1);
 		List<Map<String, Object>> list2=paymentService.selectMainAdvertiseByServiceCode(2);

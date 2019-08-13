@@ -6,7 +6,7 @@ import java.util.Map;
 import com.ez.peoplejob.common.SearchVO;
 
 public interface ResumeDAO {
-	
+	List<ResumeVO> myresume(int memberCode);
 	public int insertMember2(ResumeVO vo);
 	public int insertResume(ResumeVO vo);
 	

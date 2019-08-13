@@ -35,14 +35,13 @@ input#workdate2,input#workdate1 { font-size: 15px;}
 		
 		$("#btProgressEdit").click(function(){
 			
-			$("form[name=frmList]").attr("action","<c:url value='/manager/payment/progressEdit.do'/>")
+			$("form[name=frmList]").attr("action","<c:url value='/mana ger/payment/progressEdit.do'/>")
 			$("form[name=frmList]").submit();
 			
 		});
 		
 	$("input[name=btPayment]").click(function(){
 		var type = $(this).val();
-		alert("type="+type);
 			
 			$("form[name=frmList]").attr("action",
 					"<c:url value='/manager/payment/list.do?type="+type+"'/>")
@@ -69,7 +68,7 @@ action='<c:url value="/manager/payment/list.do"/>'>
 <input type="hidden" name='currentPage' value="1">
 <input type="hidden" name='searchCondition' value="${param.searchCondition }">
 <input type="hidden" name='searchKeyword' value="${param.searchKeyword }">
-
+<input type="hidden" name='type' value="${param.type }">
 
 
 

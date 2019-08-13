@@ -199,7 +199,7 @@ $(function(){
 		
 	</div>
 	        <!-- Comments Form -->
-        <c:if test="${boardVo.commentage=='Y' }">
+        <c:if test="${boardVo.commentage=='Y' || boardVo.commentage=='on'}">
         <div class="card my-4">
           <h5 class="card-header">댓글을 남겨주세요:</h5>
           <div class="card-body">

@@ -163,7 +163,7 @@ button {
 					<a href="<c:url value='/main/mainindex.do'/>"><img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO"></a>
 				</div>	
 			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6" style="width: 500px">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search" value="${param.keyword }">
+				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="검색어를 입력해주세요" value="${param.keyword }">
 				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03" id="submitbut" name="submitbut">
 					<i class="zmdi zmdi-search"></i>
 				</button>

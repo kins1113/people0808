@@ -1,6 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/icon.PNG'/>"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/bootstrap/css/bootstrap.min.css'/>">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css'/>">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/fonts/iconic/css/material-design-iconic-font.min.css'/>">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/animate/animate.css'/>">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/css-hamburgers/hamburgers.min.css'/>">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/animsition/css/animsition.min.css'/>">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/util.min.css'/>">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/main.css'/>">
+<!--===============================================================================================-->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style type="text/css">
+.pos-relative.size-a-2.bo-1-rad-22.of-hidden.bocl11.m-tb-6 {
+    margin-left: 140px;
+}
+
+.banner-header {
+    margin-top: -10px;
+}
+
+h2 {
+        font-size: 18px;
+        margin: 0 0 15px;
+    }
+    
+    .loginWrap {
+    margin-left: 20px;
+    height: 110px;
+    border: 1px solid #e3e4e8;
+    background-color: #f3f4f6;
+    box-sizing: border-box;
+}
+
+.blind {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+}
+
+.memberType {
+    width: 262px;
+    margin: -1px 0 0 -1px;
+    border: 1px solid #e3e4e8;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+#point .pointWrap button {
+    font-family: inherit;
+    outline: none;
+}
+
+.memberType > li .tab {
+    position: relative;
+    display: block;
+    vertical-align: top;
+    line-height: 70px;
+}
+.memberType > li {
+    float: left;
+    width: 50%;
+    height: 50px;
+    text-align: center;
+}
+li {
+    list-style: none;
+}
+button {
+    overflow: visible;
+    background: transparent;
+    cursor: pointer;
+}
+
+.lyLoginForm {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 364px;
+    padding: 40px 13px 13px 13px;
+    border: 1px solid #565d79;
+    background-color: #fff;
+    text-align: left;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+    z-index: 10;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+button {
+    overflow: visible;
+    background: transparent;
+    cursor: pointer;
+}
+    
+ /* ul.main-menu {
+    border-bottom: 5px solid #379d37ed;
+} */
+ 
+ ul.main-menu {
+    /* border-bottom: 4px solid darkseagreen; */
+}
+</style>
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">	
 	function pageFunc(curPage){
 		document.frmSearch.currentPage.value=curPage;
@@ -59,7 +192,6 @@ button.btn.btn-success {
 	    <th scope="col"> 체크</th>
 	    <th scope="col"> 이력서제목</th>
 	    <th scope="col">이력서 공개 설정</th>
-	    <th scope="col">내 이력서 열람 기업</th>
 	    <th scope="col">등록일</th>
 		<c:forEach var="vo" items="${list }">					
 	    
@@ -78,9 +210,15 @@ button.btn.btn-success {
 					</c:if>
 					</a></td>
 		
-	    <td>${vo.opencheck}</td>
+	    <td>
+		 <c:if test="${vo.opencheck=='Y'}">
+          공개
+       </c:if>
+       <c:if test="${vo.opencheck=='N'}">
+          비공개
+       </c:if>
+		</td>
 	   	
-	    <td>${vo.opencheck}</td><!--일단 멤버 네임으로  -->
 	    
 	    
 	    <td><fmt:formatDate value="${vo.resumeRegdate}" pattern="yyyy-MM-dd"/>
@@ -138,5 +276,4 @@ button.btn.btn-success {
 </div>
 
 
-<%@include file="../main/inc/bottom.jsp" %>
 
